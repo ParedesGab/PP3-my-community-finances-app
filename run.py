@@ -14,7 +14,7 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('my_finances')
 
-#Access my-finances worksheet
+#Make sure the API is working correctly
 income = SHEET.worksheet('income')
 expenses = SHEET.worksheet("expenses")
 
@@ -26,6 +26,17 @@ pprint(expenses_data[2]) #output: a list of rows with string values
 
 
 #Welcome message
+
+def welcome():
+    welcome_message = """\n============== Welcome to MyFinances App! ==============\n
+    This expense tracker will help you monitor your income and expenses
+    to understand your spending habits!
+    
+    Ready to start? Let's go! 🚀
+    """
+    print(welcome_message)
+
+welcome()
 
 #Ask user to chooce betweeen options
     #if Option1: Check My Finance Report! 
