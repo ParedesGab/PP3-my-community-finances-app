@@ -34,7 +34,7 @@ pprint(expenses_data[2]) #output: a list of rows with string values
     #elif Option4: Exit
     #else choice invalid, print invalid and state what is wrong
 
-#User chose: 1
+#User chose: 1 (Check My Finance Report! )
     #Ask User which month they want to see
 
     #If choice is invalid: print/raise an error
@@ -64,7 +64,26 @@ pprint(expenses_data[2]) #output: a list of rows with string values
             
             #If no: add new income?, add new expense? or exit?
 
-        
+#User chose: 2 (Add new income?)
+    #Request data from the user: source, amount, month
+
+    #If choice is invalid: print/raise an error
+    #If choice is valid:
+        #Parse data into correct format for worksheet
+        #Update income spreadsheet
+        #Print data to terminal
+
+#User chose: 3 (Add new expense?)
+    #Request data from the user: source, amount, month
+
+    #If choice is invalid: print/raise an error
+    #If choice is valid:
+        #Parse data into correct format for worksheet
+        #Update expenses spreadsheet
+        #Print data to terminal
+
+#User chose: 4 (Exit)
+    #Print (Goodbye and "See you next time! Your finances are in good hands.")
 
 
 
