@@ -1,6 +1,7 @@
 import gspread
 from google.oauth2.service_account import Credentials
 from pprint import pprint
+from colorama import init, Fore, Style
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -28,15 +29,22 @@ pprint(expenses_data[2]) #output: a list of rows with string values
 #Welcome message
 
 def welcome():
-    welcome_message = """\n============== Welcome to MyFinances App! ==============\n
+
+    """
+    Displays a welcome message with color
+    """
+
+    init()  # Initialize colorama
+    welcome_message = f"""\n{Fore.GREEN + Style.BRIGHT}============== WELCOME TO MyFinances APP! =============={Style.RESET_ALL}\n
     This expense tracker will help you monitor your income and expenses
     to understand your spending habits!
     
-    Ready to start? Let's go! 🚀
-    """
+    Ready to start? Let's go! 🚀\n"""
     print(welcome_message)
 
 welcome()
+
+
 
 #Ask user to chooce betweeen options
     #if Option1: Check My Finance Report! 
