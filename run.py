@@ -112,17 +112,35 @@ def validate_user_choice(user_choice):
 ############################################# User chose: 1 (Check My Finance Report! )
 
 def show_monthly_finance_report():
+    """
+    Monthly finance report
+    """
+    print("Monthly finance report")
+    get_month_input()
 
-    #Ask User which month they want to see
-    month_selection = input("Enter the month name (e.g., january, february): ").lower()
+            ########### Get month input from User ################
 
-    #If choice is invalid: print/raise an error
-    if month_selection !=
+def get_month_input():
+    """
+    Prompts the user to enter a month name and validates the input.
+    Returns the entered month name as a string, or an error if the input is invalid.
+    """
 
-    return(month_selection)
+    #validate the User choice:
+    while True:
+        #Ask User which month they want to see
+        user_month = input(Fore.BLUE + "\nPlease enter the month name (e.g., january, february):\n " + Style.RESET_ALL).lower()
 
+        try:
+            datetime.strptime(user_month, "%B")
+            month = user_month.title() 
+            print(f"Month was selected: {month}")
+            #return(month) #return the month as a string, and breaks the loop
 
-    
+        #If choice is invalid: print/raise an error
+        except ValueError as error:
+            print(Fore.LIGHTRED_EX + " Invalid month name!" + Style.RESET_ALL)
+            continue #important to break the loop and jump back to the beginning of the while loop!
 
     
     #If choice is valid: check if the month has data:
