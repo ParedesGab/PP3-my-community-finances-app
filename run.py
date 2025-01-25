@@ -56,7 +56,7 @@ def get_main_user_choice():
     """
     while True:
         print(Fore.BLUE + "Please select an option:" + Style.RESET_ALL)
-        print("\n  1. Check My Finance Report!")
+        print("\n  1. Check My Monthly Finance Report!")
         print("  2. Add new income")
         print("  3. Add new expense")
         print("  4. Exit program")
@@ -105,11 +105,19 @@ def validate_user_choice(user_choice):
     if user selects other values between 1 and 4.
     """
     if not 1 <= user_choice <= 4:
-        raise ValueError("Invalid choice! Please enter a number between 1 and 4.")
+        raise ValueError(Fore.LIGHTRED_EX + "Invalid choice! Please enter a number between 1 and 4." + Style.RESET_ALL)
 
 
-#User chose: 1 (Check My Finance Report! )
+############################################# User chose: 1 (Check My Finance Report! )
+
+def show_monthly_finance_report():
+
     #Ask User which month they want to see
+    month_selection = input("Enter the month (e.g., January, February): ")
+
+    return(month_selection)
+
+    
 
     #If choice is invalid: print/raise an error
     #If choice is valid: check if the month has data:
@@ -163,6 +171,7 @@ def validate_user_choice(user_choice):
 def main():
     welcome()
     get_main_user_choice()
+    show_monthly_finance_report()
 
 main()
 
