@@ -3,6 +3,7 @@ from google.oauth2.service_account import Credentials
 from pprint import pprint
 from colorama import init, Fore, Style, Back
 from datetime import datetime
+#import pandas as pd
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -17,14 +18,14 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('my_finances')
 
 #Make sure the API is working correctly
-income = SHEET.worksheet('income')
-expenses = SHEET.worksheet("expenses")
+# income = SHEET.worksheet('income')
+# expenses = SHEET.worksheet("expenses")
 
-income_data = income.get_all_values()
-expenses_data = expenses.get_all_values()
+# income_data = income.get_all_values()
+# expenses_data = expenses.get_all_values()
 
-#pprint(income_data[1]) #output: a list of rows with string values
-#pprint(expenses_data[2]) #output: a list of rows with string values
+# #pprint(income_data[1]) #output: a list of rows with string values
+# #pprint(expenses_data[2]) #output: a list of rows with string values
 
 ############################################# Welcome message
 
@@ -32,6 +33,7 @@ def welcome():
 
     """
     Displays a welcome message with color
+    RETURNS: Printed welcome message
     """
 
     init()  # Initialize colorama
@@ -54,13 +56,16 @@ def get_main_user_choice():
 
     """
     Gets the user's choice from the menu options.
+    RETURNS: The option (1-4) chosen by the user (if valid)
+    RETURNS: A ValueError (if invalid)
     """
     while True:
         print(Fore.BLUE + "Please select an option:" + Style.RESET_ALL)
         print("\n  1. Check My Monthly Finance Report!")
-        print("  2. Add new income")
-        print("  3. Add new expense")
-        print("  4. Exit program")
+        print("  2. Check my income and expenses.")
+        print("  3. Add new income")
+        print("  4. Add new expense")
+        print("  5. Exit program")
 
         try:
             option = int(input("\nEnter your choice (1-4):\n "))
@@ -74,7 +79,7 @@ def get_main_user_choice():
             break  
 
         except ValueError as e:
-            print(f"{e}\n")
+            print(Fore.LIGHTRED_EX + f"{e}\n" + Style.RESET_ALL)
     
     return(option)
 
@@ -83,9 +88,14 @@ def get_main_user_choice():
 ############################################# Menu options
 
 def handle_user_option(option):
+
+    """
+    Handle user option
+    RETURNS: The function of each option
+    """
     if option == 1:
-        # return show_finance_report()
-        print("show_finance_report")
+        return show_monthly_finance_report()
+        #rint("show_finance_report")
     elif option == 2:
         # return add_new_income()
         print("add_new_income")
@@ -102,28 +112,37 @@ def validate_user_choice(user_choice):
 
     """
     Validates the user's choice.
-    Raises ValueErrors if strings are provided or
-    if user selects other values between 1 and 4.
+    RAISES:  ValueErrors if strings are provided or if user selects
+    other values between 1 and 4.
     """
     if not 1 <= user_choice <= 4:
         raise ValueError(Fore.LIGHTRED_EX + "Invalid choice! Please enter a number between 1 and 4." + Style.RESET_ALL)
-
 
 ############################################# User chose: 1 (Check My Finance Report! )
 
 def show_monthly_finance_report():
     """
     Monthly finance report
+    RETURNS: Asks user if they want to see all their data, gets the Month input from User,
+
     """
-    print("Monthly finance report")
+    print("")
+    print(Fore.GREEN + Style.BRIGHT+ "\n✨ MY MONTHLY FINANCE REPORT ✨" + Style.RESET_ALL)
+    
+    #Ask user if they want to see all your income data(y/n)?
+    #Ask user if they want to see all their report data(y/n)
+        #if yes, show it, 
+        #if not, 
+
     get_month_input()
 
-            ########### Get month input from User ################
+#****** Get month input from User *****
 
 def get_month_input():
     """
     Prompts the user to enter a month name and validates the input.
-    Returns the entered month name as a string, or an error if the input is invalid.
+    RETURNS: Month (if valid)
+    RETURNS: ValueError (if invalid)
     """
 
     #validate the User choice:
@@ -134,31 +153,99 @@ def get_month_input():
         try:
             datetime.strptime(user_month, "%B")
             month = user_month.title() 
-            print(f"Month was selected: {month}")
-            #return(month) #return the month as a string, and breaks the loop
+            #print(f"Month was selected: {month}")
+            return(month) #return the month as a string, and breaks the loop
 
         #If choice is invalid: print/raise an error
         except ValueError as error:
             print(Fore.LIGHTRED_EX + " Invalid month name!" + Style.RESET_ALL)
             continue #important to break the loop and jump back to the beginning of the while loop!
+  
+#****** Get DATA from the worksheets *****
 
-    
-    #If choice is valid: check if the month has data:
+def get_worksheet_data(worksheet):
+    '''
+    get worksheet data to be used in calculations
+    '''
+    worksheet = SHEET.worksheet(worksheet)
+    all_income_values = worksheet.get_all_values()
+    return(all_income_values)
 
-        #No data:
-            #print(there is no data for the month yet), only for ABC
-            #Ask user: add new income?, add new expense? or Check expenses report for ABC?
+#****** Give User their Data  *****
+def view_income_worksheet():
+    '''
+    get income worksheet data
+    '''
+    print(Fore.GREEN + Style.BRIGHT + "\nGetting your income data...\n" + Style.RESET_ALL) #give user some feedback in the terminal
+    income_worksheet = SHEET.worksheet("income")
+    #print(income_worksheet) #<Worksheet 'income' id:1680754323>
+
+    all_income_values = income_worksheet.get_all_values()
+    #print(all_income_values)
+    #print(all_income_values[1]) #access the first row, after the headers
+
+    # Get header row
+    header_row = all_income_values[0] #output= list of string values
+    #print(header_row)
+
+    #Get data rows
+    data_rows = all_income_values[1:]
+    #print(data_rows)
+
+    # Print header
+    print(" | ".join(header_row))   # join makes a single string with the headers separated by pipes.
+    print("-" * (len(header_row) * 9))  # separator line
+
+    #Display All income data
+    for row in data_rows:  # Do not take the header row
+        print(" | ".join(row))
+        print("-" * (len(row) * 9))
+
+###
+def get_expenses_worksheet():
+    '''
+    get income worksheet data
+    '''
+    print(Fore.GREEN + Style.BRIGHT + f"\nGetting your expenses data ...\n" + Style.RESET_ALL) #give user some feedback in the terminal
+    expenses_worksheet = SHEET.worksheet("expenses") 
+
+    all_expenses_values = expenses_worksheet.get_all_values()
+    #print(all_expenses_values)
+    #print(all_expenses_values[1]) #access the first row, after the headers
+
+    # Get header row
+    header_row = all_expenses_values[0] #output= list of string values
+    #print(header_row)
+
+    #Get data rows
+    data_rows = all_expenses_values[1:]
+    #print(data_rows)
+
+    # Print header
+    print(" | ".join(header_row))   # join makes a single string with the headers separated by pipes.
+    print("-" * (len(header_row) * 9))  # separator line
+
+    #Display All income data
+    for row in data_rows:  # Do not take the header row
+        print(" | ".join(row))
+        print("-" * (len(row) * 9))
+
+#If choice is valid: check if the month has data:
+
+    #No data:
+        #print(there is no data for the month yet), only for ABC
+        #Ask user: add new income?, add new expense? or Check expenses report for ABC?
         
-        # Has data: 
-            #Print: calculating your general finances in ABC:
-            # ✅ Your total income in ABC was:
-            # ✅ Your total expenses in ABC was:
+    # Has data: 
+        #Print: calculating your general finances in ABC:
+        # ✅ Your total income in ABC was:
+        # ✅ Your total expenses in ABC was:
 
-            #Print calculating your cash balance in ABC:
+        #Print calculating your cash balance in ABC:
             #If Positive: 🤘🏽😎 Congratulations! in ABC your cash balance is positive : ➕ amount
             #If negative: ⚠️🚨Attention!⚠️🚨 in ABC your cash balance is negative:  ➖ amount
 
-            #Ask user: do they want to see the expenses details?(y/n)
+        #Ask user: do they want to see the expenses details?(y/n)
             #If yes: 
                 #Print (Your expenses details for ABC are ...)
                 #Show expenses per category.
@@ -194,7 +281,8 @@ def get_month_input():
 def main():
     welcome()
     get_main_user_choice()
-    show_monthly_finance_report()
+   #show_monthly_finance_report()
+    get_worksheet_data("income")
 
 main()
 
