@@ -1,7 +1,7 @@
 import gspread
 from google.oauth2.service_account import Credentials
 from pprint import pprint
-from colorama import init, Fore, Style
+from colorama import init, Fore, Style, Back
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -22,9 +22,8 @@ expenses = SHEET.worksheet("expenses")
 income_data = income.get_all_values()
 expenses_data = expenses.get_all_values()
 
-pprint(income_data[1]) #output: a list of rows with string values
-pprint(expenses_data[2]) #output: a list of rows with string values
-
+#pprint(income_data[1]) #output: a list of rows with string values
+#pprint(expenses_data[2]) #output: a list of rows with string values
 
 #Welcome message
 
@@ -35,16 +34,18 @@ def welcome():
     """
 
     init()  # Initialize colorama
-    welcome_message = f"""\n{Fore.GREEN + Style.BRIGHT}============== WELCOME TO MyFinances APP! =============={Style.RESET_ALL}\n
+    welcome_message = f"""
+    \n{Fore.GREEN + Style.BRIGHT}============== WELCOME TO MyFinances APP! =============={Style.RESET_ALL}\n
     This expense tracker will help you monitor your income and expenses
     to understand your spending habits!
     
-    Ready to start? Let's go! 🚀\n"""
+    Ready to start? Let's go! 🚀\n
+{Fore.GREEN + Style.BRIGHT}========================================================{Style.RESET_ALL}
+    """
+    
     print(welcome_message)
 
 welcome()
-
-
 
 #Ask user to chooce betweeen options
     #if Option1: Check My Finance Report! 
@@ -52,6 +53,42 @@ welcome()
     #elif Option3: Add new expense?
     #elif Option4: Exit
     #else choice invalid, print invalid and state what is wrong
+
+def get_main_user_choice():
+
+    """
+    Gets the user's choice from the menu options.
+    """
+
+    print(Fore.BLUE + "Please select an option:" + Style.RESET_ALL)
+    print("\n  1. Check My Finance Report!")
+    print("  2. Add new income")
+    print("  3. Add new expense")
+    print("  4. Exit program")
+
+    option = int(input("\nEnter your choice (1-4): "))
+    #print(option)
+
+    while True:
+        if option == 1:
+            #show_finance_report()
+            print("show_finance_report")
+        elif option == 2:
+            #add_new_income()
+            print("add_new_income")
+        elif option == 3:
+            #add_new_expense()
+            print("add new expense")
+        elif option == 4:
+            #exit()
+            print("Exit program")
+            break
+        else:
+            print("Invalid choice, please enter a number between 1 and 4")
+            #raise ValueError
+
+#get_main_user_choice()
+
 
 #User chose: 1 (Check My Finance Report! )
     #Ask User which month they want to see
@@ -104,8 +141,12 @@ welcome()
 #User chose: 4 (Exit)
     #Print (Goodbye and "See you next time! Your finances are in good hands.")
 
+#function to call all functions
+def main():
+    welcome()
+    get_main_user_choice()
 
-
+main()
 
 
              
