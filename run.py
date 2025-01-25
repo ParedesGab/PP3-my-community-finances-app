@@ -2,6 +2,7 @@ import gspread
 from google.oauth2.service_account import Credentials
 from pprint import pprint
 from colorama import init, Fore, Style, Back
+from datetime import datetime
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -113,13 +114,17 @@ def validate_user_choice(user_choice):
 def show_monthly_finance_report():
 
     #Ask User which month they want to see
-    month_selection = input("Enter the month (e.g., January, February): ")
+    month_selection = input("Enter the month name (e.g., january, february): ").lower()
+
+    #If choice is invalid: print/raise an error
+    if month_selection !=
 
     return(month_selection)
 
+
     
 
-    #If choice is invalid: print/raise an error
+    
     #If choice is valid: check if the month has data:
 
         #No data:
