@@ -65,15 +65,15 @@ def get_main_user_choice():
             option = int(input("\nEnter your choice (1-4):\n "))
             #print(option)
 
-            if (option >= 1 and option <= 4):
-                handle_user_option(option)
-                break  # Exit the loop if valid choice
-            else:
-                raise ValueError("")
+        #Validate the data
+            validate_user_choice(option)
+        #call the handle option function
+            handle_user_option(option)
+        # Exit the loop if valid choice
+            break  
 
         except ValueError as e:
-            print(f"Invalid input! {e}")
-            print("Please enter a number between 1 and 4.\n")
+            print(f"{e}\n")
     
     return(option)
 
@@ -97,16 +97,15 @@ def handle_user_option(option):
 
 ############################################# Raise ValueError
 
-def validate_user_choice(user_input):
+def validate_user_choice(user_choice):
 
     """
     Validates the user's choice.
     Raises ValueErrors if strings are provided or
     if user selects other values between 1 and 4.
     """
-
-
-
+    if not 1 <= user_choice <= 4:
+        raise ValueError("Invalid choice! Please enter a number between 1 and 4.")
 
 
 #User chose: 1 (Check My Finance Report! )
