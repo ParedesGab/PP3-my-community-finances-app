@@ -25,7 +25,7 @@ expenses_data = expenses.get_all_values()
 #pprint(income_data[1]) #output: a list of rows with string values
 #pprint(expenses_data[2]) #output: a list of rows with string values
 
-#Welcome message
+############################################# Welcome message
 
 def welcome():
 
@@ -45,21 +45,15 @@ def welcome():
     
     print(welcome_message)
 
-welcome()
+#welcome()
 
-#Ask user to chooce betweeen options
-    #if Option1: Check My Finance Report! 
-    #elif Option2: Add new income?
-    #elif Option3: Add new expense?
-    #elif Option4: Exit
-    #else choice invalid, print invalid and state what is wrong
+########################################## Ask user to chooce betweeen options
 
 def get_main_user_choice():
 
     """
     Gets the user's choice from the menu options.
     """
-
     print(Fore.BLUE + "Please select an option:" + Style.RESET_ALL)
     print("\n  1. Check My Finance Report!")
     print("  2. Add new income")
@@ -69,25 +63,30 @@ def get_main_user_choice():
     option = int(input("\nEnter your choice (1-4): "))
     #print(option)
 
-    while True:
-        if option == 1:
-            #show_finance_report()
-            print("show_finance_report")
-        elif option == 2:
-            #add_new_income()
-            print("add_new_income")
-        elif option == 3:
-            #add_new_expense()
-            print("add new expense")
-        elif option == 4:
-            #exit()
-            print("Exit program")
-            break
-        else:
-            print("Invalid choice, please enter a number between 1 and 4")
-            #raise ValueError
+    handle_user_option(option)
+        
+    return(option)
 
 #get_main_user_choice()
+
+############################################# Menu options
+
+def handle_user_option(option):
+    if option == 1:
+        #show_finance_report()
+        print("show_finance_report")
+    elif option == 2:
+        #add_new_income()
+        print("add_new_income")
+    elif option == 3:
+        #add_new_expense()
+        print("add new expense")
+    elif option == 4:
+        #exit()
+        print("Exit program")
+    else:
+        print("Invalid choice, please enter a number between 1 and 4")
+        #raise ValueError
 
 
 #User chose: 1 (Check My Finance Report! )
