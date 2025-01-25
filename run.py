@@ -62,7 +62,7 @@ def get_main_user_choice():
     while True:
         print(Fore.BLUE + "Please select an option:" + Style.RESET_ALL)
         print("\n  1. Check My Monthly Finance Report!")
-        print("  2. Check my income and expenses.")
+        print("  2. Check my income and expenses")
         print("  3. Add new income")
         print("  4. Add new expense")
         print("  5. Exit program")
@@ -97,6 +97,9 @@ def handle_user_option(option):
         return show_monthly_finance_report()
         #rint("show_finance_report")
     elif option == 2:
+        # return display_worksheet():
+        print("Check my income and expense")
+    elif option == 2:
         # return add_new_income()
         print("add_new_income")
     elif option == 3:
@@ -123,18 +126,36 @@ def validate_user_choice(user_choice):
 def show_monthly_finance_report():
     """
     Monthly finance report
-    RETURNS: Asks user if they want to see all their data, gets the Month input from User,
+    RETURNS: gets the Month input from User,
 
     """
     print("")
     print(Fore.GREEN + Style.BRIGHT+ "\n✨ MY MONTHLY FINANCE REPORT ✨" + Style.RESET_ALL)
     
-    #Ask user if they want to see all your income data(y/n)?
-    #Ask user if they want to see all their report data(y/n)
-        #if yes, show it, 
-        #if not, 
+    #User gives the month
+    month = get_month_input()
 
-    get_month_input()
+    #If choice {month} is valid: check if {month} has data:
+    income_worksheet = get_worksheet_data("income")
+    expenses_worksheet = get_worksheet_data("expenses")
+
+    month_found = False
+    for row in income_worksheet:
+        if row[0].lower() == month.lower(): # Check the first element of each row
+            month_found = True # Exit the loop if data is found in income
+            break
+    for row in expenses_worksheet:
+        if row[0].lower() == month.lower(): # Check the first element of each row
+            month_found = True
+            break # Exit the loop if data is found in expenses
+
+    if month_found == True:
+        # Display report
+        print(f"this is your report for {month}:")
+    else:
+        # No data for the month
+        print(f"There is no data for {month} yet.")
+        # Ask user: add new income?, add new expense? or Check expenses report for ABC?
 
 #****** Get month input from User *****
 
@@ -168,74 +189,18 @@ def get_worksheet_data(worksheet):
     get worksheet data to be used in calculations
     '''
     worksheet = SHEET.worksheet(worksheet)
-    all_income_values = worksheet.get_all_values()
-    return(all_income_values)
+    all_values = worksheet.get_all_values()
+    
+    return(all_values)
 
-#****** Give User their Data  *****
-def view_income_worksheet():
-    '''
-    get income worksheet data
-    '''
-    print(Fore.GREEN + Style.BRIGHT + "\nGetting your income data...\n" + Style.RESET_ALL) #give user some feedback in the terminal
-    income_worksheet = SHEET.worksheet("income")
-    #print(income_worksheet) #<Worksheet 'income' id:1680754323>
+#function to call all functions
+def main():
+    welcome()
+    get_main_user_choice()
+   #show_monthly_finance_report()
 
-    all_income_values = income_worksheet.get_all_values()
-    #print(all_income_values)
-    #print(all_income_values[1]) #access the first row, after the headers
-
-    # Get header row
-    header_row = all_income_values[0] #output= list of string values
-    #print(header_row)
-
-    #Get data rows
-    data_rows = all_income_values[1:]
-    #print(data_rows)
-
-    # Print header
-    print(" | ".join(header_row))   # join makes a single string with the headers separated by pipes.
-    print("-" * (len(header_row) * 9))  # separator line
-
-    #Display All income data
-    for row in data_rows:  # Do not take the header row
-        print(" | ".join(row))
-        print("-" * (len(row) * 9))
-
-###
-def get_expenses_worksheet():
-    '''
-    get income worksheet data
-    '''
-    print(Fore.GREEN + Style.BRIGHT + f"\nGetting your expenses data ...\n" + Style.RESET_ALL) #give user some feedback in the terminal
-    expenses_worksheet = SHEET.worksheet("expenses") 
-
-    all_expenses_values = expenses_worksheet.get_all_values()
-    #print(all_expenses_values)
-    #print(all_expenses_values[1]) #access the first row, after the headers
-
-    # Get header row
-    header_row = all_expenses_values[0] #output= list of string values
-    #print(header_row)
-
-    #Get data rows
-    data_rows = all_expenses_values[1:]
-    #print(data_rows)
-
-    # Print header
-    print(" | ".join(header_row))   # join makes a single string with the headers separated by pipes.
-    print("-" * (len(header_row) * 9))  # separator line
-
-    #Display All income data
-    for row in data_rows:  # Do not take the header row
-        print(" | ".join(row))
-        print("-" * (len(row) * 9))
-
-#If choice is valid: check if the month has data:
-
-    #No data:
-        #print(there is no data for the month yet), only for ABC
-        #Ask user: add new income?, add new expense? or Check expenses report for ABC?
-        
+main()
+       
     # Has data: 
         #Print: calculating your general finances in ABC:
         # ✅ Your total income in ABC was:
@@ -265,7 +230,76 @@ def get_expenses_worksheet():
         #Update income spreadsheet
         #Print data to terminal
 
-#User chose: 3 (Add new expense?)
+
+#****** Give User their Data  *****
+def display_income_worksheet():
+    '''
+    get income worksheet data
+    '''
+    print(Fore.GREEN + Style.BRIGHT + "\nGetting your income data...\n" + Style.RESET_ALL) #give user some feedback in the terminal
+    income_worksheet = SHEET.worksheet("income")
+    #print(income_worksheet) #<Worksheet 'income' id:1680754323>
+
+    all_income_values = income_worksheet.get_all_values()
+    #print(all_income_values)
+    #print(all_income_values[1]) #access the first row, after the headers
+
+    # Get header row
+    header_row = all_income_values[0] #output= list of string values
+    #print(header_row)
+
+    #Get data rows
+    data_rows = all_income_values[1:]
+    #print(data_rows)
+
+    # Print header
+    print(" | ".join(header_row))   # join makes a single string with the headers separated by pipes.
+    print("-" * (len(header_row) * 9))  # separator line
+
+    #Display All income data
+    for row in data_rows:  # Do not take the header row
+        print(" | ".join(row))
+        print("-" * (len(row) * 9))
+
+def display_expenses_worksheet():
+    '''
+    get income worksheet data
+    '''
+    print(Fore.GREEN + Style.BRIGHT + f"\nGetting your expenses data ...\n" + Style.RESET_ALL) #give user some feedback in the terminal
+    expenses_worksheet = SHEET.worksheet("expenses") 
+
+    all_expenses_values = expenses_worksheet.get_all_values()
+    #print(all_expenses_values)
+    #print(all_expenses_values[1]) #access the first row, after the headers
+
+    # Get header row
+    header_row = all_expenses_values[0] #output= list of string values
+    #print(header_row)
+
+    #Get data rows
+    data_rows = all_expenses_values[1:]
+    #print(data_rows)
+
+    # Print header
+    print(" | ".join(header_row))   # join makes a single string with the headers separated by pipes.
+    print("-" * (len(header_row) * 9))  # separator line
+
+    #Display All income data
+    for row in data_rows:  # Do not take the header row
+        print(" | ".join(row))
+        print("-" * (len(row) * 9))
+
+
+#User chose: 3 (Add new income?)
+    #Request data from the user: source, amount, month
+
+    #If choice is invalid: print/raise an error
+    #If choice is valid:
+        #Parse data into correct format for worksheet
+        #Update income spreadsheet
+        #Print data to terminal
+
+#User chose: 4 (Add new expense?)
     #Request data from the user: source, amount, month
 
     #If choice is invalid: print/raise an error
@@ -274,17 +308,10 @@ def get_expenses_worksheet():
         #Update expenses spreadsheet
         #Print data to terminal
 
-#User chose: 4 (Exit)
+#User chose: 5 (Exit)
     #Print (Goodbye and "See you next time! Your finances are in good hands.")
 
-#function to call all functions
-def main():
-    welcome()
-    get_main_user_choice()
-   #show_monthly_finance_report()
-    get_worksheet_data("income")
 
-main()
 
 
              
