@@ -54,17 +54,27 @@ def get_main_user_choice():
     """
     Gets the user's choice from the menu options.
     """
-    print(Fore.BLUE + "Please select an option:" + Style.RESET_ALL)
-    print("\n  1. Check My Finance Report!")
-    print("  2. Add new income")
-    print("  3. Add new expense")
-    print("  4. Exit program")
+    while True:
+        print(Fore.BLUE + "Please select an option:" + Style.RESET_ALL)
+        print("\n  1. Check My Finance Report!")
+        print("  2. Add new income")
+        print("  3. Add new expense")
+        print("  4. Exit program")
 
-    option = int(input("\nEnter your choice (1-4): "))
-    #print(option)
+        try:
+            option = int(input("\nEnter your choice (1-4):\n "))
+            #print(option)
 
-    handle_user_option(option)
-        
+            if (option >= 1 and option <= 4):
+                handle_user_option(option)
+                break  # Exit the loop if valid choice
+            else:
+                raise ValueError("")
+
+        except ValueError as e:
+            print(f"Invalid input! {e}")
+            print("Please enter a number between 1 and 4.\n")
+    
     return(option)
 
 #get_main_user_choice()
@@ -73,20 +83,30 @@ def get_main_user_choice():
 
 def handle_user_option(option):
     if option == 1:
-        #show_finance_report()
+        # return show_finance_report()
         print("show_finance_report")
     elif option == 2:
-        #add_new_income()
+        # return add_new_income()
         print("add_new_income")
     elif option == 3:
-        #add_new_expense()
+        # return add_new_expense()
         print("add new expense")
     elif option == 4:
-        #exit()
+        # return exit()
         print("Exit program")
-    else:
-        print("Invalid choice, please enter a number between 1 and 4")
-        #raise ValueError
+
+############################################# Raise ValueError
+
+def validate_user_choice(user_input):
+
+    """
+    Validates the user's choice.
+    Raises ValueErrors if strings are provided or
+    if user selects other values between 1 and 4.
+    """
+
+
+
 
 
 #User chose: 1 (Check My Finance Report! )
