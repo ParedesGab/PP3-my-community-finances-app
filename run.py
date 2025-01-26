@@ -94,7 +94,7 @@ def handle_user_option(option):
     RETURNS: The function of each option
     """
     if option == 1:
-        return show_monthly_finance_report()
+        return monthly_finance_report()
         #rint("show_finance_report")
     elif option == 2:
         # return display_worksheet():
@@ -123,7 +123,7 @@ def validate_user_choice(user_choice):
 
 ############################################# User chose: 1 (Check My Finance Report! )
 
-def show_monthly_finance_report():
+def monthly_finance_report():
     """
     Monthly finance report
     RETURNS: gets the Month input from User,
@@ -139,19 +139,13 @@ def show_monthly_finance_report():
     income_worksheet = get_worksheet_data("income")
     expenses_worksheet = get_worksheet_data("expenses")
 
-    month_found = False
-    for row in income_worksheet:
-        if row[0].lower() == month.lower(): # Check the first element of each row
-            month_found = True # Exit the loop if data is found in income
-            break
-    for row in expenses_worksheet:
-        if row[0].lower() == month.lower(): # Check the first element of each row
-            month_found = True
-            break # Exit the loop if data is found in expenses
+    # Check if data exists in income or expense worksheet
+    income_month_data_available = month_has_data(income_worksheet, month)
+    expense_month_data_available = month_has_data(expenses_worksheet, month)
 
-    if month_found == True:
-        # Display report
-        print(f"this is your report for {month}:")
+    if income_month_data_available or expense_month_data_available:
+    # Display report (implementation needed)
+        print(f"This is your report for {month}")
     else:
         # No data for the month
         print(f"There is no data for {month} yet.")
@@ -193,6 +187,18 @@ def get_worksheet_data(worksheet):
     
     return(all_values)
 
+#************* Checks if data exists for a specific month in a worksheet.
+def month_has_data(worksheet_data, month):
+  """
+  Checks if data exists for a specific month in a worksheet.
+  RETURNS. True if data exists for the month, False otherwise.
+  """
+
+  for row in worksheet_data:
+    if row[0].lower() == month.lower():
+      return True
+  return False
+
 #function to call all functions
 def main():
     welcome()
@@ -201,10 +207,7 @@ def main():
 
 main()
        
-    # Has data: 
-        #Print: calculating your general finances in ABC:
-        # ✅ Your total income in ABC was:
-        # ✅ Your total expenses in ABC was:
+    
 
         #Print calculating your cash balance in ABC:
             #If Positive: 🤘🏽😎 Congratulations! in ABC your cash balance is positive : ➕ amount
@@ -229,7 +232,6 @@ main()
         #Parse data into correct format for worksheet
         #Update income spreadsheet
         #Print data to terminal
-
 
 #****** Give User their Data  *****
 def display_income_worksheet():
@@ -288,7 +290,6 @@ def display_expenses_worksheet():
     for row in data_rows:  # Do not take the header row
         print(" | ".join(row))
         print("-" * (len(row) * 9))
-
 
 #User chose: 3 (Add new income?)
     #Request data from the user: source, amount, month
