@@ -94,7 +94,7 @@ def handle_user_option(option):
     RETURNS: The function of each option
     """
     if option == 1:
-        return monthly_finance_report()
+        return monthly_finance_report_main()
         #rint("show_finance_report")
     elif option == 2:
         # return display_worksheet():
@@ -123,14 +123,14 @@ def validate_user_choice(user_choice):
 
 ############################################# User chose: 1 (Check My Finance Report! )
 
-def monthly_finance_report():
+def monthly_finance_report_main():
     """
     Monthly finance report
     RETURNS: gets the Month input from User,
 
     """
     print("")
-    print(Fore.GREEN + Style.BRIGHT+ "\n✨ MY MONTHLY FINANCE REPORT ✨" + Style.RESET_ALL)
+    print(Fore.GREEN + Style.BRIGHT+ "\n  ✨✨✨✨  MY MONTHLY FINANCE REPORT  <✨✨✨✨" + Style.RESET_ALL)
     
     #User gives the month
     month = get_month_input()
@@ -144,13 +144,19 @@ def monthly_finance_report():
     expense_month_data_available = month_has_data(expenses_worksheet, month)
 
     if income_month_data_available or expense_month_data_available:
-    # Display report (implementation needed)
-        print(f"This is your report for {month}")
+        print(Fore.GREEN + Style.BRIGHT + f"\nCalculating your {month} income and expenses...\n" + Style.RESET_ALL)
+        
+        total_month_income = calculate_total_amount(income_worksheet, month, 2)
+        total_month_expenses = calculate_total_amount(expenses_worksheet, month, 4)
+
+        print(f"✅ Your total INCOME: EUR{total_month_income: .2f}")
+        print(f"✅ Your total EXPENSES: EUR{total_month_expenses: .2f}\n")
+               
     else:
         # No data for the month
         print(f"There is no data for {month} yet.")
         # Ask user: add new income?, add new expense? or Check expenses report for ABC?
-
+    
 #****** Get month input from User *****
 
 def get_month_input():
@@ -198,6 +204,20 @@ def month_has_data(worksheet_data, month):
     if row[0].lower() == month.lower():
       return True
   return False
+
+#************* If month has data, calculates total amount in selected month: 
+
+def calculate_total_amount(worksheet_data, month, amount_col_index):
+    """
+    Calculates and returns the total amount for the given month and worksheet
+    """
+
+    total_amount = 0
+    for row in worksheet_data:             # interates through each row in the worksheet
+        if row[0].lower() == month.lower(): #first value after the month header
+            total_amount += float(row[amount_col_index])
+    return total_amount
+
 
 #function to call all functions
 def main():
