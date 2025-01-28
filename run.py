@@ -159,6 +159,48 @@ class FinanceManager:
                     print(f"{error} Warning: Could not convert amount in {row} to a number.")
         return total_amount
     
+    #6) ASKS USER IF THEY WANT TO SEE EXPENSES DETAILS AND VALIDATE CHOICE (for show_monthly_expenses_details)
+    def validate_see_expenses_details_choice(self):
+        """
+        Confirms the users choice to see detailed expense information.
+        """
+        while True:
+            #Ask user: do they want to see the expenses details?(y/n)
+            see_details = input(f"{Fore.BLUE} Do you want to see your expenses details?(y/n) {Style.RESET_ALL}: ").lower()
+            
+            if see_details == "y":
+                return True
+            elif see_details == "n":
+                return False
+            else:
+                raise ValueError(Fore.LIGHTRED_EX + "Invalid input! Please enter 'y' or 'n'" + Style.RESET_ALL) 
+
+    #5) IF USER SAYS "y": SHOW EXPENSES DETAILS (for generate_monthly_finance_report)
+    def show_monthly_expenses_details():
+        """
+        """
+        try:
+            show_details = validate_expense_details()
+            
+            if show_details:
+                print("Your expenses details for ABC are ...")
+                # 7) Show expenses per category -->
+                return calculate_expenses_by_category()
+
+                # 8) Show max expense category and amount
+                #return max_expense_by_category()
+
+                # 9) Show which categories have to be payed at the first day of each month (2025-01-01)
+                #return find_first_day_payments():
+
+                #And Ask user what they want to do next?: 
+            elif show_details == False:
+                print("#add new income?, add new expense? or exit?")
+        except ValueError as error:
+            print(f"{error}")
+    
+
+    
     #MONTHLY FINANCE REPORT
     def generate_monthly_finance_report(self):
         """
@@ -196,7 +238,7 @@ class FinanceManager:
             else:
                 print(Fore.LIGHTRED_EX + f"🚨🚨 Attention! Negative cash balance!: EUR{cash_balance: .2f}\n" + Style.RESET_ALL)
             
-            #return show_expenses_details()
+            #return show_monthly_expenses_details()
         else:
             print(f"There is no data for {month} yet.")
             # Ask user: add new income?, add new expense? or Check expenses report for ABC?
@@ -208,46 +250,9 @@ def main():
 
 main()
 
-#5) ************* If user wants, show expenses details
-# def show_expenses_details():
 
-#     try:
-#         show_details = validate_expense_details()
-        
-#         if show_details:
-#             print("Your expenses details for ABC are ...")
-#             # 7) Show expenses per category -->
-#             return calculate_expenses_by_category()
 
-#             # 8) Show max expense category and amount
-#             #return max_expense_by_category()
 
-#             # 9) Show which categories have to be payed at the first day of each month (2025-01-01)
-#             #return find_first_day_payments():
-
-#             #And Ask user what they want to do next?: 
-#         elif show_details == False:
-#             print("#add new income?, add new expense? or exit?")
-#     except ValueError as error:
-#         print(f"{error}")
-
-# #6) ************* Confirms the users choice to see or not their detailed expense information.
-# def validate_expense_details():
-#     """
-#      Confirms the users choice to see or not their detailed expense information.
-#     RETURNS -> True if the user says yes, False otherwise.
-#     Raises: ValueError: If the user input is invalid (not 'y' or 'n').
-#     """
-#     while True:
-#         #Ask user: do they want to see the expenses details?(y/n)
-#         see_details = input(f"{Fore.BLUE} Do you want to see your expenses details?(y/n) {Style.RESET_ALL}: ").lower()
-         
-#         if see_details == "y":
-#             return True
-#         elif see_details == "n":
-#             return False
-#         else:
-#             raise ValueError(Fore.LIGHTRED_EX + "Invalid input! Please enter 'y' or 'n'" + Style.RESET_ALL) 
 
 # #7) ****** Show expenses per category.
 # def calculate_expenses_by_category(month):
