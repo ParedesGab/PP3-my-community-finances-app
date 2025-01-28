@@ -133,7 +133,7 @@ def monthly_finance_report_main():
     print(Fore.GREEN + Style.BRIGHT+ "\n  ✨✨✨✨  MY MONTHLY FINANCE REPORT  ✨✨✨✨" + Style.RESET_ALL)
     
     #User gives the month
-    month = get_month_input()
+    month = get_and_validate_month_input()
 
     #If choice {month} is valid: check if {month} has data:
     income_worksheet = get_worksheet_data("income")
@@ -166,16 +166,24 @@ def monthly_finance_report_main():
         # No data for the month
         print(f"There is no data for {month} yet.")
         # Ask user: add new income?, add new expense? or Check expenses report for ABC?
-    
-#****** Get month input from User *****
 
-def get_month_input():
+# 1) ****** Get DATA from the worksheets *****
+
+def get_worksheet_data(worksheet):
+    '''
+    Gets all data from a worksheet
+    '''
+    worksheet = SHEET.worksheet(worksheet)
+    all_values = worksheet.get_all_values()
+    
+    return(all_values)
+    
+#2)****** Get month input from User *****
+
+def get_and_validate_month_input():
     """
     Prompts the user to enter a month name and validates the input.
-    RETURNS: Month (if valid)
-    RETURNS: ValueError (if invalid)
     """
-
     #validate the User choice:
     while True:
         #Ask User which month they want to see
@@ -192,22 +200,10 @@ def get_month_input():
             print(Fore.LIGHTRED_EX + " Invalid month name!" + Style.RESET_ALL)
             continue #important to break the loop and jump back to the beginning of the while loop!
   
-#****** Get DATA from the worksheets *****
-
-def get_worksheet_data(worksheet):
-    '''
-    get worksheet data to be used in calculations
-    '''
-    worksheet = SHEET.worksheet(worksheet)
-    all_values = worksheet.get_all_values()
-    
-    return(all_values)
-
-#************* Checks if data exists for a specific month in a worksheet.
+#3) ************ Checks if data exists for the selected month in a worksheet.
 def month_has_data(worksheet_data, month):
   """
-  Checks if data exists for a specific month in a worksheet.
-  RETURNS. True if data exists for the month, False otherwise.
+  Checks and returns true if data exists for a specific month in a worksheet.
   """
 
   for row in worksheet_data:
@@ -215,8 +211,7 @@ def month_has_data(worksheet_data, month):
       return True
   return False
 
-#************* If month has data, calculates total amount in selected month: 
-
+#4) ************* If month has data, calculates total amount in selected month: 
 def calculate_total_amount(worksheet_data, month, amount_col_index):
     """
     Calculates and returns the total amount for the given month and worksheet
@@ -228,6 +223,7 @@ def calculate_total_amount(worksheet_data, month, amount_col_index):
             total_amount += float(row[amount_col_index])
     return total_amount
 
+#5) ************* If user wants, show expenses details
 def show_expenses_details():
 
     try:
@@ -235,15 +231,22 @@ def show_expenses_details():
         
         if show_details:
             print("Your expenses details for ABC are ...")
+            # 7) Show expenses per category -->
+            return calculate_expenses_by_category()
+
+            # 8) Show max expense category and amount
+            #return max_expense_by_category()
+
+            # 9) Show which categories have to be payed at the first day of each month (2025-01-01)
+            #return find_first_day_payments():
+
+            #And Ask user what they want to do next?: 
         elif show_details == False:
             print("#add new income?, add new expense? or exit?")
     except ValueError as error:
         print(f"{error}")
-    #Show expenses per category.
-        #Show max expense category and amount
-        #Show which categories have to be payed at the first day of each month (2025-01-01)
-        #Ask user what they want to do next?: 
 
+#6) ************* Confirms the users choice to see or not their detailed expense information.
 def validate_expense_details():
     """
      Confirms the users choice to see or not their detailed expense information.
@@ -252,14 +255,26 @@ def validate_expense_details():
     """
     while True:
         #Ask user: do they want to see the expenses details?(y/n)
-        see_details = input("do you want to see your expenses details?(y/n): ").lower()
-        
+        see_details = input(f"{Fore.BLUE} Do you want to see your expenses details?(y/n) {Style.RESET_ALL}: ").lower()
+         
         if see_details == "y":
             return True
         elif see_details == "n":
             return False
         else:
             raise ValueError(Fore.LIGHTRED_EX + "Invalid input! Please enter 'y' or 'n'" + Style.RESET_ALL) 
+
+#7) ****** Show expenses per category.
+def calculate_expenses_by_category():
+    pass
+
+#8) ****** Show max expense category and amount
+def max_expense_by_category():
+    pass
+
+#9) ****** Show which categories have to be payed at the first day of each month (2025-01-01)
+def find_first_day_payments():
+    pass
 
 #function to call all functions
 def main():
