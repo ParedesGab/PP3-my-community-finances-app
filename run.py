@@ -99,6 +99,41 @@ def handle_user_option(option):
 
 # IF USER OPTION == 1
 class FinanceManager: 
+    #MAKE THE WORKSHEETS ACCESSIBLE FOR THE CLASS METHODS
+    def __init__(self):
+        self.income_worksheet = SHEET.worksheet("income")
+        self.expenses_worksheet = SHEET.worksheet("income")
+
+    #GET ALL DATA FROM A WORKSHEET
+    def get_worksheet_data(worksheet):
+        '''
+        Gets all data from a worksheet
+        '''
+        worksheet = SHEET.worksheet(worksheet)
+        all_values = worksheet.get_all_values()
+        return all_values
+    
+    #GET MONTH SELECTED BY USER AND VALIDATES IT
+    def get_and_validate_month_input():
+        """
+        Prompts the user to enter a month name and validates the input.
+        """
+        #validate the User choice:
+        while True:
+            #Ask User which month they want to see
+            user_month = input(Fore.BLUE + "\nPlease enter the month name (e.g., january, february):\n " + Style.RESET_ALL).lower()
+
+            try:
+                datetime.strptime(user_month, "%B")
+                month = user_month.title() 
+                #print(f"Month was selected: {month}")
+                return(month) #return the month as a string, and breaks the loop
+
+            #If choice is invalid: print/raise an error
+            except ValueError as error:
+                print(Fore.LIGHTRED_EX + " Invalid month name!" + Style.RESET_ALL)
+                continue #important to break the loop and jump back to the beginning of the while loop!
+
     def generate_monthly_finance_report():
         """
         Monthly finance report
@@ -143,49 +178,20 @@ class FinanceManager:
             print(f"There is no data for {month} yet.")
             # Ask user: add new income?, add new expense? or Check expenses report for ABC?
 
-    # 1) ****** Get DATA from the worksheets *****
 
-    def get_worksheet_data(worksheet):
-        '''
-        Gets all data from a worksheet
-        '''
-        worksheet = SHEET.worksheet(worksheet)
-        all_values = worksheet.get_all_values()
         
-        return(all_values)
-        
-    #2)****** Get month input from User *****
-
-    def get_and_validate_month_input():
-        """
-        Prompts the user to enter a month name and validates the input.
-        """
-        #validate the User choice:
-        while True:
-            #Ask User which month they want to see
-            user_month = input(Fore.BLUE + "\nPlease enter the month name (e.g., january, february):\n " + Style.RESET_ALL).lower()
-
-            try:
-                datetime.strptime(user_month, "%B")
-                month = user_month.title() 
-                #print(f"Month was selected: {month}")
-                return(month) #return the month as a string, and breaks the loop
-
-            #If choice is invalid: print/raise an error
-            except ValueError as error:
-                print(Fore.LIGHTRED_EX + " Invalid month name!" + Style.RESET_ALL)
-                continue #important to break the loop and jump back to the beginning of the while loop!
+    
     
     #3) ************ Checks if data exists for the selected month in a worksheet.
     def month_has_data(worksheet_data, month):
-    """
-    Checks and returns true if data exists for a specific month in a worksheet.
-    """
+        """
+        Checks and returns true if data exists for a specific month in a worksheet.
+        """
 
-    for row in worksheet_data:
-        if row[0].lower() == month.lower():
-        return True
-    return False
+        for row in worksheet_data:
+            if row[0].lower() == month.lower():
+            return True
+        return False
 
     #4) ************* If month has data, calculates total amount in selected month: 
     def calculate_total_amount(worksheet_data, month, amount_col_index):
