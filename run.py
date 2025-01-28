@@ -225,39 +225,40 @@ class FinanceManager:
         print("")
         print(Fore.GREEN + Style.BRIGHT+ "\n  ✨✨✨✨  MY MONTHLY FINANCE REPORT  ✨✨✨✨" + Style.RESET_ALL)
         
-        #User inputs the month
-        month = self.get_and_validate_month_input()
+        while True: 
+            #User inputs the month
+            month = self.get_and_validate_month_input()
 
-        #Get all data of a worksheet
-        income_data = self.get_worksheet_data("income")
-        expenses_data = self.get_worksheet_data("expenses")
+            #Get all data of a worksheet
+            income_data = self.get_worksheet_data("income")
+            expenses_data = self.get_worksheet_data("expenses")
 
-        # Check if the month exists within the data
-        income_month_data_available = self.month_has_data(income_data, month)
-        expense_month_data_available = self.month_has_data(expenses_data, month)
+            # Check if the month exists within the data
+            income_month_data_available = self.month_has_data(income_data, month)
+            expense_month_data_available = self.month_has_data(expenses_data, month)
 
-        if income_month_data_available or expense_month_data_available:
-            print(Fore.GREEN + Style.BRIGHT + f"\nCalculating your {month} income and expenses...\n" + Style.RESET_ALL)
-            
-            total_month_income = self.calculate_total_amount(income_data, month, 2)
-            total_month_expenses = self.calculate_total_amount(expenses_data, month, 4)
+            if income_month_data_available or expense_month_data_available:
+                print(Fore.GREEN + Style.BRIGHT + f"\nCalculating your {month} income and expenses...\n" + Style.RESET_ALL)
+                
+                total_month_income = self.calculate_total_amount(income_data, month, 2)
+                total_month_expenses = self.calculate_total_amount(expenses_data, month, 4)
 
-            print(f"✅ TOTAL INCOME: EUR{total_month_income: .2f}")
-            print(f"✅ TOTAL EXPENSES: EUR{total_month_expenses: .2f}\n")
+                print(f"✅ TOTAL INCOME: EUR{total_month_income: .2f}")
+                print(f"✅ TOTAL EXPENSES: EUR{total_month_expenses: .2f}\n")
 
-            #Calculate cash balance
-            print(Fore.GREEN + Style.BRIGHT + f"\nCalculating Your {month} cash balance...\n" + Style.RESET_ALL)
-            cash_balance = total_month_income - total_month_expenses
+                #Calculate cash balance
+                print(Fore.GREEN + Style.BRIGHT + f"\nCalculating Your {month} cash balance...\n" + Style.RESET_ALL)
+                cash_balance = total_month_income - total_month_expenses
 
-            if cash_balance >= 0:
-                print(f"🎉🎉 Congratulations! Positive cash balance!: EUR{cash_balance: .2f}\n")
+                if cash_balance >= 0:
+                    print(f"🎉🎉 Congratulations! Positive cash balance!: EUR{cash_balance: .2f}\n")
+                else:
+                    print(Fore.LIGHTRED_EX + f"🚨🚨 Attention! Negative cash balance!: EUR{cash_balance: .2f}\n" + Style.RESET_ALL)
+
+                monthly_expenses_details = self.show_monthly_expenses_details(month)
             else:
-                print(Fore.LIGHTRED_EX + f"🚨🚨 Attention! Negative cash balance!: EUR{cash_balance: .2f}\n" + Style.RESET_ALL)
-        else:
-            print(f"There is no data for {month} yet.")
-            # Ask user: add new income?, add new expense? or Check expenses report for ABC?
-              
-        monthly_expenses_details = self.show_monthly_expenses_details(month)        
+                print(f"{Fore.LIGHTRED_EX}There is no data for {month} yet... {Style.RESET_ALL}")
+                # Ask user: add new income?, add new expense? or Check expenses report for ABC?                    
 
 #CALL WELCOME AND USER CHOICE functions
 def main():
