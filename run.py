@@ -159,22 +159,6 @@ class FinanceManager:
                     print(f"{error} Warning: Could not convert amount in {row} to a number.")
         return total_amount
     
-    # #ASKS USER IF THEY WANT TO SEE EXPENSES DETAILS AND VALIDATE CHOICE (for generate_monthly_finance_report)
-    # def validate_see_expenses_details_choice(self):
-    #     """
-    #     Confirms the users choice to see detailed expense information.
-    #     """
-    #     while True:
-    #         #Ask user: do they want to see the expenses details?(y/n)
-    #         see_details = input(f"{Fore.BLUE} Do you want to see your expenses details?(y/n) {Style.RESET_ALL}: ").lower()
-            
-    #         if see_details == "y":
-    #             return True
-    #         elif see_details == "n":
-    #             return False
-    #         else:
-    #             raise ValueError(Fore.LIGHTRED_EX + "Invalid input! Please enter 'y' or 'n'" + Style.RESET_ALL)
-    
     #CALCULATE EXPENSES BY CATEGORY (for show_monthly_expenses_details)
     def calculate_expenses_by_category(self, expenses_data, month):
         """
@@ -273,7 +257,6 @@ class FinanceManager:
             print(f"There is no data for {month} yet.")
             # Ask user: add new income?, add new expense? or Check expenses report for ABC?
               
-        #if self.validate_see_expenses_details_choice():
         monthly_expenses_details = self.show_monthly_expenses_details(month)        
 
 #CALL WELCOME AND USER CHOICE functions
@@ -282,18 +265,6 @@ def main():
     get_main_user_choice()
 
 main()
-
-
-
-
-
-
-
-
-
-
-#############################################
-#####################
 
 #User chose: 2 (Add new income?)
     #Request data from the user: source, amount, month
