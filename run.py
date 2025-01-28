@@ -159,21 +159,21 @@ class FinanceManager:
                     print(f"{error} Warning: Could not convert amount in {row} to a number.")
         return total_amount
     
-    #ASKS USER IF THEY WANT TO SEE EXPENSES DETAILS AND VALIDATE CHOICE (for generate_monthly_finance_report)
-    def validate_see_expenses_details_choice(self):
-        """
-        Confirms the users choice to see detailed expense information.
-        """
-        while True:
-            #Ask user: do they want to see the expenses details?(y/n)
-            see_details = input(f"{Fore.BLUE} Do you want to see your expenses details?(y/n) {Style.RESET_ALL}: ").lower()
+    # #ASKS USER IF THEY WANT TO SEE EXPENSES DETAILS AND VALIDATE CHOICE (for generate_monthly_finance_report)
+    # def validate_see_expenses_details_choice(self):
+    #     """
+    #     Confirms the users choice to see detailed expense information.
+    #     """
+    #     while True:
+    #         #Ask user: do they want to see the expenses details?(y/n)
+    #         see_details = input(f"{Fore.BLUE} Do you want to see your expenses details?(y/n) {Style.RESET_ALL}: ").lower()
             
-            if see_details == "y":
-                return True
-            elif see_details == "n":
-                return False
-            else:
-                raise ValueError(Fore.LIGHTRED_EX + "Invalid input! Please enter 'y' or 'n'" + Style.RESET_ALL)
+    #         if see_details == "y":
+    #             return True
+    #         elif see_details == "n":
+    #             return False
+    #         else:
+    #             raise ValueError(Fore.LIGHTRED_EX + "Invalid input! Please enter 'y' or 'n'" + Style.RESET_ALL)
     
     #CALCULATE EXPENSES BY CATEGORY (for show_monthly_expenses_details)
     def calculate_expenses_by_category(self, expenses_data, month):
@@ -203,42 +203,35 @@ class FinanceManager:
         """
         Finds the category with the maximum expense
         """
-        print(Fore.GREEN + Style.BRIGHT + "HIGHEST EXPENSE:" + Style.RESET_ALL)
+        #print(Fore.GREEN + Style.BRIGHT + "🎯 HIGHEST EXPENSE:" + Style.RESET_ALL)
         max_category = max(expenses_by_category, key = expenses_by_category.get)
         #print(max_category)
         max_amount = expenses_by_category[max_category]
-        #print(max_category, max_amount)
+
         return max_category, max_amount
 
-    #return max_expense_by_category()
-
-    # 9) Show which categories have to be payed at the first day of each month (2025-01-01)
-    #return find_first_day_payments():
-
-    #Show which categories have to be payed at the first day of each month (2025-01-01)
-        #And Ask user what they want to do next?: 
+    #Ask user what they want to do next?: 
     # elif show_details == False:
-    #     print("#add new income?, add new expense? or exit?")
+    #     print("#add new income?, add new expense? or exit?")1
+
 
     #IF USER SAYS "y": SHOW EXPENSES DETAILS (for generate_monthly_finance_report)
     def show_monthly_expenses_details(self, month):
         """
         Displays detailed expense information for a given month.
         """
-        print(f"{Fore.GREEN + Style.BRIGHT}\n🎯 MY DETAILED EXPENSE REPORT in {month.upper()}!\n {Style.RESET_ALL}")
+        print(f"{Fore.GREEN + Style.BRIGHT}\nCalculating Your {month} detailed expense report...\n {Style.RESET_ALL}")
 
         #Show expenses per category
         expenses_data = self.get_worksheet_data("expenses")
         expenses_by_category = self.calculate_expenses_by_category(expenses_data, month)
-
-        print(Fore.GREEN + Style.BRIGHT + "EXPENSES BY CATEGORY:\n" + Style.RESET_ALL)
 
         for category, amount in expenses_by_category.items():
             print(f"→ {category}: EUR {amount:.2f}\n")
 
         #Show max expense by category
         max_category, max_amount = self.max_expense_by_category(expenses_by_category)
-        print(f"→ {max_category.upper()} (EUR {max_amount:.2f})\n")
+        print(f"{Fore.GREEN + Style.BRIGHT}🎯 HIGHEST EXPENSE:{Style.RESET_ALL} {max_category.upper()} (EUR {max_amount:.2f})\n")
         
     #MONTHLY FINANCE REPORT
     def generate_monthly_finance_report(self):
@@ -269,19 +262,19 @@ class FinanceManager:
             print(f"✅ TOTAL EXPENSES: EUR{total_month_expenses: .2f}\n")
 
             #Calculate cash balance
-            print(Fore.GREEN + Style.BRIGHT + f"Calculating Your {month} cash balance...\n" + Style.RESET_ALL)
+            print(Fore.GREEN + Style.BRIGHT + f"\nCalculating Your {month} cash balance...\n" + Style.RESET_ALL)
             cash_balance = total_month_income - total_month_expenses
 
             if cash_balance >= 0:
                 print(f"🎉🎉 Congratulations! Positive cash balance!: EUR{cash_balance: .2f}\n")
             else:
                 print(Fore.LIGHTRED_EX + f"🚨🚨 Attention! Negative cash balance!: EUR{cash_balance: .2f}\n" + Style.RESET_ALL)
-            
-        if self.validate_see_expenses_details_choice():
-            return self.show_monthly_expenses_details(month)
         else:
             print(f"There is no data for {month} yet.")
             # Ask user: add new income?, add new expense? or Check expenses report for ABC?
+              
+        #if self.validate_see_expenses_details_choice():
+        monthly_expenses_details = self.show_monthly_expenses_details(month)        
 
 #CALL WELCOME AND USER CHOICE functions
 def main():
@@ -296,13 +289,6 @@ main()
 
 
 
-# #8) ****** Show max expense category and amount
-# def max_expense_by_category():
-#     pass
-
-# #9) ****** Show which categories have to be payed at the first day of each month (2025-01-01)
-# def find_first_day_payments():
-#     pass
 
 
 
