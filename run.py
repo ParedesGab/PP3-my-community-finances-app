@@ -30,7 +30,7 @@ SHEET = GSPREAD_CLIENT.open('my_finances')
 #WELCOME MESSAGE
 def welcome():
     """
-    Displays a welcome message with color
+    Displays a welcome message with color.
     """
     init()  # Initialize colorama
     welcome_message = f"""
@@ -65,10 +65,10 @@ def get_main_user_choice():
         #return the handle_user_option function
             return handle_user_option(option) #return breaks the loop
 
-        except ValueError as e:
-            print(Fore.LIGHTRED_EX + f"{e}\n" + Style.RESET_ALL)
+        except ValueError as error:
+            print(Fore.LIGHTRED_EX + f"{error}\n" + Style.RESET_ALL)
     
-#VALIDATE USER CHOICE
+#VALIDATE USER CHOICE (for get_main_user_choice)
 def validate_user_choice(user_choice):
     """
     Validates the user's choice.
@@ -76,10 +76,10 @@ def validate_user_choice(user_choice):
     if not 1 <= user_choice <= 4:
         raise ValueError(Fore.LIGHTRED_EX + "Invalid choice! Please enter a number between 1 and 4." + Style.RESET_ALL)
 
-#HANDLE THE USER SELECTION
+#HANDLE THE USER SELECTION (for get_main_user_choice)
 def handle_user_option(option):
     """
-    Handle user option
+    Handle user option.
     """
     if option == 1:
         return generate_monthly_finance_report()
@@ -97,8 +97,16 @@ def handle_user_option(option):
         # return exit()
         print("Exit program")
 
-############################################# User chose: 1 (Check My Finance Report! )
+#CALL WELCOME AND USER CHOICE functions
+def main():
+    welcome()
+    get_main_user_choice()
 
+main()
+
+# IF USER OPTION == 1
+
+class FinanceManager: 
 def generate_monthly_finance_report():
     """
     Monthly finance report
@@ -199,12 +207,7 @@ def calculate_total_amount(worksheet_data, month, amount_col_index):
             total_amount += float(row[amount_col_index])
     return total_amount
 
-#function to call all functions
-def main():
-    welcome()
-    get_main_user_choice()
 
-main()
 
 #5) ************* If user wants, show expenses details
 # def show_expenses_details():
