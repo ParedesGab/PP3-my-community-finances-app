@@ -76,12 +76,10 @@ def validate_user_choice(user_choice):
     if not 1 <= user_choice <= 4:
         raise ValueError(Fore.LIGHTRED_EX + "Invalid choice! Please enter a number between 1 and 4." + Style.RESET_ALL)
 
-############################################# Menu options
-
+#HANDLE THE USER SELECTION
 def handle_user_option(option):
     """
     Handle user option
-    RETURNS: The function of each option
     """
     if option == 1:
         return generate_monthly_finance_report()
@@ -89,21 +87,15 @@ def handle_user_option(option):
     elif option == 2:
         # return display_worksheet():
         print("Check my income and expense")
-    elif option == 2:
+    elif option == 3:
         # return add_new_income()
         print("add_new_income")
-    elif option == 3:
+    elif option == 4:
         # return add_new_expense()
         print("add new expense")
-    elif option == 4:
+    elif option == 5:
         # return exit()
         print("Exit program")
-
-
-
-
-
-
 
 ############################################# User chose: 1 (Check My Finance Report! )
 
