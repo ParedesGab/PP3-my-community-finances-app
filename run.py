@@ -312,11 +312,12 @@ class FinanceManager:
         """
         Adds a new income record to the "income" worksheet.
         """
+        print(Fore.GREEN + Style.BRIGHT + "\n TO ADD A NEW INCOME:" + Style.RESET_ALL)
+
+        month = self.get_and_validate_month_input()
+        source = input(Fore.BLUE + "Enter income source:\n " + Style.RESET_ALL)
         while True:
             try:
-                print(Fore.GREEN + Style.BRIGHT + "\n TO ADD A NEW INCOME:" + Style.RESET_ALL)
-                month = self.get_and_validate_month_input()
-                source = input(Fore.BLUE + "Enter income source:\n " + Style.RESET_ALL)
                 amount = float(input(Fore.BLUE + "Enter income amount:\n " + Style.RESET_ALL))
 
                 new_income_row = [month, source, amount]
@@ -333,8 +334,7 @@ class FinanceManager:
                 #break 
 
             except ValueError as error:
-                print(Fore.LIGHTRED_EX + f"Invalid input: {error}. Please try again.\n" + Style.RESET_ALL)
-                #continue
+                print(Fore.LIGHTRED_EX + f"Invalid input: {error}. Please enter a valid amount.\n" + Style.RESET_ALL)
 
     # IF USER OPTION == 4 (Add new expenses)
     def add_new_expense_to_expense_worksheet(self):
