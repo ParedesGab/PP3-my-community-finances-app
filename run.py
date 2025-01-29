@@ -84,18 +84,28 @@ def handle_user_option(option):
     if option == 1:
         finance_manager = FinanceManager() 
         return finance_manager.generate_monthly_finance_report()
+
     elif option == 2:
         finance_manager = FinanceManager()
+
         print(Fore.BLUE + "\n**Income Data**" + Style.RESET_ALL)
-        finance_manager.display_worksheet("income")     
+        finance_manager.display_worksheet("income")
+
         print(Fore.BLUE + "\n**Expense Data**" + Style.RESET_ALL)
-        finance_manager.display_worksheet("expenses") 
+        finance_manager.display_worksheet("expenses")
+
+        print(Fore.GREEN + Style.BRIGHT + "\n****************************************************" + Style.RESET_ALL)
+        print(Fore.BLUE + "\nWhat would like to do next?" + Style.RESET_ALL)
+        return get_main_user_choice()
+
     elif option == 3:
         finance_manager = FinanceManager() 
         finance_manager.add_new_income_to_income_worksheet()
+
     elif option == 4:
         finance_manager = FinanceManager() 
         finance_manager.add_new_expense_to_expense_worksheet()
+
     elif option == 5:
         print(Fore.GREEN + Style.BRIGHT + "✨ Your finances are in good hands ✨ Goodbye and See you next time!\n" + Style.RESET_ALL)
         exit()
@@ -275,7 +285,7 @@ class FinanceManager:
         '''
         get data from a given worksheet.
         '''
-        print(f"\n{Fore.GREEN + Style.BRIGHT}Getting all your {worksheet} data...\n{Style.RESET_ALL}")
+        print(f"\n{Fore.GREEN + Style.BRIGHT}Getting Your {worksheet.capitalize()} data...\n{Style.RESET_ALL}")
 
         #all_income_values = income_worksheet.get_all_values()
         all_worksheet_values = self.get_worksheet_data(worksheet)
@@ -292,10 +302,14 @@ class FinanceManager:
         print(" | ".join(header_row))   # join makes a single string with the headers separated by pipes.
         print("-" * (len(header_row) * 9))  # separator line
 
-        #Display All income data
+        #Display All income or expenses data
         for row in data_rows:  # Do not take the header row
             print(" | ".join(row))
             print("-" * (len(row) * 9))
+        
+        # print(Fore.GREEN + Style.BRIGHT + "\n****************************************************" + Style.RESET_ALL)
+        # print(Fore.BLUE + "\nWhat would like to do next?" + Style.RESET_ALL)
+        # return get_main_user_choice()
     
     # IF USER OPTION == 3 (Add new expenses)
     def add_new_income_to_income_worksheet(self):
