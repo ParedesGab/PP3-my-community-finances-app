@@ -52,10 +52,10 @@ def get_main_user_choice():
     while True:
         print(Fore.BLUE + "Please select an option:" + Style.RESET_ALL)
         print("\n  1. Check MONTHLY Finance Report!")
-        print("  2. Check ALL income and expenses")
-        print("  3. Add new income")
-        print("  4. Add new expense")
-        print("  5. Exit program")
+        print("  2. Check ALL Income and Expenses.")
+        print("  3. Add New Income.")
+        print("  4. Add New Expense.")
+        print("  5. Exit Program.")
 
         try:
             option = int(input("\nEnter your choice (1-4):\n "))
@@ -97,7 +97,7 @@ def handle_user_option(option):
         finance_manager = FinanceManager() 
         finance_manager.add_new_expense_to_expense_worksheet()
     elif option == 5:
-        print(Fore.GREEN + Style.BRIGHT + "Goodbye and See you next time! Your finances are in good hands.\n" + Style.RESET_ALL)
+        print(Fore.GREEN + Style.BRIGHT + "✨ Your finances are in good hands ✨ Goodbye and See you next time!\n" + Style.RESET_ALL)
         exit()
 
 class FinanceManager: 
@@ -276,7 +276,7 @@ class FinanceManager:
         '''
         get data from a given worksheet.
         '''
-        print(f"\n{Fore.GREEN + Style.BRIGHT}Getting your {worksheet} data...\n{Style.RESET_ALL}")
+        print(f"\n{Fore.GREEN + Style.BRIGHT}Getting all your {worksheet} data...\n{Style.RESET_ALL}")
 
         #all_income_values = income_worksheet.get_all_values()
         all_worksheet_values = self.get_worksheet_data(worksheet)
