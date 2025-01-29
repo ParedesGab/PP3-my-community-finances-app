@@ -331,7 +331,6 @@ class FinanceManager:
 
                 print(Fore.BLUE + "\nWhat would like to do next?" + Style.RESET_ALL)
                 return get_main_user_choice()
-                #break 
 
             except ValueError as error:
                 print(Fore.LIGHTRED_EX + f"Invalid input: {error}. Please enter a valid amount.\n" + Style.RESET_ALL)
@@ -350,22 +349,32 @@ class FinanceManager:
                 # Validate date format and consistency with month
                 date_obj = datetime.strptime(date, "%Y-%m-%d")
                 if date_obj.month != datetime.strptime(month, "%B").month:
-                    raise ValueError(f"Date '{date}' does not match the entered month '{month}'.")
+                    raise ValueError(f"Date '{date}' does not match the entered month '{month}'")
 
                 category = input(Fore.BLUE + "Enter expense category: " + Style.RESET_ALL)
                 description = input(Fore.BLUE + "Enter expense description: " + Style.RESET_ALL)
-                amount = float(input(Fore.BLUE + "Enter expense amount: " + Style.RESET_ALL))
+
+                while True:
+                    try:
+                        amount = float(input(Fore.BLUE + "Enter expense amount: " + Style.RESET_ALL))
+                        break
+                    except ValueError as error:
+                        print(Fore.LIGHTRED_EX + f"Invalid input: {error}. Please enter a valid amount:" + Style.RESET_ALL)
 
                 new_expense_row = [month, date, category, description, amount]
                 self.expenses_worksheet.append_row(new_expense_row)
 
                 print(f"\n{Fore.GREEN + Style.BRIGHT}New expense for {month} on {date} added successfully!{Style.RESET_ALL}")
                 self.display_worksheet("expenses")  # Display updated expenses after adding
-                break
+
+                print(Fore.GREEN + Style.BRIGHT + "\n****************************************************" + Style.RESET_ALL)
+
+                print(Fore.BLUE + "\nWhat would like to do next?" + Style.RESET_ALL)
+                return get_main_user_choice()
 
             except ValueError as error:
-                print(Fore.LIGHTRED_EX + f"Invalid input: {error}. Please try again.\n" + Style.RESET_ALL)
-
+                print(Fore.LIGHTRED_EX + f"Invalid input: {error}. Please enter a valid month or date." + Style.RESET_ALL)
+                
 #CALL WELCOME AND USER CHOICE functions
 def main():
     welcome()
