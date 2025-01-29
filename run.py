@@ -350,8 +350,7 @@ class FinanceManager:
 
             except ValueError as error:
                 print(Fore.LIGHTRED_EX + f"Invalid input: {error}. Please try again.\n" + Style.RESET_ALL)
-
-    
+  
 
 #CALL WELCOME AND USER CHOICE functions
 def main():
