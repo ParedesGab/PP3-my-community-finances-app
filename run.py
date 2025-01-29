@@ -306,10 +306,6 @@ class FinanceManager:
         for row in data_rows:  # Do not take the header row
             print(" | ".join(row))
             print("-" * (len(row) * 9))
-        
-        # print(Fore.GREEN + Style.BRIGHT + "\n****************************************************" + Style.RESET_ALL)
-        # print(Fore.BLUE + "\nWhat would like to do next?" + Style.RESET_ALL)
-        # return get_main_user_choice()
     
     # IF USER OPTION == 3 (Add new expenses)
     def add_new_income_to_income_worksheet(self):
@@ -318,6 +314,7 @@ class FinanceManager:
         """
         while True:
             try:
+                print(Fore.GREEN + Style.BRIGHT + "\n TO ADD A NEW INCOME:" + Style.RESET_ALL)
                 month = self.get_and_validate_month_input()
                 source = input(Fore.BLUE + "Enter income source: " + Style.RESET_ALL)
                 amount = float(input(Fore.BLUE + "Enter income amount: " + Style.RESET_ALL))
