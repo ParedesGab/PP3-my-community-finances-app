@@ -91,8 +91,9 @@ def handle_user_option(option):
         print(Fore.BLUE + "\n**Expense Data**" + Style.RESET_ALL)
         finance_manager.display_worksheet("expenses") 
     elif option == 3:
-        # return add_new_income()
-        print("add_new_income")
+        finance_manager = FinanceManager() 
+        #return finance_manager.add_new_income_to_income_worksheet
+        finance_manager.add_new_income_to_income_worksheet()
     elif option == 4:
         # return add_new_expense()
         print("add new expense")
@@ -100,7 +101,6 @@ def handle_user_option(option):
         # return exit()
         print("Exit program")
 
-# IF USER OPTION == 1
 class FinanceManager: 
     #MAKE THE WORKSHEETS ACCESSIBLE FOR THE CLASS METHODS
     def __init__(self):
@@ -115,7 +115,8 @@ class FinanceManager:
         worksheet = SHEET.worksheet(worksheet)
         all_values = worksheet.get_all_values()
         return all_values
-    
+
+    # IF USER OPTION == 1
     #GET MONTH SELECTED BY USER AND VALIDATES IT (for generate_monthly_finance_report)
     def get_and_validate_month_input(self):
         """
@@ -299,31 +300,27 @@ class FinanceManager:
             print("-" * (len(row) * 9))
     
     # IF USER OPTION == 3  (Add new income)
-    def add_new_income(self):
+    def add_new_income_to_income_worksheet(self):
         """
         Adds a new income record to the "income" worksheet.
         """
         while True:
             try:
-                #Request data from the user: source, amount, month
+                month = self.get_and_validate_month_input()
                 source = input(Fore.BLUE + "Enter income source: " + Style.RESET_ALL)
-                amount = float(input(Fore.BLUE + "Enter income amount: " + Style.RESET_ALL)) 
-                month = self.get_and_validate_month_input() 
-        
-                #If choice is invalid: print/raise an error
-    #If choice is valid:
-        #Parse data into correct format for worksheet
-        #Update income spreadsheet
-        #Print data to terminal
+                amount = float(input(Fore.BLUE + "Enter income amount: " + Style.RESET_ALL))
 
-# '''
-#     Receives a list of integers to be inserted into a worksheet.
-#     Update the relevant worksheet with the data provided 
-#     '''
-#     print(f"Updating {worksheet} worksheet...") 
-#     worksheet_to_update = SHEET.worksheet(worksheet) 
-#     worksheet_to_update.append_row(data)
-#     print(f"{worksheet} worksheet updated successfully.\n")
+                new_income_row = [month, source, amount]
+
+                self.income_worksheet.append_row(new_income_row)
+
+                print(f"\n{Fore.GREEN + Style.BRIGHT}New income for {month} from {source} (EUR {amount:.2f}) added successfully!{Style.RESET_ALL}")
+                self.display_worksheet("income") 
+                break 
+
+            except ValueError as error:
+                print(Fore.LIGHTRED_EX + f"Invalid input: {error}. Please try again.\n" + Style.RESET_ALL)
+                #continue
 
 #CALL WELCOME AND USER CHOICE functions
 def main():
