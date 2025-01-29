@@ -166,7 +166,7 @@ class FinanceManager:
         for row in worksheet_data:             # interates through each row in the worksheet
             if row[0].lower() == month.lower(): #first value after the month header
                 try:
-                    total_amount += float(row[amount_col_index])
+                    total_amount += float(row[amount_col_index].replace(",", "") )
                 except ValueError as error:
                     print(f"{error} Warning: Could not convert amount in {row} to a number.")
         return total_amount
