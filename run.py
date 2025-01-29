@@ -73,7 +73,7 @@ def validate_user_choice(user_choice):
     """
     Validates the user's choice.
     """
-    if not 1 <= user_choice <= 4:
+    if not 1 <= user_choice <= 5:
         raise ValueError(Fore.LIGHTRED_EX + "Invalid choice! Please enter a number between 1 and 4." + Style.RESET_ALL)
 
 #HANDLE THE USER SELECTION (for get_main_user_choice)
@@ -98,7 +98,8 @@ def handle_user_option(option):
         finance_manager.add_new_expense_to_expense_worksheet()
     elif option == 5:
         # return exit()
-        print("Exit program")
+        print("Goodbye and See you next time! Your finances are in good hands.")
+        exit()
 
 class FinanceManager: 
     #MAKE THE WORKSHEETS ACCESSIBLE FOR THE CLASS METHODS
@@ -350,7 +351,6 @@ class FinanceManager:
 
             except ValueError as error:
                 print(Fore.LIGHTRED_EX + f"Invalid input: {error}. Please try again.\n" + Style.RESET_ALL)
-  
 
 #CALL WELCOME AND USER CHOICE functions
 def main():
@@ -363,17 +363,7 @@ main()
 
 
 
-#User chose: 4 (Add new expense?)
-    #Request data from the user: source, amount, month
 
-    #If choice is invalid: print/raise an error
-    #If choice is valid:
-        #Parse data into correct format for worksheet
-        #Update expenses spreadsheet
-        #Print data to terminal
-
-#User chose: 5 (Exit)
-    #Print (Goodbye and "See you next time! Your finances are in good hands.")
 
 
 
