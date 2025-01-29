@@ -97,8 +97,7 @@ def handle_user_option(option):
         finance_manager = FinanceManager() 
         finance_manager.add_new_expense_to_expense_worksheet()
     elif option == 5:
-        # return exit()
-        print("Goodbye and See you next time! Your finances are in good hands.")
+        print(Fore.GREEN + Style.BRIGHT + "Goodbye and See you next time! Your finances are in good hands.\n" + Style.RESET_ALL)
         exit()
 
 class FinanceManager: 
