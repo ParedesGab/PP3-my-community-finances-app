@@ -277,12 +277,9 @@ class FinanceManager:
         get data from a given worksheet.
         '''
         print(f"\n{Fore.GREEN + Style.BRIGHT}Getting your {worksheet} data...\n{Style.RESET_ALL}")
-        #print(income_worksheet) #<Worksheet 'income' id:1680754323>
 
         #all_income_values = income_worksheet.get_all_values()
         all_worksheet_values = self.get_worksheet_data(worksheet)
-        #print(all_income_values)
-        #print(all_income_values[1]) #access the first row, after the headers
 
         # Get header row
         header_row = all_worksheet_values[0] #output= list of string values
@@ -300,6 +297,33 @@ class FinanceManager:
         for row in data_rows:  # Do not take the header row
             print(" | ".join(row))
             print("-" * (len(row) * 9))
+    
+    # IF USER OPTION == 3  (Add new income)
+    def add_new_income(self):
+        """
+        Adds a new income record to the "income" worksheet.
+        """
+        while True:
+            try:
+                #Request data from the user: source, amount, month
+                source = input(Fore.BLUE + "Enter income source: " + Style.RESET_ALL)
+                amount = float(input(Fore.BLUE + "Enter income amount: " + Style.RESET_ALL)) 
+                month = self.get_and_validate_month_input() 
+        
+                #If choice is invalid: print/raise an error
+    #If choice is valid:
+        #Parse data into correct format for worksheet
+        #Update income spreadsheet
+        #Print data to terminal
+
+# '''
+#     Receives a list of integers to be inserted into a worksheet.
+#     Update the relevant worksheet with the data provided 
+#     '''
+#     print(f"Updating {worksheet} worksheet...") 
+#     worksheet_to_update = SHEET.worksheet(worksheet) 
+#     worksheet_to_update.append_row(data)
+#     print(f"{worksheet} worksheet updated successfully.\n")
 
 #CALL WELCOME AND USER CHOICE functions
 def main():
@@ -309,15 +333,6 @@ def main():
 main()
 
 
-
-#User chose: 3 (Add new income?)
-    #Request data from the user: source, amount, month
-
-    #If choice is invalid: print/raise an error
-    #If choice is valid:
-        #Parse data into correct format for worksheet
-        #Update income spreadsheet
-        #Print data to terminal
 
 #User chose: 4 (Add new expense?)
     #Request data from the user: source, amount, month
