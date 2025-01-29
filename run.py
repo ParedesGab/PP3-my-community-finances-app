@@ -134,7 +134,7 @@ class FinanceManager:
         #validate the user's choice:
         while True:
             #Ask User which month they want to see
-            user_month = input(Fore.BLUE + "\nPlease enter the month name (e.g., january, february):\n " + Style.RESET_ALL).lower()
+            user_month = input(Fore.BLUE + "\nPlease enter the month name (e.g., january):\n " + Style.RESET_ALL).lower()
 
             try:
                 datetime.strptime(user_month, "%B")
@@ -316,16 +316,21 @@ class FinanceManager:
             try:
                 print(Fore.GREEN + Style.BRIGHT + "\n TO ADD A NEW INCOME:" + Style.RESET_ALL)
                 month = self.get_and_validate_month_input()
-                source = input(Fore.BLUE + "Enter income source: " + Style.RESET_ALL)
-                amount = float(input(Fore.BLUE + "Enter income amount: " + Style.RESET_ALL))
+                source = input(Fore.BLUE + "Enter income source:\n " + Style.RESET_ALL)
+                amount = float(input(Fore.BLUE + "Enter income amount:\n " + Style.RESET_ALL))
 
                 new_income_row = [month, source, amount]
 
                 self.income_worksheet.append_row(new_income_row)
 
                 print(f"\n{Fore.GREEN + Style.BRIGHT}New income for {month} from {source} (EUR {amount:.2f}) added successfully!{Style.RESET_ALL}")
-                self.display_worksheet("income") 
-                break 
+                self.display_worksheet("income")
+
+                print(Fore.GREEN + Style.BRIGHT + "\n****************************************************" + Style.RESET_ALL)
+
+                print(Fore.BLUE + "\nWhat would like to do next?" + Style.RESET_ALL)
+                return get_main_user_choice()
+                #break 
 
             except ValueError as error:
                 print(Fore.LIGHTRED_EX + f"Invalid input: {error}. Please try again.\n" + Style.RESET_ALL)
