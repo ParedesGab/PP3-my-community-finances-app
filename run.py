@@ -51,8 +51,8 @@ def get_main_user_choice():
     """
     while True:
         print(Fore.BLUE + "Please select an option:" + Style.RESET_ALL)
-        print("\n  1. Check MONTHLY Finance Report!")
-        print("  2. Check ALL Income and Expenses.")
+        print("\n  1. Check My Monthly Finance Report!")
+        print("  2. Display All My Income and Expenses.")
         print("  3. Add New Income.")
         print("  4. Add New Expense.")
         print("  5. Exit Program.")
@@ -87,7 +87,7 @@ def handle_user_option(option):
     elif option == 2:
         finance_manager = FinanceManager()
         print(Fore.BLUE + "\n**Income Data**" + Style.RESET_ALL)
-        finance_manager.display_worksheet("income") 
+        finance_manager.display_worksheet("income")     
         print(Fore.BLUE + "\n**Expense Data**" + Style.RESET_ALL)
         finance_manager.display_worksheet("expenses") 
     elif option == 3:
@@ -258,18 +258,17 @@ class FinanceManager:
                     print(Fore.LIGHTRED_EX + f"🚨🚨 Attention! Negative cash balance!: EUR{cash_balance: .2f}\n" + Style.RESET_ALL)
 
                 monthly_expenses_details = self.show_monthly_expenses_details(month)
+
                 # Ask user: Check expenses report for ABC?  add new income?, add new expense? or 
+                print(Fore.GREEN + Style.BRIGHT + "\n****************************************************" + Style.RESET_ALL)
+                print(Fore.BLUE + "\nWhat would like to do next?" + Style.RESET_ALL)
+                return get_main_user_choice()
+
             else:
                 print(f"{Fore.LIGHTRED_EX}\nThere is no data for {month} yet... {Style.RESET_ALL}")
-                print("\nWould you like to:")
-                print("1. Enter a different month")
-                #print("2. Exit program")
-                choice = input("\nEnter your choice (1 or 2):\n ")
-                if choice == '1':
-                    continue  # Restart the loop to prompt for another month
-                else:
-                    break 
                 # Ask user: add new income?, add new expense? or Check expenses report for ABC?
+                print(Fore.BLUE + "\nWhat would like to do next?" + Style.RESET_ALL)
+                return get_main_user_choice()
     
     # IF USER OPTION == 2  (Check my income and expense!)
     def display_worksheet(self, worksheet):
@@ -356,18 +355,7 @@ def main():
     welcome()
     get_main_user_choice()
 
-main()
-
-
-
-
-
-
-
-
-
-
-             
+main()             
 
 
     
