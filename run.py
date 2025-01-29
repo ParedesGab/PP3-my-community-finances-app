@@ -84,10 +84,12 @@ def handle_user_option(option):
     if option == 1:
         finance_manager = FinanceManager() 
         return finance_manager.generate_monthly_finance_report()
-        #rint("show_finance_report")
     elif option == 2:
-        # return display_worksheet():
-        print("Check all income and expense")
+        finance_manager = FinanceManager()
+        print(Fore.BLUE + "\n**Income Data**" + Style.RESET_ALL)
+        finance_manager.display_worksheet("income") 
+        print(Fore.BLUE + "\n**Expense Data**" + Style.RESET_ALL)
+        finance_manager.display_worksheet("expenses") 
     elif option == 3:
         # return add_new_income()
         print("add_new_income")
@@ -274,20 +276,20 @@ class FinanceManager:
         '''
         get data from a given worksheet.
         '''
-        print(Fore.GREEN + Style.BRIGHT + "\nGetting your {worksheet} data...\n" + Style.RESET_ALL)
+        print(f"\n{Fore.GREEN + Style.BRIGHT}Getting your {worksheet} data...\n{Style.RESET_ALL}")
         #print(income_worksheet) #<Worksheet 'income' id:1680754323>
 
         #all_income_values = income_worksheet.get_all_values()
-        all_income_values = self.get_worksheet_data(worksheet)
+        all_worksheet_values = self.get_worksheet_data(worksheet)
         #print(all_income_values)
         #print(all_income_values[1]) #access the first row, after the headers
 
         # Get header row
-        header_row = all_income_values[0] #output= list of string values
+        header_row = all_worksheet_values[0] #output= list of string values
         #print(header_row)
 
         #Get data rows
-        data_rows = all_income_values[1:]
+        data_rows = all_worksheet_values[1:]
         #print(data_rows)
 
         # Print header
@@ -299,49 +301,12 @@ class FinanceManager:
             print(" | ".join(row))
             print("-" * (len(row) * 9))
 
-    # def display_expenses_worksheet(self):
-    #     '''
-    #     get expenses worksheet data
-    #     '''
-    #     print(Fore.GREEN + Style.BRIGHT + f"\nGetting your expenses data ...\n" + Style.RESET_ALL) #give user some feedback in the terminal
-    #     expenses_worksheet = SHEET.worksheet("expenses") 
-
-    #     all_expenses_values = expenses_worksheet.get_all_values()
-    #     #print(all_expenses_values)
-    #     #print(all_expenses_values[1]) #access the first row, after the headers
-
-    #     # Get header row
-    #     header_row = all_expenses_values[0] #output= list of string values
-    #     #print(header_row)
-
-    #     #Get data rows
-    #     data_rows = all_expenses_values[1:]
-    #     #print(data_rows)
-
-    #     # Print header
-    #     print(" | ".join(header_row))   # join makes a single string with the headers separated by pipes.
-    #     print("-" * (len(header_row) * 9))  # separator line
-
-    #     #Display All income data
-    #     for row in data_rows:  # Do not take the header row
-    #         print(" | ".join(row))
-    #         print("-" * (len(row) * 9))       
-
 #CALL WELCOME AND USER CHOICE functions
 def main():
     welcome()
     get_main_user_choice()
 
 main()
-
-#CALL WELCOME AND USER CHOICE functions
-def main():
-    welcome()
-    get_main_user_choice()
-
-main()
-
-
 
 
 
