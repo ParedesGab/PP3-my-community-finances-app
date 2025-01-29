@@ -92,11 +92,10 @@ def handle_user_option(option):
         finance_manager.display_worksheet("expenses") 
     elif option == 3:
         finance_manager = FinanceManager() 
-        #return finance_manager.add_new_income_to_income_worksheet
         finance_manager.add_new_income_to_income_worksheet()
     elif option == 4:
-        # return add_new_expense()
-        print("add new expense")
+        finance_manager = FinanceManager() 
+        finance_manager.add_new_expense_to_expense_worksheet()
     elif option == 5:
         # return exit()
         print("Exit program")
@@ -105,7 +104,7 @@ class FinanceManager:
     #MAKE THE WORKSHEETS ACCESSIBLE FOR THE CLASS METHODS
     def __init__(self):
         self.income_worksheet = SHEET.worksheet("income")
-        self.expenses_worksheet = SHEET.worksheet("income")
+        self.expenses_worksheet = SHEET.worksheet("expenses")
 
     #GET ALL DATA FROM A WORKSHEET (for generate_monthly_finance_report)
     def get_worksheet_data(self, worksheet):
@@ -299,7 +298,7 @@ class FinanceManager:
             print(" | ".join(row))
             print("-" * (len(row) * 9))
     
-    # IF USER OPTION == 3  (Add new income)
+    # IF USER OPTION == 3 (Add new expenses)
     def add_new_income_to_income_worksheet(self):
         """
         Adds a new income record to the "income" worksheet.
@@ -322,12 +321,46 @@ class FinanceManager:
                 print(Fore.LIGHTRED_EX + f"Invalid input: {error}. Please try again.\n" + Style.RESET_ALL)
                 #continue
 
+    # IF USER OPTION == 4 (Add new expenses)
+    def add_new_expense_to_expense_worksheet(self):
+        """
+        Adds a new expense record to the "expenses" worksheet, ensuring consistency between month and date.
+        """
+        while True:
+            try:
+                month = self.get_and_validate_month_input()
+                # Get the current year
+
+                date = input(Fore.BLUE + "Enter expense date (YYYY-MM-DD): " + Style.RESET_ALL)
+                # Validate date format and consistency with month
+                date_obj = datetime.strptime(date, "%Y-%m-%d")
+                if date_obj.month != datetime.strptime(month, "%B").month:
+                    raise ValueError(f"Date '{date}' does not match the entered month '{month}'.")
+
+                category = input(Fore.BLUE + "Enter expense category: " + Style.RESET_ALL)
+                description = input(Fore.BLUE + "Enter expense description: " + Style.RESET_ALL)
+                amount = float(input(Fore.BLUE + "Enter expense amount: " + Style.RESET_ALL))
+
+                new_expense_row = [month, date, category, description, amount]
+                self.expenses_worksheet.append_row(new_expense_row)
+
+                print(f"\n{Fore.GREEN + Style.BRIGHT}New expense for {month} on {date} added successfully!{Style.RESET_ALL}")
+                self.display_worksheet("expenses")  # Display updated expenses after adding
+                break
+
+            except ValueError as error:
+                print(Fore.LIGHTRED_EX + f"Invalid input: {error}. Please try again.\n" + Style.RESET_ALL)
+
+    
+
 #CALL WELCOME AND USER CHOICE functions
 def main():
     welcome()
     get_main_user_choice()
 
 main()
+
+
 
 
 
