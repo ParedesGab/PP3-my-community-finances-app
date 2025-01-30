@@ -180,11 +180,13 @@ class FinanceManager:
                     total_amount += float(amount_str)
                 except ValueError as error:
                     print(
-                        f"{error} Could not convert amount in {row} to a number.")
+                        f"{error}"
+                        f"Could not convert amount in {row} to a number."
+                    )
         return total_amount
 
     # CALCULATE EXPENSES BY CATEGORY (for show_monthly_expenses_details)
-    def calculate_expenses_by_category(self, expenses_data, month):
+    def calc_expenses_by_category(self, expenses_data, month):
         """
         Calculate expenses per category in a given month.
         """
@@ -197,7 +199,9 @@ class FinanceManager:
                     amount = float(row[4])
                 except ValueError:
                     print(
-                        f"Warning: Could not convert amount in row {row} to a number.")
+                        f"Warning: Could not convert amount in row"
+                        f"{row} to a number."
+                    )
                     continue
                 if category in expenses_by_category:
                     expenses_by_category[category] += amount
@@ -215,7 +219,7 @@ class FinanceManager:
 
         return max_category, max_amount
 
-    # IF USER SAYS "y": SHOW EXPENSES DETAILS (for generate_monthly_finance_report)
+    # IF "y": SHOW EXPENSES DETAILS (for generate_monthly_finance_report)
     def show_monthly_expenses_details(self, month):
         """
         Displays detailed expense information for a given month.
@@ -228,7 +232,7 @@ class FinanceManager:
 
         # Show expenses per category
         expenses_data = self.get_worksheet_data("expenses")
-        expenses_by_category = self.calculate_expenses_by_category(expenses_data, month)
+        expenses_by_category = self.calc_expenses_by_category(expenses_data, month)
 
         for category, amount in expenses_by_category.items():
             print(f"→ {category}: EUR {amount:.2f}\n")
