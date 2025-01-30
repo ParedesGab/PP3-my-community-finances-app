@@ -232,13 +232,17 @@ class FinanceManager:
 
         # Show expenses per category
         expenses_data = self.get_worksheet_data("expenses")
-        expenses_by_category = self.calc_expenses_by_category(expenses_data, month)
+        expenses_by_category = self.calc_expenses_by_category(
+            expenses_data, month
+            )
 
         for category, amount in expenses_by_category.items():
             print(f"→ {category}: EUR {amount:.2f}\n")
 
         # Show max expense by category
-        max_category, max_amount = self.max_expense_by_category(expenses_by_category)
+        max_category, max_amount = self.max_expense_by_category(
+            expenses_by_category
+            )
         print(
             f"{Fore.GREEN + Style.BRIGHT}🎯 HIGHEST EXPENSE:{Style.RESET_ALL} "
             f"{max_category.upper()} (EUR {max_amount:.2f})\n"
@@ -274,8 +278,12 @@ class FinanceManager:
                     f"\nCalculating your {month} income and expenses...\n" +
                     Style.RESET_ALL)
 
-                total_month_income = self.calculate_total_amount(income_data, month, 2)
-                total_month_expenses = self.calculate_total_amount(expenses_data, month, 4)
+                total_month_income = self.calculate_total_amount(
+                    income_data, month, 2
+                    )
+                total_month_expenses = self.calculate_total_amount(
+                    expenses_data, month, 4
+                    )
 
                 print(f"✅ TOTAL INCOME: EUR{total_month_income: .2f}")
                 print(f"✅ TOTAL EXPENSES: EUR{total_month_expenses: .2f}\n")
@@ -296,11 +304,14 @@ class FinanceManager:
                 else:
                     print(
                         Fore.LIGHTRED_EX +
-                        f"🚨🚨 Attention! Negative cash balance!: EUR{cash_balance: .2f}\n" +
+                        f"🚨🚨 Attention! Negative cash balance!:"
+                        f" EUR{cash_balance: .2f}\n" +
                         Style.RESET_ALL
                     )
 
-                monthly_expenses_details = self.show_monthly_expenses_details(month)
+                monthly_expenses_details = self.show_monthly_expenses_details(
+                    month
+                    )
 
                 # Ask user: What to do next?
                 print(Fore.GREEN + Style.BRIGHT + "\n*****" + Style.RESET_ALL)
