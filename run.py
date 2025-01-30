@@ -22,14 +22,14 @@ def welcome():
     Displays a welcome message with color.
     """
     init()
-    border = f"{Fore.GREEN + Style.BRIGHT}================={Style.RESET_ALL}"
+    border = f"{Fore.GREEN + Style.BRIGHT}=============={Style.RESET_ALL}"
     welcome_message = f"""
     \n{border} WELCOME TO MyFinances APP! {border}\n
     This expense tracker will help you monitor
-    your income and expenses!
+    your income and expenses!\n
     Are you ready to understand your spending habits?\n
     Let's go! 🚀\n
-{border}{border}{border}
+{border}{border}{border}{border}
     """
     print(welcome_message)
 
