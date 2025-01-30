@@ -220,7 +220,11 @@ class FinanceManager:
         """
         Displays detailed expense information for a given month.
         """
-        print(f"{Fore.GREEN + Style.BRIGHT}\nCalculating Your {month} detailed expense report...\n {Style.RESET_ALL}")
+        print(
+            f"{Fore.GREEN + Style.BRIGHT}\n"
+            f"Calculating Your {month} detailed expense report...\n"
+            f"{Style.RESET_ALL}"
+        )
 
         # Show expenses per category
         expenses_data = self.get_worksheet_data("expenses")
@@ -231,7 +235,10 @@ class FinanceManager:
 
         # Show max expense by category
         max_category, max_amount = self.max_expense_by_category(expenses_by_category)
-        print(f"{Fore.GREEN + Style.BRIGHT}🎯 HIGHEST EXPENSE:{Style.RESET_ALL} {max_category.upper()} (EUR {max_amount:.2f})\n")
+        print(
+            f"{Fore.GREEN + Style.BRIGHT}🎯 HIGHEST EXPENSE:{Style.RESET_ALL} "
+            f"{max_category.upper()} (EUR {max_amount:.2f})\n"
+        )
 
     # MONTHLY FINANCE REPORT
     def generate_monthly_finance_report(self):
@@ -239,7 +246,11 @@ class FinanceManager:
         Generates and displays the monthly finance report!
         """
         print("")
-        print(Fore.GREEN + Style.BRIGHT + "\n  ✨✨✨✨  MY MONTHLY FINANCE REPORT  ✨✨✨✨" + Style.RESET_ALL)
+        print(
+            Fore.GREEN + Style.BRIGHT +
+            "\n  ✨✨✨✨  MY MONTHLY FINANCE REPORT  ✨✨✨✨" +
+            Style.RESET_ALL
+            )
 
         while True:
             # User inputs the month
@@ -254,7 +265,10 @@ class FinanceManager:
             expense_month_data_available = self.month_has_data(expenses_data, month)
 
             if income_month_data_available or expense_month_data_available:
-                print(Fore.GREEN + Style.BRIGHT + f"\nCalculating your {month} income and expenses...\n" + Style.RESET_ALL)
+                print(
+                    Fore.GREEN + Style.BRIGHT +
+                    f"\nCalculating your {month} income and expenses...\n" +
+                    Style.RESET_ALL)
 
                 total_month_income = self.calculate_total_amount(income_data, month, 2)
                 total_month_expenses = self.calculate_total_amount(expenses_data, month, 4)
@@ -263,18 +277,27 @@ class FinanceManager:
                 print(f"✅ TOTAL EXPENSES: EUR{total_month_expenses: .2f}\n")
 
                 # Calculate cash balance
-                print(Fore.GREEN + Style.BRIGHT + f"\nCalculating Your {month} cash balance...\n" + Style.RESET_ALL)
+                print(Fore.GREEN + Style.BRIGHT +
+                f"\nCalculating Your {month} cash balance...\n" +
+                Style.RESET_ALL)
                 cash_balance = total_month_income - total_month_expenses
 
                 if cash_balance >= 0:
-                    print(f"🎉🎉 Congratulations! Positive cash balance!: EUR{cash_balance: .2f}\n")
+                    print(
+                        f"🎉🎉 Congratulations! Positive cash balance!:"
+                        f"EUR{cash_balance: .2f}\n"
+                        )
                 else:
-                    print(Fore.LIGHTRED_EX + f"🚨🚨 Attention! Negative cash balance!: EUR{cash_balance: .2f}\n" + Style.RESET_ALL)
+                    print(
+                        Fore.LIGHTRED_EX +
+                        f"🚨🚨 Attention! Negative cash balance!: EUR{cash_balance: .2f}\n" +
+                        Style.RESET_ALL
+                    )
 
                 monthly_expenses_details = self.show_monthly_expenses_details(month)
 
                 # Ask user: What to do next?
-                print(Fore.GREEN + Style.BRIGHT + "\n*****************************" + Style.RESET_ALL)
+                print(Fore.GREEN + Style.BRIGHT + "\n*****" + Style.RESET_ALL)
                 print(
                     Fore.BLUE +
                     "\nWhat would you like to do next?" +
@@ -283,7 +306,10 @@ class FinanceManager:
                 return get_main_user_choice()
 
             else:
-                print(f"{Fore.LIGHTRED_EX}\nThere is no data for {month} yet... {Style.RESET_ALL}")
+                print(
+                    f"{Fore.LIGHTRED_EX}\nThere is no data for {month} yet..."
+                    f"{Style.RESET_ALL}"
+                    )
                 print(
                     Fore.BLUE +
                     "\nWhat would you like to do next?" +
