@@ -88,7 +88,11 @@ def handle_user_option(option):
         finance_manager.display_worksheet("expenses")
 
         print(Fore.GREEN + Style.BRIGHT + "\n**************" + Style.RESET_ALL)
-        print(Fore.BLUE + "\nWhat would like to do next?" + Style.RESET_ALL)
+        print(
+            Fore.BLUE +
+            "\nWhat would you like to do next?" +
+            Style.RESET_ALL
+        )
         return get_main_user_choice()
 
     elif option == 3:
@@ -133,7 +137,12 @@ class FinanceManager:
         # validate the user's choice:
         while True:
             # Ask User which month they want to see
-            user_month = input(Fore.BLUE + "\nPlease enter the month name (e.g., january):\n" + Style.RESET_ALL).lower()
+            prompt = (
+                f"{Fore.BLUE}"
+                f"\nPlease enter the month name (e.g., january):\n"
+                f"{Style.RESET_ALL}"
+            )
+            user_month = input(prompt).lower()
 
             try:
                 datetime.strptime(user_month, "%B")
@@ -142,7 +151,11 @@ class FinanceManager:
 
             # If choice is invalid: ValueError
             except ValueError as error:
-                print(Fore.LIGHTRED_EX + " Invalid month name!" + Style.RESET_ALL)
+                print(
+                    Fore.LIGHTRED_EX +
+                    "Invalid month name!" +
+                    Style.RESET_ALL
+                )
 
     # CHECK IF MONTH SELECTED HAS DATA (for generate_monthly_finance_report)
     def month_has_data(self, worksheet_data, month):
@@ -151,10 +164,10 @@ class FinanceManager:
         """
         for row in worksheet_data:
             if row[0].lower() == month.lower():
-                	return True
+                return True
         return False
 
-    # CALCULATE TOTAL INCOME AND TOTAL EXPENSES FOR THE GIVEN MONTH AND WORKSHEET (for generate_monthly_finance_report)
+    # CALCULATE TOTAL AMOUNT (for generate_monthly_finance_report)
     def calculate_total_amount(self, worksheet_data, month, amount_col_index):
         """
         Calculates the total amount for the given month and worksheet.
@@ -163,9 +176,10 @@ class FinanceManager:
         for row in worksheet_data:
             if row[0].lower() == month.lower():
                 try:
-                    total_amount += float(row[amount_col_index].replace(",", "") )
+                    amount_str = row[amount_col_index].replace(",", "")
+                    total_amount += float(amount_str)
                 except ValueError as error:
-                    print(f"{error} Warning: Could not convert amount in {row} to a number.")
+                    print(f"{error} Could not convert amount in {row} to a number.")
         return total_amount
 
     # CALCULATE EXPENSES BY CATEGORY (for show_monthly_expenses_details)
@@ -342,21 +356,35 @@ class FinanceManager:
                         amount = float(input(Fore.BLUE + "Enter expense amount:\n" + Style.RESET_ALL))
                         break
                     except ValueError as error:
-                        print(Fore.LIGHTRED_EX + f"Invalid input: {error}. Please enter a valid amount:" + Style.RESET_ALL)
+                        print(
+                            Fore.LIGHTRED_EX +
+                            f"Error: {error}. Please enter a valid amount:" +
+                            Style.RESET_ALL)
 
                 new_expense_row = [month, date, category, description, amount]
                 self.expenses_worksheet.append_row(new_expense_row)
 
-                print(f"\n{Fore.GREEN + Style.BRIGHT}New expense for {month} on {date} added successfully!{Style.RESET_ALL}")
+                print(
+                    f"\n{Fore.GREEN + Style.BRIGHT}"
+                    f"New expense for {month} on {date} added successfully!"
+                    f"{Style.RESET_ALL}"
+                )
                 self.display_worksheet("expenses")
 
-                print(Fore.GREEN + Style.BRIGHT + "\n****************************************************" + Style.RESET_ALL)
+                print(Fore.GREEN + Style.BRIGHT + "\n*****" + Style.RESET_ALL)
 
-                print(Fore.BLUE + "\nWhat would like to do next?" + Style.RESET_ALL)
+                print(
+                    Fore.BLUE +
+                    "\nWhat would you like to do next?" +
+                    Style.RESET_ALL
+                )
                 return get_main_user_choice()
 
             except ValueError as error:
-                print(Fore.LIGHTRED_EX + f"Invalid input: {error}. Please enter a valid month or date." + Style.RESET_ALL)
+                print(
+                    Fore.LIGHTRED_EX +
+                    f"Error: {error}. Please enter a valid month/date." +
+                    Style.RESET_ALL)
 
 
 # CALL WELCOME AND USER CHOICE functions
