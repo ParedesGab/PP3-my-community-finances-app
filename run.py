@@ -179,7 +179,8 @@ class FinanceManager:
                     amount_str = row[amount_col_index].replace(",", "")
                     total_amount += float(amount_str)
                 except ValueError as error:
-                    print(f"{error} Could not convert amount in {row} to a number.")
+                    print(
+                        f"{error} Could not convert amount in {row} to a number.")
         return total_amount
 
     # CALCULATE EXPENSES BY CATEGORY (for show_monthly_expenses_details)
@@ -195,7 +196,8 @@ class FinanceManager:
                 try:
                     amount = float(row[4])
                 except ValueError:
-                    print(f"Warning: Could not convert amount in row {row} to a number.")
+                    print(
+                        f"Warning: Could not convert amount in row {row} to a number.")
                     continue
                 if category in expenses_by_category:
                     expenses_by_category[category] += amount
@@ -208,7 +210,7 @@ class FinanceManager:
         """
         Finds the category with the maximum expense
         """
-        max_category = max(expenses_by_category, key = expenses_by_category.get)
+        max_category = max(expenses_by_category, key=expenses_by_category.get)
         max_amount = expenses_by_category[max_category]
 
         return max_category, max_amount
@@ -273,12 +275,20 @@ class FinanceManager:
 
                 # Ask user: What to do next?
                 print(Fore.GREEN + Style.BRIGHT + "\n*****************************" + Style.RESET_ALL)
-                print(Fore.BLUE + "\nWhat would like to do next?" + Style.RESET_ALL)
+                print(
+                    Fore.BLUE +
+                    "\nWhat would you like to do next?" +
+                    Style.RESET_ALL
+                )
                 return get_main_user_choice()
 
             else:
                 print(f"{Fore.LIGHTRED_EX}\nThere is no data for {month} yet... {Style.RESET_ALL}")
-                print(Fore.BLUE + "\nWhat would like to do next?" + Style.RESET_ALL)
+                print(
+                    Fore.BLUE +
+                    "\nWhat would you like to do next?" +
+                    Style.RESET_ALL
+                )
                 return get_main_user_choice()
 
     # IF USER OPTION == 2  (Check my income and expense!)
@@ -325,9 +335,12 @@ class FinanceManager:
                 print(f"\n{Fore.GREEN + Style.BRIGHT}New income for {month} from {source} (EUR {amount:.2f}) added successfully!{Style.RESET_ALL}")
                 self.display_worksheet("income")
 
-                print(Fore.GREEN + Style.BRIGHT + "\n****************************************************" + Style.RESET_ALL)
-
-                print(Fore.BLUE + "\nWhat would like to do next?" + Style.RESET_ALL)
+                print(Fore.GREEN + Style.BRIGHT + "\n*****" + Style.RESET_ALL)
+                print(
+                    Fore.BLUE +
+                    "\nWhat would you like to do next?" +
+                    Style.RESET_ALL
+                )
                 return get_main_user_choice()
 
             except ValueError as error:
