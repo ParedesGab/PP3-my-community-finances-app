@@ -105,8 +105,8 @@ def handle_user_option(option):
 
     elif option == 5:
         exit_message = (
-            f"{Fore.GREEN + Style.BRIGHT}✨ Your finances are in good hands ✨ "
-            f"Goodbye and See you next time!\n{Style.RESET_ALL}"
+            f"{Fore.GREEN + Style.BRIGHT} ✨ Your finances are in good hands ✨ "
+            f" Goodbye and See you next time!\n{Style.RESET_ALL}"
         )
         print(exit_message)
         exit()
