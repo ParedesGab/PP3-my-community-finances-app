@@ -56,7 +56,7 @@ def get_main_user_choice():
         print("  5. Exit Program.")
 
         try:
-            option = int(input("\nEnter your choice (1-4):\n "))
+            option = int(input("\nEnter your choice (1-4):\n"))
 
         #Validate the data
             validate_user_choice(option)
@@ -132,7 +132,7 @@ class FinanceManager:
         #validate the user's choice:
         while True:
             #Ask User which month they want to see
-            user_month = input(Fore.BLUE + "\nPlease enter the month name (e.g., january):\n " + Style.RESET_ALL).lower()
+            user_month = input(Fore.BLUE + "\nPlease enter the month name (e.g., january):\n" + Style.RESET_ALL).lower()
 
             try:
                 datetime.strptime(user_month, "%B")
@@ -313,10 +313,10 @@ class FinanceManager:
         print(Fore.GREEN + Style.BRIGHT + "\n TO ADD A NEW INCOME:" + Style.RESET_ALL)
 
         month = self.get_and_validate_month_input()
-        source = input(Fore.BLUE + "Enter income source:\n " + Style.RESET_ALL)
+        source = input(Fore.BLUE + "Enter income source:\n" + Style.RESET_ALL)
         while True:
             try:
-                amount = float(input(Fore.BLUE + "Enter income amount:\n " + Style.RESET_ALL))
+                amount = float(input(Fore.BLUE + "Enter income amount:\n" + Style.RESET_ALL))
 
                 new_income_row = [month, source, amount]
 
@@ -343,18 +343,18 @@ class FinanceManager:
                 month = self.get_and_validate_month_input()
                 # Get the current year
 
-                date = input(Fore.BLUE + "Enter expense date (YYYY-MM-DD): " + Style.RESET_ALL)
+                date = input(Fore.BLUE + "Enter expense date (YYYY-MM-DD):\n" + Style.RESET_ALL)
                 # Validate date format and consistency with month
                 date_obj = datetime.strptime(date, "%Y-%m-%d")
                 if date_obj.month != datetime.strptime(month, "%B").month:
                     raise ValueError(f"Date '{date}' does not match the entered month '{month}'")
 
-                category = input(Fore.BLUE + "Enter expense category: " + Style.RESET_ALL)
-                description = input(Fore.BLUE + "Enter expense description: " + Style.RESET_ALL)
+                category = input(Fore.BLUE + "Enter expense category:\n" + Style.RESET_ALL)
+                description = input(Fore.BLUE + "Enter expense description:\n" + Style.RESET_ALL)
 
                 while True:
                     try:
-                        amount = float(input(Fore.BLUE + "Enter expense amount: " + Style.RESET_ALL))
+                        amount = float(input(Fore.BLUE + "Enter expense amount:\n" + Style.RESET_ALL))
                         break
                     except ValueError as error:
                         print(Fore.LIGHTRED_EX + f"Invalid input: {error}. Please enter a valid amount:" + Style.RESET_ALL)
