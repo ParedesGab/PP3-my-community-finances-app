@@ -379,7 +379,7 @@ class FinanceManager:
             "Enter income source:\n" +
             Style.RESET_ALL
         )
-        source = input(prompt)
+        source = input(prompt_source)
         while True:
             try:
                 prompt_amount = (
@@ -387,7 +387,7 @@ class FinanceManager:
                     "Enter income amount:\n" +
                     Style.RESET_ALL
                 )
-                amount = float(input(prompt))
+                amount = float(input(prompt_amount))
 
                 new_income_row = [month, source, amount]
 
