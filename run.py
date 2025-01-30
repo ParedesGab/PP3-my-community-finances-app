@@ -22,7 +22,7 @@ def welcome():
     Displays a welcome message with color.
     """
     init()
-    border = f"{Fore.GREEN + Style.BRIGHT}=============={Style.RESET_ALL}"
+    border = f"{Fore.GREEN + Style.BRIGHT}==============={Style.RESET_ALL}"
     welcome_message = f"""
     \n{border} WELCOME TO MyFinances APP! {border}\n
     This expense tracker will help you monitor your income and expenses
