@@ -137,12 +137,12 @@ class FinanceManager:
         # validate the user's choice:
         while True:
             # Ask User which month they want to see
-            prompt = (
+            prompt_month = (
                 f"{Fore.BLUE}"
                 f"\nPlease enter the month name (e.g., january):\n"
                 f"{Style.RESET_ALL}"
             )
-            user_month = input(prompt).lower()
+            user_month = input(prompt_month).lower()
 
             try:
                 datetime.strptime(user_month, "%B")
@@ -265,10 +265,10 @@ class FinanceManager:
             expenses_data = self.get_worksheet_data("expenses")
 
             # Check if the month exists within the data
-            income_month_data_available = self.month_has_data(income_data, month)
-            expense_month_data_available = self.month_has_data(expenses_data, month)
+            income_month_data = self.month_has_data(income_data, month)
+            expense_month_data = self.month_has_data(expenses_data, month)
 
-            if income_month_data_available or expense_month_data_available:
+            if income_month_data or expense_month_data:
                 print(
                     Fore.GREEN + Style.BRIGHT +
                     f"\nCalculating your {month} income and expenses...\n" +
@@ -328,7 +328,11 @@ class FinanceManager:
         '''
         get data from a given worksheet.
         '''
-        print(f"\n{Fore.GREEN + Style.BRIGHT}Getting Your {worksheet.capitalize()} data...\n{Style.RESET_ALL}")
+        print(
+            f"\n{Fore.GREEN + Style.BRIGHT}"
+            f"Getting Your {worksheet.capitalize()} data...\n"
+            f"{Style.RESET_ALL}"
+        )
 
         all_worksheet_values = self.get_worksheet_data(worksheet)
 
@@ -352,19 +356,37 @@ class FinanceManager:
         """
         Adds a new income record to the "income" worksheet.
         """
-        print(Fore.GREEN + Style.BRIGHT + "\n TO ADD A NEW INCOME:" + Style.RESET_ALL)
+        print(
+            Fore.GREEN + Style.BRIGHT +
+            "\n TO ADD A NEW INCOME:" +
+            Style.RESET_ALL
+        )
 
         month = self.get_and_validate_month_input()
-        source = input(Fore.BLUE + "Enter income source:\n" + Style.RESET_ALL)
+        prompt_source = (
+            Fore.BLUE +
+            "Enter income source:\n" +
+            Style.RESET_ALL
+        )
+        source = input(prompt)
         while True:
             try:
-                amount = float(input(Fore.BLUE + "Enter income amount:\n" + Style.RESET_ALL))
+                prompt_amount = (
+                    Fore.BLUE +
+                    "Enter income amount:\n" +
+                    Style.RESET_ALL
+                )
+                amount = float(input(prompt))
 
                 new_income_row = [month, source, amount]
 
                 self.income_worksheet.append_row(new_income_row)
 
-                print(f"\n{Fore.GREEN + Style.BRIGHT}New income for {month} from {source} (EUR {amount:.2f}) added successfully!{Style.RESET_ALL}")
+                print(
+                    f"\n{Fore.GREEN + Style.BRIGHT}"
+                    f"New income for {month} from {source} (EUR {amount:.2f})"
+                    f"added successfully!{Style.RESET_ALL}"
+                )
                 self.display_worksheet("income")
 
                 print(Fore.GREEN + Style.BRIGHT + "\n*****" + Style.RESET_ALL)
@@ -376,34 +398,59 @@ class FinanceManager:
                 return get_main_user_choice()
 
             except ValueError as error:
-                print(Fore.LIGHTRED_EX + f"Invalid input: {error}. Please enter a valid amount.\n" + Style.RESET_ALL)
+                print(
+                    Fore.LIGHTRED_EX +
+                    f"Invalid input: {error}. Please enter a valid amount.\n" +
+                    Style.RESET_ALL
+                )
 
     # IF USER OPTION == 4 (Add new expenses)
     def add_new_expense_to_expense_worksheet(self):
         """
-        Adds a new expense record to the "expenses" worksheet, ensuring consistency between month and date.
+        Adds a new expense record to the "expenses" worksheet.
+        Ensures consistency between month and date.
         """
         while True:
             try:
                 month = self.get_and_validate_month_input()
 
-                date = input(Fore.BLUE + "Enter expense date (YYYY-MM-DD):\n" + Style.RESET_ALL)
+                # Date
+                prompt_date = (
+                    Fore.BLUE +
+                    "Enter expense date (YYYY-MM-DD):\n" +
+                    Style.RESET_ALL
+                    )
+                date = input(prompt_date)
                 # Validate date format and consistency with month
                 date_obj = datetime.strptime(date, "%Y-%m-%d")
                 if date_obj.month != datetime.strptime(month, "%B").month:
-                    raise ValueError(f"Date '{date}' does not match the entered month '{month}'")
+                    raise ValueError(f"'{date}' does not match the '{month}'")
 
-                category = input(Fore.BLUE + "Enter expense category:\n" + Style.RESET_ALL)
-                description = input(Fore.BLUE + "Enter expense description:\n" + Style.RESET_ALL)
+                # Category
+                prompt_category = (
+                    Fore.BLUE +
+                    "Enter expense category:\n" +
+                    Style.RESET_ALL
+                    )
+                category = input(prompt_category)
 
+                # Description
+                prompt_description = (
+                    Fore.BLUE +
+                    "Enter expense description:\n" +
+                    Style.RESET_ALL
+                )
+                description = input(prompt_description)
+
+                # Amount
                 while True:
                     try:
-                        prompt = (
+                        prompt_amount = (
                             Fore.BLUE +
                             "Enter expense amount:\n" +
                             Style.RESET_ALL
                         )
-                        amount = float(input(prompt))
+                        amount = float(input(prompt_amount))
                         break
                     except ValueError as error:
                         print(
