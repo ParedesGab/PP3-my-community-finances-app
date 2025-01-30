@@ -277,9 +277,11 @@ class FinanceManager:
                 print(f"✅ TOTAL EXPENSES: EUR{total_month_expenses: .2f}\n")
 
                 # Calculate cash balance
-                print(Fore.GREEN + Style.BRIGHT +
-                f"\nCalculating Your {month} cash balance...\n" +
-                Style.RESET_ALL)
+                print(
+                    Fore.GREEN + Style.BRIGHT +
+                    f"\nCalculating Your {month} cash balance...\n" +
+                    Style.RESET_ALL
+                    )
                 cash_balance = total_month_income - total_month_expenses
 
                 if cash_balance >= 0:
@@ -392,7 +394,12 @@ class FinanceManager:
 
                 while True:
                     try:
-                        amount = float(input(Fore.BLUE + "Enter expense amount:\n" + Style.RESET_ALL))
+                        prompt = (
+                            Fore.BLUE +
+                            "Enter expense amount:\n" +
+                            Style.RESET_ALL
+                        )
+                        amount = float(input(prompt))
                         break
                     except ValueError as error:
                         print(
