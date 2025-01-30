@@ -22,15 +22,14 @@ def welcome():
     Displays a welcome message with color.
     """
     init()  # Initialize colorama
+    border = f"{Fore.GREEN + Style.BRIGHT}=============={Style.RESET_ALL}"
     welcome_message = f"""
-    \n{Fore.GREEN + Style.BRIGHT}============== WELCOME TO MyFinances APP! =============={Style.RESET_ALL}\n
+    \n{border} WELCOME TO MyFinances APP! {border}\n
     This expense tracker will help you monitor your income and expenses
-    to understand your spending habits!
-    
+    to understand your spending habits!\n
     Ready to start? Let's go! 🚀\n
-{Fore.GREEN + Style.BRIGHT}========================================================{Style.RESET_ALL}
+{border}{border}{border}{border}
     """
-    
     print(welcome_message)
 
 
@@ -374,8 +373,8 @@ class FinanceManager:
 
             except ValueError as error:
                 print(Fore.LIGHTRED_EX + f"Invalid input: {error}. Please enter a valid month or date." + Style.RESET_ALL)
-            
-                
+
+
 # CALL WELCOME AND USER CHOICE functions
 def main():
     welcome()
