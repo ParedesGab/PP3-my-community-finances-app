@@ -6,8 +6,10 @@
 
 **Welcome to MyFinances tracker APP!**
 
- This expense tracker will help you monitor your income and expenses to understand your spending habits!
- Are you ready? Let's go!.
+  This expense tracker will help you monitor
+  your income and expenses!
+  Are you ready to understand your spending habits?
+  Let's go!
 
 + The live page can be accessed via this [link]()
 
