@@ -9,23 +9,13 @@ SCOPE = [
     "https://www.googleapis.com/auth/drive"
     ]
 
-#Create constant variables
+# Create constant variables
 CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('my_finances')
 
-#Make sure the API is working correctly
-# income = SHEET.worksheet('income')
-# expenses = SHEET.worksheet("expenses")
-
-# income_data = income.get_all_values()
-# expenses_data = expenses.get_all_values()
-
-# #pprint(income_data[1]) #output: a list of rows with string values
-# #pprint(expenses_data[2]) #output: a list of rows with string values
-
-#WELCOME MESSAGE
+# WELCOME MESSAGE
 def welcome():
     """
     Displays a welcome message with color.
@@ -42,7 +32,7 @@ def welcome():
     
     print(welcome_message)
 
-#GET USER CHOICE
+# GET USER CHOICE
 def get_main_user_choice():
     """
     Gets the user's choice from the menu options.
@@ -58,15 +48,15 @@ def get_main_user_choice():
         try:
             option = int(input("\nEnter your choice (1-4):\n"))
 
-        #Validate the data
+        # Validate the data
             validate_user_choice(option)
-        #return the handle_user_option function
+        # return the handle_user_option function
             return handle_user_option(option) #return breaks the loop
 
         except ValueError as error:
             print(Fore.LIGHTRED_EX + f"{error}\n" + Style.RESET_ALL)
     
-#VALIDATE USER CHOICE (for get_main_user_choice)
+# VALIDATE USER CHOICE (for get_main_user_choice)
 def validate_user_choice(user_choice):
     """
     Validates the user's choice.
@@ -74,7 +64,7 @@ def validate_user_choice(user_choice):
     if not 1 <= user_choice <= 5:
         raise ValueError(Fore.LIGHTRED_EX + "Invalid choice! Please enter a number between 1 and 4." + Style.RESET_ALL)
 
-#HANDLE THE USER SELECTION (for get_main_user_choice)
+# HANDLE THE USER SELECTION (for get_main_user_choice)
 def handle_user_option(option):
     """
     Handle user option.
@@ -129,7 +119,7 @@ class FinanceManager:
         """
         Prompts the user to enter a month name and validates the input.
         """
-        #validate the user's choice:
+        # validate the user's choice:
         while True:
             #Ask User which month they want to see
             user_month = input(Fore.BLUE + "\nPlease enter the month name (e.g., january):\n" + Style.RESET_ALL).lower()
@@ -137,15 +127,15 @@ class FinanceManager:
             try:
                 datetime.strptime(user_month, "%B")
                 month = user_month.title() 
-                #print(f"Month was selected: {month}")
+                # print(f"Month was selected: {month}")
                 return month #return the month as a string, and breaks the loop
 
-            #If choice is invalid: ValueError
+            # If choice is invalid: ValueError
             except ValueError as error:
                 print(Fore.LIGHTRED_EX + " Invalid month name!" + Style.RESET_ALL)
-                #continue #important to break the loop and jump back to the beginning of the while loop!
+                # continue #important to break the loop and jump back to the beginning of the while loop!
     
-    #CHECK IF MONTH SELECTED HAS DATA (for generate_monthly_finance_report)
+    # CHECK IF MONTH SELECTED HAS DATA (for generate_monthly_finance_report)
     def month_has_data(self, worksheet_data, month):
         """
         Checks if data exists for a specific month in a worksheet.
@@ -155,27 +145,27 @@ class FinanceManager:
                 	return True
         return False
 
-    #CALCULATE TOTAL INCOME AND TOTAL EXPENSES FOR THE GIVEN MONTH AND WORKSHEET (for generate_monthly_finance_report)
+    # CALCULATE TOTAL INCOME AND TOTAL EXPENSES FOR THE GIVEN MONTH AND WORKSHEET (for generate_monthly_finance_report)
     def calculate_total_amount(self, worksheet_data, month, amount_col_index):
         """
         Calculates the total amount for the given month and worksheet.
         """
         total_amount = 0
         for row in worksheet_data:             # interates through each row in the worksheet
-            if row[0].lower() == month.lower(): #first value after the month header
+            if row[0].lower() == month.lower(): # first value after the month header
                 try:
                     total_amount += float(row[amount_col_index].replace(",", "") )
                 except ValueError as error:
                     print(f"{error} Warning: Could not convert amount in {row} to a number.")
         return total_amount
     
-    #CALCULATE EXPENSES BY CATEGORY (for show_monthly_expenses_details)
+    # CALCULATE EXPENSES BY CATEGORY (for show_monthly_expenses_details)
     def calculate_expenses_by_category(self, expenses_data, month):
         """
         Calculate expenses per category in a given month.
         """
-        expenses_by_category = {} #create a dictionary
-        #expenses_by_category = [] #create a list
+        expenses_by_category = {} # create a dictionary
+        # expenses_by_category = [] # create a list
 
         for row in expenses_data:    
             if row[0].lower() == month.lower():
@@ -191,43 +181,38 @@ class FinanceManager:
                     expenses_by_category[category] = amount
         return expenses_by_category
     
-    #MAX EXPENSE PER CATEGORY (for show_monthly_expenses_details)
+    # MAX EXPENSE PER CATEGORY (for show_monthly_expenses_details)
     def max_expense_by_category(self, expenses_by_category):
-        #expenses_by_category is a dictionary
+        # expenses_by_category is a dictionary
         """
         Finds the category with the maximum expense
         """
-        #print(Fore.GREEN + Style.BRIGHT + "🎯 HIGHEST EXPENSE:" + Style.RESET_ALL)
+        # print(Fore.GREEN + Style.BRIGHT + "🎯 HIGHEST EXPENSE:" + Style.RESET_ALL)
         max_category = max(expenses_by_category, key = expenses_by_category.get)
-        #print(max_category)
+        # print(max_category)
         max_amount = expenses_by_category[max_category]
 
         return max_category, max_amount
 
-    #Ask user what they want to do next?: 
-    # elif show_details == False:
-    #     print("#add new income?, add new expense? or exit?")1
-
-
-    #IF USER SAYS "y": SHOW EXPENSES DETAILS (for generate_monthly_finance_report)
+    # IF USER SAYS "y": SHOW EXPENSES DETAILS (for generate_monthly_finance_report)
     def show_monthly_expenses_details(self, month):
         """
         Displays detailed expense information for a given month.
         """
         print(f"{Fore.GREEN + Style.BRIGHT}\nCalculating Your {month} detailed expense report...\n {Style.RESET_ALL}")
 
-        #Show expenses per category
+        # Show expenses per category
         expenses_data = self.get_worksheet_data("expenses")
         expenses_by_category = self.calculate_expenses_by_category(expenses_data, month)
 
         for category, amount in expenses_by_category.items():
             print(f"→ {category}: EUR {amount:.2f}\n")
 
-        #Show max expense by category
+        # Show max expense by category
         max_category, max_amount = self.max_expense_by_category(expenses_by_category)
         print(f"{Fore.GREEN + Style.BRIGHT}🎯 HIGHEST EXPENSE:{Style.RESET_ALL} {max_category.upper()} (EUR {max_amount:.2f})\n")
         
-    #MONTHLY FINANCE REPORT
+    # MONTHLY FINANCE REPORT
     def generate_monthly_finance_report(self):
         """
         Generates and displays the monthly finance report!
@@ -236,10 +221,10 @@ class FinanceManager:
         print(Fore.GREEN + Style.BRIGHT+ "\n  ✨✨✨✨  MY MONTHLY FINANCE REPORT  ✨✨✨✨" + Style.RESET_ALL)
         
         while True: 
-            #User inputs the month
+            # User inputs the month
             month = self.get_and_validate_month_input()
 
-            #Get all data of a worksheet
+            # Get all data of a worksheet
             income_data = self.get_worksheet_data("income")
             expenses_data = self.get_worksheet_data("expenses")
 
@@ -256,7 +241,7 @@ class FinanceManager:
                 print(f"✅ TOTAL INCOME: EUR{total_month_income: .2f}")
                 print(f"✅ TOTAL EXPENSES: EUR{total_month_expenses: .2f}\n")
 
-                #Calculate cash balance
+                # Calculate cash balance
                 print(Fore.GREEN + Style.BRIGHT + f"\nCalculating Your {month} cash balance...\n" + Style.RESET_ALL)
                 cash_balance = total_month_income - total_month_expenses
 
@@ -285,14 +270,14 @@ class FinanceManager:
         '''
         print(f"\n{Fore.GREEN + Style.BRIGHT}Getting Your {worksheet.capitalize()} data...\n{Style.RESET_ALL}")
 
-        #all_income_values = income_worksheet.get_all_values()
+        # all_income_values = income_worksheet.get_all_values()
         all_worksheet_values = self.get_worksheet_data(worksheet)
 
         # Get header row
         header_row = all_worksheet_values[0] #output= list of string values
         #print(header_row)
 
-        #Get data rows
+        # Get data rows
         data_rows = all_worksheet_values[1:]
         #print(data_rows)
 
@@ -300,7 +285,7 @@ class FinanceManager:
         print(" | ".join(header_row))   # join makes a single string with the headers separated by pipes.
         print("-" * (len(header_row) * 9))  # separator line
 
-        #Display All income or expenses data
+        # Display All income or expenses data
         for row in data_rows:  # Do not take the header row
             print(" | ".join(row))
             print("-" * (len(row) * 9))
@@ -373,7 +358,7 @@ class FinanceManager:
             except ValueError as error:
                 print(Fore.LIGHTRED_EX + f"Invalid input: {error}. Please enter a valid month or date." + Style.RESET_ALL)
                 
-#CALL WELCOME AND USER CHOICE functions
+# CALL WELCOME AND USER CHOICE functions
 def main():
     welcome()
     get_main_user_choice()
