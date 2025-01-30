@@ -1,9 +1,7 @@
 import gspread
 from google.oauth2.service_account import Credentials
-from pprint import pprint
 from colorama import init, Fore, Style, Back
 from datetime import datetime
-#import pandas as pd
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
