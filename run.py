@@ -15,6 +15,7 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('my_finances')
 
+
 # WELCOME MESSAGE
 def welcome():
     """
@@ -31,6 +32,7 @@ def welcome():
     """
     
     print(welcome_message)
+
 
 # GET USER CHOICE
 def get_main_user_choice():
@@ -55,7 +57,8 @@ def get_main_user_choice():
 
         except ValueError as error:
             print(Fore.LIGHTRED_EX + f"{error}\n" + Style.RESET_ALL)
-    
+
+
 # VALIDATE USER CHOICE (for get_main_user_choice)
 def validate_user_choice(user_choice):
     """
@@ -63,6 +66,7 @@ def validate_user_choice(user_choice):
     """
     if not 1 <= user_choice <= 5:
         raise ValueError(Fore.LIGHTRED_EX + "Invalid choice! Please enter a number between 1 and 4." + Style.RESET_ALL)
+
 
 # HANDLE THE USER SELECTION (for get_main_user_choice)
 def handle_user_option(option):
@@ -99,12 +103,15 @@ def handle_user_option(option):
         exit()
 
 class FinanceManager: 
-    #MAKE THE WORKSHEETS ACCESSIBLE FOR THE CLASS METHODS
+
+
+    # MAKE THE WORKSHEETS ACCESSIBLE FOR THE CLASS METHODS
     def __init__(self):
         self.income_worksheet = SHEET.worksheet("income")
         self.expenses_worksheet = SHEET.worksheet("expenses")
 
-    #GET ALL DATA FROM A WORKSHEET (for generate_monthly_finance_report)
+
+    # GET ALL DATA FROM A WORKSHEET (for generate_monthly_finance_report)
     def get_worksheet_data(self, worksheet):
         '''
         Gets all data from a worksheet
@@ -113,8 +120,9 @@ class FinanceManager:
         all_values = worksheet.get_all_values()
         return all_values
 
+
     # IF USER OPTION == 1
-    #GET MONTH SELECTED BY USER AND VALIDATES IT (for generate_monthly_finance_report)
+    # GET MONTH SELECTED BY USER AND VALIDATES IT (for generate_monthly_finance_report)
     def get_and_validate_month_input(self):
         """
         Prompts the user to enter a month name and validates the input.
@@ -135,6 +143,7 @@ class FinanceManager:
                 print(Fore.LIGHTRED_EX + " Invalid month name!" + Style.RESET_ALL)
                 # continue #important to break the loop and jump back to the beginning of the while loop!
     
+
     # CHECK IF MONTH SELECTED HAS DATA (for generate_monthly_finance_report)
     def month_has_data(self, worksheet_data, month):
         """
@@ -144,6 +153,7 @@ class FinanceManager:
             if row[0].lower() == month.lower():
                 	return True
         return False
+
 
     # CALCULATE TOTAL INCOME AND TOTAL EXPENSES FOR THE GIVEN MONTH AND WORKSHEET (for generate_monthly_finance_report)
     def calculate_total_amount(self, worksheet_data, month, amount_col_index):
@@ -159,6 +169,7 @@ class FinanceManager:
                     print(f"{error} Warning: Could not convert amount in {row} to a number.")
         return total_amount
     
+
     # CALCULATE EXPENSES BY CATEGORY (for show_monthly_expenses_details)
     def calculate_expenses_by_category(self, expenses_data, month):
         """
@@ -181,6 +192,7 @@ class FinanceManager:
                     expenses_by_category[category] = amount
         return expenses_by_category
     
+    
     # MAX EXPENSE PER CATEGORY (for show_monthly_expenses_details)
     def max_expense_by_category(self, expenses_by_category):
         # expenses_by_category is a dictionary
@@ -193,6 +205,7 @@ class FinanceManager:
         max_amount = expenses_by_category[max_category]
 
         return max_category, max_amount
+
 
     # IF USER SAYS "y": SHOW EXPENSES DETAILS (for generate_monthly_finance_report)
     def show_monthly_expenses_details(self, month):
@@ -212,6 +225,7 @@ class FinanceManager:
         max_category, max_amount = self.max_expense_by_category(expenses_by_category)
         print(f"{Fore.GREEN + Style.BRIGHT}🎯 HIGHEST EXPENSE:{Style.RESET_ALL} {max_category.upper()} (EUR {max_amount:.2f})\n")
         
+
     # MONTHLY FINANCE REPORT
     def generate_monthly_finance_report(self):
         """
@@ -263,6 +277,7 @@ class FinanceManager:
                 print(Fore.BLUE + "\nWhat would like to do next?" + Style.RESET_ALL)
                 return get_main_user_choice()
     
+
     # IF USER OPTION == 2  (Check my income and expense!)
     def display_worksheet(self, worksheet):
         '''
@@ -290,6 +305,7 @@ class FinanceManager:
             print(" | ".join(row))
             print("-" * (len(row) * 9))
     
+
     # IF USER OPTION == 3 (Add new expenses)
     def add_new_income_to_income_worksheet(self):
         """
@@ -317,6 +333,7 @@ class FinanceManager:
 
             except ValueError as error:
                 print(Fore.LIGHTRED_EX + f"Invalid input: {error}. Please enter a valid amount.\n" + Style.RESET_ALL)
+
 
     # IF USER OPTION == 4 (Add new expenses)
     def add_new_expense_to_expense_worksheet(self):
@@ -357,6 +374,7 @@ class FinanceManager:
 
             except ValueError as error:
                 print(Fore.LIGHTRED_EX + f"Invalid input: {error}. Please enter a valid month or date." + Style.RESET_ALL)
+            
                 
 # CALL WELCOME AND USER CHOICE functions
 def main():
