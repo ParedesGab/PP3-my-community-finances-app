@@ -18,18 +18,18 @@
 
 ### User Goals
 
-+ Find a casual and fun activity to pass time or to relax.
-+ Test memory skills with an enjoyable memory game. 
-+ Enhance memory, concentration, and problem-solving skills.
-+ Find a simple, accessible game that doesn't require downloads or setup.
-+ Find a vibrant, eye-catching game that provides a visually engaging experience.
++ Track and manage income and expenses on a monthly basis.
++ Generate comprehensive monthly financial reports summarizing income, expenses, and cash balance.
++ Analyze spending patterns by viewing categorized expenses and identifying top spending areas.
++ Quickly and easily add new income and expense entries.
++ Access and review a complete history of income and expense records.
 
 ### Site Owner Goals
 
-  + Provide a fun, relaxed and engaging User experience.
-  + Create an entertaining memory game that appeals to a broad audience.
-  + Create a game that helps users improve memory, focus, and cognitive abilities. 
-  + Develop a unique design and thematic experience, such as the galaxy theme, to stand out from generic memory games.
+  + Create a practical and user-friendly application to help users effectively track their finances in daily life.
+  + Ensure application functionality and bug-free performance.
+  + Create an intuitive user interface.
+  + Create an easy to use app.
   
 ---
 ## User Experience
