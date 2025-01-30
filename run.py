@@ -21,7 +21,7 @@ def welcome():
     """
     Displays a welcome message with color.
     """
-    init()  # Initialize colorama
+    init()
     border = f"{Fore.GREEN + Style.BRIGHT}=============={Style.RESET_ALL}"
     welcome_message = f"""
     \n{border} WELCOME TO MyFinances APP! {border}\n
@@ -52,7 +52,7 @@ def get_main_user_choice():
         # Validate the data
             validate_user_choice(option)
         # return the handle_user_option function
-            return handle_user_option(option) #return breaks the loop
+            return handle_user_option(option)
 
         except ValueError as error:
             print(Fore.LIGHTRED_EX + f"{error}\n" + Style.RESET_ALL)
@@ -134,13 +134,11 @@ class FinanceManager:
             try:
                 datetime.strptime(user_month, "%B")
                 month = user_month.title() 
-                # print(f"Month was selected: {month}")
                 return month #return the month as a string, and breaks the loop
 
             # If choice is invalid: ValueError
             except ValueError as error:
                 print(Fore.LIGHTRED_EX + " Invalid month name!" + Style.RESET_ALL)
-                # continue #important to break the loop and jump back to the beginning of the while loop!
     
 
     # CHECK IF MONTH SELECTED HAS DATA (for generate_monthly_finance_report)
@@ -160,8 +158,8 @@ class FinanceManager:
         Calculates the total amount for the given month and worksheet.
         """
         total_amount = 0
-        for row in worksheet_data:             # interates through each row in the worksheet
-            if row[0].lower() == month.lower(): # first value after the month header
+        for row in worksheet_data:             
+            if row[0].lower() == month.lower():
                 try:
                     total_amount += float(row[amount_col_index].replace(",", "") )
                 except ValueError as error:
@@ -174,8 +172,7 @@ class FinanceManager:
         """
         Calculate expenses per category in a given month.
         """
-        expenses_by_category = {} # create a dictionary
-        # expenses_by_category = [] # create a list
+        expenses_by_category = {} #
 
         for row in expenses_data:    
             if row[0].lower() == month.lower():
@@ -194,13 +191,10 @@ class FinanceManager:
     
     # MAX EXPENSE PER CATEGORY (for show_monthly_expenses_details)
     def max_expense_by_category(self, expenses_by_category):
-        # expenses_by_category is a dictionary
         """
         Finds the category with the maximum expense
         """
-        # print(Fore.GREEN + Style.BRIGHT + "🎯 HIGHEST EXPENSE:" + Style.RESET_ALL)
         max_category = max(expenses_by_category, key = expenses_by_category.get)
-        # print(max_category)
         max_amount = expenses_by_category[max_category]
 
         return max_category, max_amount
@@ -265,14 +259,13 @@ class FinanceManager:
 
                 monthly_expenses_details = self.show_monthly_expenses_details(month)
 
-                # Ask user: Check expenses report for ABC?  add new income?, add new expense? or 
-                print(Fore.GREEN + Style.BRIGHT + "\n****************************************************" + Style.RESET_ALL)
+                # Ask user: What to do next?
+                print(Fore.GREEN + Style.BRIGHT + "\n*****************************" + Style.RESET_ALL)
                 print(Fore.BLUE + "\nWhat would like to do next?" + Style.RESET_ALL)
                 return get_main_user_choice()
 
             else:
                 print(f"{Fore.LIGHTRED_EX}\nThere is no data for {month} yet... {Style.RESET_ALL}")
-                # Ask user: add new income?, add new expense? or Check expenses report for ABC?
                 print(Fore.BLUE + "\nWhat would like to do next?" + Style.RESET_ALL)
                 return get_main_user_choice()
     
@@ -284,23 +277,20 @@ class FinanceManager:
         '''
         print(f"\n{Fore.GREEN + Style.BRIGHT}Getting Your {worksheet.capitalize()} data...\n{Style.RESET_ALL}")
 
-        # all_income_values = income_worksheet.get_all_values()
         all_worksheet_values = self.get_worksheet_data(worksheet)
 
         # Get header row
-        header_row = all_worksheet_values[0] #output= list of string values
-        #print(header_row)
+        header_row = all_worksheet_values[0]
 
         # Get data rows
         data_rows = all_worksheet_values[1:]
-        #print(data_rows)
 
         # Print header
-        print(" | ".join(header_row))   # join makes a single string with the headers separated by pipes.
-        print("-" * (len(header_row) * 9))  # separator line
+        print(" | ".join(header_row))   
+        print("-" * (len(header_row) * 9))
 
         # Display All income or expenses data
-        for row in data_rows:  # Do not take the header row
+        for row in data_rows:
             print(" | ".join(row))
             print("-" * (len(row) * 9))
     
@@ -342,7 +332,6 @@ class FinanceManager:
         while True:
             try:
                 month = self.get_and_validate_month_input()
-                # Get the current year
 
                 date = input(Fore.BLUE + "Enter expense date (YYYY-MM-DD):\n" + Style.RESET_ALL)
                 # Validate date format and consistency with month
@@ -364,7 +353,7 @@ class FinanceManager:
                 self.expenses_worksheet.append_row(new_expense_row)
 
                 print(f"\n{Fore.GREEN + Style.BRIGHT}New expense for {month} on {date} added successfully!{Style.RESET_ALL}")
-                self.display_worksheet("expenses")  # Display updated expenses after adding
+                self.display_worksheet("expenses")
 
                 print(Fore.GREEN + Style.BRIGHT + "\n****************************************************" + Style.RESET_ALL)
 
