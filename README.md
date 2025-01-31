@@ -2,7 +2,7 @@
 
 (Developer: Gabriela Fabiola Paredes Rojas)
 
-![Responsive Mockup image](documentation/screenshots/mockup.png)
+![Responsive Mockup image](documentation/website-screenshots)
 
 **Welcome to MyFinances tracker APP!**
 
@@ -80,7 +80,7 @@
 
 ### Welcome message
 
-![Game Header up to Tablets](documentation/website-screenshots/game-name.png)
+![Welcome message](documentation/website-screenshots/game-name.png)
   
 + Printed (positioned) above the menu options.
 + The welcome() function displays a colorful welcome message to the user when the program starts. It uses the colorama library to add green borders and bold text, creating a visually appealing introduction to the MyFinances app.
