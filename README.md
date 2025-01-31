@@ -106,13 +106,17 @@
 ![Invalid choice](documentation/website-screenshots/user-selection-option1.png)
 
 + 1 it is recognized as a valid input.
-+ The application first shows the title of the monthly financial report and prompts the user to enter the complete month name.
-+ The input uses the lower() method to accept capital letters.
-+ If month name is valid, then the monthly report shows as follows:
++ The application first displays the report title in green using colorama to stand out.
++ When generating a monthly report, the application prompts the user for the month name (case-insensitive).
++ If the month is valid, the report displays the total income, total expenses, cash balance, a breakdown of expenses by category, and the highest expense.
   - Calculates Monthly Income and Expenses
-  - Calculates Cash Balance
-  - Calculates Expenses By Category and Highest expense
+  ![Invalid choice](documentation/website-screenshots/calculate-monthly-income-and-expenses.png)
 
+  - Calculates Cash Balance
+  ![Invalid choice](documentation/website-screenshots/calculate-cash-balance.png)
+
+  - Calculates Expenses By Category and Highest expense
+  ![Invalid choice](documentation/website-screenshots/calculate-expenses-by-category-and-max-spend.png)s
 ---
 ### Game Indications Page
 
