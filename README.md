@@ -99,15 +99,19 @@
 
 ![Invalid choice](documentation/website-screenshots/invalid-choice-not-number-from-1-to-5.png)
 
-+ After any of these errors, the user is prompted to select an option again.
++ After any of these errors, the user is prompted to select a menu option (1-5) again.
 
 **User selects option 1**
 
 ![Invalid choice](documentation/website-screenshots/user-selection-option1.png)
 
 + 1 it is recognized as a valid input.
-+ The application first shows the title of the monthly financial report and prompts the user to enter a month name.
-
++ The application first shows the title of the monthly financial report and prompts the user to enter the complete month name.
++ The input uses the lower() method to accept capital letters.
++ If month name is valid, then the monthly report shows as follows:
+  - Calculates Monthly Income and Expenses
+  - Calculates Cash Balance
+  - Calculates Expenses By Category and Highest expense
 
 ---
 ### Game Indications Page

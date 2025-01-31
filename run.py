@@ -234,7 +234,7 @@ class FinanceManager:
         """
         print(
             f"{Fore.GREEN + Style.BRIGHT}\n"
-            f"Calculating Your {month} detailed expense report...\n"
+            f"Calculating Your {month} expenses by category...\n"
             f"{Style.RESET_ALL}"
         )
 
