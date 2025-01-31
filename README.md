@@ -133,7 +133,7 @@
 ![Menu option 2](documentation/website-screenshots/user-selection-option2.png)
 
 + 2 it is recognized as a valid input.
-+ The application displays all the avaiable financial data, for both income and expenses. 
++ The application displays all the avaiable financial data, for both income and expenses.
   - Income data
   ![income data](documentation/website-screenshots/all-income-data.png)
 
@@ -166,7 +166,7 @@
 ![new income data displayed](documentation/website-screenshots/display-updated-income-data.png)
 
 + The new income record is appended to the Google sheet (Figures below).
-- Initial Google worksheet
+  - Initial Google worksheet
   ![Initial Google worksheet](documentation/website-screenshots/initial-google-income-worksheet.png)
 
   - Updated Google worksheet
@@ -174,66 +174,36 @@
 
 + Finally, the user is returned to the menu options, where they can choose their next action.
 
-### Memory Board Game Page
+**Menu Option 4**
 
-![Memory board game card deck open](documentation/website-screenshots/memory-game-open.png)
+![Menu option 3](documentation/website-screenshots/user-selection-option3.png)
 
-It contains two subsections, from top to bottom:
++ 3 it is recognized as a valid input.
++ The application first displays a title in green, using colorama to stand out, prompting the user that "To add a new income:" first they need to add a month name (case-insensitive).
 
-**Subsection: Game Board**
++ If the user enters an invalid month name (e.g., jan, or a misspelled month) a ValueError is caught, and an error message is displayed (figure below).
+  ![Invalid month name](documentation/website-screenshots/invalid-month-name.png)
+  - The user is asked again to enter a month name. 
 
-- This section presents the memory game itself: a relaxing and fun memory-matching game designed with a space-related theme.
++ If the month is valid, the report then prompts the user to enter their income source. Note, the income source accepts any data type. Thus, any text can be entered.
 
-- Players are challenged to match 8 pairs of cards, with a total of 16 cards in the game.
++ After entering the income source, the report then prompts the user to enter their income amount. Note, the income source accepts only numbers (integers or floats). If the user enters something that is not a number, the application will ask you to enter the amount again.
+![Invalid amount](documentation/website-screenshots/invalid-amount.png)
 
-- The card deck array is created by Javascript within the Game Board section. 
++ Once all the information was entered, the application will display a confirmation message.
+![new income data message](documentation/website-screenshots/new-income-data.png)
 
- - The game offers a no-pressure environment where players never lose, ensuring a calm and enjoyable experience.
++ The updated income data will then be displayed, so you can verify that the new record has been added correctly.
+![new income data displayed](documentation/website-screenshots/display-updated-income-data.png)
 
- - When the game starts (or if it is restarted) the cards will be shuffled and placed face down (**Figure below**), and they have the same hover effect as the home menu buttons. 
++ The new income record is appended to the Google sheet (Figures below).
+  - Initial Google worksheet
+  ![Initial Google worksheet](documentation/website-screenshots/initial-google-income-worksheet.png)
 
-![Memory board game card deck closed](documentation/website-screenshots/memory-game-closed.png)
+  - Updated Google worksheet
+  ![Updated Google worksheet](documentation/website-screenshots/updated-google-income-worksheet.png)
 
-**Subsection: Control Area**
- 
- - This subsection displays the "Moves", "Score" and one button, the "Restart Game".
-
- - These elements are placed on top of the other. 
-
- - The Restart Game button has the same hover effects as the home menu buttons, and to encourage the user to restart the game as much as they want, the button stands out in orange. 
-
- - At the beginning of the game:
-    - The **Moves** are set to 0, and every time the user chooses two cards, the "moves" will increase by 1.
-    - The **Score** is set to 0, and every time there is a match, the player earns 100 points. When the user reaches 800 (i.e., all pairs are matched), the score will show 🎉 800! 🎉.
-
-- The Memory Board Game page is responsive. Namely:
-
-  -   The card grid maintains 4 columns and 4 rows across all devices, with the width and height of the cards increasing on larger screens.
-
-  - In tablets and larger screens, the memory card deck and control are placed next to each other (flex-direction: row).
-
-  - In mobiles: the Control Area is placed below the memory card deck. This was achieved because their container (id memory-game-container) was set to display property: flex, and flex-direction: column 
-
-![memory board game mobiles](documentation/website-screenshots/memory-game-mobiles.png)
-
----
-### Game Finished - Congratulations Page
-
-![congratulations page](documentation/website-screenshots/congratulations-message.png)
-
-- After 4 seconds, once the user has matched all the cards (score: 🎉 800! 🎉), they are redirected to a page that congratulates them on their victory.
-
-- The congratulations message also stands out in orange.
-
-- In addition, it displays in bold the amount of moves the user made.
-
-- This section contains two buttons:
-  - **Home Menu:** Directs you back to to the Home Menu page.
-  - **Play again!:** Starts a new game. 
-
-- The buttons use the same style as the home menu buttons. 
-
-- With Javascript, the class smaller-name was added to the header (i.e., game name), to make the whole page more visually organized. 
++ Finally, the user is returned to the menu options, where they can choose their next action.
 
 ---
 ## Features left to implement
@@ -246,10 +216,6 @@ It contains two subsections, from top to bottom:
 
 - Implement visual feedback (e.g., a highlight) for matched pairs.
 - Allow users to navigate back to the home page directly from the memory game. Please note that for now this option was intentionally excluded to encourage players to stay on the game page longer, with the added flexibility to restart the game if they wish.
-
-- I intentionally left out a timer to keep the game relaxed and pressure-free. However, if feedback suggests it, I’d be happy to implement it with JavaScript.
-
-- Due to time constraints, I used onclick in all buttons of the HTML document for faster implementation. However, I recognize that mixing structure (HTML) with functionality (JS) is not best practice, as it can make the code harder to maintain and does not facilitate collaboration in team environments. After the project is graded, I plan to refactor the code by removing inline onclick attributes, and instead handling events via JavaScript by adding event listeners, ensuring better separation of concerns and improving maintainability.
 
 ---
 ## Design
@@ -293,20 +259,6 @@ It contains two subsections, from top to bottom:
 - [Mobile: Memory board game page](documentation/wireframes/memory-board-game-mobile.png)
 - [Mobile: Congratulations page](documentation/wireframes/congratulations-mobile.png)
 
-#### Tablets
-
-- [Tablet: Home menu page](documentation/wireframes/main-page-tablet.png)
-- [Tablet: Games indications page](documentation/wireframes/game-instructions-tablet.png)
-- [Tablet: Memory board game page](documentation/wireframes/memory-board-game-tablet.png)
-- [Tablet: Congratulations page](documentation/wireframes/congratulations-tablet.png)
-
-#### Laptops/Desktop
-
-- [Laptops: Home menu page](documentation/wireframes/main-page-laptops-up.png)
-- [Laptops: Games indications page](documentation/wireframes/game-instructions-laptops-up.png)
-- [Laptops: Memory board game page](documentation/wireframes/memory-board-game-laptops-up.png)
-- [Laptops: Congratulations page](documentation/wireframes/congratulations-laptops-up.png)
-
 ---
 ## Technologies used
 - [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
@@ -340,16 +292,8 @@ It contains two subsections, from top to bottom:
 
 ![HTML Validation](documentation/validation/html-file-validator.png)
 
-#### CSS Validator
-
-![CSS Validation](documentation/validation/css-stylesheet-css-validator.png)
-
-#### JSHint
-
-![JS validation](documentation/validation/javascript-jshint-validation.png)
 
 + There were no errors found in the javascript code using the JS Hint Validator. 
-+ There was one warning and a message of unused variables. This is documented in the "Bugs" section below.
 
 ### Accessibility 
 
