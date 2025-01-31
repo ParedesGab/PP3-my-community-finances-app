@@ -25,7 +25,8 @@ def welcome():
     border = f"{Fore.GREEN + Style.BRIGHT}=============={Style.RESET_ALL}"
     welcome_message = f"""
     \n{border} WELCOME TO MyFinances APP! {border}\n
-    \nThis expense tracker will help you monitor 
+    
+    This expense tracker will help you monitor 
     your income and expenses!
 
         * Generate detailed monthly financial reports.
