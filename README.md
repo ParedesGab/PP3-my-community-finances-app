@@ -80,24 +80,20 @@
 
 ### Welcome message
 
-![Welcome message](documentation/website-screenshots/game-name.png)
+![Welcome message](documentation/website-screenshots/welcome-message.png)
   
-+ Printed (positioned) above the menu options.
-+ The welcome() function displays a colorful welcome message to the user when the program starts. It uses the colorama library to add green borders and bold text, creating a visually appealing introduction to the MyFinances app.
-
-
-![Game Header Laptops and up](documentation/website-screenshots/game-name-laptops-up.png)
++ Positioned above the menu options.
++ The welcome() function displays a colorful welcome message to the user when the program starts. It uses the colorama library to add green borders, creating a visually appealing introduction to the MyFinances app.
++ The welcome message already informs the user what can be done in the program.
        
----
-### Home Menu Page
+### Menu options
 
-![Home menu main page](documentation/website-screenshots/home-menu-main-page.png)
+![Menu options](documentation/website-screenshots/menu-options.png)
 
-+ The main page of the Galaxy Memory Game, consists of the game heading and the home menu buttons. 
-
-+ The intention was to have a simple yet impactful background that would immediately introduce the galactic theme of the Memory Game.
-
-+ This same background is used across all pages and it allows the title and buttons to stand out.
++ Displays the 5 menu options.
++ Informs the user what can be done in the program and displays the number to be entered to select the option.
++ It gets the user selection and validates the selection.
++ If the user enters an invalid input (like non-numeric characters) or a number larger than 5, a ValueError is caught, and an error message is displayed.
 
 **Home Menu Buttons**
 
