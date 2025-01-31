@@ -36,44 +36,44 @@
 
 ### Target audience
 
-+ Space enthusiasts, kids or adults.
-+ Parents looking for educational and fun games for their children.
-+ Children interested in games and space and galaxy themes. 
-+ Students or educators that seek tools to improve cognitive abilities.
-+ Casual gamers, casual web users or individuals looking for light, engaging games to pass the time.
++ Individuals who want to manage their money.
++ Users who want to understand their spending habits.
++ Users who are comfortable with using a simple computer program.
++ Users searching for a free and easy way to track finances.
 
 ### User expectations
 
-+ Accessible site.
++ Ease of use application.
 + Understand clearly the purpose of the site.
 + Quick and easy access to content and navigation.
 + Clean and intuitive layout, overall a smooth experience.
-+ Have vibrant and eye-catching content that keeps the user engaged.
-+ Expect the game to work seamlessly on various devices, allowing them to enjoy it anytime, anywhere.
++ Expect the application to work seamlessly on various devices, allowing them to enjoy it anytime, anywhere.
 
 ### User stories
 
 + **As a first-time user, I want to:**
 
-  + Quickly understand how the game works.
-  + Dive into the game without confusion.
-  + Have a smooth, enjoyable experience without delays or glitches.
-  + Easily navigate the website and find the content interesting.
-  + Be drawn into the game's theme by having an engaging and visually appealing experience.
-  + Know how many movements I am doing during and a summary after the game.
+  + Quickly understand how the application works and the purpose of it.
+  + Clarity in the menu options.
+  + Easily navigate the website and find the options relevant.
+  + Dive into the application without confusion.
+  + Have quick, and easy-to-read results. 
+  + Have a smooth, enjoyable experience without delays or glitches or errors.
+  + Have an engaging and visually appealing experience.
 
 + **As a returning user, I want to:**
 
-  + See if my cognitive skills have improved by comparing the movements I made in one game versus another.
-  + See a more dynamic galaxy-themed background to make the page more immersive.
-  + Check if new space card-theme designs are being featured.
+  + Expect the interface and functionality to remain consistent with what they are used to.
+  + Accomplish their tasks quickly and easily, leveraging their past experience with the program.
+  + Expect their data to be readily accessible.
+  + Have an application that continues to provide value and help them monitor their finances effectively.
 
 + **As the site ownser, I want:**
 
-  + To keep the users engaged and the website updated with newer themes.
+  + To keep the users engaged and the website updated with newer menu options/features.
   + Deliver a smooth, accessible experience.
-  + Relaxed, stress-free experience: Without a timer and the possibility of losing, players can enjoy the game at their own pace, exploring and improving their memory without feeling rushed or pressured.
-  + Positive reinforcement and engagement: The "no-loss" design encourages players to keep playing and improving, offering a rewarding, fun experience where they can focus on achieving personal milestones and celebrating small victories.
+  + To keep the application running correctly, be free of bugs, and not crash.
+  + Collect user feedback to see if the application is helpful and what improvements can be implemented.
 
 ---
 ## Features 
