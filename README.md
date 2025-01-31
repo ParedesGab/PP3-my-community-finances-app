@@ -159,10 +159,18 @@
 + After entering the income source, the report then prompts the user to enter their income amount. Note, the income source accepts only numbers (integers or floats). If the user enters something that is not a number, the application will ask you to enter the amount again.
 ![Invalid amount](documentation/website-screenshots/invalid-amount.png)
 
-+ Once all the information was entered, the application will append the income record to the Google sheet and display a confirmation message.
++ Once all the information was entered, the application will display a confirmation message.
 ![new income data message](documentation/website-screenshots/new-income-data.png)
 
 + The updated income data will then be displayed, so you can verify that the new record has been added correctly.
+![new income data displayed](documentation/website-screenshots/display-updated-income-data.png)
+
++ The new income record is appended to the Google sheet (Figures below).
+- Initial Google worksheet
+  ![Initial Google worksheet](documentation/website-screenshots/initial-google-income-worksheet.png)
+
+  - Updated Google worksheet
+  ![Updated Google worksheet](documentation/website-screenshots/updated-google-income-worksheet.png)
 
 + Finally, the user is returned to the menu options, where they can choose their next action.
 
