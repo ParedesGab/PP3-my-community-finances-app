@@ -118,36 +118,31 @@
   - Calculates Expenses By Category and Highest expense
   ![Invalid choice](documentation/website-screenshots/calculate-expenses-by-category-and-max-spend.png)
   
-  - The program then asks the user what they would like to do next, and displays the menu options again (figure below).
-  ![Menu options](documentation/website-screenshots/menu-options.png)
+  - The program then asks the user what they would like to do next, and displays the menu options again.
 
 + If the user enters an invalid month name (e.g., jan, or a misspelled month) a ValueError is caught, and an error message is displayed (figure below).
 
-![Menu options](documentation/website-screenshots/invalid-month-name.png)
+  ![Menu options](documentation/website-screenshots/invalid-month-name.png)
 
 + If the entered month is valid but no income or expense data exists for that month, the application displays a message indicating that there is no data for that month yet.
-![Menu options](documentation/website-screenshots/month-has-no-data.png)
+  ![Menu options](documentation/website-screenshots/month-has-no-data.png)
 
-- The program then asks the user what they would like to do next, and displays the menu options again (figure below). This was intentionally selected because the user might want to view all their data, add a month, etc.
-![Menu options](documentation/website-screenshots/menu-options.png)
+- The program then asks the user what they would like to do next, and displays the menu options again (figure below). This was intentionally selected because the user might want to view all their data, add data for that month, exit the program, etc.
 
+**Menu Option 2**
 
-  **Menu Option 2**
+![Invalid choice](documentation/website-screenshots/user-selection-option2.png)
 
-![Invalid choice](documentation/website-screenshots/user-selection-option1.png)
-
-+ 1 it is recognized as a valid input.
-+ The application first displays the report title in green using colorama to stand out.
-+ When generating a monthly report, the application prompts the user for the month name (case-insensitive).
-+ If the month is valid, the report displays the total income, total expenses, cash balance, a breakdown of expenses by category, and the highest expense.
++ 2 it is recognized as a valid input.
++ The application displays all the avaiable financial data, for both income and expenses. 
   - Calculates Monthly Income and Expenses
-  ![Invalid choice](documentation/website-screenshots/calculate-monthly-income-and-expenses.png)
+  ![Invalid choice](documentation/website-screenshots/all-income-data.png)
 
-  - Calculates Cash Balance
-  ![Invalid choice](documentation/website-screenshots/calculate-cash-balance.png)
+  - Expenses data
+  ![Invalid choice](documentation/website-screenshots/all-expenses-data-part1.png)
+  ![Invalid choice](documentation/website-screenshots/all-expenses-data-part2.png)
 
-  - Calculates Expenses By Category and Highest expense
-  ![Invalid choice](documentation/website-screenshots/calculate-expenses-by-category-and-max-spend.png)
++ The program then asks the user what they would like to do next, and displays the menu options again.
 
 ---
 ### Game Indications Page
