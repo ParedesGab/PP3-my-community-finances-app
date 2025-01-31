@@ -403,7 +403,7 @@ class FinanceManager:
 
                 print(
                     f"\n{Fore.GREEN + Style.BRIGHT}"
-                    f"New income for {month} from {source} (EUR {amount:.2f})"
+                    f"New income for {month} from {source} (EUR {amount:.2f}) "
                     f"added successfully!{Style.RESET_ALL}"
                 )
                 self.display_worksheet("income")

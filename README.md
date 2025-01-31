@@ -103,65 +103,69 @@
 
 **Menu Option 1**
 
-![Invalid choice](documentation/website-screenshots/user-selection-option1.png)
+![Menu option 1](documentation/website-screenshots/user-selection-option1.png)
 
 + 1 it is recognized as a valid input.
 + The application first displays the report title in green using colorama to stand out.
 + When generating a monthly report, the application prompts the user for the month name (case-insensitive).
 + If the month is valid, the report displays the total income, total expenses, cash balance, a breakdown of expenses by category, and the highest expense.
   - Calculates Monthly Income and Expenses
-  ![Invalid choice](documentation/website-screenshots/calculate-monthly-income-and-expenses.png)
+  ![Calculates Monthly Income and Expenses](documentation/website-screenshots/calculate-monthly-income-and-expenses.png)
 
   - Calculates Cash Balance
-  ![Invalid choice](documentation/website-screenshots/calculate-cash-balance.png)
+  ![Calculates Cash Balance](documentation/website-screenshots/calculate-cash-balance.png)
 
   - Calculates Expenses By Category and Highest expense
-  ![Invalid choice](documentation/website-screenshots/calculate-expenses-by-category-and-max-spend.png)
+  ![Calculates Expenses By Category and Highest expense](documentation/website-screenshots/calculate-expenses-by-category-and-max-spend.png)
   
   - The program then asks the user what they would like to do next, and displays the menu options again.
 
 + If the user enters an invalid month name (e.g., jan, or a misspelled month) a ValueError is caught, and an error message is displayed (figure below).
-
-  ![Menu options](documentation/website-screenshots/invalid-month-name.png)
+  ![Invalid month name](documentation/website-screenshots/invalid-month-name.png)
+  - The user is asked again to enter a month name. 
 
 + If the entered month is valid but no income or expense data exists for that month, the application displays a message indicating that there is no data for that month yet.
-  ![Menu options](documentation/website-screenshots/month-has-no-data.png)
-
-- The program then asks the user what they would like to do next, and displays the menu options again (figure below). This was intentionally selected because the user might want to view all their data, add data for that month, exit the program, etc.
+  ![Month has no data](documentation/website-screenshots/month-has-no-data.png)
+  - The user is then asked what they would like to do next, and displays the menu options again (figure below). This was intentionally selected because the user might want to view all their data, add data for that month, exit the program, etc.
 
 **Menu Option 2**
 
-![Invalid choice](documentation/website-screenshots/user-selection-option2.png)
+![Menu option 2](documentation/website-screenshots/user-selection-option2.png)
 
 + 2 it is recognized as a valid input.
 + The application displays all the avaiable financial data, for both income and expenses. 
-  - Calculates Monthly Income and Expenses
-  ![Invalid choice](documentation/website-screenshots/all-income-data.png)
+  - Income data
+  ![income data](documentation/website-screenshots/all-income-data.png)
 
   - Expenses data
-  ![Invalid choice](documentation/website-screenshots/all-expenses-data-part1.png)
-  ![Invalid choice](documentation/website-screenshots/all-expenses-data-part2.png)
+  ![expenses data part1](documentation/website-screenshots/all-expenses-data-part1.png)
+  ![expenses data part2](documentation/website-screenshots/all-expenses-data-part2.png)
 
 + The program then asks the user what they would like to do next, and displays the menu options again.
 
----
-### Game Indications Page
+**Menu Option 3**
 
-- The user is redirected to this page when clicking to the "Play Instructions" button from the Home Menu page.
+![Menu option 3](documentation/website-screenshots/user-selection-option3.png)
 
-- This section provides the user with an introductory explanation of the game, shows visual representations of the game cards, and gives them an option to return to the main menu.
++ 3 it is recognized as a valid input.
++ The application first displays a title in green, using colorama to stand out, prompting the user that "To add a new income:" first they need to add a month name (case-insensitive).
 
-- This section is responsive and the images use the flex-wrap property. 
++ If the user enters an invalid month name (e.g., jan, or a misspelled month) a ValueError is caught, and an error message is displayed (figure below).
+  ![Invalid month name](documentation/website-screenshots/invalid-month-name.png)
+  - The user is asked again to enter a month name. 
 
-Design for mobiles:
++ If the month is valid, the report then prompts the user to enter their income source. Note, the income source accepts any data type. Thus, any text can be entered.
 
-![Game indications mobiles](documentation/website-screenshots/game-indications-mobile.png)
++ After entering the income source, the report then prompts the user to enter their income amount. Note, the income source accepts only numbers (integers or floats). If the user enters something that is not a number, the application will ask you to enter the amount again.
+![Invalid amount](documentation/website-screenshots/invalid-amount.png)
 
-Design for Tablets and larger devices:
++ Once all the information was entered, the application will append the income record to the Google sheet and display a confirmation message.
+![new income data message](documentation/website-screenshots/new-income-data.png)
 
-![Game indications tablets and up](documentation/website-screenshots/game-indications-tablets-up.png)
++ The updated income data will then be displayed, so you can verify that the new record has been added correctly.
 
----
++ Finally, the user is returned to the menu options, where they can choose their next action.
+
 ### Memory Board Game Page
 
 ![Memory board game card deck open](documentation/website-screenshots/memory-game-open.png)
