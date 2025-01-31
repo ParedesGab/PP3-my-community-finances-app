@@ -27,10 +27,10 @@ def welcome():
     This expense tracker will help you monitor
     your income and expenses!
 
-        * Generate detailed monthly financial reports.
-        * Check your spending and identify your largest expenses.
-        * Easily add new income and expense entries.
-        * Review all your financial data.\n
+    * Add new income and expense entries.
+    * Generate a monthly financial report.
+    * Identify your largest expense.
+    * Take a look at all your financial data.\n
 
     Are you ready to understand your spending habits?\n
     Let's go! 🚀\n
@@ -45,17 +45,18 @@ def get_main_user_choice():
     while True:
         print(Fore.BLUE + "Please select an option:" + Style.RESET_ALL)
         print("""
-        1. Check My Monthly Finance Report!
-        2. Display All My Income and Expenses.
-        3. Add New Income.
-        4. Add New Expense.
-        5. Exit Program.)
+        0. How to use the application?
+        1. Add New Income.
+        2. Add New Expense.
+        3. Check Monthly Finance Report!
+        4. Display All Income and Expenses.
+        5. Exit Program.
         """)
 
         try:
-            option = int(input("\nEnter your choice (1-5):\n"))
+            option = int(input("\nEnter your choice (0-5):\n"))
 
-        # Validate the data
+        # Validate the option
             validate_user_choice(option)
         # return the handle_user_option function
             return handle_user_option(option)
@@ -75,7 +76,7 @@ def validate_user_choice(user_choice):
 
 # HANDLE THE USER SELECTION (for get_main_user_choice)
 def handle_user_option(option):
-    """HandleS user option."""
+    """Handles user option."""
     if option == 1:
         finance_manager = FinanceManager()
         return finance_manager.generate_monthly_finance_report()
@@ -83,18 +84,20 @@ def handle_user_option(option):
     elif option == 2:
         finance_manager = FinanceManager()
 
-        print(Fore.BLUE + "\n**Income Data**" + Style.RESET_ALL)
+        income_header = Fore.BLUE + "\n**Income Data**" + Style.RESET_ALL
+        print(income_header)
         finance_manager.display_worksheet("income")
 
-        print(Fore.BLUE + "\n**Expense Data**" + Style.RESET_ALL)
+        expenses_header = Fore.BLUE + "\n**Expenses Data**" + Style.RESET_ALL
+        print(expenses_header)
+
         finance_manager.display_worksheet("expenses")
 
         print(Fore.GREEN + Style.BRIGHT + "\n**************" + Style.RESET_ALL)
-        print(
-            Fore.BLUE +
-            "\nWhat would you like to do next?" +
-            Style.RESET_ALL
+        menu_prompt = (
+            Fore.BLUE + "What would you like to do next?" + Style.RESET_ALL
         )
+        print(menu_prompt)
         return get_main_user_choice()
 
     elif option == 3:
@@ -106,10 +109,11 @@ def handle_user_option(option):
         finance_manager.add_new_expense_to_expense_worksheet()
 
     elif option == 5:
-        exit_message = (
-            f"{Fore.GREEN + Style.BRIGHT} ✨ Your finances are in good hands ✨ "
-            f" Goodbye and See you next time!\n{Style.RESET_ALL}"
-        )
+        exit_message = f"""
+        {Fore.GREEN + Style.BRIGHT}
+        ✨ Your finances are in good hands ✨
+            Goodbye and See you next time!{Style.RESET_ALL}
+        """
         print(exit_message)
         exit()
 
@@ -136,9 +140,8 @@ class FinanceManager:
         while True:
             # Ask User which month they want to see
             prompt_month = (
-                f"{Fore.BLUE}"
-                f"\nPlease enter the month name (e.g., january):\n"
-                f"{Style.RESET_ALL}"
+                Fore.BLUE + "Please enter the month name (e.g., january):\n" +
+                Style.RESET_ALL
             )
             user_month = input(prompt_month).lower()
 
@@ -149,11 +152,11 @@ class FinanceManager:
 
             # If choice is invalid: ValueError
             except ValueError as error:
-                print(
-                    Fore.LIGHTRED_EX +
-                    "Invalid month name!" +
+                invalid_month_name = (
+                    Fore.LIGHTRED_EX + "Invalid month name!" +
                     Style.RESET_ALL
                 )
+                print(invalid_month_name)
 
     # CHECK IF MONTH SELECTED HAS DATA (for generate_monthly_finance_report)
     def month_has_data(self, worksheet_data, month):
@@ -239,10 +242,9 @@ class FinanceManager:
     # MONTHLY FINANCE REPORT
     def generate_monthly_finance_report(self):
         """Generates and displays the monthly finance report."""
-        print("")
         print(
             Fore.GREEN + Style.BRIGHT +
-            "\n  ✨✨✨✨  MY MONTHLY FINANCE REPORT  ✨✨✨✨" +
+            "\n  ✨✨✨✨  MY MONTHLY FINANCE REPORT  ✨✨✨✨\n " +
             Style.RESET_ALL
             )
 
