@@ -2,7 +2,7 @@
 
 (Developer: Gabriela Fabiola Paredes Rojas)
 
-![Responsive Mockup image](documentation/website-screenshots)
+![Responsive Mockup image](documentation/website-screenshots/mockup.png)
 
 **Welcome to MyFinances tracker APP!**
 
