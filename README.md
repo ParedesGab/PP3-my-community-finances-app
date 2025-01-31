@@ -100,22 +100,14 @@
 ![Invalid choice](documentation/website-screenshots/invalid-choice-not-number-from-1-to-5.png)
 
 + After any of these errors, the user is prompted to select an option again.
-+ If the user enters a valid input (from 1 to 5), the application shows the title of the monthly financial report and prompts the user to enter a name (figure below).
+
+**User selects option 1**
+
 ![Invalid choice](documentation/website-screenshots/user-selection-option1.png)
 
-**Home Menu Buttons**
++ 1 it is recognized as a valid input.
++ The application first shows the title of the monthly financial report and prompts the user to enter a month name.
 
-![Home menu buttons](documentation/website-screenshots/home-menu-buttons.png)
-
-+ The home menu buttons are present on the main page of Memory Game, and they consist on two buttons: Play Game, and Play instructions. 
-  
-+ They are responsive, and across all devices the home menu buttons are found positioned on top of the other (flex-direction: column).
-
-+ The buttons will rotate slightly and change colors when hovered, creating a smooth, visually appealing interactive effect.
-
-+ Clear and easy to read.
-
-+ Consistent styling and easy navigation.
 
 ---
 ### Game Indications Page
