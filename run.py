@@ -25,9 +25,8 @@ def welcome():
     border = f"{Fore.GREEN + Style.BRIGHT}=============={Style.RESET_ALL}"
     welcome_message = f"""
     \n{border} WELCOME TO MyFinances APP! {border}\n
-    This expense tracker helps you:
+    This expense tracker helps you track your income and expenses!:
 
-    * Track your monthly income and expenses.
     * Generate detailed monthly financial reports.
     * Check your spending and identify your largest expenses.
     * Easily add new income and expense entries.
