@@ -78,17 +78,13 @@
 ---
 ## Features 
 
-### Game Header
+### Welcome message
 
 ![Game Header up to Tablets](documentation/website-screenshots/game-name.png)
-
-+ It contains two titles (h1 and h2) positioned at the center of the page, and they are the first elements found across all pages.
-    + Clear and easy to read.
-    + It uses a futuristic Google font "Rajdhanithat" and a background style that conveys and embraces the cosmic-theme.
   
-+ Therefore, the user understands directly that theme of the memory game is related to galaxy, space, universe.
++ Printed (positioned) above the menu options.
++ The welcome() function displays a colorful welcome message to the user when the program starts. It uses the colorama library to add green borders and bold text, creating a visually appealing introduction to the MyFinances app.
 
-+ The header position and font-size are responsive across all devices. For example, it increases in size in larger screens (**Figure below**). However, it is made smaller in all the other pages.
 
 ![Game Header Laptops and up](documentation/website-screenshots/game-name-laptops-up.png)
        
