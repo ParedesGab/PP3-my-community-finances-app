@@ -93,7 +93,15 @@
 + Displays the 5 menu options.
 + Informs the user what can be done in the program and displays the number to be entered to select the option.
 + It gets the user selection and validates the selection.
-+ If the user enters an invalid input (like non-numeric characters) or a number larger than 5, a ValueError is caught, and an error message is displayed.
++ If the user enters an invalid input (like non-numeric characters) or a number larger than 5, a ValueError is caught, and an error message is displayed (figures below, respectively).
+
+![Invalid choice](documentation/website-screenshots/invalid-literal-for-int.png)
+
+![Invalid choice](documentation/website-screenshots/invalid-choice-not-number-from-1-to-5.png)
+
++ After any of these errors, the user is prompted to select an option again.
++ If the user enters a valid input (from 1 to 5), the application shows the title of the monthly financial report and prompts the user to enter a name (figure below).
+![Invalid choice](documentation/website-screenshots/user-selection-option1.png)
 
 **Home Menu Buttons**
 
