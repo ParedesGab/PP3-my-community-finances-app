@@ -57,14 +57,16 @@ def get_main_user_choice():
             if not user_input: 
                 raise ValueError(
                     Fore.LIGHTRED_EX +
-                    "Empty input: Please enter a number between 0 and 5.\n" +
+                    "Empty input: Please enter a number between 0 and 5 " 
+                    "without spaces or special characters.\n" +
                     Style.RESET_ALL
                 )
         
             if not is_valid_number(user_input):
                 raise ValueError(
                     Fore.LIGHTRED_EX +
-                    "Invalid input: Please enter a number between 0 and 5.\n" +
+                    "Invalid input: Please enter a number between 0 and 5 " 
+                    "without spaces or special characters.\n" +
                     Style.RESET_ALL
                 )
 
@@ -85,7 +87,8 @@ def validate_user_choice(user_choice):
     if not 0 <= user_choice <= 5:
         raise ValueError(
                     Fore.LIGHTRED_EX +
-                    "Invalid input: Please enter a number between 0 and 5.\n" +
+                    "Invalid input: Please enter a number between 0 and 5 " 
+                    "without spaces or special characters.\n" +
                     Style.RESET_ALL
                 )
 
@@ -100,11 +103,23 @@ def is_valid_number(input_value):
 # HANDLE THE USER SELECTION (for get_main_user_choice)
 def handle_user_option(option):
     """Handles user option."""
+
+    if option == 0:
+        pass
+
     if option == 1:
+        finance_manager = FinanceManager()
+        finance_manager.add_new_income_to_income_worksheet()
+
+    elif option == 2:
+        finance_manager = FinanceManager()
+        finance_manager.add_new_expense_to_expense_worksheet()
+
+    elif option == 3:
         finance_manager = FinanceManager()
         return finance_manager.generate_monthly_finance_report()
 
-    elif option == 2:
+    elif option == 4:
         finance_manager = FinanceManager()
 
         income_header = Fore.BLUE + "\n**Income Data**" + Style.RESET_ALL
@@ -122,14 +137,6 @@ def handle_user_option(option):
         )
         print(menu_prompt)
         return get_main_user_choice()
-
-    elif option == 3:
-        finance_manager = FinanceManager()
-        finance_manager.add_new_income_to_income_worksheet()
-
-    elif option == 4:
-        finance_manager = FinanceManager()
-        finance_manager.add_new_expense_to_expense_worksheet()
 
     elif option == 5:
         exit_message = f"""
