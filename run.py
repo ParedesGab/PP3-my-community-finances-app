@@ -9,14 +9,12 @@ SCOPE = [
     "https://www.googleapis.com/auth/drive"
     ]
 
-# Create constant variables
 CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('my_finances')
 
 
-# WELCOME MESSAGE
 def welcome():
     """Displays a welcome message with color."""
     init()
@@ -39,13 +37,12 @@ def welcome():
     print(welcome_message)
 
 
-# GET USER CHOICE
 def get_main_user_choice():
     """Gets the user's choice from the menu options."""
     while True:
         print(Fore.BLUE + "Please select an option:" + Style.RESET_ALL)
         print("""
-        0. How to use the application?
+        0. Application instructions.
         1. Add New Income.
         2. Add New Expense.
         3. Check Monthly Finance Report!
@@ -54,7 +51,25 @@ def get_main_user_choice():
         """)
 
         try:
-            option = int(input("\nEnter your choice (0-5):\n"))
+            user_input = input("\nEnter your choice (0-5):\n")
+            
+        #Checks for empty input
+            if not user_input: 
+                raise ValueError(
+                    Fore.LIGHTRED_EX +
+                    "Empty input: Please enter a number between 0 and 5.\n" +
+                    Style.RESET_ALL
+                )
+        
+            if not is_valid_number(user_input):
+                raise ValueError(
+                    Fore.LIGHTRED_EX +
+                    "Invalid input: Please enter a number between 0 and 5.\n" +
+                    Style.RESET_ALL
+                )
+
+        # Attempt conversion to integer, handling potential errors
+            option = int(user_input)
 
         # Validate the option
             validate_user_choice(option)
@@ -62,16 +77,24 @@ def get_main_user_choice():
             return handle_user_option(option)
 
         except ValueError as error:
-            print(Fore.LIGHTRED_EX + f"{error}\n" + Style.RESET_ALL)
+            print(error)
 
 
-# VALIDATE USER CHOICE (for get_main_user_choice)
 def validate_user_choice(user_choice):
     """Validates the user's choice."""
-    if not 1 <= user_choice <= 5:
-        error_message = f"{Fore.LIGHTRED_EX}Invalid choice! " \
-                f"Please enter a number between 1 and 5.{Style.RESET_ALL}"
-        raise ValueError(error_message)
+    if not 0 <= user_choice <= 5:
+        raise ValueError(
+                    Fore.LIGHTRED_EX +
+                    "Invalid input: Please enter a number between 0 and 5.\n" +
+                    Style.RESET_ALL
+                )
+
+
+def is_valid_number(input_value):
+    """Checks if the input value is a valid number."""
+    if not input_value.isdigit() or input_value.startswith("+"):
+        return False
+    return True
 
 
 # HANDLE THE USER SELECTION (for get_main_user_choice)
