@@ -37,35 +37,94 @@ def welcome():
     print(welcome_message)
 
 
+def show_application_instructions():
+    """Displays instructions for how to use the application."""
+    instructions = f"""
+    {Fore.GREEN + Style.BRIGHT}APPLICATION INSTRUCTIONS{Style.RESET_ALL}
+
+    Wlcome to My finances app! Here is how you can use your application:
+    1. {Fore.BLUE}Add New Income:{Style.RESET_ALL}
+       - You can add income records to track your earnings.
+       - Each income entry consists of:
+         → {Fore.YELLOW}Month{Style.RESET_ALL}: The month the income was earned (e.g., January).
+         → {Fore.YELLOW}Source{Style.RESET_ALL}: The source of the income (e.g., Salary, Freelance).
+         → {Fore.YELLOW}Amount{Style.RESET_ALL}: The amount earned in EUR (e.g., 1500.00).
+
+    2. {Fore.BLUE}Add New Expense:{Style.RESET_ALL}
+       - You can record your expenses to monitor your spending.
+       - Each expense entry includes:
+         → {Fore.YELLOW}Month{Style.RESET_ALL}: The month the expense occurred (e.g., February).
+         → {Fore.YELLOW}Date{Style.RESET_ALL}: The specific date of the expense (YYYY-MM-DD).
+         → {Fore.YELLOW}Category{Style.RESET_ALL}: The category of the expense (e.g., Rent, Groceries).
+         → {Fore.YELLOW}Description{Style.RESET_ALL}: A short description of the expense (e.g., "Monthly Rent").
+         → {Fore.YELLOW}Amount{Style.RESET_ALL}: The amount spent in EUR (e.g., 750.00).
+
+    3. {Fore.BLUE}Generate Monthly Finance Report:{Style.RESET_ALL}
+       - Select a month to generate a detailed report of your income and expenses.
+       - The report will display:
+         → Total Income for the selected month.
+         → Total Expenses for the selected month.
+         → Your cash balance (Income - Expenses).
+         → A breakdown of expenses by category, including the highest expense category.
+
+    4. {Fore.BLUE}Display All Income and Expenses:{Style.RESET_ALL}
+       - View all records from the "income" and "expenses" worksheets.
+       - This option shows all data in a table format, allowing you to see your financial history.
+
+    5. {Fore.BLUE}Exit Program:{Style.RESET_ALL}
+       - Close the application. Don't worry; your data is safe in the Google Sheets.  
+
+    {Fore.GREEN}✨ Tip:{Style.RESET_ALL} Always double-check your inputs to ensure data accuracy.
+
+    """
+    print(instructions)
+
+
 def get_main_user_choice():
     """Gets the user's choice from the menu options."""
     while True:
-        print(Fore.BLUE + "Please select an option:" + Style.RESET_ALL)
-        print("""
-        0. Application instructions.
-        1. Add New Income.
-        2. Add New Expense.
-        3. Check Monthly Finance Report!
-        4. Display All Income and Expenses.
-        5. Exit Program.
+        print(Fore.BLUE + Style.BRIGHT  + "\nPlease choose an option by entering the corresponding number:" + Style.RESET_ALL)
+        print(f"""
+    {Fore.GREEN + Style.BRIGHT} 0. Application instruction {Style.RESET_ALL}
+           Learn how to use the MyFinances app effectively.
+
+    {Fore.GREEN + Style.BRIGHT} 1. Add New Income. {Style.RESET_ALL}
+           Record your income details  (Month, Source, and Amount).
+
+    {Fore.GREEN + Style.BRIGHT} 2. Add New Expense. {Style.RESET_ALL}
+           Record your expense details (Month, Category, Description, and Amount).
+
+    {Fore.GREEN + Style.BRIGHT} 3. Check Monthly Finance Report! {Style.RESET_ALL}
+           View a summary of your income and expenses for a selected month.
+
+    {Fore.GREEN + Style.BRIGHT} 4. Display All Income and Expenses. {Style.RESET_ALL}
+           View all your recorded financial data.
+
+    {Fore.GREEN + Style.BRIGHT} 5. Exit Program. {Style.RESET_ALL}
+           Close the MyFinances application.lose the MyFinances application.
         """)
 
         try:
-            user_input = input("\nEnter your choice (0-5):\n")
-            
-        #Checks for empty input
-            if not user_input: 
+            choice_message = (
+                Fore.BLUE + Style.BRIGHT  +
+                "Enter your choice (0-5):\n"
+                + Style.RESET_ALL
+            )
+            user_input = input(choice_message)
+
+        # Checks for empty input
+            if not user_input:
                 raise ValueError(
                     Fore.LIGHTRED_EX +
-                    "Empty input: Please enter a number between 0 and 5 " 
+                    "Empty input: Please enter a number between 0 and 5 "
                     "without spaces or special characters.\n" +
                     Style.RESET_ALL
                 )
-        
+
             if not is_valid_number(user_input):
                 raise ValueError(
                     Fore.LIGHTRED_EX +
-                    "Invalid input: Please enter a number between 0 and 5 " 
+                    "Invalid input: Please enter a number between 0 and 5 "
                     "without spaces or special characters.\n" +
                     Style.RESET_ALL
                 )
@@ -87,7 +146,7 @@ def validate_user_choice(user_choice):
     if not 0 <= user_choice <= 5:
         raise ValueError(
                     Fore.LIGHTRED_EX +
-                    "Invalid input: Please enter a number between 0 and 5 " 
+                    "Invalid input: Please enter a number between 0 and 5 "
                     "without spaces or special characters.\n" +
                     Style.RESET_ALL
                 )
@@ -100,12 +159,11 @@ def is_valid_number(input_value):
     return True
 
 
-# HANDLE THE USER SELECTION (for get_main_user_choice)
 def handle_user_option(option):
     """Handles user option."""
 
     if option == 0:
-        pass
+        show_application_instructions()
 
     if option == 1:
         finance_manager = FinanceManager()
