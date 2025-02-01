@@ -42,20 +42,27 @@ def show_application_instructions():
     {Fore.BLUE} 1. Add New Income:{Style.RESET_ALL}
        - You can add income records to track your earnings.
        - Each income entry consists of:
-         → {Fore.YELLOW}Month{Style.RESET_ALL}: The month the income was earned (e.g., January).
-         → {Fore.YELLOW}Source{Style.RESET_ALL}: The source of the income (e.g., Salary, Freelance).
-         → {Fore.YELLOW}Amount{Style.RESET_ALL}: The amount earned in EUR (e.g., 1500.00).
+         → {Fore.YELLOW}Month{Style.RESET_ALL}: The month the income was earned
+         (e.g., January).
+         → {Fore.YELLOW}Source{Style.RESET_ALL}: The source of the income
+         (e.g., Salary, Freelance).
+         → {Fore.YELLOW}Amount{Style.RESET_ALL}: The amount earned in EUR
+         (e.g., 1500.00).
 
     {Fore.BLUE} 2. Add New Expense:{Style.RESET_ALL}
        - You can record your expenses to monitor your spending.
        - Each expense entry includes:
-         → {Fore.YELLOW}Month{Style.RESET_ALL}: The month the expense occurred (e.g., February).
-         → {Fore.YELLOW}Category{Style.RESET_ALL}: The category of the expense (e.g., Rent, Groceries).
-         → {Fore.YELLOW}Description{Style.RESET_ALL}: A description of the expense (e.g., "Monthly Rent").
-         → {Fore.YELLOW}Amount{Style.RESET_ALL}: The amount spent in EUR (e.g., 750.00).
+         → {Fore.YELLOW}Month{Style.RESET_ALL}: The month the expense occurred
+         (e.g., February).
+         → {Fore.YELLOW}Category{Style.RESET_ALL}: The category of the expense
+         (e.g., Rent, Groceries).
+         → {Fore.YELLOW}Description{Style.RESET_ALL}: Expense description
+         (e.g., "Monthly Rent").
+         → {Fore.YELLOW}Amount{Style.RESET_ALL}: The amount spent in EUR
+         (e.g., 750.00).
 
     {Fore.BLUE} 3. Generate Monthly Finance Report:{Style.RESET_ALL}
-       - Select a month to generate a detailed report of your income and expenses.
+       - Select a month to generate a detailed income and expenses report.
        - The report will display:
          → Total Income for the selected month.
          → Total Expenses for the selected month.
@@ -65,13 +72,10 @@ def show_application_instructions():
 
     {Fore.BLUE} 4. Display All Income and Expenses:{Style.RESET_ALL}
        - View all your records from the "income" and "expenses" worksheets.
-       - This option shows all data in a table format, allowing you to see your financial history.
+       - This option shows all your data in a table format.
 
     {Fore.BLUE} 5. Exit Program:{Style.RESET_ALL}
        - Close the application. Don't worry; all your data is stored!
-
-    {Fore.GREEN}✨ Tip:{Style.RESET_ALL} Always double-check your inputs to ensure data accuracy.
-
     """
     print(instructions)
 
@@ -79,32 +83,37 @@ def show_application_instructions():
 def get_main_user_choice():
     """Gets the user's choice from the menu options."""
     while True:
-        print(Fore.BLUE + Style.BRIGHT  + "\nPlease enter a number between 0 and 5 to select an option:" + Style.RESET_ALL)
+        user_prompt = (
+            Fore.BLUE + Style.BRIGHT +
+            "\nPlease enter a number between 0 and 5 to select an option:" +
+            Style.RESET_ALL
+        )
+        print(user_prompt)
         print(f"""
-    {Fore.GREEN + Style.BRIGHT} 0. Application Instructions. {Style.RESET_ALL}
+    {Fore.GREEN + Style.BRIGHT}0. Application Instructions.{Style.RESET_ALL}
            Learn how to use the MyFinances app effectively.
 
-    {Fore.GREEN + Style.BRIGHT} 1. Add New Income. {Style.RESET_ALL}
+    {Fore.GREEN + Style.BRIGHT}1. Add New Income.{Style.RESET_ALL}
            Record your income details  (Month, Source, and Amount).
 
-    {Fore.GREEN + Style.BRIGHT} 2. Add New Expense. {Style.RESET_ALL}
-           Record your expense details (Month, Category, Description, and Amount).
+    {Fore.GREEN + Style.BRIGHT}2. Add New Expense.{Style.RESET_ALL}
+           Record your expense details (Month, Category, Description, Amount).
 
-    {Fore.GREEN + Style.BRIGHT} 3. Check Monthly Finance Report! {Style.RESET_ALL}
-           View a summary of your income and expenses for a selected month.
+    {Fore.GREEN + Style.BRIGHT}3. Check Monthly Finance Report{Style.RESET_ALL}
+    View a summary of your income and expenses for a selected month.
 
-    {Fore.GREEN + Style.BRIGHT} 4. Display All My Income and Expenses! {Style.RESET_ALL}
+    {Fore.GREEN + Style.BRIGHT}4. Display Income and Expenses{Style.RESET_ALL}
            View all your recorded financial data.
 
-    {Fore.GREEN + Style.BRIGHT} 5. Exit Program. {Style.RESET_ALL}
+    {Fore.GREEN + Style.BRIGHT}5. Exit Program.{Style.RESET_ALL}
            Close the MyFinances application.lose the MyFinances application.\n
         """)
 
         try:
             choice_message = (
-                Fore.BLUE + Style.BRIGHT  +
-                "Enter your option (0-5):\n"
-                + Style.RESET_ALL
+                Fore.BLUE + Style.BRIGHT +
+                "Enter your option (0-5):\n" +
+                Style.RESET_ALL
             )
             user_input = input(choice_message)
 
