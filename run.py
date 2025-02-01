@@ -18,7 +18,7 @@ SHEET = GSPREAD_CLIENT.open('my_finances')
 def welcome():
     """Displays a welcome message with color."""
     init()
-    border = f"{Fore.GREEN + Style.BRIGHT}=============={Style.RESET_ALL}"
+    border = f"{Fore.GREEN + Style.BRIGHT}======================={Style.RESET_ALL}"
     welcome_message = f"""
     \n{border} WELCOME TO MyFinances APP! {border}\n
 
@@ -27,7 +27,7 @@ def welcome():
 
     Are you ready to understand your spending habits?\n
     Let's go! 🚀\n
-{border}{border}{border}{border}
+   {border}{border}{border}
     """
     print(welcome_message)
 
@@ -94,7 +94,7 @@ def get_main_user_choice():
            Learn how to use the MyFinances app effectively.
 
     {Fore.GREEN + Style.BRIGHT}1. Add New Income.{Style.RESET_ALL}
-           Record your income details  (Month, Source, and Amount).
+           Record your income details (Month, Source, and Amount).
 
     {Fore.GREEN + Style.BRIGHT}2. Add New Expense.{Style.RESET_ALL}
            Record your expense details (Month, Category, Description, Amount).
@@ -213,19 +213,69 @@ def handle_user_option(option):
 
 class FinanceManager:
 
-    # MAKE THE WORKSHEETS ACCESSIBLE FOR THE CLASS METHODS
+    # Make the worksheet accessible for the class methods
     def __init__(self):
         self.income_worksheet = SHEET.worksheet("income")
         self.expenses_worksheet = SHEET.worksheet("expenses")
 
-    # GET ALL DATA FROM A WORKSHEET (for generate_monthly_finance_report)
     def get_worksheet_data(self, worksheet):
         """Gets all data from a worksheet"""
         worksheet = SHEET.worksheet(worksheet)
         all_values = worksheet.get_all_values()
         return all_values
 
-    # IF USER OPTION == 1
+# IF USER OPTION == 1 (Add new expenses)
+    def add_new_income_to_income_worksheet(self):
+        """Adds a new income record to the "income" worksheet."""
+        print(
+            Fore.GREEN + Style.BRIGHT +
+            "\n TO ADD A NEW INCOME:" +
+            Style.RESET_ALL
+        )
+
+        month = self.get_and_validate_month_input()
+        prompt_source = (
+            Fore.BLUE +
+            "Enter income source:\n" +
+            Style.RESET_ALL
+        )
+        source = input(prompt_source)
+        while True:
+            try:
+                prompt_amount = (
+                    Fore.BLUE +
+                    "Enter income amount:\n" +
+                    Style.RESET_ALL
+                )
+                amount = float(input(prompt_amount))
+
+                new_income_row = [month, source, amount]
+
+                self.income_worksheet.append_row(new_income_row)
+
+                print(
+                    f"\n{Fore.GREEN + Style.BRIGHT}"
+                    f"New income for {month} from {source} (EUR {amount:.2f}) "
+                    f"added successfully!{Style.RESET_ALL}"
+                )
+                self.display_worksheet("income")
+
+                print(Fore.GREEN + Style.BRIGHT + "\n*****" + Style.RESET_ALL)
+                print(
+                    Fore.BLUE +
+                    "\nWhat would you like to do next?" +
+                    Style.RESET_ALL
+                )
+                return get_main_user_choice()
+
+            except ValueError as error:
+                print(
+                    Fore.LIGHTRED_EX +
+                    f"Invalid input: {error}. Please enter a valid amount.\n" +
+                    Style.RESET_ALL
+                )
+
+    # IF USER OPTION == 3
     # GET and validate MONTH SELECTED (for generate_monthly_finance_report)
     def get_and_validate_month_input(self):
         """Prompts the user to enter a month name and validates the input."""
@@ -440,57 +490,6 @@ class FinanceManager:
         for row in data_rows:
             print(" | ".join(row))
             print("-" * (len(row) * 9))
-
-    # IF USER OPTION == 3 (Add new expenses)
-    def add_new_income_to_income_worksheet(self):
-        """Adds a new income record to the "income" worksheet."""
-        print(
-            Fore.GREEN + Style.BRIGHT +
-            "\n TO ADD A NEW INCOME:" +
-            Style.RESET_ALL
-        )
-
-        month = self.get_and_validate_month_input()
-        prompt_source = (
-            Fore.BLUE +
-            "Enter income source:\n" +
-            Style.RESET_ALL
-        )
-        source = input(prompt_source)
-        while True:
-            try:
-                prompt_amount = (
-                    Fore.BLUE +
-                    "Enter income amount:\n" +
-                    Style.RESET_ALL
-                )
-                amount = float(input(prompt_amount))
-
-                new_income_row = [month, source, amount]
-
-                self.income_worksheet.append_row(new_income_row)
-
-                print(
-                    f"\n{Fore.GREEN + Style.BRIGHT}"
-                    f"New income for {month} from {source} (EUR {amount:.2f}) "
-                    f"added successfully!{Style.RESET_ALL}"
-                )
-                self.display_worksheet("income")
-
-                print(Fore.GREEN + Style.BRIGHT + "\n*****" + Style.RESET_ALL)
-                print(
-                    Fore.BLUE +
-                    "\nWhat would you like to do next?" +
-                    Style.RESET_ALL
-                )
-                return get_main_user_choice()
-
-            except ValueError as error:
-                print(
-                    Fore.LIGHTRED_EX +
-                    f"Invalid input: {error}. Please enter a valid amount.\n" +
-                    Style.RESET_ALL
-                )
 
     # IF USER OPTION == 4 (Add new expenses)
     def add_new_expense_to_expense_worksheet(self):
