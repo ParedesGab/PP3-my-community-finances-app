@@ -25,11 +25,6 @@ def welcome():
     This expense tracker will help you monitor
     your income and expenses!
 
-    * Add new income and expense entries.
-    * Generate a monthly financial report.
-    * Identify your largest expense.
-    * Take a look at all your financial data.\n
-
     Are you ready to understand your spending habits?\n
     Let's go! 🚀\n
 {border}{border}{border}{border}
