@@ -2,6 +2,8 @@ import gspread
 from google.oauth2.service_account import Credentials
 from colorama import init, Fore, Style, Back
 from datetime import datetime
+import re
+
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -315,7 +317,10 @@ class FinanceManager:
                 Style.RESET_ALL
             )
             # Remove trailing spaces and convert to lowercase
-            user_source = input(prompt_source).strip().lower()
+            c = input(prompt_source).strip().lower()
+
+            # at least 4 characters long, contains alphabetic characters, and is not purely numeric
+            if len(user_source) >= 4 and re.search('[a-zA-Z]', user_source) and not user_source.isdigit():
 
 
     # CHECK IF MONTH SELECTED HAS DATA (for generate_monthly_finance_report)
