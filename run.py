@@ -23,7 +23,7 @@ def welcome():
     \n{border} WELCOME TO MyFinances APP! {border}\n
 
     This expense tracker will help you monitor
-    your income and expenses!
+    your 2025 income and expenses!
 
     Are you ready to understand your spending habits?\n
     Let's go! 🚀\n
@@ -117,7 +117,7 @@ def get_main_user_choice():
             )
             user_input = input(choice_message)
 
-        # Checks for empty input
+        # Check for empty input
             if not user_input:
                 raise ValueError(
                     Fore.LIGHTRED_EX +
@@ -134,12 +134,12 @@ def get_main_user_choice():
                     Style.RESET_ALL
                 )
 
-        # Attempt conversion to integer, handling potential errors
+        # Attempt conversion to integer, to handle potential errors
             option = int(user_input)
 
         # Validate the option
             validate_user_choice(option)
-        # return the handle_user_option function
+        # Return the handle_user_option function
             return handle_user_option(option)
 
         except ValueError as error:
@@ -227,13 +227,19 @@ class FinanceManager:
 # IF USER OPTION == 1 (Add new expenses)
     def add_new_income_to_income_worksheet(self):
         """Adds a new income record to the "income" worksheet."""
-        print(
-            Fore.GREEN + Style.BRIGHT +
-            "\n TO ADD A NEW INCOME:" +
-            Style.RESET_ALL
-        )
+
+        income_message = f"""
+        {Fore.GREEN + Style.BRIGHT}Let's add a new income record!
+        {Style.RESET_ALL}
+        You will be asked to provide the following details in order:
+        → Month (Ensure it is the complete month name, e.g., January)
+        → Source (Ensure it is at least 4 characters long, contains alphabetic characters, and is not purely numeric
+        → Amount in EUR (e.g., 500.00)   
+        """
+        print(income_message)
 
         month = self.get_and_validate_month_input()
+
         prompt_source = (
             Fore.BLUE +
             "Enter income source:\n" +
@@ -275,18 +281,17 @@ class FinanceManager:
                     Style.RESET_ALL
                 )
 
-    # IF USER OPTION == 3
-    # GET and validate MONTH SELECTED (for generate_monthly_finance_report)
+
     def get_and_validate_month_input(self):
         """Prompts the user to enter a month name and validates the input."""
-        # validate the user's choice:
         while True:
             # Ask User which month they want to see
             prompt_month = (
                 Fore.BLUE + "Please enter the month name (e.g., january):\n" +
                 Style.RESET_ALL
             )
-            user_month = input(prompt_month).lower()
+            # Remove trailing spaces and convert to lowercase
+            user_month = input(prompt_month).strip().lower()
 
             try:
                 datetime.strptime(user_month, "%B")
@@ -300,6 +305,18 @@ class FinanceManager:
                     Style.RESET_ALL
                 )
                 print(invalid_month_name)
+                
+
+    def get_and_validate_source_input(self):
+        """Prompts the user to enter a source name and validates the input."""
+        while True:
+            prompt_source = (
+                Fore.BLUE + "Please enter the income source (minimum 4 characters):\n" +
+                Style.RESET_ALL
+            )
+            # Remove trailing spaces and convert to lowercase
+            user_source = input(prompt_source).strip().lower()
+
 
     # CHECK IF MONTH SELECTED HAS DATA (for generate_monthly_finance_report)
     def month_has_data(self, worksheet_data, month):
