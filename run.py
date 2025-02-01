@@ -82,7 +82,7 @@ def show_application_instructions():
     print(instructions)
 
 
-def get_main_user_choice():
+def get_menu_user_choice():
     """Gets the user's choice from the menu options."""
     while True:
         user_prompt = (
@@ -201,7 +201,7 @@ def handle_user_option(option):
             Fore.BLUE + "What would you like to do next?" + Style.RESET_ALL
         )
         print(menu_prompt)
-        return get_main_user_choice()
+        return get_menu_user_choice()
 
     elif option == 5:
         exit_message = f"""
@@ -231,23 +231,26 @@ class FinanceManager:
         """Adds a new income record to the "income" worksheet."""
 
         income_message = f"""
-        {Fore.GREEN + Style.BRIGHT}Let's add a new income record!
+{Fore.GREEN + Style.BRIGHT}**** ADD A NEW INCOME RECORD FOR 2025 ****
         {Style.RESET_ALL}
-        You will be asked to provide the following details in order:
-        → Month (Ensure it is the complete month name, e.g., January)
-        → Source (Ensure it is at least 4 characters long, contains alphabetic characters, and is not purely numeric
-        → Amount in EUR (e.g., 500.00)   
+        Please provide the following details in order:
+
+        → {Fore.YELLOW}Month{Style.RESET_ALL}: The month the income was earned.
+         (Please provide the complete month name. E.g, January).
+
+        → {Fore.YELLOW}Source{Style.RESET_ALL}: The source of the income.
+         (Please ensure it is at least 4 characters long, includes valid words,
+         and isn't entirely numeric. E.g., Salary, Freelance, Etsy).
+
+        → {Fore.YELLOW}Amount{Style.RESET_ALL}: The amount earned in EUR.
+         (e.g., 1500.00).  
         """
         print(income_message)
 
         month = self.get_and_validate_month_input()
 
-        prompt_source = (
-            Fore.BLUE +
-            "Enter income source:\n" +
-            Style.RESET_ALL
-        )
-        source = input(prompt_source)
+        source = self.get_and_validate_source_input()
+
         while True:
             try:
                 prompt_amount = (
@@ -274,7 +277,7 @@ class FinanceManager:
                     "\nWhat would you like to do next?" +
                     Style.RESET_ALL
                 )
-                return get_main_user_choice()
+                return get_menu_user_choice()
 
             except ValueError as error:
                 print(
@@ -302,11 +305,8 @@ class FinanceManager:
 
             # If choice is invalid: ValueError
             except ValueError as error:
-                invalid_month_name = (
-                    Fore.LIGHTRED_EX + "Invalid month name!" +
-                    Style.RESET_ALL
-                )
-                print(invalid_month_name)
+                print(Fore.LIGHTRED_EX + "Invalid month name!" +
+                    Style.RESET_ALL)
                 
 
     def get_and_validate_source_input(self):
@@ -317,10 +317,27 @@ class FinanceManager:
                 Style.RESET_ALL
             )
             # Remove trailing spaces and convert to lowercase
-            c = input(prompt_source).strip().lower()
+            user_source = input(prompt_source).strip().lower()
+
+            # at least 4 characters long, contains alphabetic characters, and is not purely numeric
+            amount = float(input(prompt_amount))
+
+    def get_and_validate_amount_input(self):
+        """Prompts the user to enter a  amount in EUR and validates the input."""
+        while True:
+            prompt_amount= (
+                Fore.BLUE + "Please enter the amount (EUR):\n" +
+                Style.RESET_ALL
+            )   
+            # Remove trailing spaces and convert to lowercase
+            user_amount = input(prompt_source).strip()
 
             # at least 4 characters long, contains alphabetic characters, and is not purely numeric
             if len(user_source) >= 4 and re.search('[a-zA-Z]', user_source) and not user_source.isdigit():
+                    return user_source
+            else:
+                print(Fore.LIGHTRED_EX + "Invalid input: Ensure it is at least 4 characters long, contains alphabetic characters, and is not purely numeric." +
+                    Style.RESET_ALL)
 
 
     # CHECK IF MONTH SELECTED HAS DATA (for generate_monthly_finance_report)
@@ -473,7 +490,7 @@ class FinanceManager:
                     "\nWhat would you like to do next?" +
                     Style.RESET_ALL
                 )
-                return get_main_user_choice()
+                return get_menu_user_choice()
 
             else:
                 print(
@@ -485,7 +502,7 @@ class FinanceManager:
                     "\nWhat would you like to do next?" +
                     Style.RESET_ALL
                 )
-                return get_main_user_choice()
+                return get_menu_user_choice()
 
     # IF USER OPTION == 2  (Check my income and expense!)
     def display_worksheet(self, worksheet):
@@ -584,7 +601,7 @@ class FinanceManager:
                     "\nWhat would you like to do next?" +
                     Style.RESET_ALL
                 )
-                return get_main_user_choice()
+                return get_menu_user_choice()
 
             except ValueError as error:
                 print(
@@ -596,7 +613,7 @@ class FinanceManager:
 # CALL WELCOME AND USER CHOICE functions
 def main():
     welcome()
-    get_main_user_choice()
+    get_menu_user_choice()
 
 
 main()
