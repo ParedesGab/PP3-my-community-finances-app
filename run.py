@@ -35,7 +35,8 @@ def welcome():
 def show_application_instructions():
     """Displays instructions for how to use the application."""
     instructions = f"""
-    {Fore.GREEN + Style.BRIGHT}== APPLICATION INSTRUCTIONS == {Style.RESET_ALL}
+    {Fore.GREEN + Style.BRIGHT}==== APPLICATION INSTRUCTIONS ====
+    {Style.RESET_ALL}
 
     Welcome to My finances app! Here is how you can use your application:\n
 
@@ -86,7 +87,7 @@ def show_application_instructions():
     rim = f"{Fore.GREEN + Style.BRIGHT}======================{Style.RESET_ALL}"
     print(f"{rim}{rim}{rim}")
 
-    #press enter to continue or 5 to exit
+    #press enter to return to the menu or 5 to exit
 
 
 def get_menu_user_choice():
@@ -219,7 +220,7 @@ class FinanceManager:
         """Adds a new income record to the "income" worksheet."""
 
         income_message = f"""
-{Fore.GREEN + Style.BRIGHT}**** ADD A NEW INCOME RECORD FOR 2025 ****
+{Fore.GREEN + Style.BRIGHT}==== ADD A NEW INCOME RECORD FOR 2025 ====
         {Style.RESET_ALL}
         Please provide the following details in order:
 
@@ -310,6 +311,28 @@ class FinanceManager:
                     f"Invalid input: Please enter a valid amount.\n" +
                     Style.RESET_ALL
                 )
+
+    def add_new_expense_to_expense_worksheet(self):
+        category = input(Fore.BLUE + "Enter expense category: " + Style.RESET_ALL)
+        description = input(Fore.BLUE + "Enter expense description: " + Style.RESET_ALL)
+            
+        while True:
+            try:
+                amount = float(input(Fore.BLUE + "Enter expense amount: " + Style.RESET_ALL))
+                break
+            except ValueError as error:
+                    print(Fore.LIGHTRED_EX + f"Invalid input: {error}. Please enter a valid amount:" + Style.RESET_ALL)
+
+            new_expense_row = [month, date, category, description, amount]
+            self.expenses_worksheet.append_row(new_expense_row)
+
+            print(f"\n{Fore.GREEN + Style.BRIGHT}New expense for {month} on {date} added successfully!{Style.RESET_ALL}")
+            self.display_worksheet("expenses")  # Display updated expenses after adding
+
+            print(Fore.GREEN + Style.BRIGHT + "\n****************************************************" + Style.RESET_ALL)
+            print(Fore.BLUE + "\nWhat would like to do next?" + Style.RESET_ALL)
+            return get_main_user_choice()
+                
 
     # CHECK IF MONTH SELECTED HAS DATA (for generate_monthly_finance_report)
     def month_has_data(self, worksheet_data, month):
