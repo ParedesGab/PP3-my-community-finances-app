@@ -114,7 +114,7 @@ def get_menu_user_choice():
             if not user_input:
                 raise ValueError(
                     Fore.LIGHTRED_EX +
-                    "Empty input: Please enter a number between 0 and 5 "
+                    "Empty input:  enter a number between 0 and 5 "
                     "without spaces or special characters.\n" +
                     Style.RESET_ALL
                 )
@@ -122,7 +122,7 @@ def get_menu_user_choice():
             if not is_valid_number(user_input):
                 raise ValueError(
                     Fore.LIGHTRED_EX +
-                    "Invalid input: Please enter a number between 0 and 5 "
+                    "Invalid input:  enter a number between 0 and 5 "
                     "without spaces or special characters.\n" +
                     Style.RESET_ALL
                 )
@@ -144,7 +144,7 @@ def validate_user_choice(user_choice):
     if not 0 <= user_choice <= 5:
         raise ValueError(
                     Fore.LIGHTRED_EX +
-                    "Invalid input: Please enter a number between 0 and 5 "
+                    "Invalid input:  enter a number between 0 and 5 "
                     "without spaces or special characters.\n" +
                     Style.RESET_ALL
                 )
@@ -160,24 +160,21 @@ def is_valid_number(input_value):
 def handle_user_option(option):
     """Handles user option."""
 
+    finance_manager = FinanceManager()
+
     if option == 0:
         show_application_instructions()
 
-    if option == 1:
-        finance_manager = FinanceManager()
+    elif option == 1:
         finance_manager.add_new_income_to_income_worksheet()
 
     elif option == 2:
-        finance_manager = FinanceManager()
         finance_manager.add_new_expense_to_expense_worksheet()
 
     elif option == 3:
-        finance_manager = FinanceManager()
         return finance_manager.generate_monthly_finance_report()
 
     elif option == 4:
-        finance_manager = FinanceManager()
-
         income_header = Fore.BLUE + "\n**Income Data**" + Style.RESET_ALL
         print(income_header)
         finance_manager.display_worksheet("income")
@@ -187,7 +184,7 @@ def handle_user_option(option):
 
         finance_manager.display_worksheet("expenses")
 
-        print(Fore.GREEN + Style.BRIGHT + "\n**************" + Style.RESET_ALL)
+        print(Fore.GREEN + Style.BRIGHT + "\n***" + Style.RESET_ALL)
         menu_prompt = (
             Fore.BLUE + "What would you like to do next?" + Style.RESET_ALL
         )
@@ -220,19 +217,19 @@ class FinanceManager:
         """Adds a new income record to the "income" worksheet."""
 
         income_message = f"""
-{Fore.GREEN + Style.BRIGHT}==== ADD A NEW INCOME RECORD FOR 2025 ====
+        {Fore.GREEN + Style.BRIGHT}==== ADD A NEW INCOME RECORD FOR 2025 ====
         {Style.RESET_ALL}
-        Please provide the following details in order:
+         Please provide the following details in order:
 
         → {Fore.YELLOW}Month{Style.RESET_ALL}: The month the income was earned.
-         (Please provide the complete month name. E.g, January).
+          (Enter complete month name. E.g, January).
 
         → {Fore.YELLOW}Source{Style.RESET_ALL}: The source of the income.
-         (Please ensure it is at least 4 characters long, includes valid words,
-         and isn't entirely numeric. E.g., Salary, Freelance, Etsy).
+          (Ensure it is at least 4 characters long, includes valid words,
+          and isn't entirely numeric. E.g., Salary, Freelance, Etsy).
 
         → {Fore.YELLOW}Amount{Style.RESET_ALL}: The amount earned in EUR.
-         (Positive or negative numbers allowed. E.g., 10.00, +10.00, -10.00).
+          (E.g., 1500.00).
         """
         print(income_message)
 
@@ -244,12 +241,15 @@ class FinanceManager:
 
         self.income_worksheet.append_row(new_income_row)
 
-        print(
-            f"\n{Fore.GREEN + Style.BRIGHT}"
-            f"New income for {month} from {source} (EUR {amount:.2f}) "
-            f"added successfully!{Style.RESET_ALL}"
+        print("\nStoring your new income entry ...")
+
+        print(f"""
+        {Fore.GREEN + Style.BRIGHT}
+        New income for {month}, 2025 from source: {source} (EUR {amount:.2f})
+        stored successfully!
+        {Style.RESET_ALL}
+        """
         )
-        self.display_worksheet("income")
 
         print(Fore.GREEN + Style.BRIGHT + "\n*****" + Style.RESET_ALL)
         print(
@@ -258,13 +258,55 @@ class FinanceManager:
             Style.RESET_ALL
         )
         return get_menu_user_choice()
+    
+    def add_new_expense_to_expense_worksheet(self):
+        """Adds a new expense record to the "expense" worksheet."""
+
+        expense_message = f"""
+    	{Fore.GREEN + Style.BRIGHT}==== ADD A NEW EXPENSE RECORD FOR 2025 ====
+        {Style.RESET_ALL}
+         Please provide the following details in order:
+
+        → {Fore.YELLOW}Month{Style.RESET_ALL}: The month the income was earned.
+          (Enter the complete month name. E.g, January).
+        → {Fore.YELLOW}Category{Style.RESET_ALL}: The source of the income.
+          (Ensure it is at least 4 characters long, includes valid words,
+          and isn't entirely numeric. E.g., Salary, Freelance).
+        → {Fore.YELLOW}Description{Style.RESET_ALL}: A expense description.
+          (Ensure it is at least 4 characters long, includes valid words,
+          and isn't entirely numeric. E.g., Weekly groceries).
+        → {Fore.YELLOW}Amount{Style.RESET_ALL}: The amount earned in EUR.
+          (E.g., 1500.00).
+        """
+        print(expense_message)
+
+        month = self.get_and_validate_month_input()
+        category = self.get_and_validate_category_input()
+        description = self.get_and_validate_description_input()
+        amount = self.get_and_validate_amount_input()
+            
+        new_expense_row = [month, category, description, amount]
+        self.expenses_worksheet.append_row(new_expense_row)
+
+        print("\nStoring your new expense entry ...")
+
+        print(f"""
+        {Fore.GREEN + Style.BRIGHT}
+        New expense for {month}, 2025 with category{category}
+        and description: {description}, added successfully!
+        {Style.RESET_ALL}
+        """)
+
+        print(Fore.GREEN + Style.BRIGHT + "\n***" + Style.RESET_ALL)
+        print(Fore.BLUE + "\nWhat would like to do next?" + Style.RESET_ALL)
+        return get_menu_user_choice()
 
     def get_and_validate_month_input(self):
         """Prompts the user to enter a month name and validates the input."""
         while True:
 
             prompt_month = (
-                Fore.BLUE + "Please enter the month name (e.g., january):\n" +
+                Fore.BLUE + "Enter the month name (e.g., january):\n" +
                 Style.RESET_ALL
             )
 
@@ -276,30 +318,31 @@ class FinanceManager:
                 return month
 
             except ValueError as error:
-                print(Fore.LIGHTRED_EX + "Invalid input: Please enter a month name." +
+                print(Fore.LIGHTRED_EX + "Invalid input: Enter a month name." +
                     Style.RESET_ALL)              
 
     def get_and_validate_source_input(self):
         """Prompts the user to enter a source name and validates the input."""
-        while True:
-            prompt_source = (
-                Fore.BLUE + "Please enter the income source (minimum 4 characters):\n" +
-                Style.RESET_ALL
-            )
+        #while True:
+        prompt_source = (
+            Fore.BLUE + "Enter the income source (minimum 4 characters):\n" +
+            Style.RESET_ALL
+        )
+        return self.get_and_validate_input(prompt_source)
 
-            user_source = input(prompt_source).strip().lower()
+            #user_source = input(prompt_source).strip().lower()
 
-            if len(user_source) >= 4 and re.search('[a-zA-Z]', user_source) and not user_source.isdigit():
-                    return user_source
-            else:
-                print(Fore.LIGHTRED_EX + "Invalid input: Ensure it is at least 4 characters long, contains alphabetic characters, and is not purely numeric." +
-                    Style.RESET_ALL)
+            # if len(user_source) >= 4 and re.search('[a-zA-Z]', user_source) and not user_source.isdigit():
+            #         return user_source
+            # else:
+            #     print(Fore.LIGHTRED_EX + "Invalid input: Ensure it is at least 4 characters long, contains alphabetic characters, and is not purely numeric." +
+            #         Style.RESET_ALL)
 
     def get_and_validate_amount_input(self):
         """Prompts the user to enter a  amount in EUR and validates the input."""
         while True:
             prompt_amount= (
-                Fore.BLUE + "Please enter the amount (EUR):\n" +
+                Fore.BLUE + "Enter the amount (EUR):\n" +
                 Style.RESET_ALL
             )   
             try:
@@ -308,31 +351,77 @@ class FinanceManager:
             except ValueError as error:
                 print(
                     Fore.LIGHTRED_EX +
-                    f"Invalid input: Please enter a valid amount.\n" +
+                    f"Invalid input: Enter a valid amount.\n" +
                     Style.RESET_ALL
                 )
+    def get_and_validate_category_input(self):
+        """Prompts the user to enter a category name and validates the input."""
+        #while True:
+        prompt_category = (
+            Fore.BLUE + "Enter the income source (minimum 4 characters):\n" +
+            Style.RESET_ALL
+        )
+        return self.get_and_validate_input(prompt_category)
 
-    def add_new_expense_to_expense_worksheet(self):
-        category = input(Fore.BLUE + "Enter expense category: " + Style.RESET_ALL)
-        description = input(Fore.BLUE + "Enter expense description: " + Style.RESET_ALL)
-            
+            # user_source = input(prompt_source).strip().lower()
+
+            # if len(user_source) >= 4 and re.search('[a-zA-Z]', user_source) and not user_source.isdigit():
+            #         return user_source
+            # else:
+            #     print(Fore.LIGHTRED_EX + "Invalid input: Ensure it is at least 4 characters long, contains alphabetic characters, and is not purely numeric." +
+            #         Style.RESET_ALL)
+
+    def get_and_validate_description_input(self):
+        """Prompts the user to enter a description name and validates the input."""
+        #while True:
+        prompt_description = (
+            Fore.BLUE + "Enter the description (minimum 4 characters):\n" +
+            Style.RESET_ALL
+        )
+        return self.get_and_validate_input(prompt_description)
+
+            # user_source = input(prompt_source).strip().lower()
+
+            # if len(user_source) >= 4 and re.search('[a-zA-Z]', user_source) and not user_source.isdigit():
+            #         return user_source
+            # else:
+            #     print(Fore.LIGHTRED_EX + "Invalid input: Ensure it is at least 4 characters long, contains alphabetic characters, and is not purely numeric." +
+            #         Style.RESET_ALL)
+    
+    def get_and_validate_input(self, prompt, min_length=4, require_alpha=True):
+        """
+        Prompts the user for input and validates it based on specified criteria.
+        """
         while True:
-            try:
-                amount = float(input(Fore.BLUE + "Enter expense amount: " + Style.RESET_ALL))
-                break
-            except ValueError as error:
-                    print(Fore.LIGHTRED_EX + f"Invalid input: {error}. Please enter a valid amount:" + Style.RESET_ALL)
+            user_input = input(Fore.BLUE + prompt + Style.RESET_ALL).strip()
 
-            new_expense_row = [month, date, category, description, amount]
-            self.expenses_worksheet.append_row(new_expense_row)
+            if len(user_input) < min_length:
+                print(f"""
+                    {Fore.LIGHTRED_EX}
+                    Invalid input: Must be at least {min_length} characters long, 
+                    contain alphabetic characters, and not be purely numeric
+                    {Style.RESET_ALL}
+                """)
+                continue
 
-            print(f"\n{Fore.GREEN + Style.BRIGHT}New expense for {month} on {date} added successfully!{Style.RESET_ALL}")
-            self.display_worksheet("expenses")  # Display updated expenses after adding
+            if require_alpha and not re.search('[a-zA-Z]', user_input):
+                print(f"""
+                    {Fore.LIGHTRED_EX}
+                    Invalid input: Must be at least {min_length} characters long, 
+                    contain alphabetic characters, and not be entirely numeric.
+                    {Style.RESET_ALL}
+                """)
+                continue
 
-            print(Fore.GREEN + Style.BRIGHT + "\n****************************************************" + Style.RESET_ALL)
-            print(Fore.BLUE + "\nWhat would like to do next?" + Style.RESET_ALL)
-            return get_main_user_choice()
-                
+            if user_input.isdigit():
+                print(
+                    Fore.LIGHTRED_EX +
+                    "Invalid input: Cannot be entirely numeric." +
+                    Style.RESET_ALL
+                )
+                continue
+
+            return user_input
 
     # CHECK IF MONTH SELECTED HAS DATA (for generate_monthly_finance_report)
     def month_has_data(self, worksheet_data, month):
