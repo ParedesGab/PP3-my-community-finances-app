@@ -21,18 +21,15 @@ def welcome():
     """Displays a welcome message with color."""
     init()
     rim = f"{Fore.GREEN + Style.BRIGHT}======================{Style.RESET_ALL}"
-    welcome_message = f"""
-    \n    {rim} WELCOME TO MyFinances APP! {rim}\n
+    print(f"""
+    {rim} WELCOME TO MyFinances APP! {rim}
+    
+    This expense tracker will help you monitor your 2025 income and expenses!
+    Are you ready to understand your spending habits?\n
+    Let's go!🚀 
 
-        This expense tracker will help you monitor your 2025 
-        income and expenses!
-
-        Are you ready to understand your spending habits?\n
-        Let's go! 🚀\n
     {rim}{rim}{rim}
-
-    """
-    print(welcome_message)
+    """)
 
 
 def show_application_instructions():
@@ -89,43 +86,25 @@ def show_application_instructions():
     rim = f"{Fore.GREEN + Style.BRIGHT}======================{Style.RESET_ALL}"
     print(f"{rim}{rim}{rim}")
 
-    #Go Back to the Menu
-    #Exit program?
+    #press enter to continue or 5 to exit
 
 
 def get_menu_user_choice():
     """Gets the user's choice from the menu options."""
     while True:
-        user_prompt = (
-            Fore.BLUE + Style.BRIGHT +
-            "\nPlease enter a number between 0 and 5 to select an option:" +
-            Style.RESET_ALL
-        )
-        print(user_prompt)
         print(f"""
-    {Fore.GREEN + Style.BRIGHT}0. Application Instructions.{Style.RESET_ALL}
-           Learn how to use the MyFinances app effectively.
-
-    {Fore.GREEN + Style.BRIGHT}1. Add New Income.{Style.RESET_ALL}
-           Record your income details (Month, Source, and Amount).
-
-    {Fore.GREEN + Style.BRIGHT}2. Add New Expense.{Style.RESET_ALL}
-           Record your expense details (Month, Category, Description, Amount).
-
-    {Fore.GREEN + Style.BRIGHT}3. Check Monthly Finance Report{Style.RESET_ALL}
-          View a summary of your income and expenses for a selected month.
-
-    {Fore.GREEN + Style.BRIGHT}4. Display Income and Expenses{Style.RESET_ALL}
-           View all your recorded financial data.
-
-    {Fore.GREEN + Style.BRIGHT}5. Exit Program.{Style.RESET_ALL}
-           Close the MyFinances application.lose the MyFinances application.\n
+    Press 0 to check the application instructions.
+    Press 1 to add a new income entry (Month, Source, and Amount).
+    Press 2 to add a new expense entry (Month, Category, Description, Amount).
+    Press 3 to check your monthly finance report!
+    Press 4 to view all your Income and Expenses!
+    Press 5 to exit the program.
         """)
 
         try:
             choice_message = (
                 Fore.BLUE + Style.BRIGHT +
-                "Enter your option (0-5):\n" +
+                "Enter your option (0-5) and press enter:\n" +
                 Style.RESET_ALL
             )
             user_input = input(choice_message)
