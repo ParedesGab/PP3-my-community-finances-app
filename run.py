@@ -20,16 +20,17 @@ SHEET = GSPREAD_CLIENT.open('my_finances')
 def welcome():
     """Displays a welcome message with color."""
     init()
-    border = f"{Fore.GREEN + Style.BRIGHT}======================={Style.RESET_ALL}"
+    rim = f"{Fore.GREEN + Style.BRIGHT}======================{Style.RESET_ALL}"
     welcome_message = f"""
-    \n{border} WELCOME TO MyFinances APP! {border}\n
+    \n    {rim} WELCOME TO MyFinances APP! {rim}\n
 
-    This expense tracker will help you monitor
-    your 2025 income and expenses!
+        This expense tracker will help you monitor your 2025 
+        income and expenses!
 
-    Are you ready to understand your spending habits?\n
-    Let's go! 🚀\n
-   {border}{border}{border}
+        Are you ready to understand your spending habits?\n
+        Let's go! 🚀\n
+    {rim}{rim}{rim}
+
     """
     print(welcome_message)
 
@@ -37,33 +38,36 @@ def welcome():
 def show_application_instructions():
     """Displays instructions for how to use the application."""
     instructions = f"""
-    {Fore.GREEN + Style.BRIGHT}APPLICATION INSTRUCTIONS{Style.RESET_ALL}
+    {Fore.GREEN + Style.BRIGHT}== APPLICATION INSTRUCTIONS == {Style.RESET_ALL}
 
     Welcome to My finances app! Here is how you can use your application:\n
 
     {Fore.BLUE} 1. Add New Income:{Style.RESET_ALL}
+
        - You can add income records to track your earnings.
        - Each income entry consists of:
-         → {Fore.YELLOW}Month{Style.RESET_ALL}: The month the income was earned
-         (e.g., January).
-         → {Fore.YELLOW}Source{Style.RESET_ALL}: The source of the income
-         (e.g., Salary, Freelance).
-         → {Fore.YELLOW}Amount{Style.RESET_ALL}: The amount earned in EUR
-         (e.g., 1500.00).
+         → {Fore.YELLOW}Month{Style.RESET_ALL}: The month the income was earned.
+            E.g., January, February.
+         → {Fore.YELLOW}Source{Style.RESET_ALL}: The source of the income.
+            E.g., Salary, Freelance.
+         → {Fore.YELLOW}Amount{Style.RESET_ALL}: The amount earned in EUR.
+            E.g., 10.00.
 
     {Fore.BLUE} 2. Add New Expense:{Style.RESET_ALL}
+
        - You can record your expenses to monitor your spending.
-       - Each expense entry includes:
-         → {Fore.YELLOW}Month{Style.RESET_ALL}: The month the expense occurred
-         (e.g., February).
-         → {Fore.YELLOW}Category{Style.RESET_ALL}: The category of the expense
-         (e.g., Rent, Groceries).
-         → {Fore.YELLOW}Description{Style.RESET_ALL}: Expense description
-         (e.g., "Monthly Rent").
-         → {Fore.YELLOW}Amount{Style.RESET_ALL}: The amount spent in EUR
-         (e.g., 750.00).
+       - Each expense entry consists of:
+         → {Fore.YELLOW}Month{Style.RESET_ALL}: The month the expense occurred.
+            E.g., January, February.
+         → {Fore.YELLOW}Category{Style.RESET_ALL}: The category of the expense.
+            E.g., Rent, Groceries.
+         → {Fore.YELLOW}Description{Style.RESET_ALL}: Expense description.
+            E.g., Monthly Rent.
+         → {Fore.YELLOW}Amount{Style.RESET_ALL}: The amount spent in EUR.
+            E.g., 10.00.
 
     {Fore.BLUE} 3. Generate Monthly Finance Report:{Style.RESET_ALL}
+
        - Select a month to generate a detailed income and expenses report.
        - The report will display:
          → Total Income for the selected month.
@@ -73,13 +77,20 @@ def show_application_instructions():
          → Your highest expense category.
 
     {Fore.BLUE} 4. Display All Income and Expenses:{Style.RESET_ALL}
+
        - View all your records from the "income" and "expenses" worksheets.
        - This option shows all your data in a table format.
 
     {Fore.BLUE} 5. Exit Program:{Style.RESET_ALL}
-       - Close the application. Don't worry; all your data is stored!
+
+       - Close the application. Don't worry; all your data is stored! ✨
     """
     print(instructions)
+    rim = f"{Fore.GREEN + Style.BRIGHT}======================{Style.RESET_ALL}"
+    print(f"{rim}{rim}{rim}")
+
+    #Go Back to the Menu
+    #Exit program?
 
 
 def get_menu_user_choice():
@@ -102,7 +113,7 @@ def get_menu_user_choice():
            Record your expense details (Month, Category, Description, Amount).
 
     {Fore.GREEN + Style.BRIGHT}3. Check Monthly Finance Report{Style.RESET_ALL}
-    View a summary of your income and expenses for a selected month.
+          View a summary of your income and expenses for a selected month.
 
     {Fore.GREEN + Style.BRIGHT}4. Display Income and Expenses{Style.RESET_ALL}
            View all your recorded financial data.
@@ -215,7 +226,6 @@ def handle_user_option(option):
 
 class FinanceManager:
 
-    # Make the worksheet accessible for the class methods
     def __init__(self):
         self.income_worksheet = SHEET.worksheet("income")
         self.expenses_worksheet = SHEET.worksheet("expenses")
@@ -226,7 +236,6 @@ class FinanceManager:
         all_values = worksheet.get_all_values()
         return all_values
 
-# IF USER OPTION == 1 (Add new expenses)
     def add_new_income_to_income_worksheet(self):
         """Adds a new income record to the "income" worksheet."""
 
@@ -243,59 +252,42 @@ class FinanceManager:
          and isn't entirely numeric. E.g., Salary, Freelance, Etsy).
 
         → {Fore.YELLOW}Amount{Style.RESET_ALL}: The amount earned in EUR.
-         (e.g., 1500.00).  
+         (Positive or negative numbers allowed. E.g., 10.00, +10.00, -10.00).
         """
         print(income_message)
 
         month = self.get_and_validate_month_input()
-
         source = self.get_and_validate_source_input()
+        amount = self.get_and_validate_amount_input()
 
-        while True:
-            try:
-                prompt_amount = (
-                    Fore.BLUE +
-                    "Enter income amount:\n" +
-                    Style.RESET_ALL
-                )
-                amount = float(input(prompt_amount))
+        new_income_row = [month, source, amount]
 
-                new_income_row = [month, source, amount]
+        self.income_worksheet.append_row(new_income_row)
 
-                self.income_worksheet.append_row(new_income_row)
+        print(
+            f"\n{Fore.GREEN + Style.BRIGHT}"
+            f"New income for {month} from {source} (EUR {amount:.2f}) "
+            f"added successfully!{Style.RESET_ALL}"
+        )
+        self.display_worksheet("income")
 
-                print(
-                    f"\n{Fore.GREEN + Style.BRIGHT}"
-                    f"New income for {month} from {source} (EUR {amount:.2f}) "
-                    f"added successfully!{Style.RESET_ALL}"
-                )
-                self.display_worksheet("income")
-
-                print(Fore.GREEN + Style.BRIGHT + "\n*****" + Style.RESET_ALL)
-                print(
-                    Fore.BLUE +
-                    "\nWhat would you like to do next?" +
-                    Style.RESET_ALL
-                )
-                return get_menu_user_choice()
-
-            except ValueError as error:
-                print(
-                    Fore.LIGHTRED_EX +
-                    f"Invalid input: {error}. Please enter a valid amount.\n" +
-                    Style.RESET_ALL
-                )
-
+        print(Fore.GREEN + Style.BRIGHT + "\n*****" + Style.RESET_ALL)
+        print(
+            Fore.BLUE +
+            "\nWhat would you like to do next?" +
+            Style.RESET_ALL
+        )
+        return get_menu_user_choice()
 
     def get_and_validate_month_input(self):
         """Prompts the user to enter a month name and validates the input."""
         while True:
-            # Ask User which month they want to see
+
             prompt_month = (
                 Fore.BLUE + "Please enter the month name (e.g., january):\n" +
                 Style.RESET_ALL
             )
-            # Remove trailing spaces and convert to lowercase
+
             user_month = input(prompt_month).strip().lower()
 
             try:
@@ -303,11 +295,9 @@ class FinanceManager:
                 month = user_month.title()
                 return month
 
-            # If choice is invalid: ValueError
             except ValueError as error:
-                print(Fore.LIGHTRED_EX + "Invalid month name!" +
-                    Style.RESET_ALL)
-                
+                print(Fore.LIGHTRED_EX + "Invalid input: Please enter a month name." +
+                    Style.RESET_ALL)              
 
     def get_and_validate_source_input(self):
         """Prompts the user to enter a source name and validates the input."""
@@ -316,11 +306,14 @@ class FinanceManager:
                 Fore.BLUE + "Please enter the income source (minimum 4 characters):\n" +
                 Style.RESET_ALL
             )
-            # Remove trailing spaces and convert to lowercase
+
             user_source = input(prompt_source).strip().lower()
 
-            # at least 4 characters long, contains alphabetic characters, and is not purely numeric
-            amount = float(input(prompt_amount))
+            if len(user_source) >= 4 and re.search('[a-zA-Z]', user_source) and not user_source.isdigit():
+                    return user_source
+            else:
+                print(Fore.LIGHTRED_EX + "Invalid input: Ensure it is at least 4 characters long, contains alphabetic characters, and is not purely numeric." +
+                    Style.RESET_ALL)
 
     def get_and_validate_amount_input(self):
         """Prompts the user to enter a  amount in EUR and validates the input."""
@@ -329,16 +322,15 @@ class FinanceManager:
                 Fore.BLUE + "Please enter the amount (EUR):\n" +
                 Style.RESET_ALL
             )   
-            # Remove trailing spaces and convert to lowercase
-            user_amount = input(prompt_source).strip()
-
-            # at least 4 characters long, contains alphabetic characters, and is not purely numeric
-            if len(user_source) >= 4 and re.search('[a-zA-Z]', user_source) and not user_source.isdigit():
-                    return user_source
-            else:
-                print(Fore.LIGHTRED_EX + "Invalid input: Ensure it is at least 4 characters long, contains alphabetic characters, and is not purely numeric." +
-                    Style.RESET_ALL)
-
+            try:
+                user_amount = float(input(prompt_amount).strip())
+                return user_amount
+            except ValueError as error:
+                print(
+                    Fore.LIGHTRED_EX +
+                    f"Invalid input: Please enter a valid amount.\n" +
+                    Style.RESET_ALL
+                )
 
     # CHECK IF MONTH SELECTED HAS DATA (for generate_monthly_finance_report)
     def month_has_data(self, worksheet_data, month):
@@ -529,86 +521,6 @@ class FinanceManager:
         for row in data_rows:
             print(" | ".join(row))
             print("-" * (len(row) * 9))
-
-    # IF USER OPTION == 4 (Add new expenses)
-    def add_new_expense_to_expense_worksheet(self):
-        """
-        Adds a new expense record to the "expenses" worksheet.
-        Ensures consistency between month and date.
-        """
-        while True:
-            try:
-                month = self.get_and_validate_month_input()
-
-                # Date
-                prompt_date = (
-                    Fore.BLUE +
-                    "Enter expense date (YYYY-MM-DD):\n" +
-                    Style.RESET_ALL
-                    )
-                date = input(prompt_date)
-                # Validate date format and consistency with month
-                date_obj = datetime.strptime(date, "%Y-%m-%d")
-                if date_obj.month != datetime.strptime(month, "%B").month:
-                    raise ValueError(f"'{date}' does not match the '{month}'")
-
-                # Category
-                prompt_category = (
-                    Fore.BLUE +
-                    "Enter expense category:\n" +
-                    Style.RESET_ALL
-                    )
-                category = input(prompt_category)
-
-                # Description
-                prompt_description = (
-                    Fore.BLUE +
-                    "Enter expense description:\n" +
-                    Style.RESET_ALL
-                )
-                description = input(prompt_description)
-
-                # Amount
-                while True:
-                    try:
-                        prompt_amount = (
-                            Fore.BLUE +
-                            "Enter expense amount:\n" +
-                            Style.RESET_ALL
-                        )
-                        amount = float(input(prompt_amount))
-                        break
-                    except ValueError as error:
-                        print(
-                            Fore.LIGHTRED_EX +
-                            f"Error: {error}. Please enter a valid amount:" +
-                            Style.RESET_ALL)
-
-                new_expense_row = [month, date, category, description, amount]
-                self.expenses_worksheet.append_row(new_expense_row)
-
-                print(
-                    f"\n{Fore.GREEN + Style.BRIGHT}"
-                    f"New expense for {month} on {date} added successfully!"
-                    f"{Style.RESET_ALL}"
-                )
-                self.display_worksheet("expenses")
-
-                print(Fore.GREEN + Style.BRIGHT + "\n*****" + Style.RESET_ALL)
-
-                print(
-                    Fore.BLUE +
-                    "\nWhat would you like to do next?" +
-                    Style.RESET_ALL
-                )
-                return get_menu_user_choice()
-
-            except ValueError as error:
-                print(
-                    Fore.LIGHTRED_EX +
-                    f"Error: {error}. Please enter a valid month/date." +
-                    Style.RESET_ALL)
-
 
 # CALL WELCOME AND USER CHOICE functions
 def main():
