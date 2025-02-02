@@ -23,10 +23,10 @@ def welcome():
     rim = f"{Fore.GREEN + Style.BRIGHT}======================{Style.RESET_ALL}"
     print(f"""
     {rim} WELCOME TO MyFinances APP! {rim}
-    
+
     This expense tracker will help you monitor your 2025 income and expenses!
     Are you ready to understand your spending habits?\n
-    Let's go!🚀 
+    Let's go!🚀
 
     {rim}{rim}{rim}
     """)
@@ -44,7 +44,7 @@ def show_application_instructions():
 
        - You can add income records to track your earnings.
        - Each income entry consists of:
-         → {Fore.YELLOW}Month{Style.RESET_ALL}: The month the income was earned.
+         → {Fore.YELLOW}Month{Style.RESET_ALL}: Income month.
             E.g., January, February.
          → {Fore.YELLOW}Source{Style.RESET_ALL}: The source of the income.
             E.g., Salary, Freelance.
@@ -87,7 +87,7 @@ def show_application_instructions():
     rim = f"{Fore.GREEN + Style.BRIGHT}======================{Style.RESET_ALL}"
     print(f"{rim}{rim}{rim}")
 
-    #press enter to return to the menu or 5 to exit
+    # press enter to return to the menu or 5 to exit
 
 
 def get_menu_user_choice():
@@ -248,8 +248,7 @@ class FinanceManager:
         New income for {month}, 2025 from source: {source} (EUR {amount:.2f})
         stored successfully!
         {Style.RESET_ALL}
-        """
-        )
+        """)
 
         print(Fore.GREEN + Style.BRIGHT + "\n*****" + Style.RESET_ALL)
         print(
@@ -258,12 +257,13 @@ class FinanceManager:
             Style.RESET_ALL
         )
         return get_menu_user_choice()
-    
+
     def add_new_expense_to_expense_worksheet(self):
         """Adds a new expense record to the "expense" worksheet."""
 
-        expense_message = f"""
-    	{Fore.GREEN + Style.BRIGHT}==== ADD A NEW EXPENSE RECORD FOR 2025 ====
+        print(f"""
+        {Fore.GREEN + Style.BRIGHT}
+        ==== ADD A NEW EXPENSE RECORD FOR 2025 ====
         {Style.RESET_ALL}
          Please provide the following details in order:
 
@@ -277,14 +277,13 @@ class FinanceManager:
           and isn't entirely numeric. E.g., Weekly groceries).
         → {Fore.YELLOW}Amount{Style.RESET_ALL}: The amount earned in EUR.
           (E.g., 1500.00).
-        """
-        print(expense_message)
+        """)
 
         month = self.get_and_validate_month_input()
         category = self.get_and_validate_category_input()
         description = self.get_and_validate_description_input()
         amount = self.get_and_validate_amount_input()
-            
+
         new_expense_row = [month, category, description, amount]
         self.expenses_worksheet.append_row(new_expense_row)
 
@@ -318,79 +317,14 @@ class FinanceManager:
                 return month
 
             except ValueError as error:
-                print(Fore.LIGHTRED_EX + "Invalid input: Enter a month name." +
-                    Style.RESET_ALL)              
-
-    def get_and_validate_source_input(self):
-        """Prompts the user to enter a source name and validates the input."""
-        #while True:
-        prompt_source = (
-            Fore.BLUE + "Enter the income source (minimum 4 characters):\n" +
-            Style.RESET_ALL
-        )
-        return self.get_and_validate_input(prompt_source)
-
-            #user_source = input(prompt_source).strip().lower()
-
-            # if len(user_source) >= 4 and re.search('[a-zA-Z]', user_source) and not user_source.isdigit():
-            #         return user_source
-            # else:
-            #     print(Fore.LIGHTRED_EX + "Invalid input: Ensure it is at least 4 characters long, contains alphabetic characters, and is not purely numeric." +
-            #         Style.RESET_ALL)
-
-    def get_and_validate_amount_input(self):
-        """Prompts the user to enter a  amount in EUR and validates the input."""
-        while True:
-            prompt_amount= (
-                Fore.BLUE + "Enter the amount (EUR):\n" +
-                Style.RESET_ALL
-            )   
-            try:
-                user_amount = float(input(prompt_amount).strip())
-                return user_amount
-            except ValueError as error:
                 print(
                     Fore.LIGHTRED_EX +
-                    f"Invalid input: Enter a valid amount.\n" +
+                    "Invalid input: Enter a month name." +
                     Style.RESET_ALL
                 )
-    def get_and_validate_category_input(self):
-        """Prompts the user to enter a category name and validates the input."""
-        #while True:
-        prompt_category = (
-            Fore.BLUE + "Enter the income source (minimum 4 characters):\n" +
-            Style.RESET_ALL
-        )
-        return self.get_and_validate_input(prompt_category)
-
-            # user_source = input(prompt_source).strip().lower()
-
-            # if len(user_source) >= 4 and re.search('[a-zA-Z]', user_source) and not user_source.isdigit():
-            #         return user_source
-            # else:
-            #     print(Fore.LIGHTRED_EX + "Invalid input: Ensure it is at least 4 characters long, contains alphabetic characters, and is not purely numeric." +
-            #         Style.RESET_ALL)
-
-    def get_and_validate_description_input(self):
-        """Prompts the user to enter a description name and validates the input."""
-        #while True:
-        prompt_description = (
-            Fore.BLUE + "Enter the description (minimum 4 characters):\n" +
-            Style.RESET_ALL
-        )
-        return self.get_and_validate_input(prompt_description)
-
-            # user_source = input(prompt_source).strip().lower()
-
-            # if len(user_source) >= 4 and re.search('[a-zA-Z]', user_source) and not user_source.isdigit():
-            #         return user_source
-            # else:
-            #     print(Fore.LIGHTRED_EX + "Invalid input: Ensure it is at least 4 characters long, contains alphabetic characters, and is not purely numeric." +
-            #         Style.RESET_ALL)
-    
     def get_and_validate_input(self, prompt, min_length=4, require_alpha=True):
         """
-        Prompts the user for input and validates it based on specified criteria.
+        Prompts the user for input and validates it based on various criteria.
         """
         while True:
             user_input = input(Fore.BLUE + prompt + Style.RESET_ALL).strip()
@@ -398,7 +332,7 @@ class FinanceManager:
             if len(user_input) < min_length:
                 print(f"""
                     {Fore.LIGHTRED_EX}
-                    Invalid input: Must be at least {min_length} characters long, 
+                    Invalid input: Minimun {min_length} characters long,
                     contain alphabetic characters, and not be purely numeric
                     {Style.RESET_ALL}
                 """)
@@ -407,7 +341,7 @@ class FinanceManager:
             if require_alpha and not re.search('[a-zA-Z]', user_input):
                 print(f"""
                     {Fore.LIGHTRED_EX}
-                    Invalid input: Must be at least {min_length} characters long, 
+                    Invalid input: Minimun {min_length} characters long,
                     contain alphabetic characters, and not be entirely numeric.
                     {Style.RESET_ALL}
                 """)
@@ -422,6 +356,50 @@ class FinanceManager:
                 continue
 
             return user_input
+
+    def get_and_validate_source_input(self):
+        """
+        Ensures that source, description and category inputs meet minimum length
+        and alphabetic character requirements.
+        """
+        prompt_source = (
+            Fore.BLUE + "Enter the income source (minimum 4 characters):\n" +
+            Style.RESET_ALL
+        )
+        return self.get_and_validate_input(prompt_source)
+    
+    def get_and_validate_category_input(self):
+        """Prompts the user to enter a category name and validates the input."""
+        prompt_category = (
+            Fore.BLUE + "Enter the income source (minimum 4 characters):\n" +
+            Style.RESET_ALL
+        )
+        return self.get_and_validate_input(prompt_category)
+
+    def get_and_validate_description_input(self):
+        """Prompts the user to enter a description name and validates the input."""
+        prompt_description = (
+            Fore.BLUE + "Enter the description (minimum 4 characters):\n" +
+            Style.RESET_ALL
+        )
+        return self.get_and_validate_input(prompt_description)
+
+    def get_and_validate_amount_input(self):
+        """Prompts the user to enter an amount(EUR) and validates the input."""
+        while True:
+            prompt_amount = (
+                Fore.BLUE + "Enter the amount (EUR):\n" +
+                Style.RESET_ALL
+            )
+            try:
+                user_amount = float(input(prompt_amount).strip())
+                return user_amount
+            except ValueError as error:
+                print(
+                    Fore.LIGHTRED_EX +
+                    f"Invalid input: Enter a valid amount.\n" +
+                    Style.RESET_ALL
+                )
 
     # CHECK IF MONTH SELECTED HAS DATA (for generate_monthly_finance_report)
     def month_has_data(self, worksheet_data, month):
@@ -612,6 +590,7 @@ class FinanceManager:
         for row in data_rows:
             print(" | ".join(row))
             print("-" * (len(row) * 9))
+
 
 # CALL WELCOME AND USER CHOICE functions
 def main():
