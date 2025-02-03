@@ -134,16 +134,20 @@ def get_menu_user_choice():
         try:
             choice_message = (
                 Fore.BLUE + Style.BRIGHT +
-                "\nEnter your choice (0-5) and press enter:\n" +
+                "\nEnter your choice (0-4 or E) and press enter:\n" +
                 Style.RESET_ALL
             )
-            user_input = input(choice_message)
+            user_input = input(choice_message).strip().upper()
+
+            # If user presses E
+            if user_input == "E":
+                return exit_program()
 
         # Check for empty input
             if not user_input:
                 raise ValueError(
                     Fore.LIGHTRED_EX +
-                    "Empty input:  enter a number between 0 and 5 "
+                    "Empty input:  enter a number between 0 and 4 or E, "
                     "without spaces or special characters.\n" +
                     Style.RESET_ALL
                 )
@@ -151,7 +155,7 @@ def get_menu_user_choice():
             if not is_valid_number(user_input):
                 raise ValueError(
                     Fore.LIGHTRED_EX +
-                    "Invalid input:  enter a number between 0 and 5 "
+                    "Invalid input:  enter a number between 0 and 4 or E, "
                     "without spaces or special characters.\n" +
                     Style.RESET_ALL
                 )
@@ -160,30 +164,12 @@ def get_menu_user_choice():
             option = int(user_input)
 
         # Validate the option
-            validate_user_choice(option)
+            validate_user_numbers_choice(option)
         # Return the handle_user_option function
             return handle_user_option(option)
 
         except ValueError as error:
             print(error)
-
-
-def validate_user_choice(user_choice):
-    """Validates the user's choice."""
-    if not 0 <= user_choice <= 5:
-        raise ValueError(
-                    Fore.LIGHTRED_EX +
-                    "Invalid input:  enter a number between 0 and 5 "
-                    "without spaces or special characters.\n" +
-                    Style.RESET_ALL
-                )
-
-
-def is_valid_number(input_value):
-    """Checks if the input value is a valid number."""
-    if not input_value.isdigit() or input_value.startswith("+"):
-        return False
-    return True
 
 
 def handle_user_option(option):
@@ -213,8 +199,23 @@ def handle_user_option(option):
     elif option == 4:
         return finance_manager.generate_monthly_finance_report()
 
-    elif option == "E":
-        return exit_program()
+
+def validate_user_numbers_choice(user_input):
+    """Validates the user's choice."""
+    if not 0 <= user_input <= 4:
+        raise ValueError(
+                    Fore.LIGHTRED_EX +
+                    "Invalid input:  enter a number between 0 and 4 or E, "
+                    "without spaces or special characters.\n" +
+                    Style.RESET_ALL
+                )
+
+
+def is_valid_number(input_value):
+    """Checks if the input value is a valid number."""
+    if not input_value.isdigit() or input_value.startswith("+"):
+        return False
+    return True
 
 
 def exit_program():
@@ -627,7 +628,7 @@ class FinanceManager:
         expenses_by_category = self.calc_expenses_by_category(expenses_data, month)
 
         for category, amount in expenses_by_category.items():
-            print(f"→ {category}: EUR {amount:.2f}\n")
+            print(f"→ {category.upper()}: EUR {amount:.2f}\n")
 
         # Show max expense by category
         max_category, max_amount = self.max_expense_by_category(
@@ -685,14 +686,14 @@ class FinanceManager:
 
                 if cash_balance >= 0:
                     print(
-                        f"🎉🎉 Congratulations! Positive cash balance!:"
+                        f"🎉🎉 CONGRATULATIONS: Positive Cash Balance!:"
                         f"{cash_balance: .2f} EUR\n"
                         )
                 else:
                     print(
                         Fore.LIGHTRED_EX +
-                        f"🚨🚨 Attention! Negative cash balance!:"
-                        f"{cash_balance: .2f}EUR\n" +
+                        f"🚨🚨 ALERT: Negative Cash Balance!:"
+                        f"{cash_balance: .2f} EUR\n" +
                         Style.RESET_ALL
                     )
 
