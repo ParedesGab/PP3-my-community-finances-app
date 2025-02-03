@@ -341,8 +341,8 @@ class FinanceManager:
 
         print(f"""
         {Fore.GREEN + Style.BRIGHT}
-        New expense for {month}, 2025 with category{category}
-        and description: {description} ({formatted_amount}), added successfully!
+        New expense for {month}, 2025 with category: '{category}'
+        and description: '{description}' ({formatted_amount} EUR), added successfully!
         {Style.RESET_ALL}
         """)
 
@@ -496,6 +496,37 @@ class FinanceManager:
         formatted_amount = "{:,.2f}".format(amount).replace(",", "X").replace(".", ",").replace("X", ".")
 
         return formatted_amount # Always EUR and always after the amount
+
+    def display_worksheet(self, worksheet):
+        """Gets data from a given worksheet."""
+        print(
+            f"\n{Fore.GREEN + Style.BRIGHT}"
+            f"Getting Your {worksheet.capitalize()} data...\n"
+            f"{Style.RESET_ALL}"
+        )
+
+        all_worksheet_values = self.get_worksheet_data(worksheet)
+
+        if not all_worksheet_values:
+            print(Fore.LIGHTRED_EX +
+            "No data available in this worksheet." + 
+            Style.RESET_ALL)
+            return
+
+        # Get header row
+        header_row = all_worksheet_values[0]
+
+        # Get data rows
+        data_rows = all_worksheet_values[1:]
+
+        # Print header
+        print(" | ".join(header_row))
+        print("-" * (len(header_row) * 9))
+
+        # Display All income or expenses data
+        for row in data_rows:
+            print(" | ".join(row))
+            print("-" * (len(row) * 9))
 
     # CHECK IF MONTH SELECTED HAS DATA (for generate_monthly_finance_report)
     def month_has_data(self, worksheet_data, month):
@@ -652,33 +683,6 @@ class FinanceManager:
                     )
                 print(Fore.BLUE + "\nWhat would like to do next?" + Style.RESET_ALL)
                 return get_menu_user_choice()
-
-    # IF USER OPTION == 2  (Check my income and expense!)
-    def display_worksheet(self, worksheet):
-        """Gets data from a given worksheet."""
-        print(
-            f"\n{Fore.GREEN + Style.BRIGHT}"
-            f"Getting Your {worksheet.capitalize()} data...\n"
-            f"{Style.RESET_ALL}"
-        )
-
-        all_worksheet_values = self.get_worksheet_data(worksheet)
-
-        # Get header row
-        header_row = all_worksheet_values[0]
-
-        # Get data rows
-        data_rows = all_worksheet_values[1:]
-
-        # Print header
-        print(" | ".join(header_row))
-        print("-" * (len(header_row) * 9))
-
-        # Display All income or expenses data
-        for row in data_rows:
-            print(" | ".join(row))
-            print("-" * (len(row) * 9))
-
 
 # CALL WELCOME AND USER CHOICE functions
 def main():
