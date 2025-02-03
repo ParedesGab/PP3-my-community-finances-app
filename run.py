@@ -261,7 +261,7 @@ class FinanceManager:
 
         month = self.get_and_validate_month_input()
         source = self.get_and_validate_source_input()
-        amount = self.get_and_validate_amount_input()
+        amount = self.get_validated_and_normalized_amount()
         formatted_amount = self.format_amount_for_display(amount)
 
         new_income_row = [month, source, formatted_amount]
@@ -329,7 +329,7 @@ class FinanceManager:
         month = self.get_and_validate_month_input()
         category = self.get_and_validate_category_input()
         description = self.get_and_validate_description_input()
-        amount = self.get_and_validate_amount_input()
+        amount = self.get_validated_and_normalized_amount()
         formatted_amount = self.format_amount_for_display(amount)
 
         new_expense_row = [month, category, description, formatted_amount]
@@ -456,7 +456,7 @@ class FinanceManager:
         )
         return self.get_and_validate_input(prompt_description)
 
-    def get_and_validate_amount_input(self):
+    def get_validated_and_normalized_amount(self):
         """Prompts the user to enter an amount (EUR) and normalizes and validates the input."""
         while True:
             prompt_amount = (
