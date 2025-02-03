@@ -3,6 +3,7 @@ from google.oauth2.service_account import Credentials
 from colorama import init, Fore, Style, Back
 from datetime import datetime
 import re
+from tabulate import tabulate
 
 
 SCOPE = [
@@ -83,10 +84,14 @@ def show_application_instructions():
     """
     print(instructions)
     
+    prompt_for_menu_or_exit()
+
+
+def prompt_for_menu_or_exit():
+    """Prompts the user to return to the Menu or to exit the program."""
     print("-" * 75)
     print(Fore.BLUE + "\nWhat would like to do next?" + Style.RESET_ALL)
-
-    # Prompt the user to return to the Menu or to exit the program
+    
     while True:
         print(f"""
         Press M to go back to the MENU.
@@ -196,21 +201,14 @@ def handle_user_option(option):
         finance_manager.add_new_expense_to_expense_worksheet()
 
     elif option == 3:
-        income_header = Fore.BLUE + "\n**Income Data**" + Style.RESET_ALL
-        print(income_header)
+        # Display income data first
         finance_manager.display_worksheet("income")
 
-        expenses_header = Fore.BLUE + "\n**Expenses Data**" + Style.RESET_ALL
-        print(expenses_header)
-
+        # Display expenses data after income is displayed
         finance_manager.display_worksheet("expenses")
 
-        print(Fore.GREEN + Style.BRIGHT + "\n***" + Style.RESET_ALL)
-        menu_prompt = (
-            Fore.BLUE + "What would you like to do next?" + Style.RESET_ALL
-        )
-        print(menu_prompt)
-        return get_menu_user_choice()
+         # Prompt user for next action after both are displayed
+        prompt_for_menu_or_exit()
 
     elif option == 4:
         return finance_manager.generate_monthly_finance_report()
@@ -499,12 +497,6 @@ class FinanceManager:
 
     def display_worksheet(self, worksheet):
         """Gets data from a given worksheet."""
-        print(
-            f"\n{Fore.GREEN + Style.BRIGHT}"
-            f"Getting Your {worksheet.capitalize()} data...\n"
-            f"{Style.RESET_ALL}"
-        )
-
         all_worksheet_values = self.get_worksheet_data(worksheet)
 
         if not all_worksheet_values:
@@ -519,14 +511,14 @@ class FinanceManager:
         # Get data rows
         data_rows = all_worksheet_values[1:]
 
-        # Print header
-        print(" | ".join(header_row))
-        print("-" * (len(header_row) * 9))
+        print(f"""
+        {Fore.GREEN + Style.BRIGHT}
+        ==== YOUR {worksheet.upper()} DATA IN 2025 ====
+        {Style.RESET_ALL}""")
 
-        # Display All income or expenses data
-        for row in data_rows:
-            print(" | ".join(row))
-            print("-" * (len(row) * 9))
+        # Use tabulate to display data in tabular form
+        print(f"Getting your {worksheet.capitalize()} data...")
+        print(tabulate(data_rows, headers=header_row, tablefmt="pretty"))
 
     # CHECK IF MONTH SELECTED HAS DATA (for generate_monthly_finance_report)
     def month_has_data(self, worksheet_data, month):
@@ -672,7 +664,7 @@ class FinanceManager:
                     )
 
                 # Ask user: What to do next?
-                print(Fore.GREEN + Style.BRIGHT + "\n*****" + Style.RESET_ALL)
+                print("-" * 75)
                 print(Fore.BLUE + "\nWhat would like to do next?" + Style.RESET_ALL)
                 return get_menu_user_choice()
 
@@ -681,6 +673,7 @@ class FinanceManager:
                     f"{Fore.LIGHTRED_EX}\nThere is no data for {month} yet..."
                     f"{Style.RESET_ALL}"
                     )
+                print("-" * 75)
                 print(Fore.BLUE + "\nWhat would like to do next?" + Style.RESET_ALL)
                 return get_menu_user_choice()
 
