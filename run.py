@@ -457,37 +457,64 @@ class FinanceManager:
         return self.get_and_validate_input(prompt_description)
 
     def get_and_validate_amount_input(self):
-        """Prompts the user to enter an amount (EUR) and validates the input."""
+        """Prompts the user to enter an amount (EUR) and normalizes and validates the input."""
         while True:
             prompt_amount = (
                 Fore.BLUE + "Enter the amount (EUR):\n" +
                 Style.RESET_ALL
             )
+            amount_input = input(prompt_amount).strip()
+
+            # Do not allow an empty input
+            if not amount_input:
+                print(
+                    Fore.LIGHTRED_EX +
+                    "Invalid input: Enter a month name." +
+                    Style.RESET_ALL
+                )
+                continue
+
+            # Remove all non-digit characters (but keep . and , and spaces)
+            amount_input = re.sub(r"[^\d., ]", "", amount_input)
+
+            # Remove spaces as potential thousands separators
+            amount_input = amount_input.replace(" ", "")
+
+            # Check if there is any comma and no dot. If yes, replace the comma with dot
+            if "," in amount_input and "." not in amount_input:
+                amount_input = amount_input.replace(",", ".")
+
+            # Check if there is any dot and no comma. If yes, nothing happens
+            elif "." in amount_input and "," not in amount_input:
+                pass
+
+            # Check if there are both comma and dot. If yes, then it can be two cases:
+            # Case a) 12,345.67 (comma is thousand separator and dot is decimal separator)
+            # Case b) 12.345,67 (dot is thousand separator and comma is decimal separator)
+
+            elif "." in amount_input and "," in amount_input:
+
+                # find the rightmost occurrence INDEX of either a "." or a ","
+                last_separator = max(amount_input.rfind("."), amount_input.rfind(","))
+
+                # Case a) e.g.: 12,345.67 (USA convention)
+                if amount_input[last_separator] == ".":
+                    amount_input = amount_input.replace(",", "")
+                    # Replace only the first found dot
+                    amount_input = amount_input.replace(".", ",", 1)
+                else:
+                    amount_input = amount_input.replace(".", "")
+
+                # Ensure amount_input can be used with float()
+            amount_input = amount_input.replace(",", ".")
+
             try:
-                user_input = input(prompt_amount).strip()
-
-                # 1. Handle decimal separator (comma or dot) FIRST:
-                if "," in user_input and "." in user_input:
-                    raise ValueError("Invalid input: Use either ',' or '.' as decimal separator, not both.")
-                elif "," in user_input:
-                    user_input = user_input.replace(",", ".")  # Replace comma with dot
-
-                # 2. Remove thousands separators (spaces, dots, or commas) AFTER handling decimal:
-                user_input = user_input.replace(" ", "")  # Remove spaces
-
-                # 3. Check for invalid characters (only digits, optional + or -, and optional decimal):
-                if not re.match(r'^[-+]?\d*\.?\d*$', user_input):
-                    raise ValueError("Invalid input: Please enter a valid amount (numbers, optional + or -, and one decimal point).")
-
-                # 4. Convert to float:
-                amount = float(user_input)
-
+                amount = float(amount_input)
+                if amount < 0:
+                    raise ValueError("Amount cannot be negative.")
                 return amount
-
-            except ValueError as e:
-                print(Fore.LIGHTRED_EX + f"Invalid input: {e}" + Style.RESET_ALL)
-            except Exception as e:
-                print(Fore.LIGHTRED_EX + f"An unexpected error occurred: {e}" + Style.RESET_ALL)
+            except ValueError:
+                print(Fore.LIGHTRED_EX + "Invalid amount format. Please use digits, '.', or ',' as separators.\n" + Style.RESET_ALL)
 
     def format_amount_for_display(self, amount):
         """Formats the amount for display (European format)."""
@@ -535,13 +562,18 @@ class FinanceManager:
         for row in worksheet_data:
             if row[0].lower() == month.lower():
                 try:
-                    amount_str = row[amount_col_index].replace(",", "")
-                    total_amount += float(amount_str)
+                    amount_input = row[amount_col_index]
+                    # Convert string to float for calculation (handle European format):
+                    #amount_input = amount_input.replace(".", "X").replace(",", ".").replace("X", "") 
+                    amount_input = amount_input.replace(".", "").replace(",", ".")
+                    total_amount += float(amount_input)
                 except ValueError as error:
                     print(
                         f"{error}"
                         f"Could not convert amount in {row} to a number."
                     )
+                except Exception as e: # Catch any other potential errors
+                    print(Fore.LIGHTRED_EX + f"An error occurred: {e}\n" + Style.RESET_ALL)
         return total_amount
 
     # CALCULATE EXPENSES BY CATEGORY (for show_monthly_expenses_details)
@@ -553,7 +585,7 @@ class FinanceManager:
             if row[0].lower() == month.lower():
                 category = row[2]
                 try:
-                    amount = float(row[4])
+                    amount = float(row[3])
                 except ValueError:
                     print(
                         f"Warning: Could not convert amount in row"
@@ -632,11 +664,11 @@ class FinanceManager:
                     income_data, month, 2
                     )
                 total_month_expenses = self.calculate_total_amount(
-                    expenses_data, month, 4
+                    expenses_data, month, 3
                     )
 
-                print(f"✅ TOTAL INCOME: EUR{total_month_income: .2f}")
-                print(f"✅ TOTAL EXPENSES: EUR{total_month_expenses: .2f}\n")
+                print(f"✅ TOTAL INCOME: {total_month_income: .2f} EUR")
+                print(f"✅ TOTAL EXPENSES: {total_month_expenses: .2f} EUR\n")
 
                 # Calculate cash balance
                 print(
@@ -645,17 +677,18 @@ class FinanceManager:
                     Style.RESET_ALL
                     )
                 cash_balance = total_month_income - total_month_expenses
+                #cash_balance = cash_balance.replace(".", "").replace(",", ".")
 
                 if cash_balance >= 0:
                     print(
                         f"🎉🎉 Congratulations! Positive cash balance!:"
-                        f"EUR{cash_balance: .2f}\n"
+                        f"{cash_balance: .2f} EUR\n"
                         )
                 else:
                     print(
                         Fore.LIGHTRED_EX +
                         f"🚨🚨 Attention! Negative cash balance!:"
-                        f" EUR{cash_balance: .2f}\n" +
+                        f"{cash_balance: .2f}EUR\n" +
                         Style.RESET_ALL
                     )
 
@@ -663,19 +696,14 @@ class FinanceManager:
                     month
                     )
 
-                # Ask user: What to do next?
-                print("-" * 75)
-                print(Fore.BLUE + "\nWhat would like to do next?" + Style.RESET_ALL)
-                return get_menu_user_choice()
+                return prompt_for_menu_or_exit()
 
             else:
                 print(
                     f"{Fore.LIGHTRED_EX}\nThere is no data for {month} yet..."
                     f"{Style.RESET_ALL}"
                     )
-                print("-" * 75)
-                print(Fore.BLUE + "\nWhat would like to do next?" + Style.RESET_ALL)
-                return get_menu_user_choice()
+                return prompt_for_menu_or_exit()
 
 # CALL WELCOME AND USER CHOICE functions
 def main():
