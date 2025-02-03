@@ -84,11 +84,7 @@ def show_application_instructions():
     print(instructions)
     
     print("-" * 75)
-    print(
-            Fore.BLUE +
-            "\nWhat would you like to do next?" +
-            Style.RESET_ALL
-        )
+    print(Fore.BLUE + "\nWhat would like to do next?" + Style.RESET_ALL)
 
     # Prompt the user to return to the Menu or to exit the program
     while True:
@@ -284,16 +280,12 @@ class FinanceManager:
         """)
 
         print("-" * 75)
-        print(
-            Fore.BLUE +
-            "\nWhat would you like to do next?" +
-            Style.RESET_ALL
-        )
+        print(Fore.BLUE + "\nWhat would like to do next?" + Style.RESET_ALL)
 
         # Prompt the user to choose what to do next
         while True:
             print(f"""
-            Press 1 to add another income entry.
+            Press 1 to add ANOTHER INCOME entry.
             Press 2 to add an expense entry.
             Press M to go back to the MENU.
             Press E to EXIT the program.
@@ -350,13 +342,37 @@ class FinanceManager:
         print(f"""
         {Fore.GREEN + Style.BRIGHT}
         New expense for {month}, 2025 with category{category}
-        and description: {description}, added successfully!
+        and description: {description} ({formatted_amount}), added successfully!
         {Style.RESET_ALL}
         """)
 
-        print(Fore.GREEN + Style.BRIGHT + "\n***" + Style.RESET_ALL)
+        print("-" * 75)
         print(Fore.BLUE + "\nWhat would like to do next?" + Style.RESET_ALL)
-        return get_menu_user_choice()
+
+        # Prompt the user to choose what to do next
+        while True:
+            print(f"""
+            Press 1 to add income entry.
+            Press 2 to add ANOTHER EXPENSE entry.
+            Press M to go back to the MENU.
+            Press E to EXIT the program.
+            """)
+            choice_message = (
+                Fore.BLUE + Style.BRIGHT +  
+                "Enter your choice (1, 2, M or E) and press enter:\n" +
+                Style.RESET_ALL
+            )
+            user_input = input(choice_message).strip().upper()
+            if user_input == "1":
+                return self.add_new_income_to_income_worksheet()
+            elif user_input == "2":
+                return self.add_new_expense_to_expense_worksheet()
+            elif user_input == "M":
+                return get_menu_user_choice()
+            elif user_input == "E":
+                exit_program()
+            else:
+                print(Fore.LIGHTRED_EX + "Invalid input. Please enter 1, 2, M, or E." + Style.RESET_ALL)
 
     def get_and_validate_month_input(self):
         """Prompts the user to enter a month name and validates the input."""
@@ -429,7 +445,7 @@ class FinanceManager:
     def get_and_validate_category_input(self):
         """Prompts the user to enter a category name and validates the input."""
         prompt_category = (
-            Fore.BLUE + "Enter the income source (minimum 4 characters):\n" +
+            Fore.BLUE + "Enter the category (minimum 4 characters):\n" +
             Style.RESET_ALL
         )
         return self.get_and_validate_input(prompt_category)
@@ -626,11 +642,7 @@ class FinanceManager:
 
                 # Ask user: What to do next?
                 print(Fore.GREEN + Style.BRIGHT + "\n*****" + Style.RESET_ALL)
-                print(
-                    Fore.BLUE +
-                    "\nWhat would you like to do next?" +
-                    Style.RESET_ALL
-                )
+                print(Fore.BLUE + "\nWhat would like to do next?" + Style.RESET_ALL)
                 return get_menu_user_choice()
 
             else:
@@ -638,11 +650,7 @@ class FinanceManager:
                     f"{Fore.LIGHTRED_EX}\nThere is no data for {month} yet..."
                     f"{Style.RESET_ALL}"
                     )
-                print(
-                    Fore.BLUE +
-                    "\nWhat would you like to do next?" +
-                    Style.RESET_ALL
-                )
+                print(Fore.BLUE + "\nWhat would like to do next?" + Style.RESET_ALL)
                 return get_menu_user_choice()
 
     # IF USER OPTION == 2  (Check my income and expense!)
