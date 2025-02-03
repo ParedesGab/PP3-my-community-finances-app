@@ -562,11 +562,12 @@ class FinanceManager:
         for row in worksheet_data:
             if row[0].lower() == month.lower():
                 try:
-                    amount_input = row[amount_col_index]
-                    # Convert string to float for calculation (handle European format):
-                    #amount_input = amount_input.replace(".", "X").replace(",", ".").replace("X", "") 
-                    amount_input = amount_input.replace(".", "").replace(",", ".")
-                    total_amount += float(amount_input)
+                    # Get the amount from the worksheet as a string
+                    amount_string= row[amount_col_index]
+                    # Normalize the string (handle European format)
+                    amount_string = amount_string.replace(".", "").replace(",", ".")
+                    # Convert string float after normalization
+                    total_amount += float(amount_string)
                 except ValueError as error:
                     print(
                         f"{error}"
@@ -583,9 +584,15 @@ class FinanceManager:
 
         for row in expenses_data:
             if row[0].lower() == month.lower():
-                category = row[2]
+                category = row[1]
                 try:
-                    amount = float(row[3])
+                    # Get the amount from the worksheet as a string
+                    amount_string = row[3]
+                    # Normalize the string (handle European format)
+                    amount_string = amount_string.replace(".", "").replace(",", ".")
+                    # Convert string float after normalization
+                    amount = float(amount_string)
+                
                 except ValueError:
                     print(
                         f"Warning: Could not convert amount in row"
@@ -617,9 +624,7 @@ class FinanceManager:
 
         # Show expenses per category
         expenses_data = self.get_worksheet_data("expenses")
-        expenses_by_category = self.calc_expenses_by_category(
-            expenses_data, month
-            )
+        expenses_by_category = self.calc_expenses_by_category(expenses_data, month)
 
         for category, amount in expenses_by_category.items():
             print(f"→ {category}: EUR {amount:.2f}\n")
@@ -629,11 +634,10 @@ class FinanceManager:
             expenses_by_category
             )
         print(
-            f"{Fore.GREEN + Style.BRIGHT}🎯 HIGHEST EXPENSE:{Style.RESET_ALL} "
-            f"{max_category.upper()} (EUR {max_amount:.2f})\n"
+            f"{Fore.GREEN + Style.BRIGHT}🔥 HIGHEST EXPENSE:{Style.RESET_ALL} "
+            f"{max_category.upper()} ({max_amount:.2f} EUR)\n"
         )
 
-    # MONTHLY FINANCE REPORT
     def generate_monthly_finance_report(self):
         """Generates and displays the monthly finance report."""
         print(
@@ -667,8 +671,8 @@ class FinanceManager:
                     expenses_data, month, 3
                     )
 
-                print(f"✅ TOTAL INCOME: {total_month_income: .2f} EUR")
-                print(f"✅ TOTAL EXPENSES: {total_month_expenses: .2f} EUR\n")
+                print(f"✅ TOTAL INCOME:{total_month_income: .2f} EUR")
+                print(f"✅ TOTAL EXPENSES:{total_month_expenses: .2f} EUR\n")
 
                 # Calculate cash balance
                 print(
