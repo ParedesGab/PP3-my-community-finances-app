@@ -82,7 +82,13 @@ def show_application_instructions():
        - Close the application. Don't worry; all your data is stored! ✨
     """
     print(instructions)
+    
     print("-" * 75)
+    print(
+            Fore.BLUE +
+            "\nWhat would you like to do next?" +
+            Style.RESET_ALL
+        )
 
     # Prompt the user to return to the Menu or to exit the program
     while True:
@@ -119,8 +125,8 @@ def get_menu_user_choice():
     Press 0 to check the application instructions.
     Press 1 to add a new income entry (Month, Source, and Amount).
     Press 2 to add a new expense entry (Month, Category, Description, Amount).
-    Press 3 to check your monthly finance report!
-    Press 4 to view all your Income and Expenses!
+    Press 3 to view all your income and expenses.
+    Press 4 to check your Monthly Finance Report! 
     Press E to exit the program.
         """)
 
@@ -194,9 +200,6 @@ def handle_user_option(option):
         finance_manager.add_new_expense_to_expense_worksheet()
 
     elif option == 3:
-        return finance_manager.generate_monthly_finance_report()
-
-    elif option == 4:
         income_header = Fore.BLUE + "\n**Income Data**" + Style.RESET_ALL
         print(income_header)
         finance_manager.display_worksheet("income")
@@ -213,7 +216,10 @@ def handle_user_option(option):
         print(menu_prompt)
         return get_menu_user_choice()
 
-    elif option == 5:
+    elif option == 4:
+        return finance_manager.generate_monthly_finance_report()
+
+    elif option == "E":
         return exit_program()
 
 
@@ -243,7 +249,7 @@ class FinanceManager:
         """Adds a new income record to the "income" worksheet."""
 
         income_message = f"""
-        {Fore.GREEN + Style.BRIGHT}==== ADD A NEW INCOME RECORD FOR 2025 ====
+    {Fore.GREEN + Style.BRIGHT}==== ADD A NEW INCOME RECORD FOR 2025 ====
         {Style.RESET_ALL}
          Please provide the following details in order:
 
@@ -277,13 +283,37 @@ class FinanceManager:
         {Style.RESET_ALL}
         """)
 
-        print(Fore.GREEN + Style.BRIGHT + "\n*****" + Style.RESET_ALL)
+        print("-" * 75)
         print(
             Fore.BLUE +
             "\nWhat would you like to do next?" +
             Style.RESET_ALL
         )
-        return get_menu_user_choice()
+
+        # Prompt the user to choose what to do next
+        while True:
+            print(f"""
+            Press 1 to add another income entry.
+            Press 2 to add an expense entry.
+            Press M to go back to the MENU.
+            Press E to EXIT the program.
+            """)
+            choice_message = (
+                Fore.BLUE + Style.BRIGHT +  
+                "Enter your choice (1, 2, M or E) and press enter:\n" +
+                Style.RESET_ALL
+            )
+            user_input = input(choice_message).strip().upper()
+            if user_input == "1":
+                return self.add_new_income_to_income_worksheet()
+            elif user_input == "2":
+                return self.add_new_expense_to_expense_worksheet()
+            elif user_input == "M":
+                return get_menu_user_choice()
+            elif user_input == "E":
+                exit_program()
+            else:
+                print(Fore.LIGHTRED_EX + "Invalid input. Please enter 1, 2, M, or E." + Style.RESET_ALL)
 
     def add_new_expense_to_expense_worksheet(self):
         """Adds a new expense record to the "expense" worksheet."""
