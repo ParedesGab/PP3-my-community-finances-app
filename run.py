@@ -27,8 +27,6 @@ def welcome():
     This expense tracker will help you monitor your 2025 income and expenses!
     Are you ready to understand your spending habits?\n
     Let's go!🚀
-
-    {rim}{rim}{rim}
     """)
 
 
@@ -38,11 +36,11 @@ def show_application_instructions():
     {Fore.GREEN + Style.BRIGHT}==== APPLICATION INSTRUCTIONS ====
     {Style.RESET_ALL}
 
-    Welcome to My finances app! Here is how you can use your application:\n
+    Welcome to MyFinances App! Here is how you can use your application:\n
 
     {Fore.BLUE} 1. Add New Income:{Style.RESET_ALL}
 
-       - You can add income records to track your earnings.
+       - You can add income records to track your earnings in 2025.
        - Each income entry consists of:
          → {Fore.YELLOW}Month{Style.RESET_ALL}: Income month.
             E.g., January, February.
@@ -53,7 +51,7 @@ def show_application_instructions():
 
     {Fore.BLUE} 2. Add New Expense:{Style.RESET_ALL}
 
-       - You can record your expenses to monitor your spending.
+       - You can record your expenses to monitor your spending in 2025.
        - Each expense entry consists of:
          → {Fore.YELLOW}Month{Style.RESET_ALL}: The month the expense occurred.
             E.g., January, February.
@@ -67,7 +65,7 @@ def show_application_instructions():
     {Fore.BLUE} 3. Generate Monthly Finance Report:{Style.RESET_ALL}
 
        - Select a month to generate a detailed income and expenses report.
-       - The report will display:
+       - The 2025 report will display:
          → Total Income for the selected month.
          → Total Expenses for the selected month.
          → Your cash balance (Income - Expenses).
@@ -84,28 +82,52 @@ def show_application_instructions():
        - Close the application. Don't worry; all your data is stored! ✨
     """
     print(instructions)
-    rim = f"{Fore.GREEN + Style.BRIGHT}======================{Style.RESET_ALL}"
-    print(f"{rim}{rim}{rim}")
+    print("-" * 75)
 
-    # press enter to return to the menu or 5 to exit
+    # Prompt the user to return to the Menu or to exit the program
+    while True:
+        print(f"""
+        Press M to go back to the MENU.
+        Press E to EXIT the program.
+        """)
+        try:
+            choice_message = (
+                Fore.BLUE + Style.BRIGHT +  
+                "Enter your choice (M or E) and press enter:\n" +
+                Style.RESET_ALL
+            )
+            user_input = input(choice_message).strip().upper()
+            if user_input == "M":
+                return get_menu_user_choice()
+            elif user_input == "E":
+                exit_program()
+            else:
+                raise ValueError(Fore.LIGHTRED_EX +
+                "Invalid input. Please press 'M' to return to the menu or '5' to exit." +
+                 Style.RESET_ALL
+                )
+        except ValueError as error:
+            print(error)
 
 
 def get_menu_user_choice():
     """Gets the user's choice from the menu options."""
     while True:
         print(f"""
+    {Fore.GREEN + Style.BRIGHT}==== MENU OPTIONS ===={Style.RESET_ALL}
+
     Press 0 to check the application instructions.
     Press 1 to add a new income entry (Month, Source, and Amount).
     Press 2 to add a new expense entry (Month, Category, Description, Amount).
     Press 3 to check your monthly finance report!
     Press 4 to view all your Income and Expenses!
-    Press 5 to exit the program.
+    Press E to exit the program.
         """)
 
         try:
             choice_message = (
                 Fore.BLUE + Style.BRIGHT +
-                "Enter your option (0-5) and press enter:\n" +
+                "\nEnter your choice (0-5) and press enter:\n" +
                 Style.RESET_ALL
             )
             user_input = input(choice_message)
@@ -192,13 +214,17 @@ def handle_user_option(option):
         return get_menu_user_choice()
 
     elif option == 5:
-        exit_message = f"""
-        {Fore.GREEN + Style.BRIGHT}
-        ✨ Your finances are in good hands ✨
-            Goodbye and See you next time!{Style.RESET_ALL}
-        """
-        print(exit_message)
-        exit()
+        return exit_program()
+
+
+def exit_program():
+    exit_message = f"""
+    {Fore.GREEN + Style.BRIGHT}
+    ✨ Your finances are in good hands ✨
+        Goodbye and See you next time!{Style.RESET_ALL}
+    """
+    print(exit_message)
+    exit()
 
 
 class FinanceManager:
@@ -236,8 +262,9 @@ class FinanceManager:
         month = self.get_and_validate_month_input()
         source = self.get_and_validate_source_input()
         amount = self.get_and_validate_amount_input()
+        formatted_amount = self.format_amount_for_display(amount)
 
-        new_income_row = [month, source, amount]
+        new_income_row = [month, source, formatted_amount]
 
         self.income_worksheet.append_row(new_income_row)
 
@@ -245,7 +272,7 @@ class FinanceManager:
 
         print(f"""
         {Fore.GREEN + Style.BRIGHT}
-        New income for {month}, 2025 from source: {source} (EUR {amount:.2f})
+        New income for {month}, 2025 from source: {source} (EUR {formatted_amount})
         stored successfully!
         {Style.RESET_ALL}
         """)
@@ -283,8 +310,9 @@ class FinanceManager:
         category = self.get_and_validate_category_input()
         description = self.get_and_validate_description_input()
         amount = self.get_and_validate_amount_input()
+        formatted_amount = self.format_amount_for_display(amount)
 
-        new_expense_row = [month, category, description, amount]
+        new_expense_row = [month, category, description, formatted_amount]
         self.expenses_worksheet.append_row(new_expense_row)
 
         print("\nStoring your new expense entry ...")
@@ -385,21 +413,43 @@ class FinanceManager:
         return self.get_and_validate_input(prompt_description)
 
     def get_and_validate_amount_input(self):
-        """Prompts the user to enter an amount(EUR) and validates the input."""
+        """Prompts the user to enter an amount (EUR) and validates the input."""
         while True:
             prompt_amount = (
                 Fore.BLUE + "Enter the amount (EUR):\n" +
                 Style.RESET_ALL
             )
             try:
-                user_amount = float(input(prompt_amount).strip())
-                return user_amount
-            except ValueError as error:
-                print(
-                    Fore.LIGHTRED_EX +
-                    f"Invalid input: Enter a valid amount.\n" +
-                    Style.RESET_ALL
-                )
+                user_input = input(prompt_amount).strip()
+
+                # 1. Handle decimal separator (comma or dot) FIRST:
+                if "," in user_input and "." in user_input:
+                    raise ValueError("Invalid input: Use either ',' or '.' as decimal separator, not both.")
+                elif "," in user_input:
+                    user_input = user_input.replace(",", ".")  # Replace comma with dot
+
+                # 2. Remove thousands separators (spaces, dots, or commas) AFTER handling decimal:
+                user_input = user_input.replace(" ", "")  # Remove spaces
+
+                # 3. Check for invalid characters (only digits, optional + or -, and optional decimal):
+                if not re.match(r'^[-+]?\d*\.?\d*$', user_input):
+                    raise ValueError("Invalid input: Please enter a valid amount (numbers, optional + or -, and one decimal point).")
+
+                # 4. Convert to float:
+                amount = float(user_input)
+
+                return amount
+
+            except ValueError as e:
+                print(Fore.LIGHTRED_EX + f"Invalid input: {e}" + Style.RESET_ALL)
+            except Exception as e:
+                print(Fore.LIGHTRED_EX + f"An unexpected error occurred: {e}" + Style.RESET_ALL)
+
+    def format_amount_for_display(self, amount):
+        """Formats the amount for display (European format)."""
+        formatted_amount = "{:,.2f}".format(amount).replace(",", "X").replace(".", ",").replace("X", ".")
+
+        return formatted_amount # Always EUR and always after the amount
 
     # CHECK IF MONTH SELECTED HAS DATA (for generate_monthly_finance_report)
     def month_has_data(self, worksheet_data, month):
