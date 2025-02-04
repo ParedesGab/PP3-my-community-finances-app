@@ -204,11 +204,11 @@ def validate_user_numbers_choice(user_input):
     """Validates the user's choice."""
     if not 0 <= user_input <= 4:
         raise ValueError(
-                    Fore.LIGHTRED_EX +
-                    "Invalid input:  enter a number between 0 and 4 or E, "
-                    "without spaces or special characters.\n" +
-                    Style.RESET_ALL
-                )
+            Fore.LIGHTRED_EX +
+            "Invalid input:  enter a number between 0 and 4 or E, "
+            "without spaces or special characters.\n" +
+             Style.RESET_ALL
+             )
 
 
 def is_valid_number(input_value):
@@ -405,8 +405,8 @@ class FinanceManager:
             if len(user_input) < min_length:
                 print(f"""
                     {Fore.LIGHTRED_EX}
-                    Invalid input: Minimun {min_length} characters long,
-                    contain alphabetic characters, and not be purely numeric
+                    Invalid input: Enter a word with minimun {min_length} characters long,
+                    contain alphabetic characters, and not be purely numeric.
                     {Style.RESET_ALL}
                 """)
                 continue
@@ -470,7 +470,7 @@ class FinanceManager:
             if not amount_input:
                 print(
                     Fore.LIGHTRED_EX +
-                    "Invalid input: Enter a month name." +
+                    "Empty amount: Please use digits, '.', or ',' as separators." +
                     Style.RESET_ALL
                 )
                 continue
