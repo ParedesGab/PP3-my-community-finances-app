@@ -110,7 +110,7 @@ def prompt_for_menu_or_exit():
                 exit_program()
             else:
                 raise ValueError(Fore.LIGHTRED_EX +
-                "Invalid input. Please press 'M' to return to the menu or '5' to exit." +
+                "Invalid input. Please press 'M' to return to the menu or 'E' to exit." +
                  Style.RESET_ALL
                 )
         except ValueError as error:
@@ -128,14 +128,13 @@ def get_menu_user_choice():
     Press 2 to add a new expense entry (Month, Category, Description, Amount).
     Press 3 to view all your income and expenses.
     Press 4 to check your Monthly Finance Report!
-    Press 5 to DELETE ALL income and expense entries.
     Press E to exit the program.
         """)
 
         try:
             choice_message = (
                 Fore.BLUE + Style.BRIGHT +
-                "\nEnter your choice (0-5 or E) and press enter:\n" +
+                "\nEnter your choice (0-4 or E) and press enter:\n" +
                 Style.RESET_ALL
             )
             user_input = input(choice_message).strip().upper()
@@ -148,7 +147,7 @@ def get_menu_user_choice():
             if not user_input:
                 raise ValueError(
                     Fore.LIGHTRED_EX +
-                    "Empty input:  enter a number between 0 and 5 or E, "
+                    "Empty input:  enter a number between 0 and 4 or E, "
                     "without spaces or special characters.\n" +
                     Style.RESET_ALL
                 )
@@ -156,7 +155,7 @@ def get_menu_user_choice():
             if not is_valid_number(user_input):
                 raise ValueError(
                     Fore.LIGHTRED_EX +
-                    "Invalid input:  enter a number between 0 and 5 or E, "
+                    "Invalid input:  enter a number between 0 and 4 or E, "
                     "without spaces or special characters.\n" +
                     Style.RESET_ALL
                 )
@@ -199,9 +198,6 @@ def handle_user_option(option):
 
     elif option == 4:
         return finance_manager.generate_monthly_finance_report()
-    
-    elif option == 5:
-        return finance_manager.delete_all_entries()
 
 
 def validate_user_numbers_choice(user_input):
@@ -209,7 +205,7 @@ def validate_user_numbers_choice(user_input):
     if not 0 <= user_input <= 5:
         raise ValueError(
             Fore.LIGHTRED_EX +
-            "Invalid input:  enter a number between 0 and 5 or E, "
+            "Invalid input:  enter a number between 0 and 4 or E, "
             "without spaces or special characters.\n" +
              Style.RESET_ALL
              )
@@ -713,41 +709,6 @@ class FinanceManager:
                     f"{Style.RESET_ALL}"
                     )
                 return prompt_for_menu_or_exit()
-
-    def delete_all_entries(self):
-        """Deletes all income and expense entries after confirmation using clear()."""
-        while True:
-            confirmation = input(
-                Fore.YELLOW +
-                "Are you sure you want to delete ALL income and expense entries? (yes/no): " +
-                Style.RESET_ALL
-            ).strip().lower()
-
-            if confirmation == "yes":
-                try:
-                    income_worksheet = SHEET.worksheet("income")
-                    expenses_worksheet = SHEET.worksheet("expenses")
-
-                    # Clear all rows except the header row using clear()
-                    if income_worksheet.row_count > 1:  # Check if there is more than the header row
-                        income_worksheet.clear(start='A2', end=f'Z{income_worksheet.row_count}') # Clear from A2 to the last row
-
-                    if expenses_worksheet.row_count > 1:  # Check if there is more than the header row
-                        expenses_worksheet.clear(start='A2', end=f'Z{expenses_worksheet.row_count}') # Clear from A2 to the last row
-
-                    print(Fore.GREEN + "All income and expense entries deleted successfully." + Style.RESET_ALL)
-                    return prompt_for_menu_or_exit()
-
-                except Exception as e:
-                    print(Fore.LIGHTRED_EX + f"An error occurred during deletion: {e}" + Style.RESET_ALL)
-                    return
-
-            elif confirmation == "no":
-                print(Fore.BLUE + "Deletion cancelled." + Style.RESET_ALL)
-                return prompt_for_menu_or_exit()
-
-            else:
-                print(Fore.LIGHTRED_EX + "Invalid input. Please enter 'yes' or 'no'." + Style.RESET_ALL)
 
 
 def main():
