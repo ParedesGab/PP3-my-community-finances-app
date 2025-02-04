@@ -25,7 +25,7 @@ def welcome():
     print(f"""
     {rim} WELCOME TO MyFinances APP! {rim}
 
-    This expense tracker will help you monitor your 2025 income and expenses!
+    This expense tracker will help you monitor your 2025 incomes and expenses!
     Are you ready to understand your spending habits?\n
     Let's go!🚀
     """)
@@ -77,18 +77,6 @@ def show_application_instructions():
 
        - View all your records from the "income" and "expenses" worksheets.
        - This option shows all your data in a table format.
-    
-    {Fore.BLUE} 5. Modify an existing Income or Expense entry:{Style.RESET_ALL}
-
-        - This option allows you to correct mistakes or update existing income or 
-          expense entries.
-        - You will be prompted to select whether you want to modify an Income or
-          Expense entry.
-        - The application will display all your data from the chosen worksheet,
-          and you will be asked to specify the row number of the entry you wish
-          to modify.
-        - After specifying the row number, you will be prompted to enter the
-          new values for the entry.
 
     {Fore.BLUE} E. Exit Program:{Style.RESET_ALL}
 
@@ -138,16 +126,15 @@ def get_menu_user_choice():
     Press 0 to check the application instructions.
     Press 1 to add a new income entry (Month, Source, and Amount).
     Press 2 to add a new expense entry (Month, Category, Description, Amount).
-    Press 3 to view all your income and expenses.
+    Press 3 to view all your incomes and expenses.
     Press 4 to check YOUR MONTHLY FINANCE REPORT.
-    Press 5 to modify an existing Income or Expense entry.
     Press E to exit the program.
         """)
 
         try:
             choice_message = (
                 Fore.BLUE + Style.BRIGHT +
-                "\nEnter your choice (0-5 or E) and press enter:\n" +
+                "\nEnter your choice (0-4 or E) and press enter:\n" +
                 Style.RESET_ALL
             )
             user_input = input(choice_message).strip().upper()
@@ -159,7 +146,7 @@ def get_menu_user_choice():
             if not user_input:
                 raise ValueError(
                     Fore.LIGHTRED_EX +
-                    "Empty input:  enter a number between 0 and 5 or E, "
+                    "Empty input:  enter a number between 0 and 4 or E, "
                     "without spaces or special characters.\n" +
                     Style.RESET_ALL
                 )
@@ -167,7 +154,7 @@ def get_menu_user_choice():
             if not is_valid_number(user_input):
                 raise ValueError(
                     Fore.LIGHTRED_EX +
-                    "Invalid input:  enter a number between 0 and 5 or E, "
+                    "Invalid input:  enter a number between 0 and 4 or E, "
                     "without spaces or special characters.\n" +
                     Style.RESET_ALL
                 )
@@ -196,24 +183,21 @@ def handle_user_option(option):
         finance_manager.add_new_expense_to_expense_worksheet()
 
     elif option == 3:
-        finance_manager.display_worksheet("income")
+        finance_manager.display_worksheet("incomes")
         finance_manager.display_worksheet("expenses")
         # Prompt user for next action after both are displayed
         prompt_for_menu_or_exit()
 
     elif option == 4:
         return finance_manager.generate_monthly_finance_report()
-    
-    elif option == 5:
-        return finance_manager.mofidy_entry()
-
+   
 
 def validate_user_numbers_choice(user_input):
     """Validates the user's choice."""
-    if not 0 <= user_input <= 5:
+    if not 0 <= user_input <= 4:
         raise ValueError(
             Fore.LIGHTRED_EX +
-            "Invalid input:  enter a number between 0 and 5 or E, "
+            "Invalid input:  enter a number between 0 and 4 or E, "
             "without spaces or special characters.\n" +
              Style.RESET_ALL
              )
@@ -239,7 +223,7 @@ def exit_program():
 class FinanceManager:
 
     def __init__(self):
-        self.income_worksheet = SHEET.worksheet("income")
+        self.income_worksheet = SHEET.worksheet("incomes")
         self.expenses_worksheet = SHEET.worksheet("expenses")
 
     def get_worksheet_data(self, worksheet):
@@ -527,7 +511,8 @@ class FinanceManager:
         """Formats the amount for display (European format)."""
         formatted_amount = "{:,.2f}".format(amount).replace(",", "X").replace(".", ",").replace("X", ".")
 
-        return formatted_amount # Always EUR and always after the amount
+        # Formated to standard European style
+        return formatted_amount 
 
     def display_worksheet(self, worksheet):
         """Gets data from a given worksheet."""
@@ -658,7 +643,7 @@ class FinanceManager:
             month = self.get_and_validate_month_input()
 
             # Get all data of a worksheet
-            income_data = self.get_worksheet_data("income")
+            income_data = self.get_worksheet_data("incomes")
             expenses_data = self.get_worksheet_data("expenses")
 
             # Check if the month exists within the data
@@ -716,52 +701,6 @@ class FinanceManager:
                     )
                 return prompt_for_menu_or_exit()
     
-    def mofidy_entry(self):
-        """Allows the user to modify existing income or expense entries."""
-        while True:
-            print(f"""
-            {Fore.GREEN + Style.BRIGHT}
-            ==== MODIFY INCOME OR EXPENSE ENTRY ===={Style.RESET_ALL}
-
-            1. Modify Income Entry
-            2. Modify Expense Entry
-            M. Return to Menu
-            E. Exit Program
-            """)
-
-            choice_message = (
-                Fore.BLUE + Style.BRIGHT +
-                "Enter your choice (1, 2, M, or E) and press enter:\n" +
-                Style.RESET_ALL
-            )
-            user_input = input(choice_message).strip().upper()
-
-            if user_input == "1":
-                pass
-            elif user_input == "2":
-                pass
-            elif user_input == "M":
-                return get_menu_user_choice()
-            elif user_input == "E":
-                return  exit_program()
-            else:
-                print(Fore.LIGHTRED_EX +
-                "Invalid input. Please enter 1, 2, M, or E." +
-                Style.RESET_ALL)
-
-    def _modify_specific_entry(self, worksheet):
-        """Handles the modification of a specific income or expense entry."""
-        worksheet = SHEET.worksheet(worksheet)
-        # Get all values except header row
-        data = worksheet.get_all_values()[1:]
-
-        if not data:
-            print(Fore.LIGHTRED_EX + "No entries found in this worksheet." + Style.RESET_ALL)
-            return
-
-
-
-
 
 def main():
     welcome()
