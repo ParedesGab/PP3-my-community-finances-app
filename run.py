@@ -451,7 +451,7 @@ class FinanceManager:
         """Prompts the user to enter an amount (EUR) and normalizes and validates the input."""
         while True:
             prompt_amount = (
-                Fore.BLUE + "Enter the amount (EUR):\n" +
+                Fore.BLUE + "Enter a positive amount (EUR):\n" +
                 Style.RESET_ALL
             )
             amount_input = input(prompt_amount).strip()
@@ -549,7 +549,6 @@ class FinanceManager:
         print(f"Getting your {worksheet.capitalize()} data...")
         print(tabulate(data_rows, headers=header_row, tablefmt="pretty"))
 
-    # CHECK IF MONTH SELECTED HAS DATA (for generate_monthly_finance_report)
     def month_has_data(self, worksheet_data, month):
         """Checks if month data exists in a worksheet."""
         for row in worksheet_data:
@@ -557,7 +556,6 @@ class FinanceManager:
                 return True
         return False
 
-    # CALCULATE TOTAL AMOUNT (for generate_monthly_finance_report)
     def calculate_total_amount(self, worksheet_data, month, amount_col_index):
         """Calculates the total amount for the given month and worksheet."""
         total_amount = 0
@@ -579,7 +577,6 @@ class FinanceManager:
                     print(Fore.LIGHTRED_EX + f"An error occurred: {e}\n" + Style.RESET_ALL)
         return total_amount
 
-    # CALCULATE EXPENSES BY CATEGORY (for show_monthly_expenses_details)
     def calc_expenses_by_category(self, expenses_data, month):
         """Calculate expenses per category in a given month."""
         expenses_by_category = {}
@@ -607,7 +604,6 @@ class FinanceManager:
                     expenses_by_category[category] = amount
         return expenses_by_category
 
-    # MAX EXPENSE PER CATEGORY (for show_monthly_expenses_details)
     def max_expense_by_category(self, expenses_by_category):
         """Finds the category with the maximum expense"""
         max_category = max(expenses_by_category, key=expenses_by_category.get)
@@ -615,7 +611,6 @@ class FinanceManager:
 
         return max_category, max_amount
 
-    # IF "y": SHOW EXPENSES DETAILS (for generate_monthly_finance_report)
     def show_monthly_expenses_details(self, month):
         """Displays detailed expense information for a given month."""
         print(
@@ -657,21 +652,26 @@ class FinanceManager:
             expenses_data = self.get_worksheet_data("expenses")
 
             # Check if the month exists within the data
-            income_month_data = self.month_has_data(income_data, month)
-            expense_month_data = self.month_has_data(expenses_data, month)
+            income_month_data_exists = self.month_has_data(income_data, month)
+            expense_month_data_exists = self.month_has_data(expenses_data, month)
 
-            if income_month_data or expense_month_data:
+            if income_month_data_exists or income_month_data_exists:
                 print(
                     Fore.GREEN + Style.BRIGHT +
                     f"\nCalculating your {month} income and expenses...\n" +
                     Style.RESET_ALL)
-
-                total_month_income = self.calculate_total_amount(
-                    income_data, month, 2
-                    )
-                total_month_expenses = self.calculate_total_amount(
-                    expenses_data, month, 3
-                    )
+                
+                if not income_month_data_exists:
+                    print(Fore.YELLOW + f"Warning: NO INCOME data found for {month}!\n" + Style.RESET_ALL)
+                    total_month_income = 0
+                else:
+                    total_month_income = self.calculate_total_amount(income_data, month, 2)
+                
+                if not expense_month_data_exists:
+                    print(Fore.YELLOW + f"Warning: NO EXPENSES data found for {month}!\n" + Style.RESET_ALL)
+                    total_month_expenses = 0
+                else:
+                    total_month_expenses = self.calculate_total_amount(expenses_data, month, 3)
 
                 print(f"✅ TOTAL INCOME:{total_month_income: .2f} EUR")
                 print(f"✅ TOTAL EXPENSES:{total_month_expenses: .2f} EUR\n")
@@ -698,17 +698,15 @@ class FinanceManager:
                         Style.RESET_ALL
                     )
 
-                monthly_expenses_details = self.show_monthly_expenses_details(
-                    month
-                    )
+                monthly_expenses_details = self.show_monthly_expenses_details(month)
 
                 return prompt_for_menu_or_exit()
 
             else:
-                print(
-                    f"{Fore.LIGHTRED_EX}\nThere is no data for {month} yet..."
-                    f"{Style.RESET_ALL}"
-                    )
+                print(f"""
+                {Fore.LIGHTRED_EX}\nThere is no data for {month} yet...
+                {Style.RESET_ALL}"
+                """)
                 return prompt_for_menu_or_exit()
     
 
