@@ -603,30 +603,7 @@ class FinanceManager:
                 else:
                     expenses_by_category[category] = amount
         return expenses_by_category
-
-    def show_monthly_expenses_details(self, month):
-        """Displays detailed expense information for a given month."""
-        print(
-            f"{Fore.GREEN + Style.BRIGHT}\n"
-            f"Calculating Your {month} expenses by category...\n"
-            f"{Style.RESET_ALL}"
-        )
-
-        # Show expenses per category
-        expenses_data = self.get_worksheet_data("expenses")
-        expenses_by_category = self.calc_expenses_by_category(expenses_data, month)
-
-        for category, amount in expenses_by_category.items():
-            print(f"→ {category.upper()}: EUR {amount:.2f}\n")
-
-        # Show max expense by category
-        max_category, max_amount = self.max_expense_by_category(
-            expenses_by_category
-            )
-        print(f"""{Fore.GREEN + Style.BRIGHT}
-        🔥 HIGHEST EXPENSE: {Style.RESET_ALL}{max_category.upper()} ({max_amount:.2f} EUR)
-        """)
-
+    
     def max_expense_by_category(self, expenses_by_category):
         """
         Finds the category with the maximum expense,
@@ -639,6 +616,34 @@ class FinanceManager:
             return None, None
 
         return max_category, max_amount
+
+    def show_monthly_expenses_details(self, month):
+        """Displays detailed expense information for a given month."""
+        print(f"""
+        {Fore.GREEN + Style.BRIGHT}
+        Calculating Your {month} expenses by category...
+        {Style.RESET_ALL}
+        """)
+
+        # Show expenses per category
+        expenses_data = self.get_worksheet_data("expenses")
+        expenses_by_category = self.calc_expenses_by_category(expenses_data, month)
+
+        if not expenses_by_category:
+            print(Fore.YELLOW + f"No expenses found for {month}!" +
+            Style.RESET_ALL)
+            return
+
+        for category, amount in expenses_by_category.items():
+            print(f"→ {category.upper()}: EUR {amount:.2f}\n")
+
+        # Show max expense by category
+        max_category, max_amount = self.max_expense_by_category(
+            expenses_by_category
+            )
+        print(f"""{Fore.GREEN + Style.BRIGHT}
+        🔥 HIGHEST EXPENSE: {Style.RESET_ALL}{max_category.upper()} ({max_amount:.2f} EUR)
+        """)
 
     def generate_monthly_finance_report(self):
         """Generates and displays the monthly finance report."""
@@ -663,7 +668,7 @@ class FinanceManager:
             if income_month_data_exists or income_month_data_exists:
                 print(
                     Fore.GREEN + Style.BRIGHT +
-                    f"\nCalculating your {month} income and expenses...\n" +
+                    f"Calculating your {month} income and expenses..." +
                     Style.RESET_ALL)
                 
                 if not income_month_data_exists:
