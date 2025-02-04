@@ -77,8 +77,20 @@ def show_application_instructions():
 
        - View all your records from the "income" and "expenses" worksheets.
        - This option shows all your data in a table format.
+    
+    {Fore.BLUE} 5. Modify an existing Income or Expense entry:{Style.RESET_ALL}
 
-    {Fore.BLUE} 5. Exit Program:{Style.RESET_ALL}
+        - This option allows you to correct mistakes or update existing income or 
+          expense entries.
+        - You will be prompted to select whether you want to modify an Income or
+          Expense entry.
+        - The application will display all your data from the chosen worksheet,
+          and you will be asked to specify the row number of the entry you wish
+          to modify.
+        - After specifying the row number, you will be prompted to enter the
+          new values for the entry.
+
+    {Fore.BLUE} E. Exit Program:{Style.RESET_ALL}
 
        - Close the application. Don't worry; all your data is stored! ✨
     """
@@ -135,7 +147,7 @@ def get_menu_user_choice():
         try:
             choice_message = (
                 Fore.BLUE + Style.BRIGHT +
-                "\nEnter your choice (0-4 or E) and press enter:\n" +
+                "\nEnter your choice (0-5 or E) and press enter:\n" +
                 Style.RESET_ALL
             )
             user_input = input(choice_message).strip().upper()
@@ -148,7 +160,7 @@ def get_menu_user_choice():
             if not user_input:
                 raise ValueError(
                     Fore.LIGHTRED_EX +
-                    "Empty input:  enter a number between 0 and 4 or E, "
+                    "Empty input:  enter a number between 0 and 5 or E, "
                     "without spaces or special characters.\n" +
                     Style.RESET_ALL
                 )
@@ -156,7 +168,7 @@ def get_menu_user_choice():
             if not is_valid_number(user_input):
                 raise ValueError(
                     Fore.LIGHTRED_EX +
-                    "Invalid input:  enter a number between 0 and 4 or E, "
+                    "Invalid input:  enter a number between 0 and 5 or E, "
                     "without spaces or special characters.\n" +
                     Style.RESET_ALL
                 )
@@ -196,6 +208,9 @@ def handle_user_option(option):
 
     elif option == 4:
         return finance_manager.generate_monthly_finance_report()
+    
+    elif option == 5:
+        return finance_manager.mofidy_entry()
 
 
 def validate_user_numbers_choice(user_input):
@@ -707,6 +722,39 @@ class FinanceManager:
                     f"{Style.RESET_ALL}"
                     )
                 return prompt_for_menu_or_exit()
+    
+    def mofidy_entry(self):
+        """Allows the user to modify existing income or expense entries."""
+
+        while True:
+            print(f"""
+            {Fore.GREEN + Style.BRIGHT}==== MODIFY INCOME OR EXPENSE ENTRY ===={Style.RESET_ALL}
+
+            1. Modify Income Entry
+            2. Modify Expense Entry
+            M. Return to Menu
+            E. Exit Program
+            """)
+
+            choice_message = (
+                Fore.BLUE + Style.BRIGHT +
+                "Enter your choice (1, 2, M, or E) and press enter:\n" +
+                Style.RESET_ALL
+            )
+            user_input = input(choice_message).strip().lower()
+
+            if user_input == 1:
+                pass
+            elif user_input == 2:
+                pass
+            elif user_input == "M":
+                pass
+            elif user_input == "E":
+                pass
+            else:
+                print(Fore.LIGHTRED_EX +
+                "Invalid input. Please enter 1, 2, M, or E." +
+                Style.RESET_ALL)
 
 
 def main():
