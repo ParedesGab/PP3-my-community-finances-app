@@ -127,7 +127,8 @@ def get_menu_user_choice():
     Press 1 to add a new income entry (Month, Source, and Amount).
     Press 2 to add a new expense entry (Month, Category, Description, Amount).
     Press 3 to view all your income and expenses.
-    Press 4 to check your Monthly Finance Report! 
+    Press 4 to check your Monthly Finance Report!
+    Press 5 to DELETE ALL income and expense entries.
     Press E to exit the program.
         """)
 
@@ -710,7 +711,41 @@ class FinanceManager:
                     )
                 return prompt_for_menu_or_exit()
 
-# CALL WELCOME AND USER CHOICE functions
+    def delete_all_entries(self):
+        """Deletes all income and expense entries after confirmation."""
+        while True:
+            confirmation = input(
+                Fore.YELLOW +
+                "Are you sure you want to delete ALL income and expense entries? (yes/no): " +
+                Style.RESET_ALL
+            ).strip().lower()
+
+            if confirmation == "yes":
+                try:
+                    income_worksheet = SHEET.worksheet("income")
+                    expenses_worksheet = SHEET.worksheet("expenses")
+
+                    # Clear all rows except the header row
+                    income_worksheet.delete_rows(2, income_worksheet.row_count)
+                    expenses_worksheet.delete_rows(2, expenses_worksheet.row_count)
+
+                    print(Fore.GREEN + "All income and expense entries deleted successfully." + Style.RESET_ALL)
+                    # Exit the delete function after successful deletion
+                    return  
+
+                except Exception as e:
+                    print(Fore.LIGHTRED_EX + f"An error occurred during deletion: {e}" + Style.RESET_ALL)
+                    return  # Exit the delete function if an error occurs
+
+            elif confirmation == "no":
+                print(Fore.BLUE + "Deletion cancelled." + Style.RESET_ALL)
+                # Exit the delete function if the user chooses no
+                return  
+
+            else:
+                print(Fore.LIGHTRED_EX + "Invalid input. Please enter 'yes' or 'no'." + Style.RESET_ALL)
+
+
 def main():
     welcome()
     get_menu_user_choice()
