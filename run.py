@@ -45,7 +45,6 @@ def prompt_for_menu_or_exit():
     """Prompts the user to return to the Menu or to exit the program."""
     print("-" * 75)
     print(Fore.BLUE + "\nWhat would like to do next?" + Style.RESET_ALL)
-    
     while True:
         print(f"""
         Press M to go back to the MENU.
@@ -53,7 +52,7 @@ def prompt_for_menu_or_exit():
         """)
         try:
             choice_message = (
-                Fore.BLUE + Style.BRIGHT +  
+                Fore.BLUE + Style.BRIGHT +
                 "Enter your choice (M or E) and press enter:\n" +
                 Style.RESET_ALL
             )
@@ -63,10 +62,10 @@ def prompt_for_menu_or_exit():
             elif user_input == "E":
                 exit_program()
             else:
-                raise ValueError(Fore.LIGHTRED_EX +
-                "Invalid input. Please press 'M' to return to the menu or 'E' to exit." +
-                 Style.RESET_ALL
-                )
+                raise ValueError(
+                    Fore.LIGHTRED_EX +
+                    "Invalid input. Please press 'M' to return to the menu"
+                    "or 'E' to exit." + Style.RESET_ALL)
         except ValueError as error:
             print(error)
 
@@ -112,8 +111,8 @@ def show_application_instructions():
             E.g., 1500.
 
             Note:
-            - Category & Description inputs are flexible but informative entries
-              will make your financial tracking more useful.
+            - Category and Description inputs are flexible but creating
+              informative entries make your financial tracking more useful.
             - The amount is displayed and stored following the
               standard European currency format (i.e., 1.500,00 EUR).
             - All input fields are required (empty entries are not valid).
@@ -148,9 +147,7 @@ def validate_user_numbers_choice(user_input):
         raise ValueError(
             Fore.LIGHTRED_EX +
             "Invalid input: enter a number between 0 and 4 or E, "
-            "without spaces or special characters.\n" +
-             Style.RESET_ALL
-             )
+            "without spaces or special characters.\n" + Style.RESET_ALL)
 
 
 def is_valid_number(input_value):
@@ -163,17 +160,18 @@ def is_valid_number(input_value):
 class FinanceManager:
 
     def __init__(self):
+        # Get the income and expenses worksheets
         self.income_worksheet = SHEET.worksheet("incomes")
         self.expenses_worksheet = SHEET.worksheet("expenses")
 
-    def get_worksheet_data(self, worksheet):
-        """Gets all data from a worksheet"""
-        worksheet = SHEET.worksheet(worksheet)
-        all_values = worksheet.get_all_values()
+    def get_worksheet_data(self, worksheet_name):
+        """Gets all data from a specified worksheet"""
+        worksheet_name = SHEET.worksheet(worksheet_name)
+        all_values = worksheet_name.get_all_values()
         return all_values
 
     def add_new_income_to_income_worksheet(self):
-        """Adds a new income record to the "income" worksheet."""
+        """Adds a new income record to the "incomes" worksheet."""
         income_message = f"""
     {Fore.GREEN + Style.BRIGHT}==== ADD A NEW INCOME RECORD FOR 2025 ====
         {Style.RESET_ALL}
@@ -181,13 +179,11 @@ class FinanceManager:
 
         → {Fore.YELLOW}Month{Style.RESET_ALL}: The month the income was earned.
           (Enter complete month name. E.g, January).
-
         → {Fore.YELLOW}Source{Style.RESET_ALL}: The source of the income.
-          (Ensure it is at least 4 characters long, includes valid words,
-          and isn't entirely numeric. E.g., Salary, Freelance, Etsy).
-
-        → {Fore.YELLOW}Amount{Style.RESET_ALL}: The amount earned in EUR.
-          (E.g., 1500.00).
+          (Ensure it is at least 4 characters long, and isn't entirely numeric.
+          E.g., Salary, Freelance, Etsy).
+        → {Fore.YELLOW}Amount{Style.RESET_ALL}: The amount earned (e.g, 1500).
+          (It is displayed in EU currency format. I.e, 1.500, 00 EUR).
         """
         print(income_message)
 
@@ -204,13 +200,15 @@ class FinanceManager:
 
         print(f"""
         {Fore.GREEN + Style.BRIGHT}
-        New income for {month}, 2025 from source: {source} (EUR {formatted_amount})
+        New income for {month}, 2025 from '{source}' (EUR {formatted_amount})
         stored successfully!
         {Style.RESET_ALL}
         """)
 
         print("-" * 75)
-        print(Fore.BLUE + "\nWhat would like to do next?" + Style.RESET_ALL)
+        print(
+            Fore.BLUE + "\nWhat would like to do next?" +
+            Style.RESET_ALL)
 
         # Prompt the user to choose what to do next
         while True:
@@ -221,10 +219,9 @@ class FinanceManager:
             Press E to EXIT the program.
             """)
             choice_message = (
-                Fore.BLUE + Style.BRIGHT +  
+                Fore.BLUE + Style.BRIGHT +
                 "Enter your choice (1, 2, M or E) and press enter:\n" +
-                Style.RESET_ALL
-            )
+                Style.RESET_ALL)
             user_input = input(choice_message).strip().upper()
             if user_input == "1":
                 return self.add_new_income_to_income_worksheet()
@@ -235,7 +232,10 @@ class FinanceManager:
             elif user_input == "E":
                 return exit_program()
             else:
-                print(Fore.LIGHTRED_EX + "Invalid input. Please enter 1, 2, M, or E." + Style.RESET_ALL)
+                print(
+                    Fore.LIGHTRED_EX +
+                    "Invalid input. Please enter 1, 2, M, or E." +
+                    Style.RESET_ALL)
 
     def add_new_expense_to_expense_worksheet(self):
         """Adds a new expense record to the "expense" worksheet."""
@@ -248,13 +248,13 @@ class FinanceManager:
         → {Fore.YELLOW}Month{Style.RESET_ALL}: The month the income was earned.
           (Enter the complete month name. E.g, January).
         → {Fore.YELLOW}Category{Style.RESET_ALL}: The source of the income.
-          (Ensure it is at least 4 characters long, includes valid words,
-          and isn't entirely numeric. E.g., Salary, Freelance).
+          (Ensure it is at least 4 characters long, and isn't entirely numeric.
+          E.g., Salary, Freelance).
         → {Fore.YELLOW}Description{Style.RESET_ALL}: A expense description.
-          (Ensure it is at least 4 characters long, includes valid words,
-          and isn't entirely numeric. E.g., Weekly groceries).
-        → {Fore.YELLOW}Amount{Style.RESET_ALL}: The amount earned in EUR.
-          (E.g., 1500.00).
+          (Ensure it is at least 4 characters long, and isn't entirely numeric.
+          E.g., Weekly groceries).
+        → {Fore.YELLOW}Amount{Style.RESET_ALL}: The amount earned (e.g, 1500).
+          (It is displayed in EU currency format. I.e, 1.500, 00 EUR).
         """)
 
         month = self.get_and_validate_month_input()
@@ -270,8 +270,8 @@ class FinanceManager:
 
         print(f"""
         {Fore.GREEN + Style.BRIGHT}
-        New expense for {month}, 2025 with category: '{category}'
-        and description: '{description}' ({formatted_amount} EUR), added successfully!
+        New expense for {month}, 2025 for '{category}' ('{description}',
+        {formatted_amount} EUR), added successfully!
         {Style.RESET_ALL}
         """)
 
@@ -287,7 +287,7 @@ class FinanceManager:
             Press E to EXIT the program.
             """)
             choice_message = (
-                Fore.BLUE + Style.BRIGHT +  
+                Fore.BLUE + Style.BRIGHT +
                 "Enter your choice (1, 2, M or E) and press enter:\n" +
                 Style.RESET_ALL
             )
@@ -301,16 +301,16 @@ class FinanceManager:
             elif user_input == "E":
                 return exit_program()
             else:
-                print(Fore.LIGHTRED_EX + "Invalid input. Please enter 1, 2, M, or E." + Style.RESET_ALL)
-
+                print(
+                    Fore.LIGHTRED_EX +
+                    "Invalid input. Please enter 1, 2, M, or E." +
+                    Style.RESET_ALL)
     def get_and_validate_month_input(self):
         """Prompts the user to enter a month name and validates the input."""
         while True:
-
             prompt_month = (
                 Fore.BLUE + "Enter the month name (e.g., january):\n" +
-                Style.RESET_ALL
-            )
+                Style.RESET_ALL)
 
             user_month = input(prompt_month).strip().lower()
 
@@ -323,8 +323,8 @@ class FinanceManager:
                 print(
                     Fore.LIGHTRED_EX +
                     "Invalid input: Enter a month name." +
-                    Style.RESET_ALL
-                )
+                    Style.RESET_ALL)
+
     def get_and_validate_input(self, prompt, min_length=4, require_alpha=True):
         """
         Prompts the user for input and validates it based on various criteria.
@@ -335,8 +335,8 @@ class FinanceManager:
             if len(user_input) < min_length:
                 print(f"""
                     {Fore.LIGHTRED_EX}
-                    Invalid input: Enter a word with minimun {min_length} characters long,
-                    contain alphabetic characters, and not be purely numeric.
+                    Invalid input: Must be at least {min_length} characters,
+                    contain letters, and not be all numbers.
                     {Style.RESET_ALL}
                 """)
                 continue
@@ -344,8 +344,8 @@ class FinanceManager:
             if require_alpha and not re.search('[a-zA-Z]', user_input):
                 print(f"""
                     {Fore.LIGHTRED_EX}
-                    Invalid input: Minimun {min_length} characters long,
-                    contain alphabetic characters, and not be entirely numeric.
+                    Invalid input: Must be at least {min_length} characters,
+                    contain letters, and not be all numbers.
                     {Style.RESET_ALL}
                 """)
                 continue
@@ -362,7 +362,7 @@ class FinanceManager:
 
     def get_and_validate_source_input(self):
         """
-        Ensures that source, description and category inputs meet minimum length
+        Ensures that source, description, category inputs meet minimum length
         and alphabetic character requirements.
         """
         prompt_source = (
@@ -372,7 +372,7 @@ class FinanceManager:
         return self.get_and_validate_input(prompt_source)
     
     def get_and_validate_category_input(self):
-        """Prompts the user to enter a category name and validates the input."""
+        """Prompts the user to enter a category and validates the input."""
         prompt_category = (
             Fore.BLUE + "Enter the category (minimum 4 characters):\n" +
             Style.RESET_ALL
@@ -380,7 +380,7 @@ class FinanceManager:
         return self.get_and_validate_input(prompt_category)
 
     def get_and_validate_description_input(self):
-        """Prompts the user to enter a description name and validates the input."""
+        """Prompts the user to enter a description and validates the input."""
         prompt_description = (
             Fore.BLUE + "Enter the description (minimum 4 characters):\n" +
             Style.RESET_ALL
@@ -388,10 +388,13 @@ class FinanceManager:
         return self.get_and_validate_input(prompt_description)
 
     def get_validated_and_normalized_amount(self):
-        """Prompts the user to enter an amount (EUR) and normalizes and validates the input."""
+        """
+        Prompts the user to enter an amount, normalizes it,
+        and validates the input.
+        """
         while True:
             prompt_amount = (
-                Fore.BLUE + "Enter a positive amount (EUR):\n" +
+                Fore.BLUE + "Enter an amount (EUR):\n" +
                 Style.RESET_ALL
             )
             amount_input = input(prompt_amount).strip()
@@ -407,7 +410,10 @@ class FinanceManager:
 
             # Reject negative amounts
             if amount_input.startswith("-"):
-                print(Fore.LIGHTRED_EX + "Invalid amount: Amount must be positive." + Style.RESET_ALL)
+                print(
+                    Fore.LIGHTRED_EX +
+                    "Invalid amount: Amount must be positive." +
+                    Style.RESET_ALL)
                 continue
 
             # Remove all non-digit characters (but keep . and , and spaces)
@@ -416,7 +422,8 @@ class FinanceManager:
             # Remove spaces as potential thousands separators
             amount_input = amount_input.replace(" ", "")
 
-            # Check if there is any comma and no dot. If yes, replace the comma with dot
+            # Check if there is any comma and no dot
+            # If yes, replace the comma with dot
             if "," in amount_input and "." not in amount_input:
                 amount_input = amount_input.replace(",", ".")
 
@@ -424,16 +431,18 @@ class FinanceManager:
             elif "." in amount_input and "," not in amount_input:
                 pass
 
-            # Check if there are both comma and dot. If yes, then it can be two cases:
-            # Case a) 12,345.67 (comma is thousand separator and dot is decimal separator)
-            # Case b) 12.345,67 (dot is thousand separator and comma is decimal separator)
+            # Check if there are both comma and dot. If yes, then:
+            # Case a) 12,345.67 (US format)
+            # Case b) 12.345,67 (EU format)
 
             elif "." in amount_input and "," in amount_input:
 
-                # find the rightmost occurrence INDEX of either a "." or a ","
-                last_separator = max(amount_input.rfind("."), amount_input.rfind(","))
+                # Find the rightmost occurrence INDEX of either a "." or a ","
+                last_dot = amount_input.rfind(".")
+                last_comma = amount_input.rfind(",")
+                last_separator = max(last_dot, last_comma)
 
-                # Case a) e.g.: 12,345.67 (USA convention)
+                # Case a) 12,345.67 (US format)
                 if amount_input[last_separator] == ".":
                     amount_input = amount_input.replace(",", "")
                     # Replace only the first found dot
@@ -441,37 +450,34 @@ class FinanceManager:
                 else:
                     amount_input = amount_input.replace(".", "")
 
-                # Ensure amount_input can be used with float()
+            # Ensure amount_input can be used with float()
             amount_input = amount_input.replace(",", ".")
 
             try:
                 amount = float(amount_input)
-                # if amount < 0:
-                #     print(
-                #     Fore.LIGHTRED_EX +
-                #     "Invalid amount: Amount cannot be negative." +
-                #     Style.RESET_ALL
-                #     )
-                #     continue
                 return amount
             except ValueError:
-                print(Fore.LIGHTRED_EX + "Invalid amount format. Please use digits, '.', or ',' as separators.\n" + Style.RESET_ALL)
+                print(Fore.LIGHTRED_EX +
+                "Invalid amount format. Use digits, '.', or ',' as separators" +
+                Style.RESET_ALL)
 
     def format_amount_for_display(self, amount):
         """Formats the amount for display (European format)."""
-        formatted_amount = "{:,.2f}".format(amount).replace(",", "X").replace(".", ",").replace("X", ".")
+        fmt = "{:,.2f}".format(amount)
+        fmt_amount = fmt.replace(",", "X").replace(".", ",").replace("X", ".")
 
         # Formated to standard European style
-        return formatted_amount 
+        return fmt_amount
 
     def display_worksheet(self, worksheet):
         """Gets data from a given worksheet."""
         all_worksheet_values = self.get_worksheet_data(worksheet)
 
         if not all_worksheet_values:
-            print(Fore.LIGHTRED_EX +
-            "No data available in this worksheet." + 
-            Style.RESET_ALL)
+            print(
+                Fore.LIGHTRED_EX +
+                "No data available in this worksheet." +
+                Style.RESET_ALL)
             return
 
         # Get header row
@@ -503,18 +509,20 @@ class FinanceManager:
             if row[0].lower() == month.lower():
                 try:
                     # Get the amount from the worksheet as a string
-                    amount_string= row[amount_col_index]
+                    amount= row[amount_col_index]
                     # Normalize the string (handle European format)
-                    amount_string = amount_string.replace(".", "").replace(",", ".")
+                    amount_norm = amount.replace(".", "").replace(",", ".")
                     # Convert string float after normalization
-                    total_amount += float(amount_string)
+                    total_amount += float(amount_norm)
                 except ValueError as error:
                     print(
                         f"{error}"
                         f"Could not convert amount in {row} to a number."
                     )
-                except Exception as e: # Catch any other potential errors
-                    print(Fore.LIGHTRED_EX + f"An error occurred: {e}\n" + Style.RESET_ALL)
+                except Exception as e:
+                    print(
+                        Fore.LIGHTRED_EX + f"An error occurred: {e}\n" +
+                     Style.RESET_ALL)
         return total_amount
 
     def calc_expenses_by_category(self, expenses_data, month):
@@ -526,17 +534,18 @@ class FinanceManager:
                 category = row[1]
                 try:
                     # Get the amount from the worksheet as a string
-                    amount_string = row[3]
+                    amount = row[3]
                     # Normalize the string (handle European format)
-                    amount_string = amount_string.replace(".", "").replace(",", ".")
+                    amount_norm = amount.replace(".", "").replace(",", ".")
                     # Convert string float after normalization
-                    amount = float(amount_string)
+                    amount = float(amount_norm)
                 
                 except ValueError:
-                    print(
-                        f"Warning: Could not convert amount in row"
-                        f"{row} to a number."
-                    )
+                    print(f"""
+                    {Fore.YELLOW} Warning: Could not convert amount in {row}
+                    to a number."
+                    {Style.RESET_ALL}
+                    """)
                     continue
                 if category in expenses_by_category:
                     expenses_by_category[category] += amount
@@ -559,15 +568,14 @@ class FinanceManager:
 
     def show_monthly_expenses_details(self, month):
         """Displays detailed expense information for a given month."""
-        print(f"""
-        {Fore.GREEN + Style.BRIGHT}
-        Calculating Your {month} expenses by category...
-        {Style.RESET_ALL}
-        """)
+        print(
+            Fore.GREEN + Style.BRIGHT +
+            f"\nCalculating Your {month} expenses by category...\n" +
+            Style.RESET_ALL)
 
         # Show expenses per category
-        expenses_data = self.get_worksheet_data("expenses")
-        expenses_by_category = self.calc_expenses_by_category(expenses_data, month)
+        exp_data = self.get_worksheet_data("expenses")
+        expenses_by_category = self.calc_expenses_by_category(exp_data, month)
 
         if not expenses_by_category:
             print(Fore.YELLOW + f"No expenses found for {month}!" +
@@ -581,9 +589,9 @@ class FinanceManager:
         max_category, max_amount = self.max_expense_by_category(
             expenses_by_category
             )
-        print(f"""{Fore.GREEN + Style.BRIGHT}
-        🔥 HIGHEST EXPENSE: {Style.RESET_ALL}{max_category.upper()} ({max_amount:.2f} EUR)
-        """)
+        highest = f"""
+        {Fore.GREEN + Style.BRIGHT}🔥 HIGHEST EXPENSE: {Style.RESET_ALL}"""
+        print(f"{highest} {max_category.upper()} ({max_amount:.2f} EUR)\n")
 
     def generate_monthly_finance_report(self):
         """Generates and displays the monthly finance report."""
@@ -608,23 +616,35 @@ class FinanceManager:
             if income_month_data_exists or income_month_data_exists:
                 print(
                     Fore.GREEN + Style.BRIGHT +
-                    f"Calculating your {month} income and expenses..." +
+                    f"\nCalculating your {month} income and expenses...\n" +
                     Style.RESET_ALL)
                 
                 if not income_month_data_exists:
-                    print(Fore.YELLOW + f"Warning: NO INCOME data found for {month}!\n" + Style.RESET_ALL)
+                    print(
+                        Fore.YELLOW +
+                        f"Warning: NO INCOME data found for {month}!\n" +
+                         Style.RESET_ALL)
                     total_month_income = 0
                 else:
-                    total_month_income = self.calculate_total_amount(income_data, month, 2)
+                    total_month_income = self.calculate_total_amount(
+                        income_data, month, 2)
+                    formatted_income = self.format_amount_for_display(
+                        total_month_income)
                 
                 if not expense_month_data_exists:
-                    print(Fore.YELLOW + f"Warning: NO EXPENSES data found for {month}!\n" + Style.RESET_ALL)
+                    print(
+                        Fore.YELLOW +
+                         f"Warning: NO EXPENSES data found for {month}!\n" +
+                          Style.RESET_ALL)
                     total_month_expenses = 0
                 else:
-                    total_month_expenses = self.calculate_total_amount(expenses_data, month, 3)
+                    total_month_expenses = self.calculate_total_amount(
+                        expenses_data, month, 3)
+                    formatted_expenses = self.format_amount_for_display(
+                        total_month_expenses)
 
-                print(f"✅ TOTAL INCOME:{total_month_income: .2f} EUR")
-                print(f"✅ TOTAL EXPENSES:{total_month_expenses: .2f} EUR\n")
+                print(f"✅ TOTAL INCOME: {formatted_income} EUR")
+                print(f"✅ TOTAL EXPENSES: {formatted_expenses} EUR\n")
 
                 # Calculate cash balance
                 print(
@@ -633,22 +653,19 @@ class FinanceManager:
                     Style.RESET_ALL
                     )
                 cash_balance = total_month_income - total_month_expenses
-                #cash_balance = cash_balance.replace(".", "").replace(",", ".")
 
                 if cash_balance >= 0:
-                    print(
-                        f"🎉🎉 CONGRATULATIONS: Positive Cash Balance!:"
-                        f"{cash_balance: .2f} EUR\n"
-                        )
-                else:
-                    print(
-                        Fore.LIGHTRED_EX +
-                        f"🚨🚨 ALERT: Negative Cash Balance!:"
-                        f"{cash_balance: .2f} EUR\n" +
-                        Style.RESET_ALL
-                    )
+                    message = f"""
+                    🎉🎉 CONGRATS! Positive Balance!: {cash_balance:.2f} EUR
+                    """
+                    print(message)
+                # else:
+                #     # print(
+                #     # # "🚨🚨 ALERT: Negative Cash Balance!: 
+                #     # # {cash_balance: .2f} EUR {Style.RESET_ALL}
+                #     # # """)
 
-                monthly_expenses_details = self.show_monthly_expenses_details(month)
+                self.show_monthly_expenses_details(month)
 
                 return prompt_for_menu_or_exit()
 
@@ -733,7 +750,7 @@ def get_menu_user_choice():
 
         except ValueError as error:
             print(error)
-            
+
 
 def main():
     welcome()
