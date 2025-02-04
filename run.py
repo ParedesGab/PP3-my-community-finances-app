@@ -27,7 +27,7 @@ def welcome():
 
     This expense tracker will help you monitor your 2025 incomes and expenses!
     Are you ready to understand your spending habits?\n
-    Let's go!🚀
+    Let's go! 🚀
     """)
 
 
@@ -47,25 +47,41 @@ def show_application_instructions():
             E.g., January, February.
          → {Fore.YELLOW}Source{Style.RESET_ALL}: The source of the income.
             E.g., Salary, Freelance.
-         → {Fore.YELLOW}Amount{Style.RESET_ALL}: The amount earned in EUR.
-            E.g., 10.00.
+         → {Fore.YELLOW}Amount{Style.RESET_ALL}: The amount earned.
+            E.g., 1500.
+
+            Note:
+            - Source input is flexible, but informative entries will make your
+              financial tracking more useful.
+            - The amount is displayed and stored following the
+              standard European currency format (i.e., 1.500,00 EUR).
+            - All input fields are required (empty entries are not valid).
 
     {Fore.BLUE} 2. Add New Expense:{Style.RESET_ALL}
 
        - You can record your expenses to monitor your spending in 2025.
        - Each expense entry consists of:
-         → {Fore.YELLOW}Month{Style.RESET_ALL}: The month the expense occurred.
+         → {Fore.YELLOW}Month{Style.RESET_ALL}: Expense month.
             E.g., January, February.
-         → {Fore.YELLOW}Category{Style.RESET_ALL}: The category of the expense.
+         → {Fore.YELLOW}Category{Style.RESET_ALL}: Expense category.
             E.g., Rent, Groceries.
          → {Fore.YELLOW}Description{Style.RESET_ALL}: Expense description.
+            Use this field to provide context.
             E.g., Monthly Rent.
-         → {Fore.YELLOW}Amount{Style.RESET_ALL}: The amount spent in EUR.
-            E.g., 10.00.
+         → {Fore.YELLOW}Amount{Style.RESET_ALL}: The amount spent.
+            E.g., 1500.
+
+            Note:
+            - Category & Description inputs are flexible but informative entries
+              will make your financial tracking more useful.
+            - The amount is displayed and stored following the
+              standard European currency format (i.e., 1.500,00 EUR).
+            - All input fields are required (empty entries are not valid).
 
     {Fore.BLUE} 3. Generate Monthly Finance Report:{Style.RESET_ALL}
 
        - Select a month to generate a detailed income and expenses report.
+         E.g., January, February.
        - The 2025 report will display:
          → Total Income for the selected month.
          → Total Expenses for the selected month.
@@ -75,15 +91,14 @@ def show_application_instructions():
 
     {Fore.BLUE} 4. Display All Income and Expenses:{Style.RESET_ALL}
 
-       - View all your records from the "income" and "expenses" worksheets.
-       - This option shows all your data in a table format.
+       - View all your stored income" and "expenses" records.
+       - This option shows all your data in a tabular format.
 
     {Fore.BLUE} E. Exit Program:{Style.RESET_ALL}
 
-       - Close the application. Don't worry; all your data is stored! ✨
+       - Close the application. Don't worry; all your data is safely stored! ✨
     """
     print(instructions)
-    
     prompt_for_menu_or_exit()
 
 
