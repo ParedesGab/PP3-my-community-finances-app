@@ -460,9 +460,14 @@ class FinanceManager:
             if not amount_input:
                 print(
                     Fore.LIGHTRED_EX +
-                    "Empty amount: Please use digits, '.', or ',' as separators." +
+                    "Empty amount: Please enter a positive amount." +
                     Style.RESET_ALL
                 )
+                continue
+
+            # Reject negative amounts
+            if amount_input.startswith("-"):
+                print(Fore.LIGHTRED_EX + "Invalid amount: Amount must be positive." + Style.RESET_ALL)
                 continue
 
             # Remove all non-digit characters (but keep . and , and spaces)
@@ -501,8 +506,13 @@ class FinanceManager:
 
             try:
                 amount = float(amount_input)
-                if amount < 0:
-                    raise ValueError("Amount cannot be negative.")
+                # if amount < 0:
+                #     print(
+                #     Fore.LIGHTRED_EX +
+                #     "Invalid amount: Amount cannot be negative." +
+                #     Style.RESET_ALL
+                #     )
+                #     continue
                 return amount
             except ValueError:
                 print(Fore.LIGHTRED_EX + "Invalid amount format. Please use digits, '.', or ',' as separators.\n" + Style.RESET_ALL)
