@@ -160,81 +160,6 @@ def is_valid_number(input_value):
     return True
 
 
-def handle_user_option(option):
-    """Handles user option."""
-    finance_manager = FinanceManager()
-
-    if option == 0:
-        show_application_instructions()
-
-    elif option == 1:
-        finance_manager.add_new_income_to_income_worksheet()
-
-    elif option == 2:
-        finance_manager.add_new_expense_to_expense_worksheet()
-
-    elif option == 3:
-        finance_manager.display_worksheet("incomes")
-        finance_manager.display_worksheet("expenses")
-        # Prompt user for next action after both are displayed
-        prompt_for_menu_or_exit()
-
-    elif option == 4:
-        return finance_manager.generate_monthly_finance_report()
-
-
-def get_menu_user_choice():
-    """Gets the user's choice from the menu options."""
-    while True:
-        print(f"""
-    {Fore.GREEN + Style.BRIGHT}==== MENU OPTIONS ===={Style.RESET_ALL}
-
-    Press 0 to check the application instructions.
-    Press 1 to add a new income entry (Month, Source, and Amount).
-    Press 2 to add a new expense entry (Month, Category, Description, Amount).
-    Press 3 to view all your incomes and expenses.
-    Press 4 to check YOUR MONTHLY FINANCE REPORT.
-    Press E to exit the program.
-        """)
-
-        try:
-            choice_message = (
-                Fore.BLUE + Style.BRIGHT +
-                "\nEnter your choice (0-4 or E) and press enter:\n" +
-                Style.RESET_ALL
-            )
-            user_input = input(choice_message).strip().upper()
-
-            if user_input == "E":
-                return exit_program()
-
-        # Check for empty input
-            if not user_input:
-                raise ValueError(
-                    Fore.LIGHTRED_EX +
-                    "Empty input: enter a number between 0 and 4 or E, "
-                    "without spaces or special characters.\n" +
-                    Style.RESET_ALL
-                )
-
-            if not is_valid_number(user_input):
-                raise ValueError(
-                    Fore.LIGHTRED_EX +
-                    "Invalid input: enter a number between 0 and 4 or E, "
-                    "without spaces or special characters.\n" +
-                    Style.RESET_ALL
-                )
-
-            # Convert user input to integer
-            option = int(user_input)
-
-            validate_user_numbers_choice(option)
-            return handle_user_option(option)
-
-        except ValueError as error:
-            print(error)
-
-
 class FinanceManager:
 
     def __init__(self):
@@ -733,7 +658,82 @@ class FinanceManager:
                 {Style.RESET_ALL}"
                 """)
                 return prompt_for_menu_or_exit()
-    
+
+
+def handle_user_option(option):
+    """Handles user option."""
+    finance_manager = FinanceManager()
+
+    if option == 0:
+        show_application_instructions()
+
+    elif option == 1:
+        finance_manager.add_new_income_to_income_worksheet()
+
+    elif option == 2:
+        finance_manager.add_new_expense_to_expense_worksheet()
+
+    elif option == 3:
+        finance_manager.display_worksheet("incomes")
+        finance_manager.display_worksheet("expenses")
+        # Prompt user for next action after both are displayed
+        prompt_for_menu_or_exit()
+
+    elif option == 4:
+        return finance_manager.generate_monthly_finance_report()
+
+
+def get_menu_user_choice():
+    """Gets the user's choice from the menu options."""
+    while True:
+        print(f"""
+    {Fore.GREEN + Style.BRIGHT}==== MENU OPTIONS ===={Style.RESET_ALL}
+
+    Press 0 to check the application instructions.
+    Press 1 to add a new income entry (Month, Source, and Amount).
+    Press 2 to add a new expense entry (Month, Category, Description, Amount).
+    Press 3 to view all your incomes and expenses.
+    Press 4 to check YOUR MONTHLY FINANCE REPORT.
+    Press E to exit the program.
+        """)
+
+        try:
+            choice_message = (
+                Fore.BLUE + Style.BRIGHT +
+                "\nEnter your choice (0-4 or E) and press enter:\n" +
+                Style.RESET_ALL
+            )
+            user_input = input(choice_message).strip().upper()
+
+            if user_input == "E":
+                return exit_program()
+
+        # Check for empty input
+            if not user_input:
+                raise ValueError(
+                    Fore.LIGHTRED_EX +
+                    "Empty input: enter a number between 0 and 4 or E, "
+                    "without spaces or special characters.\n" +
+                    Style.RESET_ALL
+                )
+
+            if not is_valid_number(user_input):
+                raise ValueError(
+                    Fore.LIGHTRED_EX +
+                    "Invalid input: enter a number between 0 and 4 or E, "
+                    "without spaces or special characters.\n" +
+                    Style.RESET_ALL
+                )
+
+            # Convert user input to integer
+            option = int(user_input)
+
+            validate_user_numbers_choice(option)
+            return handle_user_option(option)
+
+        except ValueError as error:
+            print(error)
+            
 
 def main():
     welcome()
