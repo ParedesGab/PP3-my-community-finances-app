@@ -555,14 +555,14 @@ class FinanceManager:
     
     def max_expense_by_category(self, expenses_by_category):
         """
-        Finds the category with the maximum expense,
-        or None if no expenses.
+        Finds the category with the maximum expense, or None if no expenses.
+        Handles the case where expenses_by_category is empty
         """
-        max_category = max(expenses_by_category, key=expenses_by_category.get)
-        max_amount = expenses_by_category[max_category]
-
         if not expenses_by_category:
             return None, None
+        
+        max_category = max(expenses_by_category, key=expenses_by_category.get)
+        max_amount = expenses_by_category[max_category]
 
         return max_category, max_amount
 
@@ -583,15 +583,24 @@ class FinanceManager:
             return
 
         for category, amount in expenses_by_category.items():
-            print(f"→ {category.upper()}: EUR {amount:.2f}\n")
+             # Format max_amount for display in European format
+            formatted_amount = self.format_amount_for_display(amount)
+            print(f"→ {category.upper()}: {formatted_amount} EUR \n")
 
         # Show max expense by category
         max_category, max_amount = self.max_expense_by_category(
-            expenses_by_category
-            )
+            expenses_by_category)
+        
+        # Format max_amount for display in European format
+        if max_amount is not None:
+            formatted_max_amount = self.format_amount_for_display(max_amount)
+        # Handle None case
+        else:
+            formatted_max_amount = "0.00"  
+
         highest = f"""
         {Fore.GREEN + Style.BRIGHT}🔥 HIGHEST EXPENSE: {Style.RESET_ALL}"""
-        print(f"{highest} {max_category.upper()} ({max_amount:.2f} EUR)\n")
+        print(f"{highest} {max_category.upper()} ({formatted_max_amount} EUR)\n")
 
     def generate_monthly_finance_report(self):
         """Generates and displays the monthly finance report."""
@@ -628,6 +637,7 @@ class FinanceManager:
                 else:
                     total_month_income = self.calculate_total_amount(
                         income_data, month, 2)
+                    # Show the income in European currency format
                     formatted_income = self.format_amount_for_display(
                         total_month_income)
                 
@@ -640,6 +650,7 @@ class FinanceManager:
                 else:
                     total_month_expenses = self.calculate_total_amount(
                         expenses_data, month, 3)
+                    # Show the expenses in European currency format
                     formatted_expenses = self.format_amount_for_display(
                         total_month_expenses)
 
@@ -652,18 +663,13 @@ class FinanceManager:
                     f"\nCalculating Your {month} cash balance...\n" +
                     Style.RESET_ALL
                     )
-                cash_balance = total_month_income - total_month_expenses
+                balance = total_month_income - total_month_expenses
+                formatted_balance = self.format_amount_for_display(balance)
 
-                if cash_balance >= 0:
-                    message = f"""
-                    🎉🎉 CONGRATS! Positive Balance!: {cash_balance:.2f} EUR
-                    """
-                    print(message)
-                # else:
-                #     # print(
-                #     # # "🚨🚨 ALERT: Negative Cash Balance!: 
-                #     # # {cash_balance: .2f} EUR {Style.RESET_ALL}
-                #     # # """)
+                if balance >= 0:
+                    print(f"🎉🎉 Positive Balance!: {formatted_balance} EUR")
+                else:
+                    print(f"🚨🚨 Negative Balance!: {formatted_balance} EUR")
 
                 self.show_monthly_expenses_details(month)
 
