@@ -127,7 +127,8 @@ def get_menu_user_choice():
     Press 1 to add a new income entry (Month, Source, and Amount).
     Press 2 to add a new expense entry (Month, Category, Description, Amount).
     Press 3 to view all your income and expenses.
-    Press 4 to check your Monthly Finance Report!
+    Press 4 to check YOUR MONTHLY FINANCE REPORT.
+    Press 5 to modify an existing Income or Expense entry.
     Press E to exit the program.
         """)
 
@@ -187,10 +188,7 @@ def handle_user_option(option):
         finance_manager.add_new_expense_to_expense_worksheet()
 
     elif option == 3:
-        # Display income data first
         finance_manager.display_worksheet("income")
-
-        # Display expenses data after income is displayed
         finance_manager.display_worksheet("expenses")
 
          # Prompt user for next action after both are displayed
@@ -302,7 +300,7 @@ class FinanceManager:
             elif user_input == "M":
                 return get_menu_user_choice()
             elif user_input == "E":
-                exit_program()
+                return exit_program()
             else:
                 print(Fore.LIGHTRED_EX + "Invalid input. Please enter 1, 2, M, or E." + Style.RESET_ALL)
 
@@ -369,7 +367,7 @@ class FinanceManager:
             elif user_input == "M":
                 return get_menu_user_choice()
             elif user_input == "E":
-                exit_program()
+                return exit_program()
             else:
                 print(Fore.LIGHTRED_EX + "Invalid input. Please enter 1, 2, M, or E." + Style.RESET_ALL)
 
@@ -717,3 +715,6 @@ def main():
 
 
 main()
+
+# if __name__ == "__main__":
+#     main()
