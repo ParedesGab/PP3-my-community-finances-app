@@ -152,7 +152,6 @@ def get_menu_user_choice():
             )
             user_input = input(choice_message).strip().upper()
 
-            # If user presses E
             if user_input == "E":
                 return exit_program()
 
@@ -173,12 +172,10 @@ def get_menu_user_choice():
                     Style.RESET_ALL
                 )
 
-        # Attempt conversion to integer, to handle potential errors
+            # Convert option to integer, to handle potential errors
             option = int(user_input)
 
-        # Validate the option
             validate_user_numbers_choice(option)
-        # Return the handle_user_option function
             return handle_user_option(option)
 
         except ValueError as error:
@@ -187,7 +184,6 @@ def get_menu_user_choice():
 
 def handle_user_option(option):
     """Handles user option."""
-
     finance_manager = FinanceManager()
 
     if option == 0:
@@ -202,8 +198,7 @@ def handle_user_option(option):
     elif option == 3:
         finance_manager.display_worksheet("income")
         finance_manager.display_worksheet("expenses")
-
-         # Prompt user for next action after both are displayed
+        # Prompt user for next action after both are displayed
         prompt_for_menu_or_exit()
 
     elif option == 4:
@@ -218,7 +213,7 @@ def validate_user_numbers_choice(user_input):
     if not 0 <= user_input <= 5:
         raise ValueError(
             Fore.LIGHTRED_EX +
-            "Invalid input:  enter a number between 0 and 4 or E, "
+            "Invalid input:  enter a number between 0 and 5 or E, "
             "without spaces or special characters.\n" +
              Style.RESET_ALL
              )
@@ -255,7 +250,6 @@ class FinanceManager:
 
     def add_new_income_to_income_worksheet(self):
         """Adds a new income record to the "income" worksheet."""
-
         income_message = f"""
     {Fore.GREEN + Style.BRIGHT}==== ADD A NEW INCOME RECORD FOR 2025 ====
         {Style.RESET_ALL}
@@ -321,7 +315,6 @@ class FinanceManager:
 
     def add_new_expense_to_expense_worksheet(self):
         """Adds a new expense record to the "expense" worksheet."""
-
         print(f"""
         {Fore.GREEN + Style.BRIGHT}
         ==== ADD A NEW EXPENSE RECORD FOR 2025 ====
@@ -725,10 +718,10 @@ class FinanceManager:
     
     def mofidy_entry(self):
         """Allows the user to modify existing income or expense entries."""
-
         while True:
             print(f"""
-            {Fore.GREEN + Style.BRIGHT}==== MODIFY INCOME OR EXPENSE ENTRY ===={Style.RESET_ALL}
+            {Fore.GREEN + Style.BRIGHT}
+            ==== MODIFY INCOME OR EXPENSE ENTRY ===={Style.RESET_ALL}
 
             1. Modify Income Entry
             2. Modify Expense Entry
@@ -741,20 +734,33 @@ class FinanceManager:
                 "Enter your choice (1, 2, M, or E) and press enter:\n" +
                 Style.RESET_ALL
             )
-            user_input = input(choice_message).strip().lower()
+            user_input = input(choice_message).strip().upper()
 
-            if user_input == 1:
+            if user_input == "1":
                 pass
-            elif user_input == 2:
+            elif user_input == "2":
                 pass
             elif user_input == "M":
-                pass
+                return get_menu_user_choice()
             elif user_input == "E":
-                pass
+                return  exit_program()
             else:
                 print(Fore.LIGHTRED_EX +
                 "Invalid input. Please enter 1, 2, M, or E." +
                 Style.RESET_ALL)
+
+    def _modify_specific_entry(self, worksheet):
+        """Handles the modification of a specific income or expense entry."""
+        worksheet = SHEET.worksheet(worksheet)
+        # Get all values except header row
+        data = worksheet.get_all_values()[1:]
+
+        if not data:
+            print(Fore.LIGHTRED_EX + "No entries found in this worksheet." + Style.RESET_ALL)
+            return
+
+
+
 
 
 def main():
