@@ -135,7 +135,7 @@ def get_menu_user_choice():
         try:
             choice_message = (
                 Fore.BLUE + Style.BRIGHT +
-                "\nEnter your choice (0-4 or E) and press enter:\n" +
+                "\nEnter your choice (0-5 or E) and press enter:\n" +
                 Style.RESET_ALL
             )
             user_input = input(choice_message).strip().upper()
@@ -148,7 +148,7 @@ def get_menu_user_choice():
             if not user_input:
                 raise ValueError(
                     Fore.LIGHTRED_EX +
-                    "Empty input:  enter a number between 0 and 4 or E, "
+                    "Empty input:  enter a number between 0 and 5 or E, "
                     "without spaces or special characters.\n" +
                     Style.RESET_ALL
                 )
@@ -156,7 +156,7 @@ def get_menu_user_choice():
             if not is_valid_number(user_input):
                 raise ValueError(
                     Fore.LIGHTRED_EX +
-                    "Invalid input:  enter a number between 0 and 4 or E, "
+                    "Invalid input:  enter a number between 0 and 5 or E, "
                     "without spaces or special characters.\n" +
                     Style.RESET_ALL
                 )
@@ -199,14 +199,17 @@ def handle_user_option(option):
 
     elif option == 4:
         return finance_manager.generate_monthly_finance_report()
+    
+    elif option == 5:
+        return finance_manager.delete_all_entries()
 
 
 def validate_user_numbers_choice(user_input):
     """Validates the user's choice."""
-    if not 0 <= user_input <= 4:
+    if not 0 <= user_input <= 5:
         raise ValueError(
             Fore.LIGHTRED_EX +
-            "Invalid input:  enter a number between 0 and 4 or E, "
+            "Invalid input:  enter a number between 0 and 5 or E, "
             "without spaces or special characters.\n" +
              Style.RESET_ALL
              )
@@ -712,7 +715,7 @@ class FinanceManager:
                 return prompt_for_menu_or_exit()
 
     def delete_all_entries(self):
-        """Deletes all income and expense entries after confirmation."""
+        """Deletes all income and expense entries after confirmation using clear()."""
         while True:
             confirmation = input(
                 Fore.YELLOW +
@@ -725,22 +728,23 @@ class FinanceManager:
                     income_worksheet = SHEET.worksheet("income")
                     expenses_worksheet = SHEET.worksheet("expenses")
 
-                    # Clear all rows except the header row
-                    income_worksheet.delete_rows(2, income_worksheet.row_count)
-                    expenses_worksheet.delete_rows(2, expenses_worksheet.row_count)
+                    # Clear all rows except the header row using clear()
+                    if income_worksheet.row_count > 1:  # Check if there is more than the header row
+                        income_worksheet.clear(start='A2', end=f'Z{income_worksheet.row_count}') # Clear from A2 to the last row
+
+                    if expenses_worksheet.row_count > 1:  # Check if there is more than the header row
+                        expenses_worksheet.clear(start='A2', end=f'Z{expenses_worksheet.row_count}') # Clear from A2 to the last row
 
                     print(Fore.GREEN + "All income and expense entries deleted successfully." + Style.RESET_ALL)
-                    # Exit the delete function after successful deletion
-                    return  
+                    return prompt_for_menu_or_exit()
 
                 except Exception as e:
                     print(Fore.LIGHTRED_EX + f"An error occurred during deletion: {e}" + Style.RESET_ALL)
-                    return  # Exit the delete function if an error occurs
+                    return
 
             elif confirmation == "no":
                 print(Fore.BLUE + "Deletion cancelled." + Style.RESET_ALL)
-                # Exit the delete function if the user chooses no
-                return  
+                return prompt_for_menu_or_exit()
 
             else:
                 print(Fore.LIGHTRED_EX + "Invalid input. Please enter 'yes' or 'no'." + Style.RESET_ALL)
