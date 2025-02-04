@@ -604,13 +604,6 @@ class FinanceManager:
                     expenses_by_category[category] = amount
         return expenses_by_category
 
-    def max_expense_by_category(self, expenses_by_category):
-        """Finds the category with the maximum expense"""
-        max_category = max(expenses_by_category, key=expenses_by_category.get)
-        max_amount = expenses_by_category[max_category]
-
-        return max_category, max_amount
-
     def show_monthly_expenses_details(self, month):
         """Displays detailed expense information for a given month."""
         print(
@@ -630,10 +623,22 @@ class FinanceManager:
         max_category, max_amount = self.max_expense_by_category(
             expenses_by_category
             )
-        print(
-            f"{Fore.GREEN + Style.BRIGHT}🔥 HIGHEST EXPENSE:{Style.RESET_ALL} "
-            f"{max_category.upper()} ({max_amount:.2f} EUR)\n"
-        )
+        print(f"""{Fore.GREEN + Style.BRIGHT}
+        🔥 HIGHEST EXPENSE: {Style.RESET_ALL}{max_category.upper()} ({max_amount:.2f} EUR)
+        """)
+
+    def max_expense_by_category(self, expenses_by_category):
+        """
+        Finds the category with the maximum expense,
+        or None if no expenses.
+        """
+        max_category = max(expenses_by_category, key=expenses_by_category.get)
+        max_amount = expenses_by_category[max_category]
+
+        if not expenses_by_category:
+            return None, None
+
+        return max_category, max_amount
 
     def generate_monthly_finance_report(self):
         """Generates and displays the monthly finance report."""
