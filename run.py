@@ -31,6 +31,46 @@ def welcome():
     """)
 
 
+def exit_program():
+    exit_message = f"""
+    {Fore.GREEN + Style.BRIGHT}
+    ✨ Your finances are in good hands ✨
+        Goodbye and See you next time!{Style.RESET_ALL}
+    """
+    print(exit_message)
+    exit()
+
+
+def prompt_for_menu_or_exit():
+    """Prompts the user to return to the Menu or to exit the program."""
+    print("-" * 75)
+    print(Fore.BLUE + "\nWhat would like to do next?" + Style.RESET_ALL)
+    
+    while True:
+        print(f"""
+        Press M to go back to the MENU.
+        Press E to EXIT the program.
+        """)
+        try:
+            choice_message = (
+                Fore.BLUE + Style.BRIGHT +  
+                "Enter your choice (M or E) and press enter:\n" +
+                Style.RESET_ALL
+            )
+            user_input = input(choice_message).strip().upper()
+            if user_input == "M":
+                return get_menu_user_choice()
+            elif user_input == "E":
+                exit_program()
+            else:
+                raise ValueError(Fore.LIGHTRED_EX +
+                "Invalid input. Please press 'M' to return to the menu or 'E' to exit." +
+                 Style.RESET_ALL
+                )
+        except ValueError as error:
+            print(error)
+
+
 def show_application_instructions():
     """Displays instructions for how to use the application."""
     instructions = f"""
@@ -102,34 +142,45 @@ def show_application_instructions():
     prompt_for_menu_or_exit()
 
 
-def prompt_for_menu_or_exit():
-    """Prompts the user to return to the Menu or to exit the program."""
-    print("-" * 75)
-    print(Fore.BLUE + "\nWhat would like to do next?" + Style.RESET_ALL)
-    
-    while True:
-        print(f"""
-        Press M to go back to the MENU.
-        Press E to EXIT the program.
-        """)
-        try:
-            choice_message = (
-                Fore.BLUE + Style.BRIGHT +  
-                "Enter your choice (M or E) and press enter:\n" +
-                Style.RESET_ALL
-            )
-            user_input = input(choice_message).strip().upper()
-            if user_input == "M":
-                return get_menu_user_choice()
-            elif user_input == "E":
-                exit_program()
-            else:
-                raise ValueError(Fore.LIGHTRED_EX +
-                "Invalid input. Please press 'M' to return to the menu or 'E' to exit." +
-                 Style.RESET_ALL
-                )
-        except ValueError as error:
-            print(error)
+def validate_user_numbers_choice(user_input):
+    """Validates the user's choice."""
+    if not 0 <= user_input <= 4:
+        raise ValueError(
+            Fore.LIGHTRED_EX +
+            "Invalid input: enter a number between 0 and 4 or E, "
+            "without spaces or special characters.\n" +
+             Style.RESET_ALL
+             )
+
+
+def is_valid_number(input_value):
+    """Checks if the input value is a valid number."""
+    if not input_value.isdigit() or input_value.startswith("+"):
+        return False
+    return True
+
+
+def handle_user_option(option):
+    """Handles user option."""
+    finance_manager = FinanceManager()
+
+    if option == 0:
+        show_application_instructions()
+
+    elif option == 1:
+        finance_manager.add_new_income_to_income_worksheet()
+
+    elif option == 2:
+        finance_manager.add_new_expense_to_expense_worksheet()
+
+    elif option == 3:
+        finance_manager.display_worksheet("incomes")
+        finance_manager.display_worksheet("expenses")
+        # Prompt user for next action after both are displayed
+        prompt_for_menu_or_exit()
+
+    elif option == 4:
+        return finance_manager.generate_monthly_finance_report()
 
 
 def get_menu_user_choice():
@@ -161,7 +212,7 @@ def get_menu_user_choice():
             if not user_input:
                 raise ValueError(
                     Fore.LIGHTRED_EX +
-                    "Empty input:  enter a number between 0 and 4 or E, "
+                    "Empty input: enter a number between 0 and 4 or E, "
                     "without spaces or special characters.\n" +
                     Style.RESET_ALL
                 )
@@ -169,12 +220,12 @@ def get_menu_user_choice():
             if not is_valid_number(user_input):
                 raise ValueError(
                     Fore.LIGHTRED_EX +
-                    "Invalid input:  enter a number between 0 and 4 or E, "
+                    "Invalid input: enter a number between 0 and 4 or E, "
                     "without spaces or special characters.\n" +
                     Style.RESET_ALL
                 )
 
-            # Convert option to integer, to handle potential errors
+            # Convert user input to integer
             option = int(user_input)
 
             validate_user_numbers_choice(option)
@@ -182,57 +233,6 @@ def get_menu_user_choice():
 
         except ValueError as error:
             print(error)
-
-
-def handle_user_option(option):
-    """Handles user option."""
-    finance_manager = FinanceManager()
-
-    if option == 0:
-        show_application_instructions()
-
-    elif option == 1:
-        finance_manager.add_new_income_to_income_worksheet()
-
-    elif option == 2:
-        finance_manager.add_new_expense_to_expense_worksheet()
-
-    elif option == 3:
-        finance_manager.display_worksheet("incomes")
-        finance_manager.display_worksheet("expenses")
-        # Prompt user for next action after both are displayed
-        prompt_for_menu_or_exit()
-
-    elif option == 4:
-        return finance_manager.generate_monthly_finance_report()
-   
-
-def validate_user_numbers_choice(user_input):
-    """Validates the user's choice."""
-    if not 0 <= user_input <= 4:
-        raise ValueError(
-            Fore.LIGHTRED_EX +
-            "Invalid input:  enter a number between 0 and 4 or E, "
-            "without spaces or special characters.\n" +
-             Style.RESET_ALL
-             )
-
-
-def is_valid_number(input_value):
-    """Checks if the input value is a valid number."""
-    if not input_value.isdigit() or input_value.startswith("+"):
-        return False
-    return True
-
-
-def exit_program():
-    exit_message = f"""
-    {Fore.GREEN + Style.BRIGHT}
-    ✨ Your finances are in good hands ✨
-        Goodbye and See you next time!{Style.RESET_ALL}
-    """
-    print(exit_message)
-    exit()
 
 
 class FinanceManager:
