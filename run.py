@@ -25,7 +25,7 @@ def welcome():
     print(f"""
     {rim} WELCOME TO MyFinances APP! {rim}
 
-    This expense tracker will help you monitor your 2025 incomes and expenses!
+    Track your 2025 income and expenses with ease!
     Are you ready to understand your spending habits?\n
     Let's go! 🚀
     """)
