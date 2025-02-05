@@ -17,6 +17,12 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('my_finances')
 
+# List of valid expense categories
+CATEGORIES = [
+    "Housing", "Transportation", "Food", "Personal Care", "Healthcare",
+    "Entertainment", "Shopping", "Education", "Travel", "Gifts", "Other"
+]
+
 
 def welcome():
     """Displays a welcome message with color."""
@@ -264,9 +270,23 @@ class FinanceManager:
 
         → {Fore.YELLOW}Month{Style.RESET_ALL}: The month the income was earned.
           (Enter the complete month name. E.g, January).
-        → {Fore.YELLOW}Category{Style.RESET_ALL}: The source of the income.
-          (Ensure it is at least 4 characters long, and isn't entirely numeric.
-          E.g., Groceries, Hobbies, Rent, Entertainment, etc.).
+        → {Fore.YELLOW}Category{Style.RESET_ALL}: The expense category.
+          IMPORTANT: Category input is restricted to the below list!
+
+          Please choose from this list (lowercase names allowed):
+          {Fore.YELLOW}
+          - Housing
+          - Transportation
+          - Food
+          - Personal Care
+          - Healthcare
+          - Entertainment
+          - Shopping
+          - Education
+          - Travel
+          - Gifts
+          - Other
+          {Style.RESET_ALL}
         → {Fore.YELLOW}Description{Style.RESET_ALL}: A expense description.
           (Ensure it is at least 4 characters long, and isn't entirely numeric.
           E.g., Weekly groceries).
@@ -277,7 +297,21 @@ class FinanceManager:
         """)
 
         month = self.get_and_validate_month_input()
-        category = self.get_and_validate_category_input()
+
+        while True:
+            category = self.get_and_validate_category_input()
+            # Check against the predefined category list
+            if category in CATEGORIES:
+                # Exit the loop because the category is valid
+                break
+            else: 
+                # Display the predefined category list
+                print(Fore.LIGHTRED_EX +
+                      "\nInvalid category. Please choose from the following:\n" +
+                      Style.RESET_ALL)
+                for category in CATEGORIES:
+                    print(f"→ {category}")
+
         description = self.get_and_validate_description_input()
         amount = self.get_validated_and_normalized_amount()
         formatted_amount = self.format_amount_for_display(amount)
@@ -394,9 +428,16 @@ class FinanceManager:
     def get_and_validate_category_input(self):
         """Prompts the user to enter a category and validates the input."""
         prompt_category = (
-            Fore.BLUE + "Enter the category (minimum 4 characters):\n" +
+            Fore.BLUE + "Enter the category:\n" +
             Style.RESET_ALL
         )
+        category_input = input(prompt_category).strip()
+
+        if not category_input:
+            print(
+                Fore.LIGHTRED_EX +
+                 "Empty input: Category is required.\n" +
+                  Style.RESET_ALL)
         return self.get_and_validate_input(prompt_category)
 
     def get_and_validate_description_input(self):
