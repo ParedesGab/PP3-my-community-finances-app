@@ -326,37 +326,29 @@ The program then asks the user what they would like to do next, and displays the
 
   +   **Error Handling/Input Validation Improvements:** While basic input validation is implemented, semantic validation of the "source," "category," and "description" fields could be added to further ensure meaningful input. However, to maintain flexibility for users, I have intentionally not implemented strict semantic validation at this stage, as the potential entries for these fields are limitless.  
 
+  MISSING. IMPLEMENT 
+
 ---
 ## Design
 
-### Color scheme
+## Design
 
-**Main color scheme**
+### Colors
+Only a few basic colors were used to highlight certain elements:
+- In the header, the game name and year are printed in green, and the current balance is in cyan.
+- The game ID is always printed in orange.
+- The header of every page is printed in blue.
+- The month of the season is printed in pink.
+- Any request for user input is printed in yellow.
+For almost every color, the built-in ANSI Escape Code colors were used. Only for the orange and pink an Escape Code with a specific RGB value was used.
 
-![Main Color scheme](documentation/design/main-color-scheme.png)
-
-- The russian violet (blue), seasalt (white) and davy's gray color where used as the main colors of the website. Their choice was inspired by the universe background image and their used keeps the website cohesive.
-
-- The russian violet (blue) was used for the titles, button names and the paragraph within the Game indications section.
-
-- All buttons except for the button with class btn--restart, used as box shadow the color davy's gray color. 
-
-**Secondary color scheme**
-
-![Secondary Color scheme](documentation/design/secondary-color-scheme.png)
-
-- To simulate colors of the universe the hover effect used two colors as gradient: Royal purple ( #7943af) and Sapphire ( #3455af). 
-
-- The button with the class btn--restart and the congratulatory message are styled in Sinopia orange to ensure that they stand out. This vibrant choice draws attention to the restart option, making it easy for users to replay the game, and highlights the victory message effectively, celebrating the user's success in a visually striking way.
-
-### Typography
-
-- "Rajdhani" and "Roboto" from Google Fonts were used as the primary and secondary font of the website, respectively. 
-- The generic family name is "Sans-serif".
-- For the titles (h1 and h2) letter-spacing CSS property with a value of 0.3rem was used, to add a slight space between letters in the text.
-
-![Primary Font](documentation/design/primary-font.png)
-![Secondary Font](documentation/design/secondary-font.png)
+### Layout
+![Page Layout](assets/docs/prepare-season.png)  
+The game has a very simple layout which is used on every screen.
+- At the top of the page is a header bar with the name of the game, the game ID, username, current balance, and year.
+- Every page has a heading which is displayed in blue and written in uppercase letters to set it apart from the rest of the page.
+- Below the heading, most pages display informative text about the page the user is currently on.
+- At the bottom of every page the game requests input from the user. If a selection is required from the user, the game displays a numbered list above the prompt.
 
 ---
 ## Wireframes
