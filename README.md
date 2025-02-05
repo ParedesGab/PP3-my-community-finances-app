@@ -104,7 +104,12 @@ The Menu provides the following options:
 *   **E: Exit:** Close the application.
 
 + It gets the user selection and validates the selection.
-+ The application validates user input. If an invalid input is entered (e.g., non-numeric characters or a number outside the valid range: 0-4), an error message is displayed, and the user is prompted to select a menu option (0-4 or E) again (Figures below).
+
++ Including spaces to the inputs is accepted. 
+
++ If an invalid input is entered (e.g., non-numeric characters or a number outside the valid range: 0-4), an error message is displayed, and the user is prompted to select a menu option (0-4 or E) again. 
+
++ All invalid inputs are handled with a clear error message. (Figures below).
 
 ![Empty input](documentation/website-screenshots/4-empty-invalid-input.png)
 
@@ -120,6 +125,8 @@ The Menu provides the following options:
 
 **Menu Option 0**
 
++ **User inputs 0:**
+
 ![Menu option 0](documentation/website-screenshots/9-user-selection-option0.png)
 
 + **Application Instructions:** The application provides comprehensive instructions accessible from the main menu. These instructions cover each available feature in detail:
@@ -131,19 +138,104 @@ The Menu provides the following options:
 
 + **Return to Menu / Exit Prompt:** After the applications instructions are displayed, the application prompts the user to either return to the main menu or exit the program. This provides a controlled flow within the application.  Invalid input (anything other than 'M' or 'E', or "m" or "e") is handled with a clear error message.
 
-![Valid input "m"](documentation/website-screenshots/10-from-option0-valid-input-m-lowercase.png)
+![Empty input](documentation/website-screenshots/4-empty-invalid-input.png)
 
-![Valid input "M"](documentation/website-screenshots/11-from-option0-valid-input-m-uppercase.png)
+![Invalid choice](documentation/website-screenshots/5-invalid-choice-not-number-from-0-to-4-or-E.png)
 
-![Valid input "e"](documentation/website-screenshots/12-from-option0-valid-input-e-lowercase.png)
-
-![Valid input "E"](documentation/website-screenshots/13-from-option0-valid-input-e-uppercase.png)
+![Invalid choice](documentation/website-screenshots/6-invalid-choice-not-number-from-0-to-4-or-E.png)
 
 ![Invalid input example](documentation/website-screenshots/14-from-option0-invalid-input-example.png)
 
 **Menu Option 1**
 
-![Menu option 1](documentation/website-screenshots/user-selection-option1.png)
++ **User inputs 1:**
+
+![Menu option 1](documentation/website-screenshots/15-user-selection-option1.png)
+
+*   **Adding Income:** Users can easily record their income for 2025. The application guides them through the process, prompting for:
+    *   **Month:** The month the income was earned (e.g., January). The application accepts full month names.
+    *   **Source:** The source of the income (e.g., Salary, Freelance).  The application validates that the source is at least 4 characters long and isn't entirely numeric.
+    *   **Amount:** The amount earned. The application displays and stores the amount using the standard European currency format (e.g., 1.500,00 EUR).  
+    
++ All input fields are required and cannot be left empty.
+
++ Including spaces and capitalization to the inputs is accepted (e.g., JanuarY, January, january, "    January", etc. are all accepted).
+
++ The amount Must be a positive number (no negative signs) and contain only digits (no special characters or letters).
+
++ All invalid inputs are handled with a clear error message. Examples below:
+
+![Invalid empty input](documentation/website-screenshots/19-empty-invalid-input.png)
+
+![Invalid month name](documentation/website-screenshots/20-invalid-month-name.png)
+
+![Invalid source](documentation/website-screenshots/21-invalid-source-input.png)
+
+![Invalid amount](documentation/website-screenshots/21-invalid-source-input.png)
+
++ After entering the details, the application displays a message of the added income (month, source, and amount) confirming that the new income entry has been successfully stored. 
+
++ Users are then given the option to add another income entry, add an expense entry, return to the main menu, or exit the application. 
+
+![New income data displayed, and the user is prompted for further action](documentation/website-screenshots/16-income-data-added.png)
+
++ The application validates user input for these options as well, displaying an error message for invalid choices (figure below).
+
+![Invalid option example](documentation/website-screenshots/17-invalid-input-example.png)
+
++ The new income record is appended (stored) to the my_finances Google cloud worksheet (figure below).
+
+![my_finances income worksheet](documentation/website-screenshots/18-income-addded-to-google-income-worksheet.png)
+
+**Menu Option 2**
+
+![Menu option 2](documentation/website-screenshots/user-selection-option3.png)
+
++ 3 it is recognized as a valid input.
++ The application first displays a title in green, using colorama to stand out, prompting the user that "To add a new income:" first they need to add a month name (case-insensitive).
+
++ If the user enters an invalid month name (e.g., jan, or a misspelled month) a ValueError is caught, and an error message is displayed (figure below).
+  ![Invalid month name](documentation/website-screenshots/invalid-month-name.png)
+  - The user is asked again to enter a month name. 
+
++ If the month is valid, the report then prompts the user to enter their income source. Note, the income source accepts any data type. Thus, any text can be entered.
+
++ After entering the income source, the report then prompts the user to enter their income amount. Note, the income source accepts only numbers (integers or floats). If the user enters something that is not a number, the application will ask you to enter the amount again.
+![Invalid amount](documentation/website-screenshots/invalid-amount.png)
+
++ Once all the information was entered, the application will display a confirmation message.
+![new income data message](documentation/website-screenshots/new-income-data.png)
+
++ The updated income data will then be displayed, so you can verify that the new record has been added correctly.
+![new income data displayed](documentation/website-screenshots/display-updated-income-data.png)
+
++ The new income record is appended to the Google sheet (Figures below).
+  - Initial Google worksheet
+  ![Initial Google worksheet](documentation/website-screenshots/initial-google-income-worksheet.png)
+
+  - Updated Google worksheet
+  ![Updated Google worksheet](documentation/website-screenshots/updated-google-income-worksheet.png)
+
++ Finally, the user is returned to the menu options, where they can choose their next action.
+
+**Menu Option 3**
+
+![Menu option 3](documentation/website-screenshots/user-selection-option2.png)
+
++ 2 it is recognized as a valid input.
++ The application displays all the avaiable financial data, for both income and expenses.
+  - Income data
+  ![income data](documentation/website-screenshots/all-income-data.png)
+
+  - Expenses data
+  ![expenses data part1](documentation/website-screenshots/all-expenses-data-part1.png)
+  ![expenses data part2](documentation/website-screenshots/all-expenses-data-part2.png)
+
++ The program then asks the user what they would like to do next, and displays the menu options again.
+
+**Menu Option 4**
+
+![Menu option 4](documentation/website-screenshots/user-selection-option1.png)
 
 + 1 it is recognized as a valid input.
 + The application first displays the report title in green using colorama to stand out.
@@ -168,82 +260,15 @@ The Menu provides the following options:
   ![Month has no data](documentation/website-screenshots/month-has-no-data.png)
   - The user is then asked what they would like to do next, and displays the menu options again (figure below). This was intentionally selected because the user might want to view all their data, add data for that month, exit the program, etc.
 
-**Menu Option 2**
+**Menu Option E**
 
-![Menu option 2](documentation/website-screenshots/user-selection-option2.png)
+![Menu option E](documentation/website-screenshots/7-lowercase-valid-input-exit.png)
 
-+ 2 it is recognized as a valid input.
-+ The application displays all the avaiable financial data, for both income and expenses.
-  - Income data
-  ![income data](documentation/website-screenshots/all-income-data.png)
++ **Exiting the Program:** The application provides a clean exit, displaying a friendly farewell message to the user before closing.
++ This ensures a positive user experience even when leaving the application.
++ Both "e" or E" are recognized as a valid input to exit the program (figures above and below, respectively).
 
-  - Expenses data
-  ![expenses data part1](documentation/website-screenshots/all-expenses-data-part1.png)
-  ![expenses data part2](documentation/website-screenshots/all-expenses-data-part2.png)
-
-+ The program then asks the user what they would like to do next, and displays the menu options again.
-
-**Menu Option 3**
-
-![Menu option 3](documentation/website-screenshots/user-selection-option3.png)
-
-+ 3 it is recognized as a valid input.
-+ The application first displays a title in green, using colorama to stand out, prompting the user that "To add a new income:" first they need to add a month name (case-insensitive).
-
-+ If the user enters an invalid month name (e.g., jan, or a misspelled month) a ValueError is caught, and an error message is displayed (figure below).
-  ![Invalid month name](documentation/website-screenshots/invalid-month-name.png)
-  - The user is asked again to enter a month name. 
-
-+ If the month is valid, the report then prompts the user to enter their income source. Note, the income source accepts any data type. Thus, any text can be entered.
-
-+ After entering the income source, the report then prompts the user to enter their income amount. Note, the income source accepts only numbers (integers or floats). If the user enters something that is not a number, the application will ask you to enter the amount again.
-![Invalid amount](documentation/website-screenshots/invalid-amount.png)
-
-+ Once all the information was entered, the application will display a confirmation message.
-![new income data message](documentation/website-screenshots/new-income-data.png)
-
-+ The updated income data will then be displayed, so you can verify that the new record has been added correctly.
-![new income data displayed](documentation/website-screenshots/display-updated-income-data.png)
-
-+ The new income record is appended to the Google sheet (Figures below).
-  - Initial Google worksheet
-  ![Initial Google worksheet](documentation/website-screenshots/initial-google-income-worksheet.png)
-
-  - Updated Google worksheet
-  ![Updated Google worksheet](documentation/website-screenshots/updated-google-income-worksheet.png)
-
-+ Finally, the user is returned to the menu options, where they can choose their next action.
-
-**Menu Option 4**
-
-![Menu option 3](documentation/website-screenshots/user-selection-option3.png)
-
-+ 3 it is recognized as a valid input.
-+ The application first displays a title in green, using colorama to stand out, prompting the user that "To add a new income:" first they need to add a month name (case-insensitive).
-
-+ If the user enters an invalid month name (e.g., jan, or a misspelled month) a ValueError is caught, and an error message is displayed (figure below).
-  ![Invalid month name](documentation/website-screenshots/invalid-month-name.png)
-  - The user is asked again to enter a month name. 
-
-+ If the month is valid, the report then prompts the user to enter their income source. Note, the income source accepts any data type. Thus, any text can be entered.
-
-+ After entering the income source, the report then prompts the user to enter their income amount. Note, the income source accepts only numbers (integers or floats). If the user enters something that is not a number, the application will ask you to enter the amount again.
-![Invalid amount](documentation/website-screenshots/invalid-amount.png)
-
-+ Once all the information was entered, the application will display a confirmation message.
-![new income data message](documentation/website-screenshots/new-income-data.png)
-
-+ The updated income data will then be displayed, so you can verify that the new record has been added correctly.
-![new income data displayed](documentation/website-screenshots/display-updated-income-data.png)
-
-+ The new income record is appended to the Google sheet (Figures below).
-  - Initial Google worksheet
-  ![Initial Google worksheet](documentation/website-screenshots/initial-google-income-worksheet.png)
-
-  - Updated Google worksheet
-  ![Updated Google worksheet](documentation/website-screenshots/updated-google-income-worksheet.png)
-
-+ Finally, the user is returned to the menu options, where they can choose their next action.
+![Menu option E](documentation/website-screenshots/8-uppercase-valid-input-exit.png)
 
 ---
 ## Features left to implement

@@ -183,7 +183,9 @@ class FinanceManager:
           (Ensure it is at least 4 characters long, and isn't entirely numeric.
           E.g., Salary, Freelance, Etsy).
         → {Fore.YELLOW}Amount{Style.RESET_ALL}: The amount earned (e.g, 1500).
-          (It is displayed in EU currency format. I.e, 1.500, 00 EUR).
+          (Must be a positive number (no negative signs) and contain only digits
+          (no special characters or letters). 
+          It is displayed in EU currency format. E.g, 1.500, 00 EUR.
         """
         print(income_message)
 
@@ -254,7 +256,9 @@ class FinanceManager:
           (Ensure it is at least 4 characters long, and isn't entirely numeric.
           E.g., Weekly groceries).
         → {Fore.YELLOW}Amount{Style.RESET_ALL}: The amount earned (e.g, 1500).
-          (It is displayed in EU currency format. I.e, 1.500, 00 EUR).
+          (Must be a positive number (no negative signs) and contain only digits
+          (no special characters or letters). 
+          It is displayed in EU currency format. E.g, 1.500, 00 EUR.
         """)
 
         month = self.get_and_validate_month_input()
