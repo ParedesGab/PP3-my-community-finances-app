@@ -104,21 +104,19 @@ The Menu provides the following options:
 *   **E: Exit:** Close the application.
 
 + It gets the user selection and validates the selection.
-+ The application validates user input. If an invalid input is entered (e.g., non-numeric characters or a number outside the valid range: 0-4), an error message is displayed, and the user is prompted to try again.
++ The application validates user input. If an invalid input is entered (e.g., non-numeric characters or a number outside the valid range: 0-4), an error message is displayed, and the user is prompted to select a menu option (0-4 or E) again (Figures below).
 
 ![Empty input](documentation/website-screenshots/4-empty-invalid-input.png)
 
-![Invalid choice](documentation/website-screenshots/invalid-choice-not-number-from-1-to-5.png)
+![Invalid choice](documentation/website-screenshots/5-invalid-choice-not-number-from-0-to-4-or-E.png)
 
-+ After any of these errors, the user is prompted to select a menu option (1-5) again.
+![Invalid choice](documentation/website-screenshots/6-invalid-choice-not-number-from-0-to-4-or-E.png)
 
++ E or e are accepted as valid inputs to exit the application and a GoodBye message is displayed (Figures below).
 
+![Valid choice "e"](documentation/website-screenshots/7-lowercase-valid-input-exit.png)
 
-The application validates user input. If an invalid input is entered (e.g., non-numeric characters or a number outside the valid range), an error message is displayed, and the user is prompted to try again.
-
-![Invalid choice - Non-numeric input](documentation/website-screenshots/invalid-literal-for-int.png)
-
-![Invalid choice - Out of range input](documentation/website-screenshots/invalid-choice-not-number-from-1-to-5.png)
+![Valid choice "E"](documentation/website-screenshots/8-uppercase-valid-input-exit.png)
 
 
 **Menu Option 1**
