@@ -118,6 +118,19 @@ The Menu provides the following options:
 
 ![Valid choice "E"](documentation/website-screenshots/8-uppercase-valid-input-exit.png)
 
+**Menu Option 0**
+
+![Menu option 0](documentation/website-screenshots/9-user-selection-option0.png)
+
++ **Application Instructions:** The application provides comprehensive instructions accessible from the main menu. These instructions cover each available feature in detail:
+    *   **Adding Income:**  Users can record new income entries, specifying the month, source, and amount. The instructions explain the required format for each field and highlight the use of the European currency format for amounts.
+    *   **Adding Expenses:** Users can record expenses, providing the month, category, description, and amount. Similar to income entries, the instructions detail the expected input format and the use of the European currency format.
+    *   **Generating Monthly Reports:** Users can generate detailed financial reports for any month of 2025. These reports include total income, total expenses, cash balance, a breakdown of expenses by category, and the highest expense category.
+    *   **Viewing All Records:** Users can view all their stored income and expense records in a tabular format. This allows for easy review and analysis of their financial data.
+    *   **Exiting the Program:** Users can exit the application when finished.  The instructions reassure users that their data is safely stored.
+
++ **Return to Menu / Exit Prompt:** After the applications instructions are displayed, the application prompts the user to either return to the main menu or exit the program. This provides a controlled flow within the application.  Invalid input (anything other than 'M' or 'E') is handled with a clear error message.
+
 
 **Menu Option 1**
 

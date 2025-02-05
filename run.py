@@ -65,7 +65,7 @@ def prompt_for_menu_or_exit():
                 raise ValueError(
                     Fore.LIGHTRED_EX +
                     "Invalid input. Please press 'M' to return to the menu"
-                    "or 'E' to exit." + Style.RESET_ALL)
+                    " or 'E' to exit." + Style.RESET_ALL)
         except ValueError as error:
             print(error)
 
