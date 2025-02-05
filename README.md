@@ -195,11 +195,11 @@ The Menu provides the following options:
 
 ![Menu option 2](documentation/website-screenshots)
 
-*   **Adding Expenses:** Users can easily record their expenses for 2025. The application prompts for the following information:
-    *   **Month:** The month the expense was incurred (e.g., January).  Full month names are accepted.
-    *   **Category:** The category of the expense (e.g., Rent, Groceries).  Input must be at least 4 characters long and cannot be entirely numeric.
-    *   **Description:** A description of the expense (e.g., Monthly rent, Weekly groceries). Input must be at least 4 characters long and cannot be entirely numeric.
-    *   **Amount:** The amount spent. The application displays and stores the amount using the standard European currency format (e.g., 1.500,00 EUR). 
++   **Adding Expenses:** Users can easily record their expenses for 2025. The application prompts for the following information:
+    -   **Month:** The month the expense was incurred (e.g., January).  Full month names are accepted.
+    -   **Category:** The category of the expense (e.g., Rent, Groceries).  Input must be at least 4 characters long and cannot be entirely numeric.
+    -   **Description:** A description of the expense (e.g., Monthly rent, Weekly groceries). Input must be at least 4 characters long and cannot be entirely numeric.
+    -   **Amount:** The amount spent. The application displays and stores the amount using the standard European currency format (e.g., 1.500,00 EUR). 
   
 + All input fields are required and cannot be left empty.
 
@@ -252,8 +252,7 @@ The Menu provides the following options:
 + If a worksheet contains no data, the application displays a message indicating that no data is available.
 MISSING
 
-+ The program then asks the user what they would like to do next, and displays the menu options again, with the same validations
-in, for example, menu option 0. 
++ The program then asks the user what they would like to do next, and displays the menu options again, with the same validations as in, for example, menu option 0. 
 
 **Menu Option 4**
 
@@ -261,13 +260,13 @@ in, for example, menu option 0.
 
 ![Menu option 4](documentation/website-screenshots/33-user-selection-option4.png)
 
-*   **Generating Monthly Finance Reports:** Users can generate detailed financial reports for any month of 2025. The report includes:
-    *   **Total Income:**  The sum of all income entries for the selected month, displayed in European currency format.
-    *   **Total Expenses:** The sum of all expense entries for the selected month, displayed in European currency format.
-    *   **Cash Balance:** The difference between total income and total expenses for the selected month, displayed in European currency format. 
++   **Generating Monthly Finance Reports:** Users can generate detailed financial reports for any month of 2025. The report includes:
+    -   **Total Income:**  The sum of all income entries for the selected month, displayed in European currency format.
+    -   **Total Expenses:** The sum of all expense entries for the selected month, displayed in European currency format.
+    -   **Cash Balance:** The difference between total income and total expenses for the selected month, displayed in European currency format. 
     The application clearly indicates whether the balance is positive or negative.
-    *   **Expense Breakdown by Category:** A detailed breakdown of expenses for the selected month, showing the total amount spent in each category, displayed in European currency format.
-    *   **Highest Expense Category:** The expense category with the highest total spending for the selected month, also displayed in European currency format.
+    -   **Expense Breakdown by Category:** A detailed breakdown of expenses for the selected month, showing the total amount spent in each category, displayed in European currency format.
+    -   **Highest Expense Category:** The expense category with the highest total spending for the selected month, also displayed in European currency format.
 
 + The application first displays the report title in green using colorama to stand out and then prompts the user to enter the month for the report (figure above).
 
@@ -279,30 +278,26 @@ in, for example, menu option 0.
 
 + Leading/trailing spaces are accepted (e.g., JanuarY, January, january, "    January", etc).
 
-+ If no income or expense data exists for the selected month, a warning message is displayed.
++ If the user enters an invalid month name (e.g., jan, or a misspelled month) and an error message is displayed.
+![Invalid month](documentation/website-screenshots/35-invalid-month-input.png)
 
-+ After generating the report, the user is prompted to return to the main menu or exit the application.
++ If there is neither income nor expense data for the selected month, a message will be displayed indicating there is no data for that month yet.
 
+![Month has no data](documentation/website-screenshots/35-month-has-no-data.png)
 
-+ If the month is valid, the report displays the total income, total expenses, cash balance, a breakdown of expenses by category, and the highest expense.
-  - Calculates Monthly Income and Expenses
-  ![Calculates Monthly Income and Expenses](documentation/website-screenshots/calculate-monthly-income-and-expenses.png)
++ For a valid month input where there is income data but no expenses data, a warning message will be displayed indicating there is no expense data. In this case, the report displays total income, total expenses (0,00 EUR), cash balance, and in "expenses by category" another warning message that no expenses for this month exists.
 
-  - Calculates Cash Balance
-  ![Calculates Cash Balance](documentation/website-screenshots/calculate-cash-balance.png)
+![No expense data](documentation/website-screenshots/36-no-expense-data-for-that-month.png)
 
-  - Calculates Expenses By Category and Highest expense
-  ![Calculates Expenses By Category and Highest expense](documentation/website-screenshots/calculate-expenses-by-category-and-max-spend.png)
-  
-  - The program then asks the user what they would like to do next, and displays the menu options again.
++ For a valid month input where there is expense data but no income data, a warning message will be displayed indicating there is no income data. In this case, the report displays total income (0,00 EUR), total expenses, cash balance, expenses by category, and highest expense.
 
-+ If the user enters an invalid month name (e.g., jan, or a misspelled month) a ValueError is caught, and an error message is displayed (figure below).
-  ![Invalid month name](documentation/website-screenshots/invalid-month-name.png)
-  - The user is asked again to enter a month name. 
+![No income data](documentation/website-screenshots/37-no-income-data-for-that-month.png)
 
-+ If the entered month is valid but no income or expense data exists for that month, the application displays a message indicating that there is no data for that month yet.
-  ![Month has no data](documentation/website-screenshots/month-has-no-data.png)
-  - The user is then asked what they would like to do next, and displays the menu options again (figure below). This was intentionally selected because the user might want to view all their data, add data for that month, exit the program, etc.
++ For a valid month input, where both, income and expenses data exist, the report displays total income, total expenses, cash balance, expenses by category, and the highest expense.
+
+![monthly report](documentation/website-screenshots/38-total-income-and-expenses-calculation.pngg)
+
+The program then asks the user what they would like to do next, and displays the menu options again, with the same validations as in, for example, menu option 0. 
 
 **Menu Option E**
 
@@ -317,14 +312,19 @@ in, for example, menu option 0.
 ---
 ## Features left to implement
 
-- Implement a more dynamic galaxy-themed background (e.g., moving nebulas).
++ This project allowed me to apply my understanding of Python, object-oriented programming principles, and core programming concepts like flow control, iteration, conditional statements, functions, methods, and data structures. While I acknowdlege that a complete finance application would include more features (which I intend to add later), my focus here was on these fundamentals. 
 
-- Add a space-themed sound effect by implementing an event listener in JavaScript that triggers whenever a match occurs.
++ Among features left to implement:
 
-- Add animations for card flips and matches to enhance the user experience.
+  +   **Data Editing and Deletion:** Allow users to correct mistakes, or delete their entries, to manage their financial data more effectively.
 
-- Implement visual feedback (e.g., a highlight) for matched pairs.
-- Allow users to navigate back to the home page directly from the memory game. Please note that for now this option was intentionally excluded to encourage players to stay on the game page longer, with the added flexibility to restart the game if they wish.
+  +   **Searching:** As the data grows, it will become more difficult to find specific entries. Implementing searching capabilities would allow users to quickly locate the income or expense records they need.
+
+  +   **Data Visualization:** While the monthly report provides a summary, visual representations of the data (charts, graphs) would make it easier for users to understand their spending habits and identify trends.
+
+  +   **Multiple Years:** The application is currently designed to track finances for 2025 only. Future versions could allow users to select the year for tracking.
+
+  +   **Error Handling/Input Validation Improvements:** While basic input validation is implemented, semantic validation of the "source," "category," and "description" fields could be added to further ensure meaningful input. However, to maintain flexibility for users, I have intentionally not implemented strict semantic validation at this stage, as the potential entries for these fields are limitless.  
 
 ---
 ## Design

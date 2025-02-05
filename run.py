@@ -251,7 +251,7 @@ class FinanceManager:
           (Enter the complete month name. E.g, January).
         → {Fore.YELLOW}Category{Style.RESET_ALL}: The source of the income.
           (Ensure it is at least 4 characters long, and isn't entirely numeric.
-          E.g., Salary, Freelance).
+          E.g., Groceries, Hobbies, Rent, Entertainment, etc.).
         → {Fore.YELLOW}Description{Style.RESET_ALL}: A expense description.
           (Ensure it is at least 4 characters long, and isn't entirely numeric.
           E.g., Weekly groceries).
