@@ -159,19 +159,21 @@ The Menu provides the following options:
     
 + All input fields are required and cannot be left empty.
 
-+ Including spaces and capitalization to the inputs is accepted (e.g., JanuarY, January, january, "    January", etc. are all accepted).
++ Leading/trailing spaces are accepted (e.g., JanuarY, January, january, "    January", etc. are all accepted).
 
-+ The amount Must be a positive number (no negative signs) and contain only digits (no special characters or letters).
++ Including capitalization to month and source inputs is accepted.
+
++ The amount must be a positive number (no negative signs) and contain only digits (no special characters or letters).
 
 + All invalid inputs are handled with a clear error message. Examples below:
 
 ![Invalid empty input](documentation/website-screenshots/19-empty-invalid-input.png)
 
-![Invalid month name](documentation/website-screenshots/20-invalid-month-name.png)
+![Invalid month](documentation/website-screenshots/20-invalid-month-name.png)
 
 ![Invalid source](documentation/website-screenshots/21-invalid-source-input.png)
 
-![Invalid amount](documentation/website-screenshots/21-invalid-source-input.png)
+![Invalid amount](documentation/website-screenshots/22-invalid-amount-input.png)
 
 + After entering the details, the application displays a message of the added income (month, source, and amount) confirming that the new income entry has been successfully stored. 
 
@@ -183,40 +185,55 @@ The Menu provides the following options:
 
 ![Invalid option example](documentation/website-screenshots/17-invalid-input-example.png)
 
-+ The new income record is appended (stored) to the my_finances Google cloud worksheet (figure below).
++ The new income record is appended (stored) to the my_finances Google cloud "incomes" worksheet (figure below).
 
-![my_finances income worksheet](documentation/website-screenshots/18-income-addded-to-google-income-worksheet.png)
+![my_finances incomes worksheet](documentation/website-screenshots/18-income-addded-to-google-income-worksheet.png)
 
 **Menu Option 2**
 
-![Menu option 2](documentation/website-screenshots/user-selection-option3.png)
++ **User inputs 2:**
 
-+ 3 it is recognized as a valid input.
-+ The application first displays a title in green, using colorama to stand out, prompting the user that "To add a new income:" first they need to add a month name (case-insensitive).
+![Menu option 2](documentation/website-screenshots)
 
-+ If the user enters an invalid month name (e.g., jan, or a misspelled month) a ValueError is caught, and an error message is displayed (figure below).
-  ![Invalid month name](documentation/website-screenshots/invalid-month-name.png)
-  - The user is asked again to enter a month name. 
+*   **Adding Expenses:** Users can easily record their expenses for 2025. The application prompts for the following information:
+    *   **Month:** The month the expense was incurred (e.g., January).  Full month names are accepted.
+    *   **Category:** The category of the expense (e.g., Rent, Groceries).  Input must be at least 4 characters long and cannot be entirely numeric.
+    *   **Description:** A description of the expense (e.g., Monthly rent, Weekly groceries). Input must be at least 4 characters long and cannot be entirely numeric.
+    *   **Amount:** The amount spent. The application displays and stores the amount using the standard European currency format (e.g., 1.500,00 EUR). 
+  
++ All input fields are required and cannot be left empty.
 
-+ If the month is valid, the report then prompts the user to enter their income source. Note, the income source accepts any data type. Thus, any text can be entered.
++ Leading/trailing spaces are accepted (e.g., JanuarY, January, january, "    January", etc. are all accepted).
 
-+ After entering the income source, the report then prompts the user to enter their income amount. Note, the income source accepts only numbers (integers or floats). If the user enters something that is not a number, the application will ask you to enter the amount again.
-![Invalid amount](documentation/website-screenshots/invalid-amount.png)
++ Including capitalization to month, category and description inputs is accepted.
 
-+ Once all the information was entered, the application will display a confirmation message.
-![new income data message](documentation/website-screenshots/new-income-data.png)
++ The amount must be a positive number (no negative signs) and contain only digits (no special characters (except from the sign +) or letters).
 
-+ The updated income data will then be displayed, so you can verify that the new record has been added correctly.
-![new income data displayed](documentation/website-screenshots/display-updated-income-data.png)
++ All invalid inputs are handled with a clear error message. Examples below:
 
-+ The new income record is appended to the Google sheet (Figures below).
-  - Initial Google worksheet
-  ![Initial Google worksheet](documentation/website-screenshots/initial-google-income-worksheet.png)
+![Invalid empty input](documentation/website-screenshots/23-empty-invalid-input.png)
 
-  - Updated Google worksheet
-  ![Updated Google worksheet](documentation/website-screenshots/updated-google-income-worksheet.png)
+![Invalid month](documentation/website-screenshots/24-invalid-month-input.png)
 
-+ Finally, the user is returned to the menu options, where they can choose their next action.
+![Invalid category](documentation/website-screenshots/25-invalid-category-input.png)
+
+![Invalid description](documentation/website-screenshots/26-invalid-description-input.png)
+
+![Invalid amount](documentation/website-screenshots/27-invalid-amount-input.png)
+
++ After entering the details, the application displays a message of the added expense (month, category, description and amount) confirming that the new expense entry has been successfully stored. 
+
++ Users are then given the option to add another expense entry, add an income entry, return to the main menu, or exit the application. 
+
+![New expense data displayed, and the user is prompted for further action](documentation/website-screenshots/28-expense-data-added.png)
+
++ The application validates user input for these options as well, displaying an error message for invalid choices (figure below).
+
+![Invalid option example](documentation/website-screenshots/29-invalid-input-example.png)
+
++ The new expense record is appended (stored) to the my_finances Google cloud "expenses" worksheet (figure below).
+
+![my_finances expenses worksheet](documentation/website-screenshots/)
 
 **Menu Option 3**
 
