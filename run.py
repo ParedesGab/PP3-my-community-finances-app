@@ -547,7 +547,7 @@ class FinanceManager:
                     amount = float(amount_norm)
                 except ValueError:
                     print(f"""
-                    {Fore.YELLOW} Warning: Could not convert amount in {row}
+                    {Fore.LIGHTRED_EX}Could not convert amount in {row}
                     to a number."
                     {Style.RESET_ALL}
                     """)

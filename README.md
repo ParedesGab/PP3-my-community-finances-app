@@ -331,55 +331,33 @@ The program then asks the user what they would like to do next, and displays the
 ---
 ## Design
 
-## Design
++ The visual design aims to make the information readily accessible and the interaction intuitive.
 
-### Colors
-Only a few basic colors were used to highlight certain elements:
-- In the header, the game name and year are printed in green, and the current balance is in cyan.
-- The game ID is always printed in orange.
-- The header of every page is printed in blue.
-- The month of the season is printed in pink.
-- Any request for user input is printed in yellow.
-For almost every color, the built-in ANSI Escape Code colors were used. Only for the orange and pink an Escape Code with a specific RGB value was used.
++ The use of `colorama` allows for colored text output in the terminal:
+
+  *   **Green:**  Used for positive messages, success indicators, titles, and section headers (e.g., "WELCOME TO MyFinances APP!", success messages).
+
+  *   **Blue:** Used for prompts, instructions, and menu options. This color is often associated with clarity and trust, making it suitable for guiding the user. (e.g., "Enter your choice (0-4 or E) and press enter:").
+
+  *   **Yellow:** Used for labels and field names, drawing the user's attention to the information they need to provide (e.g., "Month:", "Source:"). Yellow is also used for informational messages, such as the "No income/expenses data found" warning. This distinguishes these messages from errors, which are displayed in red.
+
+  *   **Red:** Used for error messages, drawing the user's attention to invalid input or potential problems. (e.g., "Invalid input: Please enter a number (0-4) or E.").
+  Only a few basic colors were used to highlight certain elements:
 
 ### Layout
-![Page Layout](assets/docs/prepare-season.png)  
-The game has a very simple layout which is used on every screen.
-- At the top of the page is a header bar with the name of the game, the game ID, username, current balance, and year.
-- Every page has a heading which is displayed in blue and written in uppercase letters to set it apart from the rest of the page.
-- Below the heading, most pages display informative text about the page the user is currently on.
-- At the bottom of every page the game requests input from the user. If a selection is required from the user, the game displays a numbered list above the prompt.
+
+The MyFinances application employs a consistent layout to ensure a predictable and user-friendly experience.
+
+*   **Screen Title/Heading:** Each screen within the application has a clear title or heading, displayed in green and bold. This heading indicates the current section or function the user is interacting with (e.g., "ADD NEW INCOME," "MONTHLY FINANCE REPORT").
+
+*   **Informative Text/Instructions:** Below the heading, most screens provide brief instructions or context-sensitive information relevant to the current task. This guides the user and explains the purpose of the screen. Prominent use of color and bold text is used to distinguish these instructions.
+
+*   **User Input and Prompts:** At the bottom of each screen, the application prompts the user for input. Clear labels are used to indicate the expected input (e.g., "Enter the month name:").  If the user needs to choose from a set of options, these options are presented in a numbered list above the input prompt.  This structure makes it clear what the user needs to do next.
+
+*   **Data Display:**  When displaying data (like income and expenses), the application uses the `tabulate` library to format the information into a clear, tabular format with headers. This makes it easy for users to review their financial records.
 
 ---
-## Wireframes
-
-#### Mobile
-
-- [Mobile: Home menu page](documentation/wireframes/main-page-mobile.png)
-- [Mobile: Games indications page](documentation/wireframes/game-instructions-mobile.png)
-- [Mobile: Memory board game page](documentation/wireframes/memory-board-game-mobile.png)
-- [Mobile: Congratulations page](documentation/wireframes/congratulations-mobile.png)
-
----
-## Technologies used
-- [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
-- [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
-- [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-- [Gitpod](https://www.gitpod.io/): the development environment to create the project files, folders and html, css and javascript codes.
-- [GitHub](https://github.com/): to store the repository, bug track and see the deployed version.
-- [Balsamiq](https://balsamiq.com/): to create the wireframes.
-- [Google Fonts](https://fonts.google.com/): to import the Rajdhani and Roboto family fonts.
-- [TinyPNG](https://tinypng.com/): to compress the images.
-- [Flaticon](https://www.flaticon.com/): source of the memory card images.
-- [Favicon.io](https://favicon.io/): source of the favicon images.
-- [Am I responsive?](https://ui.dev/amiresponsive): to generate the responsive mockup image.
-- [MDN Web Docs](https://developer.mozilla.org/en-US/): resource to check CSS properties and javascript syntax and definition descriptions.
-- [Color-hex](https://www.color-hex.com/): to get the rgb color information.
-- [Chrome DevTools](https://developer.chrome.com/docs/devtools?hl=de) and its open source [Lighthouse](https://developer.chrome.com/docs/lighthouse?hl=de).
--  [W3C HTML](https://validator.w3.org/) and [W3C CSS](https://jigsaw.w3.org/css-validator/) Validation Services. 
-- [JSHint](https://jshint.com/): to detect errors and potential problems in the JavaScript code.
-- [WAVE](https://wave.webaim.org/): to test accessibility.
-- [DeepL Write](https://www.deepl.com/en/write): to spot spelling mistakes in the text. 
+## Flow Chart
 
 ---
 ## Testing
@@ -393,30 +371,8 @@ The game has a very simple layout which is used on every screen.
 
 ![HTML Validation](documentation/validation/html-file-validator.png)
 
-
-+ There were no errors found in the javascript code using the JS Hint Validator. 
-
-### Accessibility 
-
-Accessibility was tested using the Web Accessibility Evaluation Tool (WAVE report below), and no errors were reported. 
-
-![WAVE report](documentation/wave/wave-report.png)
-
-### LightHouse report
-
-Lighthouse tool from Devtools was used to confirm that the website is performing well, is accessible and the colors and fonts chosen are readable.
-
-![LightHouse report Home menu page](documentation/lighthouse/lighthouse-report-homepage.png.png)
-
-### Responsiveness
-
-- The website was checked across devices using the chrome extension [Responsive Viewer](https://chromewebstore.google.com/detail/responsive-viewer/inmopeiepgfljkpkidclfgbgbmfcennb?hl=en). 
-
-- In addition, it was manually checked in the following devices:
-  - Huawei Y9 Prime 2019
-  - Iphone XR
-  - Iphone 15 pro
-  - Samsung Galaxy S8
++ There were no errors found in the python code using CI python linter. 
+MISSING
 
 ### Manual Testing
 
