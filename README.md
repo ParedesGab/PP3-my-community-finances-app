@@ -233,26 +233,31 @@ The Menu provides the following options:
 
 + The new expense record is appended (stored) to the my_finances Google cloud "expenses" worksheet (figure below).
 
-![my_finances expenses worksheet](documentation/website-screenshots/)
+![my_finances expenses worksheet](documentation/website-screenshots/30-expense-added-to-google-income-worksheet.png)
 
 **Menu Option 3**
 
-![Menu option 3](documentation/website-screenshots/user-selection-option2.png)
++ **User inputs 3:**
 
-+ 2 it is recognized as a valid input.
-+ The application displays all the avaiable financial data, for both income and expenses.
-  - Income data
-  ![income data](documentation/website-screenshots/all-income-data.png)
+![Menu option 3](documentation/website-screenshots/31-user-selection-option3.png)
 
-  - Expenses data
-  ![expenses data part1](documentation/website-screenshots/all-expenses-data-part1.png)
-  ![expenses data part2](documentation/website-screenshots/all-expenses-data-part2.png)
+*   **Viewing Income and Expense Data:** Users can view all recorded income or expense data in a tabular format. 
 
-+ The program then asks the user what they would like to do next, and displays the menu options again.
++ The application retrieves the data from the specified worksheet (Incomes or Expenses) and displays it in a well-formatted table.
+
++ The table includes headers for each column, making the data easy to understand.
+
+![income data](documentation/website-screenshots/32-display-all-incomes-and-expenses.png)
+
++ If a worksheet contains no data, the application displays a message indicating that no data is available.
+MISSING
+
++ The program then asks the user what they would like to do next, and displays the menu options again, with the same validations
+in, for example, menu option 0. 
 
 **Menu Option 4**
 
-![Menu option 4](documentation/website-screenshots/user-selection-option1.png)
+![Menu option 4](documentation/website-screenshots)
 
 + 1 it is recognized as a valid input.
 + The application first displays the report title in green using colorama to stand out.
