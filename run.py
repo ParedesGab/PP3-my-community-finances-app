@@ -103,15 +103,30 @@ def show_application_instructions():
          → {Fore.YELLOW}Month{Style.RESET_ALL}: Expense month.
             E.g., January, February.
          → {Fore.YELLOW}Category{Style.RESET_ALL}: Expense category.
-            E.g., Rent, Groceries.
+         
+         IMPORTANT: Please choose your category from the following list:
+         {Fore.GREEN}
+         - Housing
+         - Transportation
+         - Food
+         - Personal Care
+         - Healthcare
+         - Entertainment
+         - Shopping
+         - Education
+         - Travel
+         - Gifts
+         - Other
+         {Style.RESET_ALL}
          → {Fore.YELLOW}Description{Style.RESET_ALL}: Expense description.
             Use this field to provide context.
-            E.g., Monthly Rent.
+            E.g., for Housing: Monthly Rent, mortgage fee, rent payment, etc.
          → {Fore.YELLOW}Amount{Style.RESET_ALL}: The amount spent.
             E.g., 1500.
 
             Note:
-            - Category and Description inputs are flexible but creating
+            - IMPORTANT: Category inputs must be chosen from the list above!
+            - Description inputs are flexible but creating
               informative entries make your financial tracking more useful.
             - The amount is displayed and stored following the
               standard European currency format (i.e., 1.500,00 EUR).
