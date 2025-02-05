@@ -427,18 +427,26 @@ class FinanceManager:
 
     def get_and_validate_category_input(self):
         """Prompts the user to enter a category and validates the input."""
-        prompt_category = (
-            Fore.BLUE + "Enter the category:\n" +
-            Style.RESET_ALL
-        )
-        category_input = input(prompt_category).strip()
+        while True:
+            print(Fore.BLUE + "Enter the category (choose from the list below):\n" + Style.RESET_ALL)
+            for cat in CATEGORIES:
+                print(f"- {cat}")
+            prompt_category = Fore.BLUE + "Enter the category:\n" + Style.RESET_ALL
 
-        if not category_input:
-            print(
-                Fore.LIGHTRED_EX +
-                 "Empty input: Category is required.\n" +
-                  Style.RESET_ALL)
-        return self.get_and_validate_input(prompt_category)
+            category_input = input(prompt_category).strip()  # Strip FIRST
+
+            if not category_input:  # Check for empty input *after* stripping
+                print(Fore.LIGHTRED_EX + "Empty input: Please choose a category from the list.\n" + Style.RESET_ALL)
+                continue
+
+            category_input = category_input.lower() # Lowercase after checking for empty input
+
+            if category_input.title() in CATEGORIES:  # Check against title case
+                return category_input.title()  # Return title case for consistency
+            else:
+                print(Fore.LIGHTRED_EX +
+                    "\nInvalid category. Please choose from the following:\n" +
+                    Style.RESET_ALL)
 
     def get_and_validate_description_input(self):
         """Prompts the user to enter a description and validates the input."""
