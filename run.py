@@ -305,6 +305,7 @@ class FinanceManager:
                     Fore.LIGHTRED_EX +
                     "Invalid input. Please enter 1, 2, M, or E." +
                     Style.RESET_ALL)
+
     def get_and_validate_month_input(self):
         """Prompts the user to enter a month name and validates the input."""
         while True:
@@ -370,7 +371,7 @@ class FinanceManager:
             Style.RESET_ALL
         )
         return self.get_and_validate_input(prompt_source)
-    
+
     def get_and_validate_category_input(self):
         """Prompts the user to enter a category and validates the input."""
         prompt_category = (
@@ -457,9 +458,10 @@ class FinanceManager:
                 amount = float(amount_input)
                 return amount
             except ValueError:
-                print(Fore.LIGHTRED_EX +
-                "Invalid amount format. Use digits, '.', or ',' as separators" +
-                Style.RESET_ALL)
+                print(
+                    Fore.LIGHTRED_EX +
+                    "Invalid amount format. Use digits, dots or commas" +
+                    Style.RESET_ALL)
 
     def format_amount_for_display(self, amount):
         """Formats the amount for display (European format)."""
@@ -509,7 +511,7 @@ class FinanceManager:
             if row[0].lower() == month.lower():
                 try:
                     # Get the amount from the worksheet as a string
-                    amount= row[amount_col_index]
+                    amount = row[amount_col_index]
                     # Normalize the string (handle European format)
                     amount_norm = amount.replace(".", "").replace(",", ".")
                     # Convert string float after normalization
@@ -522,7 +524,7 @@ class FinanceManager:
                 except Exception as e:
                     print(
                         Fore.LIGHTRED_EX + f"An error occurred: {e}\n" +
-                     Style.RESET_ALL)
+                        Style.RESET_ALL)
         return total_amount
 
     def calc_expenses_by_category(self, expenses_data, month):
@@ -539,7 +541,6 @@ class FinanceManager:
                     amount_norm = amount.replace(".", "").replace(",", ".")
                     # Convert string float after normalization
                     amount = float(amount_norm)
-                
                 except ValueError:
                     print(f"""
                     {Fore.YELLOW} Warning: Could not convert amount in {row}
@@ -552,7 +553,7 @@ class FinanceManager:
                 else:
                     expenses_by_category[category] = amount
         return expenses_by_category
-    
+
     def max_expense_by_category(self, expenses_by_category):
         """
         Finds the category with the maximum expense, or None if no expenses.
@@ -560,7 +561,6 @@ class FinanceManager:
         """
         if not expenses_by_category:
             return None, None
-        
         max_category = max(expenses_by_category, key=expenses_by_category.get)
         max_amount = expenses_by_category[max_category]
 
@@ -578,29 +578,32 @@ class FinanceManager:
         expenses_by_category = self.calc_expenses_by_category(exp_data, month)
 
         if not expenses_by_category:
-            print(Fore.YELLOW + f"No expenses found for {month}!" +
-            Style.RESET_ALL)
+            print(
+                Fore.YELLOW +
+                f"No expenses found for {month}!" +
+                Style.RESET_ALL)
             return
 
         for category, amount in expenses_by_category.items():
-             # Format max_amount for display in European format
+            # Format max_amount for display in European format
             formatted_amount = self.format_amount_for_display(amount)
             print(f"→ {category.upper()}: {formatted_amount} EUR \n")
 
         # Show max expense by category
         max_category, max_amount = self.max_expense_by_category(
             expenses_by_category)
-        
         # Format max_amount for display in European format
         if max_amount is not None:
             formatted_max_amount = self.format_amount_for_display(max_amount)
         # Handle None case
         else:
-            formatted_max_amount = "0.00"  
+            formatted_max_amount = "0.00"
 
         highest = f"""
         {Fore.GREEN + Style.BRIGHT}🔥 HIGHEST EXPENSE: {Style.RESET_ALL}"""
-        print(f"{highest} {max_category.upper()} ({formatted_max_amount} EUR)\n")
+        print(f"""
+        {highest} {max_category.upper()} ({formatted_max_amount} EUR)
+        """)
 
     def generate_monthly_finance_report(self):
         """Generates and displays the monthly finance report."""
@@ -620,19 +623,18 @@ class FinanceManager:
 
             # Check if the month exists within the data
             income_month_data_exists = self.month_has_data(income_data, month)
-            expense_month_data_exists = self.month_has_data(expenses_data, month)
+            expen_month_data_exists = self.month_has_data(expenses_data, month)
 
-            if income_month_data_exists or income_month_data_exists:
+            if income_month_data_exists or expen_month_data_exists:
                 print(
                     Fore.GREEN + Style.BRIGHT +
                     f"\nCalculating your {month} income and expenses...\n" +
                     Style.RESET_ALL)
-                
                 if not income_month_data_exists:
                     print(
                         Fore.YELLOW +
                         f"Warning: NO INCOME data found for {month}!\n" +
-                         Style.RESET_ALL)
+                        Style.RESET_ALL)
                     total_month_income = 0
                 else:
                     total_month_income = self.calculate_total_amount(
@@ -640,12 +642,11 @@ class FinanceManager:
                     # Show the income in European currency format
                     formatted_income = self.format_amount_for_display(
                         total_month_income)
-                
-                if not expense_month_data_exists:
+                if not expen_month_data_exists:
                     print(
                         Fore.YELLOW +
-                         f"Warning: NO EXPENSES data found for {month}!\n" +
-                          Style.RESET_ALL)
+                        f"Warning: NO EXPENSES data found for {month}!\n" +
+                        Style.RESET_ALL)
                     total_month_expenses = 0
                 else:
                     total_month_expenses = self.calculate_total_amount(
