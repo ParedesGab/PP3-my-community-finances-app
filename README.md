@@ -92,18 +92,34 @@
        
 ### Menu options
 
-![Menu options](documentation/website-screenshots/menu-options.png)
+![Menu options](documentation/website-screenshots/3-menu-options.png)
 
-+ Displays the 5 menu options.
-+ Informs the user what can be done in the program and displays the number to be entered to select the option.
+The Menu provides the following options:
+
+*   **0: Application Instructions:** Learn how to use MyFinances.
+*   **1: Add New Income:** Record a new income entry, by specifying the month, source, and amount.
+*   **2: Add New Expense:** Record a new expense entry, by specifying the month, category, description, and amount.
+*   **3: View All Records:** Display all income and expense entries in a table format.
+*   **4: Monthly Finance Report:** Generate a detailed report for a specific month, showing total income, total expenses, cash balance, and a breakdown of expenses by category.
+*   **E: Exit:** Close the application.
+
 + It gets the user selection and validates the selection.
-+ If the user enters an invalid input (like non-numeric characters) or a number larger than 5, a ValueError is caught, and an error message is displayed (figures below, respectively).
++ The application validates user input. If an invalid input is entered (e.g., non-numeric characters or a number outside the valid range: 0-4), an error message is displayed, and the user is prompted to try again.
 
 ![Invalid choice](documentation/website-screenshots/invalid-literal-for-int.png)
 
 ![Invalid choice](documentation/website-screenshots/invalid-choice-not-number-from-1-to-5.png)
 
 + After any of these errors, the user is prompted to select a menu option (1-5) again.
+
+
+
+The application validates user input. If an invalid input is entered (e.g., non-numeric characters or a number outside the valid range), an error message is displayed, and the user is prompted to try again.
+
+![Invalid choice - Non-numeric input](documentation/website-screenshots/invalid-literal-for-int.png)
+
+![Invalid choice - Out of range input](documentation/website-screenshots/invalid-choice-not-number-from-1-to-5.png)
+
 
 **Menu Option 1**
 

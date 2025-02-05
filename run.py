@@ -736,16 +736,14 @@ def get_menu_user_choice():
             if not user_input:
                 raise ValueError(
                     Fore.LIGHTRED_EX +
-                    "Empty input: enter a number between 0 and 4 or E, "
-                    "without spaces or special characters.\n" +
+                    "Empty input: Please enter a number (0-4) or E.\n" +
                     Style.RESET_ALL
                 )
 
             if not is_valid_number(user_input):
                 raise ValueError(
                     Fore.LIGHTRED_EX +
-                    "Invalid input: enter a number between 0 and 4 or E, "
-                    "without spaces or special characters.\n" +
+                    "Invalid input: Please enter a number (0-4) or E.\n" +
                     Style.RESET_ALL
                 )
 
