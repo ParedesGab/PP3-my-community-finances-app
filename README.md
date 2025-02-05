@@ -129,8 +129,17 @@ The Menu provides the following options:
     *   **Viewing All Records:** Users can view all their stored income and expense records in a tabular format. This allows for easy review and analysis of their financial data.
     *   **Exiting the Program:** Users can exit the application when finished.  The instructions reassure users that their data is safely stored.
 
-+ **Return to Menu / Exit Prompt:** After the applications instructions are displayed, the application prompts the user to either return to the main menu or exit the program. This provides a controlled flow within the application.  Invalid input (anything other than 'M' or 'E') is handled with a clear error message.
++ **Return to Menu / Exit Prompt:** After the applications instructions are displayed, the application prompts the user to either return to the main menu or exit the program. This provides a controlled flow within the application.  Invalid input (anything other than 'M' or 'E', or "m" or "e") is handled with a clear error message.
 
+![Valid input "m"](documentation/website-screenshots/10-from-option0-valid-input-m-lowercase.png)
+
+![Valid input "M"](documentation/website-screenshots/11-from-option0-valid-input-m-uppercase.png)
+
+![Valid input "e"](documentation/website-screenshots/12-from-option0-valid-input-e-lowercase.png)
+
+![Valid input "E"](documentation/website-screenshots/13-from-option0-valid-input-e-uppercase.png)
+
+![Invalid input example](documentation/website-screenshots/14-from-option0-invalid-input-example.png)
 
 **Menu Option 1**
 
