@@ -106,7 +106,7 @@ The Menu provides the following options:
 + It gets the user selection and validates the selection.
 + The application validates user input. If an invalid input is entered (e.g., non-numeric characters or a number outside the valid range: 0-4), an error message is displayed, and the user is prompted to try again.
 
-![Invalid choice](documentation/website-screenshots/invalid-literal-for-int.png)
+![Empty input](documentation/website-screenshots/4-empty-invalid-input.png)
 
 ![Invalid choice](documentation/website-screenshots/invalid-choice-not-number-from-1-to-5.png)
 

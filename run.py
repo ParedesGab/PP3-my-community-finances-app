@@ -146,8 +146,8 @@ def validate_user_numbers_choice(user_input):
     if not 0 <= user_input <= 4:
         raise ValueError(
             Fore.LIGHTRED_EX +
-            "Invalid input: enter a number between 0 and 4 or E, "
-            "without spaces or special characters.\n" + Style.RESET_ALL)
+            "Invalid input: Please enter a number (0-4) or E.\n" +
+            Style.RESET_ALL)
 
 
 def is_valid_number(input_value):
