@@ -88,9 +88,7 @@
   
 + Positioned above the menu options.
 + The welcome() function displays a colorful welcome message to the user when the program starts. It uses the colorama library to add green borders, creating a visually appealing introduction to MyFinances app.
-+ The welcome message already informs the user what can be done in the program.
-
-concisely introduces the user to the MyFinances app and briefly summarizes its key functionalities. (More specific about the message content)
++ The welcome message already informs the user that what can be done in the program and that it is easy to use.
        
 ### Menu options
 
