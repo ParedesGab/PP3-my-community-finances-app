@@ -2,7 +2,7 @@
 
 (Developer: Gabriela Fabiola Paredes Rojas)
 
-![Responsive Mockup image](documentation/website-screenshots/mockup.png)
+![Mockup image](documentation/website-screenshots/1-mockup.png)
 
 **Welcome to MyFinances tracker APP!**
 
@@ -19,68 +19,72 @@
 ### User Goals
 
 + Track and manage income and expenses on a monthly basis.
-+ Generate comprehensive monthly financial reports summarizing income, expenses, and cash balance.
-+ Analyze spending patterns by viewing categorized expenses and identifying top spending areas.
++ Generate monthly financial reports displaying total income, total expenses and cash balance (total income - total expenses).
++ Check spending patterns by viewing categorized expenses and identifying the highest expense category.
 + Quickly and easily add new income and expense entries.
-+ Access and review a complete history of income and expense records.
++ View all their income and expense data.
 
 ### Site Owner Goals
 
-  + Create a practical and user-friendly application to help users effectively track their finances in daily life.
-  + Ensure application functionality and bug-free performance.
-  + Create an intuitive user interface.
-  + Create an easy to use app.
++ Create a practical and user-friendly application to help users effectively monitor their income and expenses.
++ Ensure application functionality and bug-free performance.
++ Create an intuitive user interface.
++ Create an easy to use app.
   
 ---
 ## User Experience
 
 ### Target audience
 
-+ Individuals who want to manage their money.
++ Individuals who want to have an overview of their income and expenses.
 + Users who want to understand their spending habits.
-+ Users who are comfortable with using a simple computer program.
++ Any user who is comfortable with using a simple computer program.
 + Users searching for a free and easy way to track finances.
+
 
 ### User expectations
 
-+ Ease of use application.
-+ Understand clearly the purpose of the site.
-+ Quick and easy access to content and navigation.
-+ Clean and intuitive layout, overall a smooth experience.
-+ Expect the application to work seamlessly on various devices, allowing them to enjoy it anytime, anywhere.
++ Clearly understand the application's purpose.
++ Quickly and easily access the menu content.
++ Correctly store and display income and expense entries.
++ Their income and/or expense entries must be stored and displayed correctly. 
++ The monthly finance report must correctly calculate and display total income, total expenses, cash balance, expenses per category, and the highest expense.
++ The application must warn the user of any invalid input.
 
 ### User stories
 
 + **As a first-time user, I want to:**
 
-  + Quickly understand how the application works and the purpose of it.
-  + Clarity in the menu options.
-  + Easily navigate the website and find the options relevant.
-  + Dive into the application without confusion.
-  + Have quick, and easy-to-read results. 
-  + Have a smooth, enjoyable experience without delays or glitches or errors.
-  + Have an engaging and visually appealing experience.
+  + Quickly understand the purpose of the application.
+  + Have clarity in the menu options so I can find easily desired functions.
+  + Have clear and easy to follow application instructions.
+  + Have my results displayed clearly and concisely, using appropriate formatting and labels for easy interpretation.
+  + Have a enjoyable experience without delays or glitches or errors.
+  + Have an application that is visually appealing to enhance the user experience.
 
 + **As a returning user, I want to:**
 
-  + Expect the interface and functionality to remain consistent with what they are used to.
-  + Accomplish their tasks quickly and easily, leveraging their past experience with the program.
+  + Be able to quickly complete common tasks (e.g., adding income, adding expenses, generating a report), leveraging the past experience with the program.
+  + The application's interface and core functionality to remain unchanged from the previous version I used, except for explicitly documented updates.
+  + Have my financial data available to me within seconds, if I select to have it displayed.
+  + Accomplish their tasks quickly and easily, 
   + Expect their data to be readily accessible.
   + Have an application that continues to provide value and help them monitor their finances effectively.
+  + Continue having the same core financial tracking features (e.g., income/expense tracking, reporting), allowing me to monitor my finances with the same level of detail as before.
 
 + **As the site ownser, I want:**
 
-  + To keep the users engaged and the website updated with newer menu options/features.
-  + Deliver a smooth, accessible experience.
+  + Regularly update the website with new menu options and features (e.g., monthly, quarterly, yearly reports) to maintain user engagement.
+  + Ensure a smooth and accessible user experience by regularly testing the website on different devices and browsers and addressing any reported accessibility issues within.
   + To keep the application running correctly, be free of bugs, and not crash.
-  + Collect user feedback to see if the application is helpful and what improvements can be implemented.
+  + Collect user feedback to understand user needs and identify areas for improvement.
 
 ---
 ## Features 
 
 ### Welcome message
 
-![Welcome message](documentation/website-screenshots/welcome-message.png)
+![Welcome message](documentation/website-screenshots/2-welcome-message.png)
   
 + Positioned above the menu options.
 + The welcome() function displays a colorful welcome message to the user when the program starts. It uses the colorama library to add green borders, creating a visually appealing introduction to the MyFinances app.
