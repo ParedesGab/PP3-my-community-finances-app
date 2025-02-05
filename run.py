@@ -552,7 +552,8 @@ class FinanceManager:
 
         for row in expenses_data:
             if row[0].lower() == month.lower():
-                category = row[1]
+                # Normalize category input to title
+                category = row[1].title()
                 try:
                     # Get the amount from the worksheet as a string
                     amount = row[3]
