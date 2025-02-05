@@ -640,6 +640,8 @@ class FinanceManager:
                         f"Warning: NO INCOME data found for {month}!\n" +
                         Style.RESET_ALL)
                     total_month_income = 0
+                    formatted_income = self.format_amount_for_display(
+                        total_month_income)
                 else:
                     total_month_income = self.calculate_total_amount(
                         income_data, month, 2)
@@ -652,6 +654,8 @@ class FinanceManager:
                         f"Warning: NO EXPENSES data found for {month}!\n" +
                         Style.RESET_ALL)
                     total_month_expenses = 0
+                    formatted_expenses = self.format_amount_for_display(
+                        total_month_expenses)
                 else:
                     total_month_expenses = self.calculate_total_amount(
                         expenses_data, month, 3)

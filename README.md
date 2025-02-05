@@ -247,7 +247,7 @@ The Menu provides the following options:
 
 + The table includes headers for each column, making the data easy to understand.
 
-![income data](documentation/website-screenshots/32-display-all-incomes-and-expenses.png)
+![display all income and expense data](documentation/website-screenshots/32-display-all-incomes-and-expenses.png)
 
 + If a worksheet contains no data, the application displays a message indicating that no data is available.
 MISSING
@@ -257,11 +257,33 @@ in, for example, menu option 0.
 
 **Menu Option 4**
 
-![Menu option 4](documentation/website-screenshots)
++ **User inputs 4:**
 
-+ 1 it is recognized as a valid input.
-+ The application first displays the report title in green using colorama to stand out.
-+ When generating a monthly report, the application prompts the user for the month name (case-insensitive).
+![Menu option 4](documentation/website-screenshots/33-user-selection-option4.png)
+
+*   **Generating Monthly Finance Reports:** Users can generate detailed financial reports for any month of 2025. The report includes:
+    *   **Total Income:**  The sum of all income entries for the selected month, displayed in European currency format.
+    *   **Total Expenses:** The sum of all expense entries for the selected month, displayed in European currency format.
+    *   **Cash Balance:** The difference between total income and total expenses for the selected month, displayed in European currency format. 
+    The application clearly indicates whether the balance is positive or negative.
+    *   **Expense Breakdown by Category:** A detailed breakdown of expenses for the selected month, showing the total amount spent in each category, displayed in European currency format.
+    *   **Highest Expense Category:** The expense category with the highest total spending for the selected month, also displayed in European currency format.
+
++ The application first displays the report title in green using colorama to stand out and then prompts the user to enter the month for the report (figure above).
+
++ Month input field is required and cannot be left empty.
+
+![Invalid empty input](documentation/website-screenshots/34-empty-invalid-input.png)
+
++ The application validates the user input for the month, ensuring it is a valid month name. Full month names are accepted.
+
++ Leading/trailing spaces are accepted (e.g., JanuarY, January, january, "    January", etc).
+
++ If no income or expense data exists for the selected month, a warning message is displayed.
+
++ After generating the report, the user is prompted to return to the main menu or exit the application.
+
+
 + If the month is valid, the report displays the total income, total expenses, cash balance, a breakdown of expenses by category, and the highest expense.
   - Calculates Monthly Income and Expenses
   ![Calculates Monthly Income and Expenses](documentation/website-screenshots/calculate-monthly-income-and-expenses.png)
