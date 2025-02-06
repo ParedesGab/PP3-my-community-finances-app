@@ -162,22 +162,6 @@ def show_application_instructions():
     prompt_for_menu_or_exit()
 
 
-def validate_user_numbers_choice(user_input):
-    """Validates the user's choice."""
-    if not 0 <= user_input <= 4:
-        raise ValueError(
-            Fore.LIGHTRED_EX +
-            "Invalid input: Please enter a number (0-4) or E.\n" +
-            Style.RESET_ALL)
-
-
-def is_valid_number(input_value):
-    """Checks if the input value is a valid number."""
-    if not input_value.isdigit() or input_value.startswith("+"):
-        return False
-    return True
-
-
 class FinanceManager:
 
     def __init__(self):
@@ -687,7 +671,7 @@ class FinanceManager:
             formatted_max_amount = "0.00"
 
         highest = f"""
-        {Fore.GREEN + Style.BRIGHT}🔥 HIGHEST EXPENSE: {Style.RESET_ALL}"""
+        {Fore.GREEN + Style.BRIGHT}🔥 HIGHEST EXPENSE:{Style.RESET_ALL}"""
         print(f"""
         {highest} {max_category.upper()} ({formatted_max_amount} EUR)
         """)
@@ -746,8 +730,8 @@ class FinanceManager:
                     formatted_expenses = self.format_amount_for_display(
                         total_month_expenses)
 
-                print(f"✅ TOTAL INCOME: {formatted_income} EUR")
-                print(f"✅ TOTAL EXPENSES: {formatted_expenses} EUR\n")
+                print(f"✅  TOTAL INCOME: {formatted_income} EUR")
+                print(f"✅  TOTAL EXPENSES: {formatted_expenses} EUR\n")
 
                 # Calculate cash balance
                 print(
@@ -759,20 +743,36 @@ class FinanceManager:
                 formatted_balance = self.format_amount_for_display(balance)
 
                 if balance >= 0:
-                    print(f"🎉🎉 Positive Balance!: {formatted_balance} EUR")
+                    print(f"🎉🎉 Positive Balance!: {formatted_balance} EUR\n")
                 else:
-                    print(f"🚨🚨 Negative Balance!: {formatted_balance} EUR")
+                    print(f"🚨🚨 Negative Balance!: {formatted_balance} EUR\n")
 
                 self.show_monthly_expenses_details(month)
 
-                return prompt_for_menu_or_exit()
+                prompt_for_menu_or_exit()
 
             else:
                 print(f"""
                 {Fore.LIGHTRED_EX}\nThere is no data for {month} yet...
                 {Style.RESET_ALL}"
                 """)
-                return prompt_for_menu_or_exit()
+                prompt_for_menu_or_exit()
+
+
+def validate_user_numbers_choice(user_input):
+    """Validates the user's choice."""
+    if not 0 <= user_input <= 4:
+        raise ValueError(
+            Fore.LIGHTRED_EX +
+            "Invalid input: Please enter a number (0-4) or E.\n" +
+            Style.RESET_ALL)
+
+
+def is_valid_number(input_value):
+    """Checks if the input value is a valid number."""
+    if not input_value.isdigit() or input_value.startswith("+"):
+        return False
+    return True
 
 
 def handle_user_option(option):
@@ -791,7 +791,6 @@ def handle_user_option(option):
     elif option == 3:
         finance_manager.display_worksheet("incomes")
         finance_manager.display_worksheet("expenses")
-        # Prompt user for next action after both are displayed
         prompt_for_menu_or_exit()
 
     elif option == 4:
@@ -823,21 +822,20 @@ def get_menu_user_choice():
             if user_input == "E":
                 return exit_program()
 
-        # Check for empty input
+            # Check for empty input
             if not user_input:
                 raise ValueError(
                     Fore.LIGHTRED_EX +
                     "Empty input: Please enter a number (0-4) or E.\n" +
                     Style.RESET_ALL
                 )
-
+            # Check if input looks like a number
             if not is_valid_number(user_input):
                 raise ValueError(
                     Fore.LIGHTRED_EX +
                     "Invalid input: Please enter a number (0-4) or E.\n" +
                     Style.RESET_ALL
                 )
-
             # Convert user input to integer
             option = int(user_input)
 
