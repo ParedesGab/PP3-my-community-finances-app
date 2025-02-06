@@ -13,8 +13,8 @@
 
   Let's go! 🚀
 
-+ The live page can be accessed via this [link]()
-
++ The live page can be accessed via this [link](https://my-finances-tracker-5a1726e2723f.herokuapp.com/)
+UPDATE
 ---
 ## Project Goals
 
