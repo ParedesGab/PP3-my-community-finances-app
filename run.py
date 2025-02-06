@@ -178,7 +178,7 @@ class FinanceManager:
     def add_new_income_to_income_worksheet(self):
         """Adds a new income record to the "incomes" worksheet."""
         income_message = f"""
-    {Fore.GREEN + Style.BRIGHT}==== ADD A NEW INCOME RECORD FOR 2025 ====
+        {Fore.GREEN + Style.BRIGHT}==== ADD A NEW INCOME RECORD FOR 2025 ====
         {Style.RESET_ALL}
          Please provide the following details in order:
 
@@ -188,8 +188,7 @@ class FinanceManager:
           (Ensure it is at least 4 characters long, and isn't entirely numeric.
           E.g., Salary, Freelance, Etsy).
         → {Fore.YELLOW}Amount{Style.RESET_ALL}: The amount earned (e.g, 1500).
-          (Must be a positive number (no "-" sign) and contain only digits
-          (no special characters or letters).
+          (Must be a positive number (no "-" sign).
           It is displayed in EU currency format. E.g, 1.500, 00 EUR.
         """
         print(income_message)
@@ -213,11 +212,10 @@ class FinanceManager:
         """)
 
         print("-" * 75)
+        # Prompt the user to choose what to do next
         print(
             Fore.BLUE + "\nWhat would you like to do next?" +
             Style.RESET_ALL)
-
-        # Prompt the user to choose what to do next
         while True:
             print(f"""
             Press 1 to add ANOTHER INCOME entry.
@@ -354,6 +352,7 @@ class FinanceManager:
             user_month = input(prompt_month).strip().lower()
 
             try:
+                # Interpret the month input as a full month name
                 datetime.strptime(user_month, "%B")
                 month = user_month.title()
                 return month
@@ -367,10 +366,11 @@ class FinanceManager:
     def get_and_validate_input(self, prompt, min_length=4, require_alpha=True):
         """
         Prompts the user for input and validates it based on various criteria.
+        Used for the source and the description inputs.
         """
         while True:
             user_input = input(Fore.BLUE + prompt + Style.RESET_ALL).strip()
-
+            # Checks if input length is valid
             if len(user_input) < min_length:
                 print(f"""
                     {Fore.LIGHTRED_EX}
@@ -379,7 +379,7 @@ class FinanceManager:
                     {Style.RESET_ALL}
                 """)
                 continue
-
+            # Check if input does not have letters
             if require_alpha and not re.search('[a-zA-Z]', user_input):
                 print(f"""
                     {Fore.LIGHTRED_EX}
@@ -410,35 +410,6 @@ class FinanceManager:
         )
         return self.get_and_validate_input(prompt_source)
 
-    def get_and_validate_category_input(self):
-        """Prompts the user to enter a category and validates the input."""
-        while True:
-            print(Fore.BLUE +
-                 "Enter the category (choose from the list below):\n" +
-                 Style.RESET_ALL)
-            for cat in CATEGORIES:
-                print(f"- {cat}")
-            prompt_category = Fore.BLUE + "Enter the category:\n" + Style.RESET_ALL
-
-            category_input = input(prompt_category).strip()
-            # Check for empty input *after* stripping
-            if not category_input:
-                print(Fore.LIGHTRED_EX +
-                 "Empty input: Please choose a category from the list.\n" +
-                  Style.RESET_ALL)
-                continue
-            # Lowercase after checking for empty input
-            category_input = category_input.lower()
-
-            # Check against title case
-            if category_input.title() in CATEGORIES:
-                # Return title case for consistency
-                return category_input.title()
-            else:
-                print(Fore.LIGHTRED_EX +
-                    "\nInvalid category. Please choose from the following:\n" +
-                    Style.RESET_ALL)
-
     def get_and_validate_description_input(self):
         """Prompts the user to enter a description and validates the input."""
         prompt_description = (
@@ -447,10 +418,45 @@ class FinanceManager:
         )
         return self.get_and_validate_input(prompt_description)
 
+    def get_and_validate_category_input(self):
+        """Prompts the user to enter a category and validates the input."""
+        while True:
+            print(
+                Fore.BLUE +
+                "\nSelect a category from this list:\n" +
+                Style.RESET_ALL)
+            for cat in CATEGORIES:
+                print(f"- {cat}")
+            prompt_category = (
+                Fore.BLUE + "\nEnter the category:\n" + Style.RESET_ALL)
+            category_input = input(prompt_category).strip().lower()
+
+            # Check for empty input
+            if not category_input:
+                print(
+                    Fore.LIGHTRED_EX +
+                    "Empty input: Please choose a category from the list.\n" +
+                    Style.RESET_ALL)
+                continue
+            # Return the category in title case
+            if category_input.title() in CATEGORIES:
+                return category_input.title()
+            else:
+                print(
+                    Fore.LIGHTRED_EX +
+                    "\nInvalid category. Please choose from the following:\n" +
+                    Style.RESET_ALL)
+
     def get_validated_and_normalized_amount(self):
         """
         Prompts the user to enter an amount, normalizes it,
         and validates the input.
+        This function repeatedly prompts the user to enter an amount
+        until a valid positive number is provided. It handles various
+        input formats, including European (e.g., 1.234,56) and
+        US (e.g., 1,234.56) number formatting, and normalizes them to
+        a consistent floating-point representation (using a dot as the
+        decimal separator). Empty or negative input is rejected.
         """
         while True:
             prompt_amount = (
@@ -527,14 +533,14 @@ class FinanceManager:
         fmt = "{:,.2f}".format(amount)
         fmt_amount = fmt.replace(",", "X").replace(".", ",").replace("X", ".")
 
-        # Formated to standard European style
+        # Formated to standard European style (e.g., 1.234,56)
         return fmt_amount
 
     def display_worksheet(self, worksheet):
         """Gets data from a given worksheet."""
         all_worksheet_values = self.get_worksheet_data(worksheet)
 
-        # Check if the worksheet is empty
+        # Check if the worksheet is completely empty
         if not all_worksheet_values:
             print(
                 Fore.LIGHTRED_EX +
@@ -588,13 +594,8 @@ class FinanceManager:
                     total_amount += float(amount_norm)
                 except ValueError as error:
                     print(
-                        f"{error}"
                         f"Could not convert amount in {row} to a number."
                     )
-                except Exception as e:
-                    print(
-                        Fore.LIGHTRED_EX + f"An error occurred: {e}\n" +
-                        Style.RESET_ALL)
         return total_amount
 
     def calc_expenses_by_category(self, expenses_data, month):
@@ -628,7 +629,7 @@ class FinanceManager:
     def max_expense_by_category(self, expenses_by_category):
         """
         Finds the category with the maximum expense, or None if no expenses.
-        Handles the case where expenses_by_category is empty
+        Handles the case where expenses_by_category is empty.
         """
         if not expenses_by_category:
             return None, None
