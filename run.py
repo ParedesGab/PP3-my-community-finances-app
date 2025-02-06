@@ -50,7 +50,7 @@ def exit_program():
 def prompt_for_menu_or_exit():
     """Prompts the user to return to the Menu or to exit the program."""
     print("-" * 75)
-    print(Fore.BLUE + "\nWhat would like to do next?" + Style.RESET_ALL)
+    print(Fore.BLUE + "\nWhat would you like to do next?" + Style.RESET_ALL)
     while True:
         print(f"""
         Press M to go back to the MENU.
@@ -230,7 +230,7 @@ class FinanceManager:
 
         print("-" * 75)
         print(
-            Fore.BLUE + "\nWhat would like to do next?" +
+            Fore.BLUE + "\nWhat would you like to do next?" +
             Style.RESET_ALL)
 
         # Prompt the user to choose what to do next
@@ -329,7 +329,7 @@ class FinanceManager:
         """)
 
         print("-" * 75)
-        print(Fore.BLUE + "\nWhat would like to do next?" + Style.RESET_ALL)
+        print(Fore.BLUE + "\nWhat would you like to do next?" + Style.RESET_ALL)
 
         # Prompt the user to choose what to do next
         while True:
