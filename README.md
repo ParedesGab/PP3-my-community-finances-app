@@ -198,25 +198,41 @@ The Menu provides the following options:
 
 + **User inputs 2:**
 
-![Menu option 2](documentation/website-screenshots)
+![Menu option 2](documentation/website-screenshots/19-user-selection-option2.png)
 
 +   **Adding Expenses:** Users can easily record their expenses for 2025. The application prompts for the following information:
     -   **Month:** The month the expense was incurred (e.g., January).  Full month names are accepted.
-    -   **Category:** The category of the expense (e.g., Rent, Groceries).  Input must be at least 4 characters long and cannot be entirely numeric.
-    -   **Description:** A description of the expense (e.g., Monthly rent, Weekly groceries). Input must be at least 4 characters long and cannot be entirely numeric.
+    -   **Category:** The category of the expense.
+    Importantly, this input was restricted to a predefined list of categories. This is because the category input is used to calculate the expenses per category and the highest expense. Therefore, data consitency was needed, an this approach resolves the problem with inconsistent category names. 
+    The defined categories list is:
+      - Housing
+      - Transportation
+      - Food
+      - Personal Care
+      - Healthcare
+      - Entertainment
+      - Shopping
+      - Education
+      - Travel
+      - Gifts
+      - Other
+    -   **Description:** A description of the expense (e.g., Monthly rent, Weekly groceries). Input must be at least 4 characters long and cannot be entirely numeric. This field allows flexible input to enable users to provide detailed and personalized descriptions of their expenses, as this input is not used for calculations.
     -   **Amount:** The amount spent. The application displays and stores the amount using the standard European currency format (e.g., 1.500,00 EUR). 
   
 + All input fields are required and cannot be left empty.
 
-+ Leading/trailing spaces are accepted (e.g., JanuarY, January, january, "    January", etc. are all accepted).
+![Invalid empty input](documentation/website-screenshots/23-empty-invalid-input.png)
+
++ Leading/trailing spaces to month, category and description inputs is accepted.
+(e.g., JanuarY, January, january, "    January", etc.).
 
 + Including capitalization to month, category and description inputs is accepted.
 
-+ The amount must be a positive number (no negative signs) and contain only digits (no special characters (except from the sign +) or letters).
++ The amount must be a positive number (no negative "-" sign accepted).
+
++ The amount ideally contains only digits, but to anticipate that an user can make a mistake, special characters or letters are accepted but are removed and not displayed.
 
 + All invalid inputs are handled with a clear error message. Examples below:
-
-![Invalid empty input](documentation/website-screenshots/23-empty-invalid-input.png)
 
 ![Invalid month](documentation/website-screenshots/24-invalid-month-input.png)
 
