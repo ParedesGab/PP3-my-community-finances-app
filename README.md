@@ -270,8 +270,17 @@ The Menu provides the following options:
 
 ![display all income and expense data](documentation/website-screenshots/32-display-all-incomes-and-expenses.png)
 
-+ If a worksheet contains no data, the application displays a message indicating that no data is available.
-MISSING
++ If there is neither income nor expense data, the application displays a message indicating that no data is available.
+
+![neither income nor expense data](documentation/website-screenshots/32-neither-income-nor-expense-data-to-display.png)
+
++ If there is income data but no expense data, the application displays a message that "no expenses data has been entered yet"
+
+![display income but no expenses data](documentation/website-screenshots/32-display-income-but-no-expenses-data-yet.png)
+
++ If there is expenses data but no income data, the application displays a message that "no income data has been entered yet"
+
+![display expenses but no income data](documentation/website-screenshots/32-display-expenses-but-no-income-data-yet.png)
 
 + The program then asks the user what they would like to do next, and displays the menu options again, with the same validations as in, for example, menu option 0. 
 
