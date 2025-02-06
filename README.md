@@ -84,6 +84,9 @@
 ---
 ## Features 
 
+* Disclaimer in some screenshots, you will see the message what would like to do next?
+This was corrected accordingly to: What would "you" like to do next?
+
 ### Welcome message
 
 ![Welcome message](documentation/website-screenshots/2-welcome-message.png)
@@ -295,6 +298,8 @@ The Menu provides the following options:
     -   **Total Expenses:** The sum of all expense entries for the selected month, displayed in European currency format.
     -   **Cash Balance:** The difference between total income and total expenses for the selected month, displayed in European currency format. 
     The application clearly indicates whether the balance is positive or negative.
+    🎉🎉 Positive Balance!: "cash balance amount EUR"
+    🚨🚨 Negative Balance!: "cash balance amount EUR"
     -   **Expense Breakdown by Category:** A detailed breakdown of expenses for the selected month, showing the total amount spent in each category, displayed in European currency format.
     -   **Highest Expense Category:** The expense category with the highest total spending for the selected month, also displayed in European currency format.
 
@@ -308,7 +313,7 @@ The Menu provides the following options:
 
 + Leading/trailing spaces are accepted (e.g., JanuarY, January, january, "    January", etc).
 
-+ If the user enters an invalid month name (e.g., jan, or a misspelled month) and an error message is displayed.
++ If the user enters an invalid month name (e.g., jan, or a misspelled month) an error message is displayed.
 ![Invalid month](documentation/website-screenshots/35-invalid-month-input.png)
 
 + If there is neither income nor expense data for the selected month, a message will be displayed indicating there is no data for that month yet.
@@ -325,7 +330,16 @@ The Menu provides the following options:
 
 + For a valid month input, where both, income and expenses data exist, the report displays total income, total expenses, cash balance, expenses by category, and the highest expense.
 
-![monthly report](documentation/website-screenshots/38-total-income-and-expenses-calculation.pngg)
++ For example, if user has the following data:
+
+  + Income data:
+  ![Income data](documentation/website-screenshots/39-income-data.png)
+
+  + Expenses data:
+  ![Expenses data](documentation/website-screenshots/40-expenses-data.png)
+
+  + The user will obtain the following monthly report:
+  ![monthly report](documentation/website-screenshots/41-total-income-and-expenses-calculation.png)
 
 The program then asks the user what they would like to do next, and displays the menu options again, with the same validations as in, for example, menu option 0. 
 
