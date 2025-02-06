@@ -223,7 +223,7 @@ class FinanceManager:
 
         print(f"""
         {Fore.GREEN + Style.BRIGHT}
-        New income for {month}, 2025 from '{source}' (EUR {formatted_amount})
+        New income for {month}, 2025 from '{source}' ({formatted_amount} EUR)
         stored successfully!
         {Style.RESET_ALL}
         """)

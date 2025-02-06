@@ -158,17 +158,21 @@ The Menu provides the following options:
     *   **Source:** The source of the income (e.g., Salary, Freelance).  The application validates that the source is at least 4 characters long and isn't entirely numeric.
     *   **Amount:** The amount earned. The application displays and stores the amount using the standard European currency format (e.g., 1.500,00 EUR).  
     
-+ All input fields are required and cannot be left empty.
++ All input fields are required and cannot be left empty. Example below.
+
+![Invalid empty input](documentation/website-screenshots/19-empty-invalid-input.png)
 
 + Leading/trailing spaces are accepted (e.g., JanuarY, January, january, "    January", etc. are all accepted).
 
 + Including capitalization to month and source inputs is accepted.
 
-+ The amount must be a positive number (no negative signs) and contain only digits (no special characters or letters).
++ The amount must be a positive number (no negative "-" sign accepted).
+
+![amount accepts letter and characters](documentation/website-screenshots/19-amount-accepts-letters-and-characters.png)
+
++ The amount ideally contains only digits, but to anticipate that an user can make a mistake, special characters or letters are accepted but are removed and not displayed.
 
 + All invalid inputs are handled with a clear error message. Examples below:
-
-![Invalid empty input](documentation/website-screenshots/19-empty-invalid-input.png)
 
 ![Invalid month](documentation/website-screenshots/20-invalid-month-name.png)
 
