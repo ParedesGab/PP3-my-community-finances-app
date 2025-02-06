@@ -109,7 +109,7 @@ def show_application_instructions():
          → {Fore.YELLOW}Month{Style.RESET_ALL}: Expense month.
             E.g., January, February.
          → {Fore.YELLOW}Category{Style.RESET_ALL}: Expense category.
-         
+
          IMPORTANT: Please choose your category from the following list:
          {Fore.GREEN}
          - Housing
@@ -204,8 +204,8 @@ class FinanceManager:
           (Ensure it is at least 4 characters long, and isn't entirely numeric.
           E.g., Salary, Freelance, Etsy).
         → {Fore.YELLOW}Amount{Style.RESET_ALL}: The amount earned (e.g, 1500).
-          (Must be a positive number (no negative signs) and contain only digits
-          (no special characters or letters). 
+          (Must be a positive number (no "-" sign) and contain only digits
+          (no special characters or letters).
           It is displayed in EU currency format. E.g, 1.500, 00 EUR.
         """
         print(income_message)
@@ -291,8 +291,8 @@ class FinanceManager:
           (Ensure it is at least 4 characters long, and isn't entirely numeric.
           E.g., Weekly groceries).
         → {Fore.YELLOW}Amount{Style.RESET_ALL}: The amount earned (e.g, 1500).
-          (Must be a positive number (no negative signs) and contain only digits
-          (no special characters or letters). 
+          (Must be a positive number (no "-" sign) and contain only digits
+          (no special characters or letters).
           It is displayed in EU currency format. E.g, 1.500, 00 EUR.
         """)
 
@@ -304,10 +304,10 @@ class FinanceManager:
             if category in CATEGORIES:
                 # Exit the loop because the category is valid
                 break
-            else: 
+            else:
                 # Display the predefined category list
                 print(Fore.LIGHTRED_EX +
-                      "\nInvalid category. Please choose from the following:\n" +
+                      "\nInvalid category. Please choose from the list:\n" +
                       Style.RESET_ALL)
                 for category in CATEGORIES:
                     print(f"→ {category}")
@@ -329,7 +329,8 @@ class FinanceManager:
         """)
 
         print("-" * 75)
-        print(Fore.BLUE + "\nWhat would you like to do next?" + Style.RESET_ALL)
+        print(Fore.BLUE + "\nWhat would you like to do next?" +
+              Style.RESET_ALL)
 
         # Prompt the user to choose what to do next
         while True:
@@ -428,21 +429,27 @@ class FinanceManager:
     def get_and_validate_category_input(self):
         """Prompts the user to enter a category and validates the input."""
         while True:
-            print(Fore.BLUE + "Enter the category (choose from the list below):\n" + Style.RESET_ALL)
+            print(Fore.BLUE +
+                 "Enter the category (choose from the list below):\n" +
+                 Style.RESET_ALL)
             for cat in CATEGORIES:
                 print(f"- {cat}")
             prompt_category = Fore.BLUE + "Enter the category:\n" + Style.RESET_ALL
 
-            category_input = input(prompt_category).strip()  # Strip FIRST
-
-            if not category_input:  # Check for empty input *after* stripping
-                print(Fore.LIGHTRED_EX + "Empty input: Please choose a category from the list.\n" + Style.RESET_ALL)
+            category_input = input(prompt_category).strip()
+            # Check for empty input *after* stripping
+            if not category_input:
+                print(Fore.LIGHTRED_EX +
+                 "Empty input: Please choose a category from the list.\n" +
+                  Style.RESET_ALL)
                 continue
+            # Lowercase after checking for empty input
+            category_input = category_input.lower()
 
-            category_input = category_input.lower() # Lowercase after checking for empty input
-
-            if category_input.title() in CATEGORIES:  # Check against title case
-                return category_input.title()  # Return title case for consistency
+            # Check against title case
+            if category_input.title() in CATEGORIES:
+                # Return title case for consistency
+                return category_input.title()
             else:
                 print(Fore.LIGHTRED_EX +
                     "\nInvalid category. Please choose from the following:\n" +
@@ -550,7 +557,7 @@ class FinanceManager:
                 f"No data available in this {worksheet.capitalize()}." +
                 Style.RESET_ALL)
             return
-        
+
         # Check if only the header row exists (no actual data)
         if len(all_worksheet_values) <= 1:
             print(f"\nGetting your {worksheet.capitalize()} data...")
