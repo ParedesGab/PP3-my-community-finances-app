@@ -407,55 +407,85 @@ The MyFinances application employs a consistent layout to ensure a predictable a
 ## Testing
 
 ### Validation
-- In this section, the HTML and CSS codes were checked for compliance with industry standards. This was done using the W3C Markup Validation Service for HTML and CSS respectively, using the code from both: the working environment and the the deployed version.
+- In this section, the python codes was checked against the CI python linter, to spot warnings, errors and check for code qualirty. 
 
-- The result in both reports: no errors were returned.
+- The result: no errors were returned.
 
-#### HTML Validation
-
-![HTML Validation](documentation/validation/html-file-validator.png)
+![CI Python linter](documentation/validation/0-python-linter-validation.png)
 
 + There were no errors found in the python code using CI python linter. 
-MISSING
 
 ### Manual Testing
 
-| Feature | Action | Expected result | Tested | Passed | Observations |
-| --- | --- | --- | --- | --- | --- |
-| **Home Menu Page** | | | | | |
-| Header | Game name display | The title is centered and positioned as the topmost element on the page and it is readable | Yes | Yes | - |- |
-| Play Game! button | Click on the Play Game! button | Redirects to the Memory Board Game page | Yes | Yes | - |
-| Play Instructions button | Click on the Play Instructions button | Redirects to the Game Indications page | Yes | Yes | - |
-| Both Home menu buttons | Hover over them | The buttons will rotate slightly and change colors to a gradient of blue and purple | Yes | Yes | 
-| Both Home menu buttons | Buttons displayed | The buttons are centered one of top of the other with a consisting style, and they are readable | Yes | Yes | 
-| **Game Indications Page** | | | | | |
-| Header | Game name display | The title is centered and positioned as the topmost element on the page and it is readable | Yes | Yes | - |- |
-| Game indications text | Text display| The paragraph stands out, the content is justified with no spelling mistakes | Yes | Yes | - |
-| Images | Images display | The images are loading correctly, they have the same style and dimensions, and are located  below the text| Yes | Yes | - |
-| Home Menu button | Click on the Home Menu button | Redirects to the Home Menu page | Yes | Yes | - |
-| **Memory Board Game Page** | | | | | |
-| Header | Game name display | The title is centered and positioned as the topmost element on the page and it is readable | Yes | Yes | - |- |
-| Game Board | Game board display | It stands out and it is centered | Yes | Yes | - |
-| Memory cards | Cards display | They have identical dimensions and are arranged in a grid layout. Initially, they appear "closed" with a white background. A hover effect is applied, and the cursor changes to indicate that they are clickable.| Yes | Yes | - |
-| Game logic | Game logic | The images are revealed only when clicked. Once a card is clicked, it becomes disabled and cannot be clicked again. After the user clicks two cards, they are re-enabled for further interactions. Each time the user clicks two cards, the "moves" count increases by 1. However, the "score" only increases by 100 when a match is made. The player wins once their score reaches 800 | Yes | Yes | - |
-| Restart Game button | Restarts the game | It restarst the game at any time | Yes | Yes | - |
-| Restart Game button | Hover over them | The button will rotate slightly and change colors to a gradient of blue and purple | Yes | Yes | - |
-| **Game Finished Congratulations Page** | | | | | |
-| Header | Game name display | The title is centered and positioned as the topmost element on the page and it is readable | Yes | Yes | - |- |
-| Game Finished - Congratulations Page | Page displays | This page appears 4s after the player has won | Yes | Yes | - |
-| Congratulations text | Text display | The paragraph stands out, the content is centered with no spelling mistakes | Yes | Yes | - |
-| Home Menu button | Click on the Home Menu button | edirects to the Home Menu page | Yes | Yes | - |
-| Play Again! button | Click on the Play Again! button | Redirects to the Memory Board Game page | Yes | Yes | - |
-| Both buttons | Hover over them | The buttons will rotate slightly and change colors to a gradient of blue and purple | Yes | Yes | 
-| Both buttons | Buttons displayed | The buttons are centered one of top of the other with a consisting style, and they are readable | Yes | Yes | 
-
----
-## Browser compatibility
-
-The website was tested on the following browsers:
-- Google Chrome
-- Firefox
-- Microsof Edge
+| Action | Expected result | Tested | Passed | Observations |
+| --- | --- | --- | --- | --- |
+| **MENU OPTIONS** | | | | | |
+| User presses enter without giving an input | Empty input message appears | Yes | Yes | - |- |
+| User presses a non numeric charactert | Invalid input message appears | Yes | Yes | - |- |
+| User presses a number outside the valid range: 0-4 | Invalid input message appears | Yes | Yes | - |- |
+| **FROM MENU, USER INPUTS 0** | | | | | |
+| User inputs == 0 | Displays the "Application instructions" feature | Yes | Yes | - |- |
+| User inputs == M or m to return to the MENU | Goes back to Menu options | Yes | Yes | - |- |
+| User inputs == E or e to return to the MENU | Exits the program with a goodbye message | Yes | Yes | - |- |
+| **FROM MENU, USER INPUTS 1** | | | | | |
+| User inputs == 1 | Displays the "add new income" feature | Yes | Yes | - |- |
+| User inputs different month name formats | Accepts flexible month name input: capitalized and with trailing and leading spaces (e.g., January, january, JANUARY, JanuAry, "       January   ") | Yes | Yes | - |- |
+| User inputs a value that is not the complete month name | Invalid input message appears | Yes | Yes | - |- |
+| User's month input is entered empty | Invalid input message appears | Yes | Yes | - |- |
+| User's source is entered | Accepts any string with minimun 4 characters long, contain alphabetic characters, and not be purely numeric. | Yes | Yes | - |- |
+| User inputs for "source" a string with 3 or less characters , or without alphabetic characters or purely numeric. | Invalid input message appears | Yes | Yes | - |- |
+| User's source input is entered empty | Invalid input message appears | Yes | Yes | - |- |
+| User inputs different amount formats (special characters and/or letters are accepted, except "-" (negative numbers),) | Accepts flexible amount input formats (e.g., 8 / 8.8 / 8,8 / 88000 / 88 000 /  88000, 26 EUR / 88000.26 / 88 000,26 / 88 000.26 / 88,000.26 / 88.000,26 ) | Yes | Yes | - |- |
+| User inputs different amount formats | Converts different amount formats to the standard European format (e.g., 15.236,26 EUR)  | Yes | Yes | - |- |
+| User inputs different amount formats | Converts different amount formats to the standard European format (e.g., 15.236,26 EUR)  | Yes | Yes | - |- |
+| User inputs a negative amount | Invalid input message appears | Yes | Yes | - |- |
+| User's amount input is entered empty | Invalid input message appears | Yes | Yes | - |- |
+| After adding a new income user can return to Menu or Exit | Application prompts user to return to menu or to exit | Yes | Yes | - |- |
+| After adding a new income user choose what do do next | Application prompts user to choose what to do next | Yes | Yes | 
+| After adding a new income, if user inputs 1| Displays ANOTHER "Add new income" option | Yes | Yes | - |- |
+| After adding a new income, if user inputs 2| Displays the "Add new expense" option | Yes | Yes | - |- |
+| After adding a new income, if user inputs M or m| Goes back to the Menu options | Yes | Yes | - |- |
+| After adding a new income, if user inputs E or e| Exits the program with a goodbye message | Yes | Yes | - |- |
+| **FROM MENU, USER INPUTS 2** | | | | | |
+| User inputs == 2 | Displays the "add new expenses" feature | Yes | Yes | - |- |
+| User inputs different month name formats | Accepts flexible month name input: capitalized and with trailing and leading spaces (e.g., January, january, JANUARY, JanuAry, "       January   ") | Yes | Yes | - |- |
+| User inputs a value that is not the complete month name | Invalid input message appears | Yes | Yes | - |- |
+| User's month input is entered empty | Invalid input message appears | Yes | Yes | - |- |
+| User's category is entered | Accepts only a predefined list of categories | Yes | Yes | - |- |
+| User's category is entered | The predefined list of categories is correctly and clearly listed | Yes | Yes | - |- |
+| User's category input is entered empty | Invalid input message appears | Yes | Yes | - |- |
+| User's description is entered | Accepts any string with minimun 4 characters long, contain alphabetic characters, and not be purely numeric. | Yes | Yes | - |- |
+| User inputs for "description" a string with 3 or less characters, or without alphabetic characters or purely numeric. | Invalid input message appears | Yes | Yes | - |- |
+| User's description input is entered empty | Invalid input message appears | Yes | Yes | - |- |
+| User inputs different amount formats (special characters and/or letters are accepted, except "-" (negative numbers),) | Accepts flexible amount input formats (e.g., 8 / 8.8 / 8,8 / 88000 / 88 000 /  88000, 26 EUR / 88000.26 / 88 000,26 / 88 000.26 / 88,000.26 / 88.000,26 ) | Yes | Yes | - |- |
+| User inputs different amount formats | Converts different amount formats to the standard European format (e.g., 15.236,26 EUR)  | Yes | Yes | - |- |
+| User inputs different amount formats | Converts different amount formats to the standard European format (e.g., 15.236,26 EUR)  | Yes | Yes | - |- |
+| User inputs a negative amount | Invalid input message appears | Yes | Yes | - |- |
+| User's amount input is entered empty | Invalid input message appears | Yes | Yes | - |- |
+| After adding a new expense user can return to Menu or Exit | Application prompts user to return to menu or to exit | Yes | Yes | - |- |
+| After adding a new expense user choose what do do next | Application prompts user to choose what to do next | Yes | Yes | 
+| After adding a new expense, if user inputs 1| Displays "Add new income" option | Yes | Yes | - |- |
+| After adding a new expense, if user inputs 2| Displays "Add ANOTHER new expense" option | Yes | Yes | - |- |
+| After adding a new expense, if user inputs M or m| Goes back to the Menu options | Yes | Yes | - |- |
+| After adding a new expense, if user inputs E or e| Exits the program with a goodbye message | Yes | Yes | - |- |
+| **FROM MENU, USER INPUTS 3** | | | | | |
+| User inputs == 3 | Displays the "view all your income and expenses" feature | Yes | Yes | - |- |
+| If there is income data but no expenses data | Income data is displayed but also a message indicating there is no expense data yet | Yes | Yes | - |- |
+| If there is expenses data but no income data | Expenses data is displayed but also a message indicating there is not income data yet | Yes | Yes | - |- |
+| if there is neither income or expense data | A message is displayed indicating that there is no income or expenses data yet | Yes | Yes | - |- |
+| After view all your income and expenses, if user inputs M or m| Goes back to the Menu options | Yes | Yes | - |- |
+| After view all your income and expenses, if user inputs E or e| Exits the program with a goodbye message | Yes | Yes | - |- |
+| **FROM MENU, USER INPUTS 4** | | | | | |
+| User inputs == 4 | Displays the "monthly finance report" feature | Yes | Yes | - |- |
+| User inputs different month name formats | Accepts flexible month name input: capitalized and with trailing and leading spaces (e.g., January, january, JANUARY, JanuAry, "       January   ") | Yes | Yes | - |- |
+| User inputs a value that is not the complete month name | Invalid input message appears | Yes | Yes | - |- |
+| User's month input is entered empty | Invalid input message appears | Yes | Yes | - |- |
+| User input for month is empty | Invalid input message appears | Yes | Yes | - |- |
+| If month input has no data yet | A message is displayed indicating that month has no data | Yes | Yes | - |- |
+| After displaying the monthly finance report, if user inputs M or m| Goes back to the Menu options | Yes | Yes | - |- |
+| After displaying the monthly finance report,, if user inputs E or e| Exits the program with a goodbye message | Yes | Yes | - |- |
+| **FROM MENU, USER INPUTS 5** | | | | | |
+| User inputs == 5 | Exits the program with a goodbye message | Yes | Yes | - |- |
 
 ---
 ## Bugs
