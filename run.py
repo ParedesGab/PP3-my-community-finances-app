@@ -543,11 +543,22 @@ class FinanceManager:
         """Gets data from a given worksheet."""
         all_worksheet_values = self.get_worksheet_data(worksheet)
 
+        # Check if the worksheet is empty
         if not all_worksheet_values:
             print(
                 Fore.LIGHTRED_EX +
-                "No data available in this worksheet." +
+                f"No data available in this {worksheet.capitalize()}." +
                 Style.RESET_ALL)
+            return
+        
+        # Check if only the header row exists (no actual data)
+        if len(all_worksheet_values) <= 1:
+            print(f"\nGetting your {worksheet.capitalize()} data...")
+            print(
+                Fore.YELLOW +
+                f"\nNo {worksheet.capitalize()} data has been entered yet!\n" +
+                Style.RESET_ALL
+            )
             return
 
         # Get header row
@@ -562,7 +573,7 @@ class FinanceManager:
         {Style.RESET_ALL}""")
 
         # Use tabulate to display data in tabular form
-        print(f"Getting your {worksheet.capitalize()} data...")
+        print(f"Getting your {worksheet.capitalize()} data...\n")
         print(tabulate(data_rows, headers=header_row, tablefmt="pretty"))
 
     def month_has_data(self, worksheet_data, month):
