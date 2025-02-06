@@ -7,9 +7,11 @@
 **Welcome to MyFinances tracker APP!**
 
   This expense tracker will help you monitor
-  your income and expenses!
+  your income and expenses for 2025!
+
   Are you ready to understand your spending habits?
-  Let's go!
+
+  Let's go! 🚀
 
 + The live page can be accessed via this [link]()
 
@@ -103,21 +105,21 @@ The Menu provides the following options:
 *   **4: Monthly Finance Report:** Generate a detailed report for a specific month, showing total income, total expenses, cash balance, and a breakdown of expenses by category.
 *   **E: Exit:** Close the application.
 
-+ It gets the user selection and validates the selection.
++ All input fields are required and cannot be left empty.
 
-+ Including spaces to the inputs is accepted. 
+![Empty input](documentation/website-screenshots/4-empty-invalid-input.png)
+
++ Leading/trailing spaces are accepted.
 
 + If an invalid input is entered (e.g., non-numeric characters or a number outside the valid range: 0-4), an error message is displayed, and the user is prompted to select a menu option (0-4 or E) again. 
 
-+ All invalid inputs are handled with a clear error message. (Figures below).
-
-![Empty input](documentation/website-screenshots/4-empty-invalid-input.png)
++ All invalid inputs are handled with a clear error message (figures below).
 
 ![Invalid choice](documentation/website-screenshots/5-invalid-choice-not-number-from-0-to-4-or-E.png)
 
 ![Invalid choice](documentation/website-screenshots/6-invalid-choice-not-number-from-0-to-4-or-E.png)
 
-+ E or e are accepted as valid inputs to exit the application and a GoodBye message is displayed (Figures below).
++ E or e are accepted as valid inputs to exit the application, and a GoodBye message is displayed (Figures below).
 
 ![Valid choice "e"](documentation/website-screenshots/7-lowercase-valid-input-exit.png)
 
@@ -135,14 +137,13 @@ The Menu provides the following options:
     *   **Generating Monthly Reports:** Users can generate detailed financial reports for any month of 2025. These reports include total income, total expenses, cash balance, a breakdown of expenses by category, and the highest expense category.
     *   **Viewing All Records:** Users can view all their stored income and expense records in a tabular format. This allows for easy review and analysis of their financial data.
     *   **Exiting the Program:** Users can exit the application when finished.  The instructions reassure users that their data is safely stored.
+  
+![instructions part1](documentation/website-screenshots/9-application-instructions-part1.png)
+![instructions part2](documentation/website-screenshots/9-application-instructions-part2.png)
+![instructions part3](documentation/website-screenshots/9-application-instructions-part3.png)
+![instructions part4](documentation/website-screenshots/9-application-instructions-part4.png)
 
 + **Return to Menu / Exit Prompt:** After the applications instructions are displayed, the application prompts the user to either return to the main menu or exit the program. This provides a controlled flow within the application.  Invalid input (anything other than 'M' or 'E', or "m" or "e") is handled with a clear error message.
-
-![Empty input](documentation/website-screenshots/4-empty-invalid-input.png)
-
-![Invalid choice](documentation/website-screenshots/5-invalid-choice-not-number-from-0-to-4-or-E.png)
-
-![Invalid choice](documentation/website-screenshots/6-invalid-choice-not-number-from-0-to-4-or-E.png)
 
 ![Invalid input example](documentation/website-screenshots/14-from-option0-invalid-input-example.png)
 
