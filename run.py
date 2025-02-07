@@ -35,7 +35,7 @@ def welcome():
     to better understand the economic landscape!
 
     Your participation will remain anonymous.
-    Thank you for helping us build a more informed future!
+    Thank you for helping us gain a deeper understanding of personal finances!
 
     Let's get started! 🚀
     """)
@@ -58,10 +58,10 @@ def prompt_for_menu_or_exit():
     print("-" * 75)
     print(Fore.BLUE + "\nWhat would you like to do next?" + Style.RESET_ALL)
     while True:
-        print(f"""
-        Press M to go back to the MENU.
-        Press E to EXIT the program.
-        """)
+        print("""
+              Press M to go back to the MENU.
+              Press E to EXIT the program.
+              """)
         try:
             choice_message = (
                 Fore.BLUE + Style.BRIGHT +
@@ -88,11 +88,11 @@ def show_application_instructions():
     {Fore.GREEN + Style.BRIGHT}==== APPLICATION INSTRUCTIONS ====
     {Style.RESET_ALL}
 
-    Welcome to MyFinances App! Here is how you can use your application:\n
+    Welcome to the FinancialSurvey2025!! App instructions:
 
     {Fore.BLUE} 1. Add New Income:{Style.RESET_ALL}
 
-       - You can add income records to track your earnings in 2025.
+       - Please provide your 2025 income(s) information here.
        - Each income entry consists of:
          → {Fore.YELLOW}Month{Style.RESET_ALL}: Income month.
             E.g., January, February.
@@ -102,21 +102,21 @@ def show_application_instructions():
             E.g., 1500.
 
             Note:
-            - Source input is flexible, but informative entries will make your
-              financial tracking more useful.
+            - Source input is flexible, but informative entries will help
+              us build a more informed future!
             - The amount is displayed and stored following the
               standard European currency format (i.e., 1.500,00 EUR).
             - All input fields are required (empty entries are not valid).
 
     {Fore.BLUE} 2. Add New Expense:{Style.RESET_ALL}
 
-       - You can record your expenses to monitor your spending in 2025.
+       - Please provide your 2025 expense(s) information here.
        - Each expense entry consists of:
          → {Fore.YELLOW}Month{Style.RESET_ALL}: Expense month.
             E.g., January, February.
          → {Fore.YELLOW}Category{Style.RESET_ALL}: Expense category.
 
-         IMPORTANT: Please choose your category from the following list:
+         IMPORTANT: Please choose a category from the following list:
          {Fore.GREEN}
          - Housing
          - Transportation
@@ -139,7 +139,8 @@ def show_application_instructions():
             Note:
             - IMPORTANT: Category inputs must be chosen from the list above!
             - Description inputs are flexible but creating
-              informative entries make your financial tracking more useful.
+              informative entries will help gain a deeper understanding
+              of personal finances!
             - The amount is displayed and stored following the
               standard European currency format (i.e., 1.500,00 EUR).
             - All input fields are required (empty entries are not valid).
@@ -157,20 +158,30 @@ def show_application_instructions():
 
     {Fore.BLUE} 4. Display All Income and Expenses:{Style.RESET_ALL}
 
-       - View all your stored income" and "expenses" records.
-       - This option shows all your data in a tabular format.
+       - This option displays all 2025 survey responses.
+       - It shows the data in a tabular format.
 
     {Fore.BLUE} E. Exit Program:{Style.RESET_ALL}
 
-       - Close the application. Don't worry; all your data is safely stored! ✨
+       - Close the application. Don't worry; your data remains anonymous ✨
     """
     print(instructions)
     prompt_for_menu_or_exit()
 
 
 class FinanceManager:
+    """
+    Manages financial data for the year 2025 by interacting with a Google Sheet.
+    This class provides methods to add income and expense records, retrieve data from
+    the spreadsheet, calculate totals, generate reports, and display information to the user.
+    It handles data validation and formatting for European currency.
+    """
 
     def __init__(self):
+        """
+        Initializes the FinanceManager object
+        and retrieves incomes/expense worksheets.
+        """
         # Get the income and expenses worksheets
         self.income_worksheet = SHEET.worksheet("incomes")
         self.expenses_worksheet = SHEET.worksheet("expenses")
