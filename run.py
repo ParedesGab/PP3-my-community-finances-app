@@ -145,9 +145,14 @@ def show_application_instructions():
               standard European currency format (i.e., 1.500,00 EUR).
             - All input fields are required (empty entries are not valid).
 
-    {Fore.BLUE} 3. Generate Monthly Finance Report:{Style.RESET_ALL}
+    {Fore.BLUE} 3. Display All Income and Expenses:{Style.RESET_ALL}
 
-       - Select a month to generate a detailed income and expenses report.
+       - This option displays all 2025 survey responses.
+       - It shows the data in a tabular format.
+
+    {Fore.BLUE} 4. View AGGREGATED 2025 MONTHLY FINANCE REPORT{Style.RESET_ALL}
+
+       - Select a month to view the aggregated 2025 financial survey data.
          E.g., January, February.
        - The 2025 report will display:
          → Aggregate total Income for the selected month.
@@ -156,10 +161,7 @@ def show_application_instructions():
          → A breakdown of expenses by category.
          → The highest expense category.
 
-    {Fore.BLUE} 4. Display All Income and Expenses:{Style.RESET_ALL}
 
-       - This option displays all 2025 survey responses.
-       - It shows the data in a tabular format.
 
     {Fore.BLUE} E. Exit Program:{Style.RESET_ALL}
 
@@ -219,12 +221,12 @@ class FinanceManager:
 
         self.income_worksheet.append_row(new_income_row)
 
-        print("\nStoring your new income entry ...")
+        print("\nStoring your income entry ...")
 
         print(f"""
         {Fore.GREEN + Style.BRIGHT}
-        New income for {month}, 2025 from '{source}' ({formatted_amount} EUR)
-        stored successfully!
+        Thank you! New income for {month}, 2025 from '{source}'
+        ({formatted_amount} EUR), stored successfully!
         {Style.RESET_ALL}
         """)
 
@@ -318,12 +320,12 @@ class FinanceManager:
         new_expense_row = [month, category, description, formatted_amount]
         self.expenses_worksheet.append_row(new_expense_row)
 
-        print("\nStoring your new expense entry ...")
+        print("\nStoring your expense entry ...")
 
         print(f"""
         {Fore.GREEN + Style.BRIGHT}
-        New expense for {month}, 2025 for '{category}' ('{description}',
-        {formatted_amount} EUR), added successfully!
+        Thank you! New expense for {month}, 2025 for '{category}' 
+        ('{description}', {formatted_amount} EUR), added successfully!
         {Style.RESET_ALL}
         """)
 
@@ -567,7 +569,7 @@ class FinanceManager:
 
         # Check if only the header row exists (no actual data)
         if len(all_worksheet_values) <= 1:
-            print(f"\nGetting your {worksheet.capitalize()} data...")
+            print(f"\nGetting {worksheet.capitalize()} data...")
             print(
                 Fore.YELLOW +
                 f"\nNo {worksheet.capitalize()} data has been entered yet!\n" +
@@ -583,11 +585,11 @@ class FinanceManager:
 
         print(f"""
         {Fore.GREEN + Style.BRIGHT}
-        ==== YOUR {worksheet.upper()} DATA IN 2025 ====
+        ==== {worksheet.upper()} DATA IN 2025 ====
         {Style.RESET_ALL}""")
 
         # Use tabulate to display data in tabular form
-        print(f"Getting your {worksheet.capitalize()} data...\n")
+        print(f"Getting {worksheet.capitalize()} data...\n")
         print(tabulate(data_rows, headers=header_row, tablefmt="pretty"))
 
     def month_has_data(self, worksheet_data, month):
@@ -659,7 +661,7 @@ class FinanceManager:
         """Displays detailed expense information for a given month."""
         print(
             Fore.GREEN + Style.BRIGHT +
-            f"\nCalculating Your {month} expenses by category...\n" +
+            f"\nCalculating {month} Expenses by Category...\n" +
             Style.RESET_ALL)
 
         # Show expenses per category
@@ -698,14 +700,15 @@ class FinanceManager:
         """Generates and displays the monthly finance report."""
         report_message = f"""
         {Fore.GREEN + Style.BRIGHT}
-        ✨✨✨✨  MY MONTHLY FINANCE REPORT  ✨✨✨✨
+        ✨✨  AGGREGATED 2025 MONTHLY FINANCE REPORT  ✨✨
         {Style.RESET_ALL}
 
-        This report will show you the following for the month you select:
+        This report will show you for the month you select:
 
         → Aggregate Total Income
         → Aggregate Total Expenses
-        → Net Finantial Balance (Income - Expenses)
+        → Net Finantial Balance:
+          Aggregate Total Income - Aggregate Total Expenses
         → A Breakdown of Expenses by Category
         → The Highest Expense Category
 
@@ -728,7 +731,7 @@ class FinanceManager:
             if income_month_data_exists or expen_month_data_exists:
                 print(
                     Fore.GREEN + Style.BRIGHT +
-                    f"\nCalculating your {month} income and expenses...\n" +
+                    f"\nCalculating {month} income and expenses...\n" +
                     Style.RESET_ALL)
                 if not income_month_data_exists:
                     print(
@@ -835,8 +838,8 @@ def get_menu_user_choice():
     Press 0 to check the application instructions.
     Press 1 to add a new income entry (Month, Source, and Amount).
     Press 2 to add a new expense entry (Month, Category, Description, Amount).
-    Press 3 to view all your incomes and expenses.
-    Press 4 to check YOUR MONTHLY FINANCE REPORT.
+    Press 3 to view all incomes and expenses.
+    Press 4 to view AGGREGATED 2025 MONTHLY FINANCE REPORT.
     Press E to exit the program.
         """)
 
