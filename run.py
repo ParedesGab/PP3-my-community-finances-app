@@ -610,7 +610,7 @@ class FinanceManager:
                     amount_norm = amount.replace(".", "").replace(",", ".")
                     # Convert string float after normalization
                     total_amount += float(amount_norm)
-                except ValueError as error:
+                except ValueError:
                     print(
                         f"Could not convert amount in {row} to a number."
                     )
@@ -694,6 +694,33 @@ class FinanceManager:
         print(f"""
         {highest} {max_category.upper()} ({formatted_max_amount} EUR)
         """)
+
+    def _get_next_report_action(self):
+        """Prompts the user for the next action after report generation."""
+        while True:
+            print("-" * 75)
+            print(
+                Fore.BLUE +
+                "\nWhat would you like to do next?" +
+                Style.RESET_ALL)
+            print("""
+                  Press R to generate a report for ANOTHER MONTH.
+                  Press M to go back to the MENU.
+                  Press E to EXIT the program.
+            """)
+            choice_message = (
+                Fore.BLUE + Style.BRIGHT +
+                "Enter your choice (R, M or E) and press enter:\n" +
+                Style.RESET_ALL
+            )
+            user_input = input(choice_message).strip().upper()
+            if user_input in ("R", "M", "E"):
+                return user_input
+            else:
+                print(
+                    Fore.LIGHTRED_EX +
+                    "Invalid input. Please enter R, M, or E." +
+                    Style.RESET_ALL)
 
     def generate_monthly_finance_report(self):
         """Generates and displays the monthly finance report."""
@@ -779,15 +806,22 @@ class FinanceManager:
                     print(f"🚨🚨 Negative Balance!: {formatted_balance} EUR\n")
 
                 self.show_monthly_expenses_details(month)
-
-                prompt_for_menu_or_exit()
-
             else:
                 print(f"""
                 {Fore.LIGHTRED_EX}\nThere is no data for {month} yet...
                 {Style.RESET_ALL}"
                 """)
-                prompt_for_menu_or_exit()
+
+                # Get user's next action
+            next_action = self._get_next_report_action()
+
+            # Generate another report
+            if next_action == "R":
+                continue
+            elif next_action == "M":
+                return get_menu_user_choice()
+            elif next_action == "E":
+                exit_program()
 
 
 def validate_user_numbers_choice(user_input):
