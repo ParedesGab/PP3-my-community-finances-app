@@ -187,7 +187,7 @@ class FinanceManager:
         self.income_worksheet = SHEET.worksheet("incomes")
         self.expenses_worksheet = SHEET.worksheet("expenses")
 
-    def get_worksheet_data(self, worksheet_name):
+    def _get_worksheet_data(self, worksheet_name):
         """Gets all data from a specified worksheet"""
         worksheet_name = SHEET.worksheet(worksheet_name)
         all_values = worksheet_name.get_all_values()
@@ -556,7 +556,7 @@ class FinanceManager:
 
     def display_worksheet(self, worksheet):
         """Gets data from a given worksheet."""
-        all_worksheet_values = self.get_worksheet_data(worksheet)
+        all_worksheet_values = self._get_worksheet_data(worksheet)
 
         # Check if the worksheet is completely empty
         if not all_worksheet_values:
@@ -591,14 +591,14 @@ class FinanceManager:
         print(f"Getting {worksheet.capitalize()} data...\n")
         print(tabulate(data_rows, headers=header_row, tablefmt="pretty"))
 
-    def month_has_data(self, worksheet_data, month):
+    def _month_has_data(self, worksheet_data, month):
         """Checks if month data exists in a worksheet."""
         for row in worksheet_data:
             if row[0].lower() == month.lower():
                 return True
         return False
 
-    def calculate_total_amount(self, worksheet_data, month, amount_col_index):
+    def _calculate_total_amount(self, worksheet_data, month, amount_col_index):
         """Calculates the total amount for the given month and worksheet."""
         total_amount = 0
         for row in worksheet_data:
@@ -616,7 +616,7 @@ class FinanceManager:
                     )
         return total_amount
 
-    def calc_expenses_by_category(self, expenses_data, month):
+    def _calc_expenses_by_category(self, expenses_data, month):
         """Calculate expenses per category in a given month."""
         expenses_by_category = {}
 
@@ -644,7 +644,7 @@ class FinanceManager:
                     expenses_by_category[category] = amount
         return expenses_by_category
 
-    def max_expense_by_category(self, expenses_by_category):
+    def _max_expense_by_category(self, expenses_by_category):
         """
         Finds the category with the maximum expense, or None if no expenses.
         Handles the case where expenses_by_category is empty.
@@ -664,8 +664,8 @@ class FinanceManager:
             Style.RESET_ALL)
 
         # Show expenses per category
-        exp_data = self.get_worksheet_data("expenses")
-        expenses_by_category = self.calc_expenses_by_category(exp_data, month)
+        exp_data = self._get_worksheet_data("expenses")
+        expenses_by_category = self._calc_expenses_by_category(exp_data, month)
 
         if not expenses_by_category:
             print(
@@ -680,7 +680,7 @@ class FinanceManager:
             print(f"→ {category.upper()}: {formatted_amount} EUR \n")
 
         # Show max expense by category
-        max_category, max_amount = self.max_expense_by_category(
+        max_category, max_amount = self._max_expense_by_category(
             expenses_by_category)
         # Format max_amount for display in European format
         if max_amount is not None:
@@ -747,12 +747,12 @@ class FinanceManager:
             month = self.get_and_validate_month_input()
 
             # Get all data of a worksheet
-            income_data = self.get_worksheet_data("incomes")
-            expenses_data = self.get_worksheet_data("expenses")
+            income_data = self._get_worksheet_data("incomes")
+            expenses_data = self._get_worksheet_data("expenses")
 
             # Check if the month exists within the data
-            income_month_data_exists = self.month_has_data(income_data, month)
-            expen_month_data_exists = self.month_has_data(expenses_data, month)
+            income_month_data_exists = self._month_has_data(income_data, month)
+            expen_month_data_exists = self._month_has_data(expenses_data, month)
 
             if income_month_data_exists or expen_month_data_exists:
                 print(
@@ -768,7 +768,7 @@ class FinanceManager:
                     formatted_income = self.format_amount_for_display(
                         total_month_income)
                 else:
-                    total_month_income = self.calculate_total_amount(
+                    total_month_income = self._calculate_total_amount(
                         income_data, month, 2)
                     # Show the income in European currency format
                     formatted_income = self.format_amount_for_display(
@@ -782,7 +782,7 @@ class FinanceManager:
                     formatted_expenses = self.format_amount_for_display(
                         total_month_expenses)
                 else:
-                    total_month_expenses = self.calculate_total_amount(
+                    total_month_expenses = self._calculate_total_amount(
                         expenses_data, month, 3)
                     # Show the expenses in European currency format
                     formatted_expenses = self.format_amount_for_display(
