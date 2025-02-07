@@ -1,8 +1,9 @@
-import gspread
-from google.oauth2.service_account import Credentials
-from colorama import init, Fore, Style, Back
 from datetime import datetime
 import re
+
+from colorama import init, Fore, Style
+import gspread
+from google.oauth2.service_account import Credentials
 from tabulate import tabulate
 
 
@@ -160,8 +161,6 @@ def show_application_instructions():
          → Net finantial balance (Income - Expenses).
          → A breakdown of expenses by category.
          → The highest expense category.
-
-
 
     {Fore.BLUE} E. Exit Program:{Style.RESET_ALL}
 
@@ -544,7 +543,7 @@ class FinanceManager:
             except ValueError:
                 print(
                     Fore.LIGHTRED_EX +
-                    "Invalid amount format. Use digits, dots or commas" +
+                    "Invalid amount format. Use this format (e.g) 1.234,56" +
                     Style.RESET_ALL)
 
     def format_amount_for_display(self, amount):
