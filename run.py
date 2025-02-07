@@ -33,7 +33,7 @@ def welcome():
 
     Track your 2025 income and expenses with ease!
     Are you ready to understand your spending habits?\n
-    Let's go! 🚀
+    Let's go! 🚀 add
     """)
 
 
@@ -145,7 +145,7 @@ def show_application_instructions():
        - The 2025 report will display:
          → Total Income for the selected month.
          → Total Expenses for the selected month.
-         → Your cash balance (Income - Expenses).
+         → Net finantial balance (Income - Expenses).
          → A breakdown of expenses by category.
          → Your highest expense category.
 
@@ -679,11 +679,22 @@ class FinanceManager:
 
     def generate_monthly_finance_report(self):
         """Generates and displays the monthly finance report."""
-        print(
-            Fore.GREEN + Style.BRIGHT +
-            "\n  ✨✨✨✨  MY MONTHLY FINANCE REPORT  ✨✨✨✨\n " +
-            Style.RESET_ALL
-            )
+        report_message = f"""
+        {Fore.GREEN + Style.BRIGHT}
+        ✨✨✨✨  MY MONTHLY FINANCE REPORT  ✨✨✨✨
+        {Style.RESET_ALL}
+
+        This report will show you the following for the month you select:
+
+        → Total Income
+        → Total Expenses
+        → Net Finantial Balance (Income - Expenses)
+        → A Breakdown of Expenses by Category
+        → Your Highest Expense Category
+
+        Please enter the month you'd like to review:
+        """
+        print(report_message)
 
         while True:
             # User inputs the month
@@ -731,13 +742,13 @@ class FinanceManager:
                     formatted_expenses = self.format_amount_for_display(
                         total_month_expenses)
 
-                print(f"✅  TOTAL INCOME: {formatted_income} EUR")
-                print(f"✅  TOTAL EXPENSES: {formatted_expenses} EUR\n")
+                print(f"✅ AGGREGATE TOTAL INCOME: {formatted_income} EUR")
+                print(f"✅ AGGREGATE TOTAL EXPENSES: {formatted_expenses} EUR\n")
 
-                # Calculate cash balance
+                # Calculate net financial balance
                 print(
                     Fore.GREEN + Style.BRIGHT +
-                    f"\nCalculating Your {month} cash balance...\n" +
+                    f"\nCalculating net financial balance for {month}\n" +
                     Style.RESET_ALL
                     )
                 balance = total_month_income - total_month_expenses
