@@ -29,15 +29,20 @@ def welcome():
     init()
     rim = f"{Fore.GREEN + Style.BRIGHT}======================{Style.RESET_ALL}"
     print(f"""
-    {rim} Welcome TO MyFinances APP! {rim}
+    {rim} Welcome to the FinancialSurvey2025 App! {rim}
 
-    Track your 2025 income and expenses with ease!
-    Are you ready to understand your spending habits?\n
-    Let's go! 🚀 add
+    We are collecting information about income and expenses to better
+    understand the economic landscape!
+
+    Your participation is vital and will remain anonymous.
+    Thank you for helping us build a more informed future!
+
+    Let's get started! 🚀
     """)
 
 
 def exit_program():
+    """Displays a farewell message and terminates the program."""
     exit_message = f"""
     {Fore.GREEN + Style.BRIGHT}
     ✨ Your finances are in good hands ✨
@@ -143,11 +148,11 @@ def show_application_instructions():
        - Select a month to generate a detailed income and expenses report.
          E.g., January, February.
        - The 2025 report will display:
-         → Total Income for the selected month.
-         → Total Expenses for the selected month.
+         → Aggregate total Income for the selected month.
+         → Aggregate total Expenses for the selected month.
          → Net finantial balance (Income - Expenses).
          → A breakdown of expenses by category.
-         → Your highest expense category.
+         → The highest expense category.
 
     {Fore.BLUE} 4. Display All Income and Expenses:{Style.RESET_ALL}
 
@@ -686,11 +691,11 @@ class FinanceManager:
 
         This report will show you the following for the month you select:
 
-        → Total Income
-        → Total Expenses
+        → Aggregate Total Income
+        → Aggregate Total Expenses
         → Net Finantial Balance (Income - Expenses)
         → A Breakdown of Expenses by Category
-        → Your Highest Expense Category
+        → The Highest Expense Category
 
         Please enter the month you'd like to review:
         """
