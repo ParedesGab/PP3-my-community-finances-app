@@ -29,7 +29,7 @@ def welcome():
     init()
     rim = f"{Fore.GREEN + Style.BRIGHT}======================{Style.RESET_ALL}"
     print(f"""
-    {rim} WELCOME TO MyFinances APP! {rim}
+    {rim} Welcome TO MyFinances APP! {rim}
 
     Track your 2025 income and expenses with ease!
     Are you ready to understand your spending habits?\n
