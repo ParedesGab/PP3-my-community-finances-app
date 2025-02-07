@@ -193,6 +193,43 @@ class FinanceManager:
         all_values = worksheet_name.get_all_values()
         return all_values
 
+    def _get_next_action_after_data_entry(self):
+        """
+        Prompts the user for the next action after having added
+        income and /or expenses entries
+        """
+        while True:
+            print("-" * 75)
+            print(
+                Fore.BLUE +
+                "\nWhat would you like to do next?" +
+                Style.RESET_ALL)
+            print("""
+                  Press 1 to add (another) income entry.
+                  Press 2 to add (another) expense entry.
+                  Press M to go back to the MENU.
+                  Press E to EXIT the program.
+            """)
+            choice_message = (
+                Fore.BLUE + Style.BRIGHT +
+                "Enter your choice (1, 2, M or E) and press enter:\n" +
+                Style.RESET_ALL
+            )
+            user_input = input(choice_message).strip().upper()
+            if user_input == "1":
+                return self.add_new_income_to_income_worksheet()
+            elif user_input == "2":
+                return self.add_new_expense_to_expense_worksheet()
+            elif user_input == "M":
+                return get_menu_user_choice()
+            elif user_input == "E":
+                return exit_program()
+            else:
+                print(
+                    Fore.LIGHTRED_EX +
+                    "Invalid input. Please enter 1, 2, M, or E." +
+                    Style.RESET_ALL)
+
     def add_new_income_to_income_worksheet(self):
         """Adds a new income record to the "incomes" worksheet."""
         income_message = f"""
@@ -228,37 +265,16 @@ class FinanceManager:
         ({formatted_amount} EUR), stored successfully!
         {Style.RESET_ALL}
         """)
-
-        print("-" * 75)
         # Prompt the user to choose what to do next
-        print(
-            Fore.BLUE + "\nWhat would you like to do next?" +
-            Style.RESET_ALL)
-        while True:
-            print(f"""
-            Press 1 to add ANOTHER INCOME entry.
-            Press 2 to add an expense entry.
-            Press M to go back to the MENU.
-            Press E to EXIT the program.
-            """)
-            choice_message = (
-                Fore.BLUE + Style.BRIGHT +
-                "Enter your choice (1, 2, M or E) and press enter:\n" +
-                Style.RESET_ALL)
-            user_input = input(choice_message).strip().upper()
-            if user_input == "1":
-                return self.add_new_income_to_income_worksheet()
-            elif user_input == "2":
-                return self.add_new_expense_to_expense_worksheet()
-            elif user_input == "M":
-                return get_menu_user_choice()
-            elif user_input == "E":
-                return exit_program()
-            else:
-                print(
-                    Fore.LIGHTRED_EX +
-                    "Invalid input. Please enter 1, 2, M, or E." +
-                    Style.RESET_ALL)
+        next_action = self._get_next_action_after_data_entry()
+        if next_action == "1":
+            return self.add_new_income_to_income_worksheet()
+        elif next_action == "2":
+            return self.add_new_expense_to_expense_worksheet()
+        elif next_action == "M":
+            return get_menu_user_choice()
+        elif next_action == "E":
+            return exit_program()
 
     def add_new_expense_to_expense_worksheet(self):
         """Adds a new expense record to the "expense" worksheet."""
@@ -327,38 +343,16 @@ class FinanceManager:
         ('{description}', {formatted_amount} EUR), added successfully!
         {Style.RESET_ALL}
         """)
-
-        print("-" * 75)
-        print(Fore.BLUE + "\nWhat would you like to do next?" +
-              Style.RESET_ALL)
-
         # Prompt the user to choose what to do next
-        while True:
-            print(f"""
-            Press 1 to add income entry.
-            Press 2 to add ANOTHER EXPENSE entry.
-            Press M to go back to the MENU.
-            Press E to EXIT the program.
-            """)
-            choice_message = (
-                Fore.BLUE + Style.BRIGHT +
-                "Enter your choice (1, 2, M or E) and press enter:\n" +
-                Style.RESET_ALL
-            )
-            user_input = input(choice_message).strip().upper()
-            if user_input == "1":
-                return self.add_new_income_to_income_worksheet()
-            elif user_input == "2":
-                return self.add_new_expense_to_expense_worksheet()
-            elif user_input == "M":
-                return get_menu_user_choice()
-            elif user_input == "E":
-                return exit_program()
-            else:
-                print(
-                    Fore.LIGHTRED_EX +
-                    "Invalid input. Please enter 1, 2, M, or E." +
-                    Style.RESET_ALL)
+        next_action = self._get_next_action_after_data_entry()
+        if next_action == "1":
+            return self.add_new_income_to_income_worksheet()
+        elif next_action == "2":
+            return self.add_new_expense_to_expense_worksheet()
+        elif next_action == "M":
+            return get_menu_user_choice()
+        elif next_action == "E":
+            return exit_program()
 
     def get_and_validate_month_input(self):
         """Prompts the user to enter a month name and validates the input."""
@@ -375,7 +369,7 @@ class FinanceManager:
                 month = user_month.title()
                 return month
 
-            except ValueError as error:
+            except ValueError:
                 print(
                     Fore.LIGHTRED_EX +
                     "Invalid input: Enter a month name." +
@@ -695,7 +689,7 @@ class FinanceManager:
         {highest} {max_category.upper()} ({formatted_max_amount} EUR)
         """)
 
-    def _get_next_report_action(self):
+    def _get_next_action_after_report(self):
         """Prompts the user for the next action after report generation."""
         while True:
             print("-" * 75)
@@ -813,7 +807,7 @@ class FinanceManager:
                 """)
 
                 # Get user's next action
-            next_action = self._get_next_report_action()
+            next_action = self._get_next_action_after_report()
 
             # Generate another report
             if next_action == "R":
