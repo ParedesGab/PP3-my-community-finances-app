@@ -27,14 +27,14 @@ CATEGORIES = [
 def welcome():
     """Displays a welcome message with color."""
     init()
-    rim = f"{Fore.GREEN + Style.BRIGHT}======================{Style.RESET_ALL}"
+    rim = f"{Fore.GREEN + Style.BRIGHT}================={Style.RESET_ALL}"
     print(f"""
-    {rim} Welcome to the FinancialSurvey2025 App! {rim}
+    {rim} Welcome to the FinancialSurvey2025! {rim}
 
-    We are collecting information about income and expenses to better
-    understand the economic landscape!
+    This application collects information about income and expenses
+    to better understand the economic landscape!
 
-    Your participation is vital and will remain anonymous.
+    Your participation will remain anonymous.
     Thank you for helping us build a more informed future!
 
     Let's get started! 🚀
@@ -45,8 +45,9 @@ def exit_program():
     """Displays a farewell message and terminates the program."""
     exit_message = f"""
     {Fore.GREEN + Style.BRIGHT}
-    ✨ Your finances are in good hands ✨
-        Goodbye and See you next time!{Style.RESET_ALL}
+    ✨ Thank you for participating in the FinancialSurvey2025! ✨
+
+    Your contribution is greatly appreciated, Goodbye!{Style.RESET_ALL}
     """
     print(exit_message)
     exit()
@@ -864,6 +865,10 @@ def get_menu_user_choice():
 
 
 def main():
+    """
+    Initializes the application, displays the welcome message, 
+    and starts the main menu loop.
+    """
     welcome()
     get_menu_user_choice()
 
