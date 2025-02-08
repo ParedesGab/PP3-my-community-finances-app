@@ -1,21 +1,21 @@
-# My Finances Tracker App
+# My Financial Survey 2025!
 
 (Developer: Gabriela Fabiola Paredes Rojas)
 
 ![Mockup image](documentation/website-screenshots/1-mockup.png)
 
-**Welcome to the FinancialSurvey2025**
+**Welcome to the FinancialSurvey2025!**
 
     This application collects information about income and expenses
-    to better understand the economic landscape of your group, region, etc!.
+    to provide insights into the financial landscape of your community!
 
     Your participation will remain anonymous.
-    Thank you for helping us gain a deeper understanding of personal finances!
+    Thank you for contributing to a better understanding of personal finances!
 
     Let's get started! 🚀
 
 + The live page can be accessed via this [link](https://my-finances-tracker-5a1726e2723f.herokuapp.com/)
-UPDATE
+
 ---
 ## Project Goals
 
@@ -26,6 +26,12 @@ UPDATE
 + Check spending patterns by viewing categorized expenses and identifying the highest expense category.
 + Quickly and easily add new income and expense entries.
 + View all their income and expense data.
+
++ Contribute anonymously to a community-wide financial survey for the year 2025.
++ Provide income and expense data to help understand the financial landscape of a community.
++ Easily input financial information with clear instructions and data validation.
++ Be assured of their anonymity throughout the process.
++ Optionally review aggregated monthly financial reports to see community trends (once enough data is collected).
 
 ### Site Owner Goals
 

@@ -162,7 +162,7 @@ def show_application_instructions():
 
     {Fore.BLUE} E. Exit Program:{Style.RESET_ALL}
 
-       - Close the application. Don't worry; your data remains anonymous ✨
+       - Close the application. Don't worry; your data remains anonymous ✨.
     """
     print(instructions_part2)
     prompt_for_menu_or_exit()
@@ -170,10 +170,11 @@ def show_application_instructions():
 
 class FinanceManager:
     """
-    Manages financial data for the year 2025 by interacting with a Google Sheet.
-    This class provides methods to add income and expense records, retrieve data from
-    the spreadsheet, calculate totals, generate reports, and display information to the user.
-    It handles data validation and formatting for European currency.
+    Manages financial data for the year 2025 by interacting with a
+    Google Sheet. Provides methods to add income and expense records,
+    retrieves data from the spreadsheet, calculate totals, generate reports,
+    and display information to the user. It handles data validation and
+    formatting for European currency.
     """
 
     def __init__(self):
@@ -243,6 +244,8 @@ class FinanceManager:
         → {Fore.YELLOW}Amount{Style.RESET_ALL}: The amount earned (e.g, 1500).
           (Must be a positive number (no "-" sign).
           It is displayed in EU currency format. E.g, 1.500, 00 EUR.
+
+          Your data will remain anonymous 🔒
         """
         print(income_message)
 
@@ -295,6 +298,8 @@ class FinanceManager:
           (Must be a positive number (no "-" sign) and contain only digits
           (no special characters or letters).
           It is displayed in EU currency format. E.g, 1.500, 00 EUR.
+
+          Your data will remain anonymous 🔒
         """)
 
         month = self.get_and_validate_month_input()
@@ -324,7 +329,7 @@ class FinanceManager:
 
         print(f"""
         {Fore.GREEN + Style.BRIGHT}
-        Thank you! New expense for {month}, 2025 for '{category}' 
+        Thank you! New expense for {month}, 2025 for '{category}'
         ('{description}', {formatted_amount} EUR), added successfully!
         {Style.RESET_ALL}
         """)
@@ -731,9 +736,9 @@ class FinanceManager:
 
             # Check if the month exists within the data
             income_month_data_exists = self._month_has_data(income_data, month)
-            expen_month_data_exists = self._month_has_data(expenses_data, month)
+            exp_month_data_exists = self._month_has_data(expenses_data, month)
 
-            if income_month_data_exists or expen_month_data_exists:
+            if income_month_data_exists or exp_month_data_exists:
                 print(
                     Fore.GREEN + Style.BRIGHT +
                     f"\nCalculating {month} income and expenses...\n" +
@@ -752,23 +757,23 @@ class FinanceManager:
                     # Show the income in European currency format
                     formatted_income = self.format_amount_for_display(
                         total_month_income)
-                if not expen_month_data_exists:
+                if not exp_month_data_exists:
                     print(
                         Fore.YELLOW +
                         f"Warning: NO EXPENSES data found for {month}!\n" +
                         Style.RESET_ALL)
                     total_month_expenses = 0
-                    formatted_expenses = self.format_amount_for_display(
+                    formatted_expense = self.format_amount_for_display(
                         total_month_expenses)
                 else:
                     total_month_expenses = self._calculate_total_amount(
                         expenses_data, month, 3)
                     # Show the expenses in European currency format
-                    formatted_expenses = self.format_amount_for_display(
+                    formatted_expense = self.format_amount_for_display(
                         total_month_expenses)
 
                 print(f"✅ AGGREGATE TOTAL INCOME: {formatted_income} EUR")
-                print(f"✅ AGGREGATE TOTAL EXPENSES: {formatted_expenses} EUR\n")
+                print(f"✅ AGGREGATE TOTAL EXPENSES: {formatted_expense} EUR\n")
 
                 # Calculate net financial balance
                 print(
@@ -892,7 +897,7 @@ def get_menu_user_choice():
 
 def main():
     """
-    Initializes the application, displays the welcome message, 
+    Initializes the application, displays the welcome message,
     and starts the main menu loop.
     """
     welcome()
