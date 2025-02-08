@@ -4,14 +4,15 @@
 
 ![Mockup image](documentation/website-screenshots/1-mockup.png)
 
-**Welcome to MyFinances tracker APP!**
+**Welcome to the FinancialSurvey2025**
 
-  This expense tracker will help you monitor
-  your income and expenses for 2025!
+    This application collects information about income and expenses
+    to better understand the economic landscape of your group, region, etc!.
 
-  Are you ready to understand your spending habits?
+    Your participation will remain anonymous.
+    Thank you for helping us gain a deeper understanding of personal finances!
 
-  Let's go! 🚀
+    Let's get started! 🚀
 
 + The live page can be accessed via this [link](https://my-finances-tracker-5a1726e2723f.herokuapp.com/)
 UPDATE

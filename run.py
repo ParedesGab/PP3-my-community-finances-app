@@ -33,10 +33,10 @@ def welcome():
     {rim} Welcome to the FinancialSurvey2025! {rim}
 
     This application collects information about income and expenses
-    to better understand the economic landscape!
+    to provide insights into the financial landscape of your community.
 
     Your participation will remain anonymous.
-    Thank you for helping us gain a deeper understanding of personal finances!
+    Thank you for contributing to a better understanding of personal finances!
 
     Let's get started! 🚀
     """)
