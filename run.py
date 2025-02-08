@@ -47,7 +47,11 @@ def exit_program():
     exit_message = f"""
     {Fore.GREEN + Style.BRIGHT}
     ✨ Thank you for your contribution! ✨
-     We will keep you informed about the impact of your input!
+
+     We'll be using it to analyze key financial trends and will publish
+     monthly reports summarizing our findings.
+
+     Stay tuned for updates! 📈🔔
     """
     print(exit_message)
     exit()
@@ -96,7 +100,7 @@ def show_application_instructions():
     {Fore.GREEN + Style.BRIGHT}==== APPLICATION INSTRUCTIONS ====
     {Style.RESET_ALL}
 
-    Welcome to the FinancialSurvey2025!! App instructions:
+    Welcome to the CommunityFinaces App. Below the instructions:
 
     {Fore.BLUE} 1. Add New Income:{Style.RESET_ALL}
 
@@ -145,12 +149,12 @@ def show_application_instructions():
 
     {Fore.BLUE} 3. Display All Income and Expenses:{Style.RESET_ALL}
 
-       - This option displays all 2025 survey responses.
+       - This option displays all data entered for 2025.
        - It shows the data in a tabular format.
 
     {Fore.BLUE} 4. View AGGREGATED 2025 MONTHLY FINANCE REPORT{Style.RESET_ALL}
 
-       - Select a month to view the aggregated 2025 financial survey data.
+       - Select a month to view the aggregated 2025 financial data.
          E.g., January, February.
        - The 2025 report will display:
          → Aggregate total Income for the selected month.

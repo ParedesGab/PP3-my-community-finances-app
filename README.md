@@ -1,13 +1,13 @@
-# My Financial Survey 2025!
+# The 2025 Community Finances App!
 
 (Developer: Gabriela Fabiola Paredes Rojas)
 
 ![Mockup image](documentation/website-screenshots/1-mockup.png)
 
-**Welcome to the FinancialSurvey2025!**
+**Welcome to the CommunityFinaces App!**
 
-    This application collects information about income and expenses
-    to provide insights into the financial landscape of your community!
+    This application collects information about 2025
+    income and expenses to provide insights into the financial landscape of your community!
 
     Your participation will remain anonymous.
     Thank you for contributing to a better understanding of personal finances!
@@ -21,28 +21,29 @@
 
 ### User Goals
 
-+ Contribute anonymously to a community-wide financial survey for the year 2025.
++ Contribute anonymously to a community-wide financial data collection for the year 2025.
 + Provide income and expense data to help understand the financial landscape of a community.
++ See how their income and expenses relate to the broader community trends.
 + Easily input financial information with clear instructions and data validation.
-+ Be assured of their anonymity throughout the process.
 + Explore aggregated monthly reports to identify community-wide income and expense trends and gain insights into financial development.
 
 ### Site Owner Goals
 
-+ Collect comprehensive and representative financial data from the community for the year 2025.
-+ Generate accurate and insightful aggregated monthly financial reports.
++ Collect comprehensive and representative financial data from the community for the year 2025 to provide meaningful insights into the community's financial landscape.
++ Generate accurate and insightful insights.
 + Identify key trends and patterns in community income and expenses.
-+ Ensure the anonymity of survey participants.
-+ Potentially publish or share key findings to benefit the community.
-  
++ Ensure the anonymity of the participants.
++ Make the data entry process as easy and accessible as possible.
++ Use the application as a tools for community building. For example, raise awareness about local financial issues.
+ 
 ---
 ## User Experience
 
 ### Target audience
 
-+ **Any community residents:** For example, a neighborhood, town, city, country, etc.
++ **Any community residents:** The target audience for this application is broad, encompassing residents of a community who are willing to share their income and expense information anonymously.  
 
-+ **Researchers and Academics:** The generated report (collected survey data)y may provide valuable data for economic research, particularly regarding consumer behavior, spending patterns, and income distribution.
++ **Researchers and Academics:** The generated report (collected survey data) could provide valuable data for economic research, particularly regarding consumer behavior, spending patterns, and income distribution.
 
 + **Government Agencies:** The generated report can be used by government agencies for policy development, economic analysis, and program planning. A local survey might inform local government decisions.
 
@@ -56,25 +57,7 @@
 + Correctly store and display income and expense entries.
 + The aggregated 2025 monthly finance report must correctly calculate and display aggregated total income, aggregated total expenses, net financial balance, expenses per category, and the highest expense of the group/community.
 + The application must warn the user of any invalid input.
-+ Have a strong expectation that their data will remain anonymous.
-
-**Regarding the Data Collection Process:**
-
-
-* **Clear Purpose:** They want to understand why their data is being collected and how it will be used to benefit the community. A clear explanation of the project's goals and objectives is important.
-* **Data Validation:** They expect the system to have some level of data validation to ensure accuracy and consistency. This might include checks for valid number formats, reasonable ranges for income and expenses, and clear error messages.
-
-
-**Regarding the Project Outcomes:**
-
-* **Community Benefit:** They expect that the project will ultimately benefit the community in some way. This might include informing local policy decisions, attracting businesses, or improving community services.
-* **Transparency of Results:** They expect the aggregated results of the project to be made available to the public in a clear and understandable format. They want to see how their contributions have helped to paint a picture of the community's financial health.
-* **No Individual Identification:** They absolutely expect that their individual data will *not* be identifiable in any of the reports or published findings. Anonymity or aggregation of data is paramount.
-* **Actionable Insights:** They hope that the data collected will lead to actionable insights and positive changes in the community. They want their participation to make a difference.
-* **Responsible Data Handling:** They expect the project organizers to handle the data responsibly and ethically. This includes using the data only for the stated purposes, protecting privacy, and ensuring data security.
-* **Project Completion:** They expect the project to be completed and the results to be shared within a reasonable timeframe.
-
-In short, users expect a smooth, secure, and meaningful experience when participating in a community financial data collection initiative. They want to contribute to the greater good while being assured that their privacy is protected and that their data will be used responsibly.
++ Be assured of their anonymity throughout the process.
 
 ### User stories
 
@@ -83,26 +66,50 @@ In short, users expect a smooth, secure, and meaningful experience when particip
   + Quickly understand the purpose of the application.
   + Have clarity in the menu options so I can find easily desired functions.
   + Have clear and easy to follow application instructions.
-  + Have my results displayed clearly and concisely, using appropriate formatting and labels for easy interpretation.
-  + Have a enjoyable experience without delays or glitches or errors.
+  + Have results displayed clearly and concisely, using appropriate formatting and labels for easy interpretation.
+  + Have an enjoyable experience without delays or glitches or errors.
   + Have an application that is visually appealing to enhance the user experience.
 
 + **As a returning user, I want to:**
 
   + Be able to quickly complete common tasks (e.g., adding income, adding expenses, generating a report), leveraging the past experience with the program.
   + The application's interface and core functionality to remain unchanged from the previous version I used, except for explicitly documented updates.
-  + Have my financial data available to me within seconds, if I select to have it displayed.
-  + Accomplish their tasks quickly and easily, 
-  + Expect their data to be readily accessible.
-  + Have an application that continues to provide value and help them monitor their finances effectively.
-  + Continue having the same core financial tracking features (e.g., income/expense tracking, reporting), allowing me to monitor my finances with the same level of detail as before.
+  + Have the collective financial data available to me within seconds, if I select to have it displayed.
+  + Get an update on how my contribution will benefit the community.
 
 + **As the site ownser, I want:**
 
-  + Regularly update the website with new menu options and features (e.g., monthly, quarterly, yearly reports) to maintain user engagement.
-  + Ensure a smooth and accessible user experience by regularly testing the website on different devices and browsers and addressing any reported accessibility issues within.
+  + Regularly update content and features (e.g., monthly, quarterly, yearly reports) to maintain user engagement.
+  + Provide to the community monthly reports summarizing key financial trends observed in the collected data.
+  + Ensure a smooth and accessible user experience by regularly testing the site on different devices and browsers and addressing any reported accessibility issues within.
   + To keep the application running correctly, be free of bugs, and not crash.
-  + Collect user feedback to understand user needs and identify areas for improvement.
+  + Collect and review user feedback to understand user needs and identify areas for improvement.
+
+
+  * **Regularly update content and features:**
+    * 
+    * Release quarterly updates with more in-depth analysis and visualizations.
+    * Explore and implement new features (e.g., interactive data exploration tools, comparison features) on a yearly basis.  
+    * Announce all updates and new features via [mention how you'll communicate - e.g. a blog, email list, social media].
+
+* **Ensure a smooth and accessible user experience:**
+    * Conduct cross-browser and cross-device testing (desktop, mobile, tablet) at least quarterly.
+    * Address any reported accessibility issues (WCAG compliance) within [define timeframe - e.g. two weeks].
+    * Monitor site performance metrics (e.g., page load times, error rates) weekly and address any performance bottlenecks promptly.
+
+* **Maintain application stability and security:**
+    * Implement robust error handling and logging to minimize crashes and facilitate debugging.
+    * Conduct regular security audits and penetration testing [define frequency, e.g. annually or after major updates].
+    * Implement and enforce strong data security measures to protect user anonymity and prevent data breaches.
+    * Ensure 99.9% uptime for the application.
+
+
+
+
+* **Demonstrate community impact:**
+    * Publish reports and case studies showcasing how the collected data has been used to inform local decisions and improve community outcomes.
+    * Share these reports with the community through [mention channels - e.g., website, social media, local news outlets].
+
 
 ---
 ## Features 
