@@ -89,15 +89,12 @@
 ---
 ## Features 
 
-* Disclaimer in some screenshots, you will see the message what would like to do next?
-This was corrected accordingly to: What would "you" like to do next?
-
 ### Welcome message
 
 ![Welcome message](documentation/website-screenshots/2-welcome-message.png)
 
 + Positioned above the menu options.
-+ The welcome() function displays a colorful welcome message to the user when the program starts. It uses the colorama library to add green borders, creating a visually appealing introduction to MyFinances app.
++ The welcome() function displays a colorful welcome message to the user when the program starts. It uses the colorama library to add green borders, creating a visually appealing introduction to the CommunityFinaces app.
 + The welcome message communicates the application's core function: anonymously sharing 2025 income and expense data to contribute to a better understanding of the community's finances.  It also highlights the anonymity of participation and the impact the data will have on local policy and community programs.
 + The message expresses gratitude for user participation and reinforces the community-centric nature of the project.
 
@@ -107,7 +104,7 @@ This was corrected accordingly to: What would "you" like to do next?
 
 The Menu provides the following options:
 
-*   **0: Application Instructions:** Access detailed instructions on how to use MyFinances.
+*   **0: Application Instructions:** Access detailed instructions on how to use the CommunityFinaces.
 *   **1: Add New Income:** Record a new income entry, by specifying the month, source, and amount.
 *   **2: Add New Expense:** Record a new expense entry, by specifying the month, category, description, and amount.
 *   **3: View All Records:** Display all recorded income and expense entries in a table format.
@@ -336,24 +333,28 @@ in **User inputs 0**.
 
 + Leading/trailing spaces are accepted (e.g., JanuarY, January, january, "    January", etc).
 
-+ If the user enters an invalid month name (e.g., jan, or a misspelled month) an error message is displayed.
++ If the user enters an invalid month name (e.g., misspelled month) an error message is displayed.
 ![Invalid month](documentation/website-screenshots/35-invalid-month-input.png)
 
 + If there is neither income nor expense data for the selected month, a message will be displayed indicating there is no data for that month yet.
 
 ![Month has no data](documentation/website-screenshots/35-month-has-no-data.png)
 
-+ For a valid month input where there is income data but no expenses data, a warning message will be displayed indicating there is no expense data. In this case, the report displays total income, total expenses (0,00 EUR), cash balance, and in "expenses by category" another warning message that no expenses for this month exists.
++ For a valid month input where there is income data but no expenses data, a warning message will be displayed indicating there is no expense data. In this case, the report displays aggregated total income, aggregated total expenses (0,00 EUR), net financial balance, and in "expenses by category" another warning message that no expenses for this month exists.
+
++ Note: The figure below is only an example of when the Google sheet "my_finances" contains income data but no expenses data.
 
 ![No expense data](documentation/website-screenshots/36-no-expense-data-for-that-month.png)
 
-+ For a valid month input where there is expense data but no income data, a warning message will be displayed indicating there is no income data. In this case, the report displays total income (0,00 EUR), total expenses, cash balance, expenses by category, and highest expense.
++ For a valid month input where there is expense data but no income data, a warning message will be displayed indicating there is no income data. In this case, the report displays aggregated total income (0,00 EUR), aggregated total expenses, net financial balance, expenses by category, and highest expense.
+
++ Note: The figure below is only an example of when the Google sheet "my_finances" contains expenses data but no income data.
 
 ![No income data](documentation/website-screenshots/37-no-income-data-for-that-month.png)
 
-+ For a valid month input, where both, income and expenses data exist, the report displays total income, total expenses, cash balance, expenses by category, and the highest expense.
++ For a valid month input, where both, income and expenses data exist, the report displays aggregated total income, aggregated total expenses, net financial balance, expenses per category, and the highest expense of the group/community.
 
-+ For example, if user has the following data:
++ For example, if the program has collected the following data:
 
   + Income data:
   ![Income data](documentation/website-screenshots/39-income-data.png)
@@ -361,39 +362,43 @@ in **User inputs 0**.
   + Expenses data:
   ![Expenses data](documentation/website-screenshots/40-expenses-data.png)
 
-  + The user will obtain the following monthly report:
+  + The user will obtain the following monthly aggregated
+  report:
   ![monthly report](documentation/website-screenshots/41-total-income-and-expenses-calculation.png)
 
 The program then asks the user what they would like to do next, and displays the menu options again, with the same validations as in, for example, menu option 0. 
 
 **Menu Option E**
 
-![Menu option E](documentation/website-screenshots/7-lowercase-valid-input-exit.png)
+![Menu option E](documentation/website-screenshots/7-lowercase-e-valid-input-exit.png)
 
 + **Exiting the Program:** The application provides a clean exit, displaying a friendly farewell message to the user before closing.
 + This ensures a positive user experience even when leaving the application.
 + Both "e" or E" are recognized as a valid input to exit the program (figures above and below, respectively).
 
-![Menu option E](documentation/website-screenshots/8-uppercase-valid-input-exit.png)
+![Menu option E](documentation/website-screenshots/8-uppercase-e-valid-input-exit.png)
 
 ---
 ## Features left to implement
 
-+ This project allowed me to apply my understanding of Python, object-oriented programming principles, and core programming concepts like flow control, iteration, conditional statements, functions, methods, and data structures. While I acknowdlege that a complete finance application would include more features (which I intend to add later), my focus here was on these fundamentals. 
++ This project allowed me to apply my understanding of Python, object-oriented programming principles, and core programming concepts like flow control, iteration, conditional statements, functions, methods, and data structures. While I acknowdlege that a complete finance application includes many more features (which I would like to implement later), my focus here was on these fundamentals. 
 
 + Among features left to implement:
-
-  +   **Data Editing and Deletion:** Allow users to correct mistakes, or delete their entries, to manage their financial data more effectively.
-
-  +   **Searching:** As the data grows, it will become more difficult to find specific entries. Implementing searching capabilities would allow users to quickly locate the income or expense records they need.
 
   +   **Data Visualization:** While the monthly report provides a summary, visual representations of the data (charts, graphs) would make it easier for users to understand their spending habits and identify trends.
 
   +   **Multiple Years:** The application is currently designed to track finances for 2025 only. Future versions could allow users to select the year for tracking.
 
-  +   **Error Handling/Input Validation Improvements:** While basic input validation is implemented, semantic validation of the "source," "category," and "description" fields could be added to further ensure meaningful input. However, to maintain flexibility for users, I have intentionally not implemented strict semantic validation at this stage, as the potential entries for these fields are limitless.  
+  +   **Error Handling/Input Validation Improvements:** While basic input validation is implemented, semantic validation of the "source," "category," and "description" fields could be added to further ensure meaningful input. However, to maintain flexibility for users, I have intentionally not implemented strict semantic validation at this stage, as the potential entries for these fields are limitless.
 
-  MISSING. IMPLEMENT 
+  + **Income Source Categorization:**  Similar to the expense categorization feature, implement a system for categorizing income sources. Due to time constraints, this feature was not included but is planned for a future update. This will allow for more granular analysis of income data.For now, the "Source" field provides flexibility for users to describe their income sources, which will can still be valuable for categorization efforts.
+
+  + **Averages and Statistical Analysis:**  Calculate and display average income and expense figures at the community level. This will provide users with valuable benchmarks and insights into how their finances compare to the overall community.  Due to time constraints, this was not included in tthis project but it will certainly be a great feature to implement. This would include for example:
+    * Average income by month.
+    * Average expenses by category.
+    * Overall average income and expenses, etc.
+  
+  + **Improved Menu Navigation:**  Currently, once a user enters a specific feature (e.g., "Add New Income"), they cannot directly return to the main menu without completing the current operation or exiting the application. Future implementations will enhance menu navigation to allow users to easily return to the main menu from any point within the application, even if they have not yet completed data entry.  This will improve the user experience.
 
 ---
 ## Design
@@ -402,29 +407,29 @@ The program then asks the user what they would like to do next, and displays the
 
 + The use of `colorama` was used to enhance the console output with colored text, improving readability and user experience.
 
-  *   **Green:**  Used for positive messages, success indicators, titles, and section headers (e.g., "WELCOME TO MyFinances APP!", success messages).
+  *   **Green:**  Used for success indicators, titles, and section headers.
 
   *   **Blue:** Used for prompts, instructions, and menu options. This color is often associated with clarity and trust, making it suitable for guiding the user. (e.g., "Enter your choice (0-4 or E) and press enter:").
 
   *   **Yellow:** Used for labels and field names, drawing the user's attention to the information they need to provide (e.g., "Month:", "Source:"). Yellow is also used for informational messages, such as the "No income/expenses data found" warning. This distinguishes these messages from errors, which are displayed in red.
 
   *   **Red:** Used for error messages, drawing the user's attention to invalid input or potential problems. (e.g., "Invalid input: Please enter a number (0-4) or E.").
-  Only a few basic colors were used to highlight certain elements:
 
 ### Layout
 
-The MyFinances application employs a consistent layout to ensure a predictable and user-friendly experience.
+The CommunityFinaces application employs a consistent layout to ensure a predictable and user-friendly experience:
 
-*   **Screen Title/Heading:** Each screen within the application has a clear title or heading, displayed in green and bold. This heading indicates the current section or function the user is interacting with (e.g., "ADD NEW INCOME," "MONTHLY FINANCE REPORT").
+*   **Heading:** Each menu option has a clear title or heading, displayed in green and bold. This heading indicates the current section or function the user is interacting with (e.g., "ADD NEW INCOME,",etc.).
 
-*   **Informative Text/Instructions:** Below the heading, most screens provide brief instructions or context-sensitive information relevant to the current task. This guides the user and explains the purpose of the screen. Prominent use of color and bold text is used to distinguish these instructions.
+*   **Informative Text** Below the heading, most features provide brief instructions or context-sensitive information relevant to the current task. This guides the user and explains the purpose of the screen.
 
 *   **User Input and Prompts:** At the bottom of each screen, the application prompts the user for input. Clear labels are used to indicate the expected input (e.g., "Enter the month name:").  If the user needs to choose from a set of options, these options are presented in a numbered list above the input prompt.  This structure makes it clear what the user needs to do next.
 
-*   **Data Display:**  When displaying data (like income and expenses), the application uses the `tabulate` library to format the information into a clear, tabular format with headers. This makes it easy for users to review their financial records.
+*   **Data Display:**  When displaying all data, the application uses the `tabulate` library to format the information into a clear, tabular format with headers. This makes it easy for users to review their financial records.
 
 ---
 ## Technologies Used
+
 - [Python](https://www.python.org/)
 - [GitHub](https://github.com/)
 - [Gitpod](https://www.gitpod.io/): The initial development environment used to create the project files and Python code.
@@ -440,8 +445,6 @@ The MyFinances application employs a consistent layout to ensure a predictable a
 This project utilizes the following Python libraries:
 
 ### Standard Libraries
-
-These libraries are included with standard Python installations and provide core functionality:
 
 - `datetime`: For working with dates and times.
 - `re`: For regular expression operations (pattern matching).
@@ -464,7 +467,6 @@ These libraries are external and were installed to extend the project's capabili
 - The result: no errors were returned.
 
 ![CI Python linter](documentation/validation/0-python-linter-validation.png)
-MISSING
 
 + There were no errors found in the python code using CI python linter. 
 
@@ -546,8 +548,7 @@ MISSING
   1. A call to generate_monthly_finance_report failed because it's a method of the FinanceManager class and required a class instance. However, the call in the handle_user_option was not associated with an instance.
         - Solution: this mistake was spotted and corrected.
 
-  2. The creds.json file dissappeared from the workspace after adding it to 
-  .gitignore. It is not clear why that happened, because the .gitignore should just prevent it from being pushed to GitHub. Thus, it should still be present but greyed-out.
+  2. The creds.json file dissappeared from the workspace after adding it to .gitignore. It is not clear why that happened, because the .gitignore should just prevent it from being pushed to GitHub. Thus, it should still be present but greyed-out.
       - Solution: I added it back to the workspace and saved it once again.
 
   3. The application encountered errors when processing amount inputs that included commas (e.g., "1,500"). Direct conversion of these strings to floating-point numbers resulted in a ValueError. 
@@ -574,7 +575,7 @@ The site was deployed using Heroku following the following steps:
 11. Enable either automatic deployment by clicking on the button "Enable Automatic Deploys" in the "Automatic Deploys" Section or deploy a branch manually by selecting the branch and clicking the button "Deploy Branch" in the "Manual deploys" section.
 12. Allow the application build process to complete. Then, click the "View" link to access your deployed application.
 
-The live link can be found here: MISSING
+The live link can be found here: [The 2025 Community Finances App!](https://my-finances-tracker-5a1726e2723f.herokuapp.com/)
 
 ## Local Deployment
 
