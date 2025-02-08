@@ -441,6 +441,7 @@ These libraries are external and were installed to extend the project's capabili
 - The result: no errors were returned.
 
 ![CI Python linter](documentation/validation/0-python-linter-validation.png)
+MISSING
 
 + There were no errors found in the python code using CI python linter. 
 
@@ -574,7 +575,31 @@ To have a copy of the project in your repositories:
 ---
 ## Credits 
 
-### Content 
+### Content
+
+- My mom being a bussiness administrator, initially gave me the idea of a personal finance tracker. However, given that data would have required personalized or independt google sheets (not using one single one, to have collective data), I modified the idea to create a census or Financial survey where collective data related to income and expenses could be collected and analyed. 
+
+This project draws inspiration and utilizes techniques from various sources:
+
+### Code and Libraries
+
+- **Regular Expressions (`re`):**  The use of regular expressions for input validation and data cleaning is based on standard Python practices and documentation.  Specifically, regular expressions were instrumental in validating user input (e.g., ensuring alphabetical characters in certain fields) and cleaning amount input (removing non-numeric characters).
+
+- **`colorama`:** The `colorama` library was used to enhance the console output with colored text, improving readability and user experience.
+
+- **Income Worksheet Function (`self.add_new_income_to_income_worksheet()`):** The structure and logic of the income worksheet function were developed independently, but benefited from general programming principles and best practices.
+
+- **Category List:** The list of expense categories was created specifically for this project, based on common expense types.
+
+- **Month Input Interpretation:** The method for interpreting the month input as a full month name (`datetime.strptime(user_month, "%B")`) is based on standard Python `datetime` library usage and documentation.
+
+- **Amount Input Formatting:** The code for formatting the amount for display in European format (`fmt.replace(",", "X").replace(".", ",").replace("X", ".")`) was developed independently, but is a common string manipulation technique.
+
+- **Finding the Maximum Category:** The method for finding the category with the highest expenses (`max(expenses_by_category, key=expenses_by_category.get)`) is a standard Python dictionary operation.
+
+### Inspiration and Guidance
+
+- ReadMe Structure: The structure and formatting of this ReadMe file were inspired and guided by the ReadMe documents of Iuliia Konovalova, Kamil Wojciechowski, and the "love running" project.
 
 - [W3 Schools](https://www.w3schools.com/jsref/met_win_settimeout.asp) showed me how to use the setTimeout() method. 
 
@@ -594,17 +619,8 @@ To have a copy of the project in your repositories:
 
 - ReadMe was inspired and guided by the ReadMe documents of my mentor Iuliia Konovalova, of my previous Kamil Wojciechowski, and of the love running project. 
 
-### Media
-  
-- The universe background image is from [Federico Beccari](https://unsplash.com/de/@federize?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash).
-
-- All memory card images are from [Icongeek26](https://www.flaticon.com/authors/icongeek26).
-
 ## Acknowledgments
 
-- My sincere gratitude to my mentor, Iuliia Konovalova, for her valuable feedback.  
-- Thank you to Code Institute, specially to Kamil, Kristyna, and Lane for the great tips and feedback.
-- Thank you to my brother Brando, Your beautiful piano music [Brando PR](https://www.youtube.com/@BrandoPR) accompanied me along this project as well.
-- I am deeply grateful to Geddi and Alexis for their insightful JavaScript fundamentals guidance.
-- A heartfelt thanks to my husband Johannes for "playing! (testing)
- the game more times than I can count. 
+- My sincere gratitude to code institute specially to Kristyna, and tutor suport for the great tips and feedback.
+- Thank you to my mentor, Iuliia Konovalova, for her important feedback.
+- A heartfelt thanks to my family for their support during this project.
