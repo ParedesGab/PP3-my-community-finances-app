@@ -401,7 +401,36 @@ The MyFinances application employs a consistent layout to ensure a predictable a
 *   **Data Display:**  When displaying data (like income and expenses), the application uses the `tabulate` library to format the information into a clear, tabular format with headers. This makes it easy for users to review their financial records.
 
 ---
-## Flow Chart
+## Technologies Used
+- [Python](https://www.python.org/)
+- [GitHub](https://github.com/)
+- [Gitpod](https://www.gitpod.io/): The initial development environment used to create the project files and Python code.
+- [VS Code](https://gitpod.io/): A local development environment used subsequently to complete the project.
+- [GitHub](https://github.com/)
+- [Heroku](https://id.heroku.com/)
+- [Google Sheets](https://docs.google.com/spreadsheets)
+- [Google Cloud](https://console.cloud.google.com/)
+- [CI Python Linter](https://pep8ci.herokuapp.com/)
+
+## Libraries
+
+This project utilizes the following Python libraries:
+
+### Standard Libraries
+
+These libraries are included with standard Python installations and provide core functionality:
+
+- `datetime`: For working with dates and times.
+- `re`: For regular expression operations (pattern matching).
+
+### Third-Party Libraries
+
+These libraries are external and were installed to extend the project's capabilities:
+
+- [colorama](https://pypi.org/project/colorama/): For adding colored text output to the console.
+- [gspread](https://docs.gspread.org/en/latest/index.html): For interacting with Google Sheets, enabling data manipulation and access to Google APIs.
+- [google-auth](https://google-auth.readthedocs.io/en/master/): For authentication with Google APIs.  Specifically, `google.oauth2.service_account.Credentials` is used to load credentials from a `creds.json` file, facilitating secure access to the Google account.
+- [tabulate](https://pypi.org/project/tabulate/): For creating nicely formatted tables for displaying data.
 
 ---
 ## Testing
@@ -546,8 +575,6 @@ To have a copy of the project in your repositories:
 ## Credits 
 
 ### Content 
-
-- The Code institute ci-full-template was used to create the GitHub repository of the Cosmic Match Memory Game website.
 
 - [W3 Schools](https://www.w3schools.com/jsref/met_win_settimeout.asp) showed me how to use the setTimeout() method. 
 
