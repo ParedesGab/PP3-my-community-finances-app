@@ -577,7 +577,7 @@ To have a copy of the project in your repositories:
 
 ### Content
 
-- Inspired by my mother, Marcela Rojas, an accountant and business administrator, I initially envisioned a personal finance tracker. This evolved, however, into a financial survey to collect and analyze collective income and expense data, as individual tracking proved impractical for a shared dataset.
+- Inspired by my mother, Marcela Rojas, a business administrator, I initially envisioned a personal finance tracker. This evolved, however, into a financial survey to collect and analyze collective income and expense data, as individual tracking proved impractical for a shared dataset.
 
 - [W3 Schools](https://www.w3schools.com/python/python_regex.asp) showed me how to use the Regular Expressions (`re`) module.
 
