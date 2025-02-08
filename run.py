@@ -83,6 +83,14 @@ def prompt_for_menu_or_exit():
             print(error)
 
 
+def _display_categories():
+    print("""
+          Please choose a category from the following list:
+          """)
+    for cat in CATEGORIES:
+        print(f" {Fore.GREEN}       - {cat}{Style.RESET_ALL}")
+
+
 def show_application_instructions():
     """Displays instructions for how to use the application."""
     instructions = f"""
@@ -116,21 +124,11 @@ def show_application_instructions():
          → {Fore.YELLOW}Month{Style.RESET_ALL}: Expense month.
             E.g., January, February.
          → {Fore.YELLOW}Category{Style.RESET_ALL}: Expense category.
+         """
+    print(instructions)
+    _display_categories()
 
-         IMPORTANT: Please choose a category from the following list:
-         {Fore.GREEN}
-         - Housing
-         - Transportation
-         - Food
-         - Personal Care
-         - Healthcare
-         - Entertainment
-         - Shopping
-         - Education
-         - Travel
-         - Gifts
-         - Other
-         {Style.RESET_ALL}
+    instructions_part2 = f"""
          → {Fore.YELLOW}Description{Style.RESET_ALL}: Expense description.
             Use this field to provide context.
             E.g., for Housing: Monthly Rent, mortgage fee, rent payment, etc.
@@ -166,7 +164,7 @@ def show_application_instructions():
 
        - Close the application. Don't worry; your data remains anonymous ✨
     """
-    print(instructions)
+    print(instructions_part2)
     prompt_for_menu_or_exit()
 
 
@@ -287,22 +285,9 @@ class FinanceManager:
         → {Fore.YELLOW}Month{Style.RESET_ALL}: The month the income was earned.
           (Enter the complete month name. E.g, January).
         → {Fore.YELLOW}Category{Style.RESET_ALL}: The expense category.
-          IMPORTANT: Category input is restricted to the below list!
-
-          Please choose from this list (lowercase names allowed):
-          {Fore.YELLOW}
-          - Housing
-          - Transportation
-          - Food
-          - Personal Care
-          - Healthcare
-          - Entertainment
-          - Shopping
-          - Education
-          - Travel
-          - Gifts
-          - Other
-          {Style.RESET_ALL}
+          IMPORTANT: Category input is restricted to the below list!""")
+        _display_categories()
+        print(f"""{Style.RESET_ALL}
         → {Fore.YELLOW}Description{Style.RESET_ALL}: A expense description.
           (Ensure it is at least 4 characters long, and isn't entirely numeric.
           E.g., Weekly groceries).
