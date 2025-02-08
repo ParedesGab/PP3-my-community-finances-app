@@ -507,20 +507,21 @@ There are no known unfixed bugs.
 ---
 ## Deployment
 
-The website has been deployed to GitHub pages following these steps:
+The site was deployed using Heroku following the following steps:
+1. Run "pip3 freeze > requirements.txt" in the terminal then commit and push it to GitHub. Make sure you have named this requirements file the same, all lowercase, and check for typos.
+2. Get a Heroku account (or log in if you already have one).
+3. To create a new app, click "new" (top right) and choose "create new app."
+4. Name your app, select a region, and click "Create app."
+5. In the "settings" tab, go to Config Vars and press "Reveal Config Vars".
+6. In the field for KEY add "CREDS" and into VALUE field copy & paste entire content of creds.json file, and click "Add".
+7. Below add another Config Var with KEY = "PORT" & VALUE = "8000".
+8. Add Buildpacks: first python and then node.js below. This specific order is crucial.
+9. Go to the "Deploy" tab and choose GitHub for Deployment method, click "Connect to GitHub".
+10. Search for the repository you would like to deploy and and click on "Connect".
+11. Enable either automatic deployment by clicking on the button "Enable Automatic Deploys" in the "Automatic Deploys" Section or deploy a branch manually by selecting the branch and clicking the button "Deploy Branch" in the "Manual deploys" section.
+12. Allow the application build process to complete. Then, click the "View" link to access your deployed application.
 
-1. In the GitHub repository for The Cosmic Match Memory Game [GitHub repository](https://github.com/ParedesGab/PP2-the-cosmic-match-memory-game), select the "Settings" tab.
-
-2. Click on "Pages" from the field "Code and automation" (on the left), and select the below settings:
-    - Source: deploy from a branch.
-    - Branch: main.
-    - click "Save".
-
-3. Select the "Code" tab and refresh the page. 
-
-4. On the right side of the page, a "Deployments" section has been activated indicating a successful deployment. 
-
-5. The live link can be accessed [here](https://paredesgab.github.io/PP2-the-cosmic-match-memory-game/).
+The live link can be found here: MISSING
 
 ## Local Deployment
 
@@ -528,7 +529,7 @@ The website has been deployed to GitHub pages following these steps:
 
 To have a copy of the project in your repositories:
 1. Log in or sign up to GitHub.
-3. Navigate to the [project repository](https://github.com/ParedesGab/PP2-the-cosmic-match-memory-game).
+3. Navigate to the [project repository](https://github.com/ParedesGab/PP2-the-cosmic-match-memory-game). MISSING
 4. In the top right corner, click the "Fork" button.
 5. A new page titled "Create a new fork" will appear. Optionally, you can edit the repository name.
 6. At the bottom of the page, click "Create fork."
@@ -536,7 +537,7 @@ To have a copy of the project in your repositories:
 ### Cloning
 
 1. Log in or sign up to GitHub.
-2. Go to the [project repository](https://github.com/ParedesGab/PP2-the-cosmic-match-memory-game).
+2. Go to the [project repository](). MISSING
 3. Click the green button "Code" and choose your preferred cloning method (for example: HTTPS, SSH, or GitHub CLI) and copy the provided url.
 4. Open the terminal in your preferred code editor and change the current working directory to the one where you want the cloned directory
 5. Run git clone in the terminal, paste the copied link, and press Enter.
