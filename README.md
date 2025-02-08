@@ -443,10 +443,10 @@ The CommunityFinaces application employs a consistent layout to ensure a predict
 - [Python](https://www.python.org/)
 - [GitHub](https://github.com/)
 - [Gitpod](https://www.gitpod.io/): The initial development environment used to create the project files and Python code.
-- [VS Code](https://gitpod.io/): A local development environment used subsequently to complete the project.
+- [VS Code](https://code.visualstudio.com/): A local development environment used subsequently to complete the project.
 - [GitHub](https://github.com/)
 - [Heroku](https://id.heroku.com/)
-- [Google Sheets](https://docs.google.com/spreadsheets)
+- [Google Sheets](https://docs.google.com/spreadsheets/d/1wjp5XLzraaxGBMTABKWPrTlAXKp0e_bQLcEX8hTs1Hk/edit?gid=178928932#gid=178928932)
 - [Google Cloud](https://console.cloud.google.com/)
 - [CI Python Linter](https://pep8ci.herokuapp.com/)
 
