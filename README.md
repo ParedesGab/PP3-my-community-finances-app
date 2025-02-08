@@ -490,26 +490,20 @@ The MyFinances application employs a consistent layout to ensure a predictable a
 ---
 ## Bugs
 + ### Solved bugs
-  1. The W3C Markup validation detected the below error in the HTML code:
-  ![bug HTML code](documentation/bugs/bug-error-html-code.png)
-        - Solution: this mistake was spotted and corrected. 
+  1. A call to generate_monthly_finance_report failed because it's a method of the FinanceManager class and required a class instance. However, the call in the handle_user_option was not associated with an instance.
+        - Solution: this mistake was spotted and corrected.
 
-  2. The W3C Markup validation detected the below warnings in the HTML code:
-    ![warnings HTML code](documentation/bugs/bug-warnings-html-code.png)
-      - Solution: To enhance the HTML syntax, a hidden H2 heading was added to each section without an existing heading.
+  2. The creds.json file dissappeared from the workspace after adding it to 
+  .gitignore. It is not clear why that happened, because the .gitignore should just prevent it from being pushed to GitHub. Thus, it should still be present but greyed-out.
+      - Solution: I added it back to the workspace and saved it once again.
 
-  3. JSHint showed the following warning:
-    ![warnings JS code](documentation/bugs/bug-warning1-jshint.png)
-      - Solution: Although the original code was functioning correctly, the event listener logic was updated to avoid any potentially confusing semantics. A separate click handler function was created. This change ensures the correct card index is captured using a closure for the handleCardFlip function.
+  3. The application encountered errors when processing amount inputs that included commas (e.g., "1,500"). Direct conversion of these strings to floating-point numbers resulted in a ValueError. 
+      - Solution: the code now pre-processes amount strings to remove commas before attempting numerical conversion, ensuring successful calculations.
 
 + ### Unfixed bugs
 
-  1. JSHint showed the following warning:
+There are no known unfixed bugs.
 
-    ![warnings JS code](documentation/bugs/bug-warning2-jshint.png)
-    
-    - As described in the "Features left to implement" section, due to time constraints, I used onclick in all buttons of the HTML document for faster implementation. However, I recognize that mixing structure (HTML) with functionality (JS) is not best practice, as it can make the code harder to maintain and does not facilitate collaboration in team environments. After the project is graded, I plan to refactor the code by removing inline onclick attributes, and instead handling events via JavaScript by adding event listeners, ensuring better separation of concerns and improving maintainability.
-  
 ---
 ## Deployment
 
