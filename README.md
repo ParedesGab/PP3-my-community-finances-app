@@ -29,30 +29,52 @@
 
 ### Site Owner Goals
 
-+ Create a practical and user-friendly application to help users effectively monitor their income and expenses.
-+ Ensure application functionality and bug-free performance.
-+ Create an intuitive user interface.
-+ Create an easy to use app.
++ Collect comprehensive and representative financial data from the community for the year 2025.
++ Generate accurate and insightful aggregated monthly financial reports.
++ Identify key trends and patterns in community income and expenses.
++ Ensure the anonymity of survey participants.
++ Potentially publish or share key findings to benefit the community.
   
 ---
 ## User Experience
 
 ### Target audience
 
-+ Individuals who want to have an overview of their income and expenses.
-+ Users who want to understand their spending habits.
-+ Any user who is comfortable with using a simple computer program.
-+ Users searching for a free and easy way to track finances.
++ **Any community residents:** For example, a neighborhood, town, city, country, etc.
 
++ **Researchers and Academics:** The generated report (collected survey data)y may provide valuable data for economic research, particularly regarding consumer behavior, spending patterns, and income distribution.
+
++ **Government Agencies:** The generated report can be used by government agencies for policy development, economic analysis, and program planning. A local survey might inform local government decisions.
 
 ### User expectations
 
++ The data input process to be simple, intuitive, and user-friendly.
++ Have clear instructions on how to use the application, a well-designed interface, and minimal technical jargon are essential.
++ Expect the data input process to be reasonably quick and not overly time-consuming.
 + Clearly understand the application's purpose.
 + Quickly and easily access the menu content.
 + Correctly store and display income and expense entries.
-+ Their income and/or expense entries must be stored and displayed correctly. 
-+ The monthly finance report must correctly calculate and display total income, total expenses, cash balance, expenses per category, and the highest expense.
++ The aggregated 2025 monthly finance report must correctly calculate and display aggregated total income, aggregated total expenses, net financial balance, expenses per category, and the highest expense of the group/community.
 + The application must warn the user of any invalid input.
++ Have a strong expectation that their data will remain anonymous.
+
+**Regarding the Data Collection Process:**
+
+
+* **Clear Purpose:** They want to understand why their data is being collected and how it will be used to benefit the community. A clear explanation of the project's goals and objectives is important.
+* **Data Validation:** They expect the system to have some level of data validation to ensure accuracy and consistency. This might include checks for valid number formats, reasonable ranges for income and expenses, and clear error messages.
+
+
+**Regarding the Project Outcomes:**
+
+* **Community Benefit:** They expect that the project will ultimately benefit the community in some way. This might include informing local policy decisions, attracting businesses, or improving community services.
+* **Transparency of Results:** They expect the aggregated results of the project to be made available to the public in a clear and understandable format. They want to see how their contributions have helped to paint a picture of the community's financial health.
+* **No Individual Identification:** They absolutely expect that their individual data will *not* be identifiable in any of the reports or published findings. Anonymity or aggregation of data is paramount.
+* **Actionable Insights:** They hope that the data collected will lead to actionable insights and positive changes in the community. They want their participation to make a difference.
+* **Responsible Data Handling:** They expect the project organizers to handle the data responsibly and ethically. This includes using the data only for the stated purposes, protecting privacy, and ensuring data security.
+* **Project Completion:** They expect the project to be completed and the results to be shared within a reasonable timeframe.
+
+In short, users expect a smooth, secure, and meaningful experience when participating in a community financial data collection initiative. They want to contribute to the greater good while being assured that their privacy is protected and that their data will be used responsibly.
 
 ### User stories
 

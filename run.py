@@ -30,15 +30,15 @@ def welcome():
     init()
     rim = f"{Fore.GREEN + Style.BRIGHT}================={Style.RESET_ALL}"
     print(f"""
-    {rim} Welcome to the FinancialSurvey2025! {rim}
+    {rim} Welcome to the CommunityFinaces App! {rim}
 
-    This application collects information about income and expenses
-    to provide insights into the financial landscape of your community.
+        Share your 2025 income and expenses anonymously to help
+        us understand our community's finances!
 
-    Your participation will remain anonymous.
-    Thank you for contributing to a better understanding of personal finances!
+        The data gathered will inform local policy, and
+        community programs. Thank you for participating!
 
-    Let's get started! 🚀
+        Let's get started! 🚀
     """)
 
 
@@ -46,9 +46,8 @@ def exit_program():
     """Displays a farewell message and terminates the program."""
     exit_message = f"""
     {Fore.GREEN + Style.BRIGHT}
-    ✨ Thank you for participating in the FinancialSurvey2025! ✨
-
-    Your contribution is greatly appreciated, Goodbye!{Style.RESET_ALL}
+    ✨ Thank you for your contribution! ✨
+     We will keep you informed about the impact of your input!
     """
     print(exit_message)
     exit()
