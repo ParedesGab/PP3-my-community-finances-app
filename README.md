@@ -377,7 +377,7 @@ The program then asks the user what they would like to do next, and displays the
 
 + The visual design aims to make the information readily accessible and the interaction intuitive.
 
-+ The use of `colorama` allows for colored text output in the terminal:
++ The use of `colorama` was used to enhance the console output with colored text, improving readability and user experience.
 
   *   **Green:**  Used for positive messages, success indicators, titles, and section headers (e.g., "WELCOME TO MyFinances APP!", success messages).
 
@@ -577,50 +577,22 @@ To have a copy of the project in your repositories:
 
 ### Content
 
-- My mom being a bussiness administrator, initially gave me the idea of a personal finance tracker. However, given that data would have required personalized or independt google sheets (not using one single one, to have collective data), I modified the idea to create a census or Financial survey where collective data related to income and expenses could be collected and analyed. 
+- Inspired by my mother, Marcela Rojas, an accountant and business administrator, I initially envisioned a personal finance tracker. This evolved, however, into a financial survey to collect and analyze collective income and expense data, as individual tracking proved impractical for a shared dataset.
 
-This project draws inspiration and utilizes techniques from various sources:
+- [W3 Schools](https://www.w3schools.com/python/python_regex.asp) showed me how to use the Regular Expressions (`re`) module.
 
-### Code and Libraries
+- [Recursos Python](https://recursospython.com/guias-y-manuales/colorama-texto-fondo-coloreados-la-consola/) showed me how to use the `colorama` library.
 
-- **Regular Expressions (`re`):**  The use of regular expressions for input validation and data cleaning is based on standard Python practices and documentation.  Specifically, regular expressions were instrumental in validating user input (e.g., ensuring alphabetical characters in certain fields) and cleaning amount input (removing non-numeric characters).
+- I got further clarificaion on the used of Python Object Oriented Programming from the from the YouTube channel [Bro Code](https://www.youtube.com/watch?v=q2SGW2VgwAM).
 
-- **`colorama`:** The `colorama` library was used to enhance the console output with colored text, improving readability and user experience.
+- A list of common expense categories was compiled for this project, drawing inspiration from standard budgeting practices and personal finance resources. Among platforms I researched: [Bureau of Labor Statistics (BLS) Consumer Expenditure Surveys](https://www.bls.gov/cex/) and the [YNAB budgeting app](https://www.ynab.com/).
 
-- **Income Worksheet Function (`self.add_new_income_to_income_worksheet()`):** The structure and logic of the income worksheet function were developed independently, but benefited from general programming principles and best practices.
-
-- **Category List:** The list of expense categories was created specifically for this project, based on common expense types.
-
-- **Month Input Interpretation:** The method for interpreting the month input as a full month name (`datetime.strptime(user_month, "%B")`) is based on standard Python `datetime` library usage and documentation.
-
-- **Amount Input Formatting:** The code for formatting the amount for display in European format (`fmt.replace(",", "X").replace(".", ",").replace("X", ".")`) was developed independently, but is a common string manipulation technique.
-
-- **Finding the Maximum Category:** The method for finding the category with the highest expenses (`max(expenses_by_category, key=expenses_by_category.get)`) is a standard Python dictionary operation.
-
-### Inspiration and Guidance
-
-- ReadMe Structure: The structure and formatting of this ReadMe file were inspired and guided by the ReadMe documents of Iuliia Konovalova, Kamil Wojciechowski, and the "love running" project.
-
-- [W3 Schools](https://www.w3schools.com/jsref/met_win_settimeout.asp) showed me how to use the setTimeout() method. 
-
-- [W3 Schools](https://www.w3schools.com/jsref/prop_html_id.asp) showed me how to return the id property. 
-
-- [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius) showed me how to create elliptical corner radius used in the Control Area of the Memory Board Game section.
-
-- I got further clarificaion on the used of Parameters vs Arguments from the from the YouTube channel [Anna McDougall](https://www.youtube.com/watch?v=5o4P8lESTF0).
-
-- Stack Overflow solutions was also used to resolve doubts.
-
-- Text was checked with DeepL Write for spelling mistakes. 
-
-- I learned how to add other pages (e.g., home menu page, games indications and congratulations pages) with Javascript by reading the project of [Kristyna Wach](https://github.com/Cushione/four-seasons-memory-game) and testing it myself within my javascript code.
-
-- Inspiration for memory game logic comes from the YouTube Channels [developedbyed](https://www.youtube.com/watch?v=-tlb4tv4mC4&t=3095s) and [Victor Talamantes](https://www.youtube.com/watch?v=c0eigGnotm0). However, I did  not relied on them and customized it my way.
-
-- ReadMe was inspired and guided by the ReadMe documents of my mentor Iuliia Konovalova, of my previous Kamil Wojciechowski, and of the love running project. 
+- [Stack Overflown](https://stackoverflow.com/questions/61699115/b-vs-b-in-datetime-module-python-3/) showed me the method for interpreting the month input as a full month name (`datetime.strptime(user_month, "%B")`).
 
 ## Acknowledgments
 
 - My sincere gratitude to code institute specially to Kristyna, and tutor suport for the great tips and feedback.
+
 - Thank you to my mentor, Iuliia Konovalova, for her important feedback.
+
 - A heartfelt thanks to my family for their support during this project.
