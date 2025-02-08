@@ -81,35 +81,10 @@
 
   + Regularly update content and features (e.g., monthly, quarterly, yearly reports) to maintain user engagement.
   + Provide to the community monthly reports summarizing key financial trends observed in the collected data.
+  + Let the user know that their data they will get published monthly reports summarizing findings.
   + Ensure a smooth and accessible user experience by regularly testing the site on different devices and browsers and addressing any reported accessibility issues within.
   + To keep the application running correctly, be free of bugs, and not crash.
   + Collect and review user feedback to understand user needs and identify areas for improvement.
-
-
-  * **Regularly update content and features:**
-    * 
-    * Release quarterly updates with more in-depth analysis and visualizations.
-    * Explore and implement new features (e.g., interactive data exploration tools, comparison features) on a yearly basis.  
-    * Announce all updates and new features via [mention how you'll communicate - e.g. a blog, email list, social media].
-
-* **Ensure a smooth and accessible user experience:**
-    * Conduct cross-browser and cross-device testing (desktop, mobile, tablet) at least quarterly.
-    * Address any reported accessibility issues (WCAG compliance) within [define timeframe - e.g. two weeks].
-    * Monitor site performance metrics (e.g., page load times, error rates) weekly and address any performance bottlenecks promptly.
-
-* **Maintain application stability and security:**
-    * Implement robust error handling and logging to minimize crashes and facilitate debugging.
-    * Conduct regular security audits and penetration testing [define frequency, e.g. annually or after major updates].
-    * Implement and enforce strong data security measures to protect user anonymity and prevent data breaches.
-    * Ensure 99.9% uptime for the application.
-
-
-
-
-* **Demonstrate community impact:**
-    * Publish reports and case studies showcasing how the collected data has been used to inform local decisions and improve community outcomes.
-    * Share these reports with the community through [mention channels - e.g., website, social media, local news outlets].
-
 
 ---
 ## Features 
@@ -120,23 +95,24 @@ This was corrected accordingly to: What would "you" like to do next?
 ### Welcome message
 
 ![Welcome message](documentation/website-screenshots/2-welcome-message.png)
-  
+
 + Positioned above the menu options.
 + The welcome() function displays a colorful welcome message to the user when the program starts. It uses the colorama library to add green borders, creating a visually appealing introduction to MyFinances app.
-+ The welcome message already informs the user that what can be done in the program and that it is easy to use.
-       
++ The welcome message communicates the application's core function: anonymously sharing 2025 income and expense data to contribute to a better understanding of the community's finances.  It also highlights the anonymity of participation and the impact the data will have on local policy and community programs.
++ The message expresses gratitude for user participation and reinforces the community-centric nature of the project.
+
 ### Menu options
 
 ![Menu options](documentation/website-screenshots/3-menu-options.png)
 
 The Menu provides the following options:
 
-*   **0: Application Instructions:** Learn how to use MyFinances.
+*   **0: Application Instructions:** Access detailed instructions on how to use MyFinances.
 *   **1: Add New Income:** Record a new income entry, by specifying the month, source, and amount.
 *   **2: Add New Expense:** Record a new expense entry, by specifying the month, category, description, and amount.
-*   **3: View All Records:** Display all income and expense entries in a table format.
-*   **4: Monthly Finance Report:** Generate a detailed report for a specific month, showing total income, total expenses, cash balance, and a breakdown of expenses by category.
-*   **E: Exit:** Close the application.
+*   **3: View All Records:** Display all recorded income and expense entries in a table format.
+*   **4: Aggregated 2025 Monthly Finance Report:** Generate a detailed report for a specific month, showing: aggregated total income, aggregated total expenses, net financial balance, expenses per category, and the highest expense of the group/community.
+*   **E: Exit:** Close the application with a goodbye message.
 
 + All input fields are required and cannot be left empty.
 
@@ -154,22 +130,23 @@ The Menu provides the following options:
 
 + E or e are accepted as valid inputs to exit the application, and a GoodBye message is displayed (Figures below).
 
-![Valid choice "e"](documentation/website-screenshots/7-lowercase-valid-input-exit.png)
+![Valid choice "e"](documentation/website-screenshots/7-lowercase-e-valid-input-exit.png)
 
-![Valid choice "E"](documentation/website-screenshots/8-uppercase-valid-input-exit.png)
+![Valid choice "E"](documentation/website-screenshots/8-uppercase-e-valid-input-exit.png)
 
 **Menu Option 0**
 
 + **User inputs 0:**
 
-![Menu option 0](documentation/website-screenshots/9-user-selection-option0.png)
+![Menu option 0](documentation/website-screenshots/9-application-instructions-part1.png)
 
 + **Application Instructions:** The application provides comprehensive instructions accessible from the main menu. These instructions cover each available feature in detail:
     *   **Adding Income:**  Users can record new income entries, specifying the month, source, and amount. The instructions explain the required format for each field and highlight the use of the European currency format for amounts.
-    *   **Adding Expenses:** Users can record expenses, providing the month, category, description, and amount. Similar to income entries, the instructions detail the expected input format and the use of the European currency format.
-    *   **Generating Monthly Reports:** Users can generate detailed financial reports for any month of 2025. These reports include total income, total expenses, cash balance, a breakdown of expenses by category, and the highest expense category.
-    *   **Viewing All Records:** Users can view all their stored income and expense records in a tabular format. This allows for easy review and analysis of their financial data.
-    *   **Exiting the Program:** Users can exit the application when finished.  The instructions reassure users that their data is safely stored.
+    *   **Adding Expenses:** Users can record expenses, providing the month, category, description, and amount. Similar to income entries, the instructions detail the expected input format and highlight the use of the European currency format for amounts.
+    *   **Viewing All Records:** Users can view all the collected income and expense records in a tabular format. This approach was selected for data transparency.
+    *   **Generating Monthly Reports from the aggregated data:**
+    If they wish, users can generate detailed financial reports for any month of 2025. These reports include aggregated total income, aggregated total expenses, net financial balance, expenses per category, and the highest expense of the group/community.
+    *   **Exiting the Program:** Users can exit the application when finished. A message reassure users that their data will be used to analyze key financial trends and share further insights beyond those available in the monthly report.
   
 ![instructions part1](documentation/website-screenshots/9-application-instructions-part1.png)
 ![instructions part2](documentation/website-screenshots/9-application-instructions-part2.png)

@@ -48,10 +48,11 @@ def exit_program():
     {Fore.GREEN + Style.BRIGHT}
     ✨ Thank you for your contribution! ✨
 
-     We'll be using it to analyze key financial trends and will publish
-     monthly reports summarizing our findings.
+    We'll use your data to analyze key financial trends
+    and share further insights beyond those available in
+    the monthly report.
 
-     Stay tuned for updates! 📈🔔
+    Stay tuned for updates! 📈🔔
     """
     print(exit_message)
     exit()
