@@ -21,17 +21,11 @@
 
 ### User Goals
 
-+ Track and manage income and expenses on a monthly basis.
-+ Generate monthly financial reports displaying total income, total expenses and cash balance (total income - total expenses).
-+ Check spending patterns by viewing categorized expenses and identifying the highest expense category.
-+ Quickly and easily add new income and expense entries.
-+ View all their income and expense data.
-
 + Contribute anonymously to a community-wide financial survey for the year 2025.
 + Provide income and expense data to help understand the financial landscape of a community.
 + Easily input financial information with clear instructions and data validation.
 + Be assured of their anonymity throughout the process.
-+ Optionally review aggregated monthly financial reports to see community trends (once enough data is collected).
++ Explore aggregated monthly reports to identify community-wide income and expense trends and gain insights into financial development.
 
 ### Site Owner Goals
 
