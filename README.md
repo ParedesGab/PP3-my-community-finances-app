@@ -380,12 +380,11 @@ The program then asks the user what they would like to do next, and displays the
 
 ### Google Sheets
 
-- All the collected data is stored in a Google sheet.
-- As soon saThe incomes and expenses are saved as soon as the 
-- The user can load and resume their game by using the game ID.
-- To provide this functionality, I implemented the use of the python libraries "gspread" and "google-auth".
++ All the collected data is stored in a Google sheet.
 
-[Link to the Google Sheets](https://docs.google.com/spreadsheets/d/1WxUWrgHylGpwkegU-006VbJFlS2_B2sNl5PbSTdmaKI/edit?usp=sharing)
++ After entering the inputs correctly, the incomes/expenses are appended (stored) to the Google sheet.
+
+[Link to the Google Sheets](https://docs.google.com/spreadsheets/d/1wjp5XLzraaxGBMTABKWPrTlAXKp0e_bQLcEX8hTs1Hk/edit?gid=178928932#gid=178928932)
 
 ---
 ## Features left to implement
@@ -406,6 +405,8 @@ The program then asks the user what they would like to do next, and displays the
     * Average income by month.
     * Average expenses by category.
     * Overall average income and expenses, etc.
+
+  + **Enhanced Data Security and Access Control:**  Currently, the application utilizes a Google Sheet for data storage, which, while convenient for development, presents potential security concerns regarding unauthorized access. Future implementations will prioritize enhancing data security and access control.
   
   + **Improved Menu Navigation:**  Currently, once a user enters a specific feature (e.g., "Add New Income"), they cannot directly return to the main menu without completing the current operation or exiting the application. Future implementations will enhance menu navigation to allow users to easily return to the main menu from any point within the application, even if they have not yet completed data entry.  This will improve the user experience.
 
