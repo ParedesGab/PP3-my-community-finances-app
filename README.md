@@ -378,6 +378,15 @@ The program then asks the user what they would like to do next, and displays the
 
 ![Menu option E](documentation/website-screenshots/8-uppercase-e-valid-input-exit.png)
 
+### Google Sheets
+
+- All the collected data is stored in a Google sheet.
+- As soon saThe incomes and expenses are saved as soon as the 
+- The user can load and resume their game by using the game ID.
+- To provide this functionality, I implemented the use of the python libraries "gspread" and "google-auth".
+
+[Link to the Google Sheets](https://docs.google.com/spreadsheets/d/1WxUWrgHylGpwkegU-006VbJFlS2_B2sNl5PbSTdmaKI/edit?usp=sharing)
+
 ---
 ## Features left to implement
 
@@ -583,7 +592,7 @@ The live link can be found here: [The 2025 Community Finances App!](https://my-f
 
 To have a copy of the project in your repositories:
 1. Log in or sign up to GitHub.
-3. Navigate to the [project repository](https://github.com/ParedesGab/PP2-the-cosmic-match-memory-game). MISSING
+3. Navigate to the [project repository](https://github.com/ParedesGab/PP3-my-community-finances-app).
 4. In the top right corner, click the "Fork" button.
 5. A new page titled "Create a new fork" will appear. Optionally, you can edit the repository name.
 6. At the bottom of the page, click "Create fork."
@@ -591,7 +600,7 @@ To have a copy of the project in your repositories:
 ### Cloning
 
 1. Log in or sign up to GitHub.
-2. Go to the [project repository](). MISSING
+2. Go to the [project repository](https://github.com/ParedesGab/PP3-my-community-finances-app).
 3. Click the green button "Code" and choose your preferred cloning method (for example: HTTPS, SSH, or GitHub CLI) and copy the provided url.
 4. Open the terminal in your preferred code editor and change the current working directory to the one where you want the cloned directory
 5. Run git clone in the terminal, paste the copied link, and press Enter.
