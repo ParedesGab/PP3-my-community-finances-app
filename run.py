@@ -797,7 +797,7 @@ class FinanceManager:
             else:
                 print(f"""
                 {Fore.LIGHTRED_EX}\nThere is no data for {month} yet...
-                {Style.RESET_ALL}"
+                {Style.RESET_ALL}
                 """)
 
                 # Get user's next action

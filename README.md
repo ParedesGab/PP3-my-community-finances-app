@@ -153,7 +153,14 @@ The Menu provides the following options:
 ![instructions part3](documentation/website-screenshots/9-application-instructions-part3.png)
 ![instructions part4](documentation/website-screenshots/9-application-instructions-part4.png)
 
-+ **Return to Menu / Exit Prompt:** After the applications instructions are displayed, the application prompts the user to either return to the main menu or exit the program. This provides a controlled flow within the application.  Invalid input (anything other than 'M' or 'E', or "m" or "e") is handled with a clear error message.
++ **Return to Menu / Exit Prompt:** After the applications instructions are displayed, the application prompts the user to either return to the main menu or exit the program. This provides a controlled flow within the application.
+
+![Valid input m](documentation/website-screenshots/10-from-option0-valid-input-m-lowercase.png)
+![Valid input M](documentation/website-screenshots/11-from-option0-valid-input-m-uppercase.png)
+![Valid input e](documentation/website-screenshots/12-from-option0-valid-input-e-lowercase.png)
+![Valid input E](documentation/website-screenshots/13-from-option0-valid-input-e-uppercase.png)
+
++ Invalid input (anything other than 'M' or 'E', or "m" or "e") is handled with a clear error message.
 
 ![Invalid input example](documentation/website-screenshots/14-from-option0-invalid-input-example.png)
 
@@ -168,50 +175,50 @@ The Menu provides the following options:
     *   **Source:** The source of the income (e.g., Salary, Freelance).  The application validates that the source is at least 4 characters long and isn't entirely numeric.
     *   **Amount:** The amount earned. The application displays and stores the amount using the standard European currency format (e.g., 1.500,00 EUR).  
     
-+ All input fields are required and cannot be left empty. Example below.
++ All input fields are required and cannot be left empty (example below).
 
-![Invalid empty input](documentation/website-screenshots/19-empty-invalid-input.png)
+![Invalid empty input](documentation/website-screenshots/16-empty-invalid-input.png)
 
 + Leading/trailing spaces are accepted (e.g., JanuarY, January, january, "    January", etc. are all accepted).
 
 + Including capitalization to month and source inputs is accepted.
 
-+ The amount must be a positive number (no negative "-" sign accepted).
++ The application validates that the source is at least 4 characters long and isn't entirely numeric.
 
-![amount accepts letter and characters](documentation/website-screenshots/19-amount-accepts-letters-and-characters.png)
++ The amount must be a positive number (no negative "-" sign accepted).
 
 + The amount ideally contains only digits, but to anticipate that an user can make a mistake, special characters or letters are accepted but are removed and not displayed.
 
-+ All invalid inputs are handled with a clear error message. Examples below:
+![amount accepts letter and characters](documentation/website-screenshots/17-amount-accepts-letters-and-characters.png)
 
-![Invalid month](documentation/website-screenshots/20-invalid-month-name.png)
++ After entering all inputs correctly, the application displays a message of the added income (month, source, and amount) confirming that the new income entry has been successfully stored. 
 
-![Invalid source](documentation/website-screenshots/21-invalid-source-input.png)
+![New income added message](documentation/website-screenshots/17-income-data-added-message.png)
 
-![Invalid amount](documentation/website-screenshots/22-invalid-amount-input.png)
++ Users are then given the option to add another income entry, add an expense entry, return to the main menu, or exit the application. The application validates user input for these options as well, displaying an error message for invalid choices as shown 
+in **User inputs 0**.
 
-+ After entering the details, the application displays a message of the added income (month, source, and amount) confirming that the new income entry has been successfully stored. 
+![New income data displayed, and the user is prompted for further action](documentation/website-screenshots/17-income-data-added-message.png)
 
-+ Users are then given the option to add another income entry, add an expense entry, return to the main menu, or exit the application. 
-
-![New income data displayed, and the user is prompted for further action](documentation/website-screenshots/16-income-data-added.png)
-
-+ The application validates user input for these options as well, displaying an error message for invalid choices (figure below).
-
-![Invalid option example](documentation/website-screenshots/17-invalid-input-example.png)
-
-+ The new income record is appended (stored) to the my_finances Google cloud "incomes" worksheet (figure below).
++ The new income record is appended (stored) to the my_finances Google "incomes" worksheet.
 
 ![my_finances incomes worksheet](documentation/website-screenshots/18-income-addded-to-google-income-worksheet.png)
+
++ All invalid month, source and amount inputs are handled with a clear error message. Examples below:
+
+![Invalid month](documentation/website-screenshots/19-invalid-month-name.png)
+
+![Invalid source](documentation/website-screenshots/20-invalid-source-input.png)
+
+![Invalid amount](documentation/website-screenshots/21-invalid-amount-input.png)
 
 **Menu Option 2**
 
 + **User inputs 2:**
 
-![Menu option 2](documentation/website-screenshots/19-user-selection-option2.png)
-
+![Menu option 2](documentation/website-screenshots/22-user-selection-option2.png)
 +   **Adding Expenses:** Users can easily record their expenses for 2025. The application prompts for the following information:
-    -   **Month:** The month the expense was incurred (e.g., January).  Full month names are accepted.
+    -   **Month:** The month the expense was incurred (e.g., January). Full month names are accepted.
     -   **Category:** The category of the expense.
     Importantly, this input was restricted to a predefined list of categories. This is because the category input is used to calculate the expenses per category and the highest expense. Therefore, data consitency was needed, an this approach resolves the problem with inconsistent category names. 
     The defined categories list is:
@@ -238,9 +245,11 @@ The Menu provides the following options:
 
 + Including capitalization to month, category and description inputs is accepted.
 
++ The application validates that the description is at least 4 characters long and isn't entirely numeric.
+
 + The amount must be a positive number (no negative "-" sign accepted).
 
-+ The amount ideally contains only digits, but to anticipate that an user can make a mistake, special characters or letters are accepted but are removed and not displayed.
++ As shown above, the amount ideally contains only digits, but to anticipate that an user can make a mistake, special characters or letters are accepted but are removed and not displayed.
 
 + All invalid inputs are handled with a clear error message. Examples below:
 
@@ -252,17 +261,17 @@ The Menu provides the following options:
 
 ![Invalid amount](documentation/website-screenshots/27-invalid-amount-input.png)
 
-+ After entering the details, the application displays a message of the added expense (month, category, description and amount) confirming that the new expense entry has been successfully stored. 
++ After entering the inputs correctly, the application displays a message of the added expense (month, category, description and amount) confirming that the new expense entry has been successfully stored. 
 
 + Users are then given the option to add another expense entry, add an income entry, return to the main menu, or exit the application. 
 
 ![New expense data displayed, and the user is prompted for further action](documentation/website-screenshots/28-expense-data-added.png)
 
-+ The application validates user input for these options as well, displaying an error message for invalid choices (figure below).
++ The application validates user input for these options as well, displaying an error message for invalid choices.
 
 ![Invalid option example](documentation/website-screenshots/29-invalid-input-example.png)
 
-+ The new expense record is appended (stored) to the my_finances Google cloud "expenses" worksheet (figure below).
++ The new expense record is appended (stored) to the my_finances Google cloud "expenses" worksheet. Below an example of multiple users having entered their data:
 
 ![my_finances expenses worksheet](documentation/website-screenshots/30-expense-added-to-google-income-worksheet.png)
 
@@ -272,7 +281,9 @@ The Menu provides the following options:
 
 ![Menu option 3](documentation/website-screenshots/31-user-selection-option3.png)
 
-*   **Viewing Income and Expense Data:** Users can view all recorded income or expense data in a tabular format. 
+*   **Viewing Income and Expense Data:** Users can view all recorded income or expense data (regardless of the month) in a tabular format.
+
++ This option was created for data transparency.
 
 + The application retrieves the data from the specified worksheet (Incomes or Expenses) and displays it in a well-formatted table.
 
@@ -280,7 +291,7 @@ The Menu provides the following options:
 
 ![display all income and expense data](documentation/website-screenshots/32-display-all-incomes-and-expenses.png)
 
-+ If there is neither income nor expense data, the application displays a message indicating that no data is available.
++ If there is neither income nor expense data yet (the worksheets are empty, containing only the headers) the application displays a message indicating that no data is available.
 
 ![neither income nor expense data](documentation/website-screenshots/32-neither-income-nor-expense-data-to-display.png)
 
@@ -300,17 +311,22 @@ The Menu provides the following options:
 
 ![Menu option 4](documentation/website-screenshots/33-user-selection-option4.png)
 
++ The application first displays the report title and a description of what this feature is about:
+
 +   **Generating Monthly Finance Reports:** Users can generate detailed financial reports for any month of 2025. The report includes:
-    -   **Total Income:**  The sum of all income entries for the selected month, displayed in European currency format.
-    -   **Total Expenses:** The sum of all expense entries for the selected month, displayed in European currency format.
-    -   **Cash Balance:** The difference between total income and total expenses for the selected month, displayed in European currency format. 
-    The application clearly indicates whether the balance is positive or negative.
-    🎉🎉 Positive Balance!: "cash balance amount EUR"
-    🚨🚨 Negative Balance!: "cash balance amount EUR"
+    -   **Aggregated Total Income:**  The sum of all income entries for the selected month, displayed in European currency format.
+    -   **Aggregated Total Expenses:** The sum of all expense entries for the selected month, displayed in European currency format.
+    -   **Net Financial Balance:** The difference between total aggregated 
+    income and total aggregated expenses for the selected month, displayed in European currency format. 
+
+    The application will indicate whether the community/group balance is positive or negative:
+    🎉🎉 Positive Balance!: "amount EUR"
+    🚨🚨 Negative Balance!: "amount EUR"
+
     -   **Expense Breakdown by Category:** A detailed breakdown of expenses for the selected month, showing the total amount spent in each category, displayed in European currency format.
     -   **Highest Expense Category:** The expense category with the highest total spending for the selected month, also displayed in European currency format.
 
-+ The application first displays the report title in green using colorama to stand out and then prompts the user to enter the month for the report (figure above).
++ Then it prompts the user to enter the month for the report (figure above).
 
 + Month input field is required and cannot be left empty.
 
